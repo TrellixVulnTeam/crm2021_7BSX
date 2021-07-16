@@ -1,1 +1,79 @@
-<p>dashboard works!</p>
+
+
+<mat-toolbar class="headbar">
+  <button mat-icon-button class="example-icon"[matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <a mat-button color="warn" routerLink="template">
+    <mat-icon>home</mat-icon>
+  </a>
+
+
+  <img src="./assets/img/user.png">&nbsp; <h2 class="navTittle">{{user.nombre}} {{user.apellido}}</h2>
+  <span class="example-spacer"></span>
+  <a mat-button color="warn" (click)="cerrarSesion()">
+    <mat-icon>logout</mat-icon>
+    <span>Salir</span>
+  </a>
+
+
+
+</mat-toolbar>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="clientes">
+    <mat-icon>people alt</mat-icon>
+    <span>Clientes</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item routerLink="suministros">
+    <mat-icon>segment</mat-icon>
+    <span>Suministros</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item routerLink="atenciones">
+    <mat-icon>notifications</mat-icon>
+    <span>Atenciones</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item routerLink="eventos">
+    <mat-icon>event</mat-icon>
+    <span>Eventos</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item routerLink="tickets">
+    <mat-icon>confirmation_number</mat-icon>
+    <span>Tickets</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item routerLink="otecnicas">
+    <mat-icon>description</mat-icon>
+    <span>Órdenes técnicas</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item routerLink="reportes">
+    <mat-icon>print</mat-icon>
+    <span>Reportes</span>
+  </button>
+
+</mat-menu>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+

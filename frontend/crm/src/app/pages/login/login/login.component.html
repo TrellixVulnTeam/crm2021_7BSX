@@ -1,1 +1,52 @@
-<mat-card>CRM</mat-card>
+<mat-card class="loginCard">
+  <mat-card-content class="cardContent">
+    <mat-grid-list cols="2">
+
+      <mat-grid-tile  class="colmd">
+        <img src="./assets/img/login.jpg" class="imgLogin">
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+
+
+          <mat-card class="box">
+            <mat-card-header>
+              <mat-card-title>
+                <img src="./assets/img/negro.png" class="imgTitle">
+              </mat-card-title>
+            </mat-card-header>
+
+            <form class="formCard" [formGroup]="validateForm">
+              <div>
+                <mat-form-field class="loginInput">
+                  <input type="text" matInput placeholder="Usuario EDESAL" autocomplete="off"
+                  formControlName="alias">
+                </mat-form-field>
+              </div>
+
+             <div>
+              <mat-form-field  class="loginInput">
+                <input type="password" matInput placeholder="Contraseña" autocomplete="off"
+                formControlName="password">
+              </mat-form-field>
+             </div>
+
+
+              <div class="button">
+                <button  type="submit" (click)="validarCredenciales()"  mat-flat-button color="primary" class="btnLogin">Iniciar sesión</button>
+              </div>
+
+            </form>
+          </mat-card>
+
+
+
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+
+
+  </mat-card-content>
+</mat-card>

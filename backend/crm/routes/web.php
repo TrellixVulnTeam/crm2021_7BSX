@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//rutas para usuarios
+Route::post('validarCredenciales', 'UsuarioController@validarCredenciales');
+Route::post('getRoles', 'UsuarioController@getRoles');

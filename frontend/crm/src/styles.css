@@ -2,3 +2,26 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+a{
+  font-family: 'Montserrat', sans-serif !important;
+}
+button{
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+span{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
+}
+
+input{
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+h2{
+  font-family: 'Montserrat', sans-serif !important;
+}
+mat-icon{
+  color: #003F63 !important;
+}

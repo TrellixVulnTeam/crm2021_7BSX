@@ -1,0 +1,54 @@
+.loginCard{
+  margin: auto !important;
+  width: 65% !important;
+  top: 5% !important;
+}
+
+input{
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px !important;
+}
+
+::placeholder {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px !important;
+}
+
+.imgTitle{
+  width: 60% !important;
+  margin-left: 100px;
+}
+
+.box{
+  box-shadow: none !important;
+  width: 80% !important;
+}
+
+.cardContent{
+  width: 100% !important;
+}
+
+.imgLogin{
+  object-fit: cover !important;
+}
+
+.loginInput{
+width: 100% !important;
+}
+
+.formCard{
+  width: 100% !important;
+
+}
+
+.btnLogin{
+  width: 100% !important;
+  color: white !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 20px !important;
+  background-color: black;
+}
+
+.btnLogin:hover{
+  background-color: rgb(51, 51, 51);
+}

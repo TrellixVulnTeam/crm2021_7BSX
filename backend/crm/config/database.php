@@ -67,9 +67,11 @@ return [
             'sslmode' => 'prefer',
         ],
 
+
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => env('DB_HOST', 'localhost\SQLEXPRESS'),
             'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
@@ -78,6 +80,49 @@ return [
             'prefix' => '',
         ],
 
+        'facturacion' => [
+            'driver' => 'sqlsrv',
+            'host' => env('FACTURACION_HOST', 'localhost'),
+            'port' => env('FACTURACION_PORT', '1433'),
+            'database' => env('FACTURACION_DATABASE', 'forge'),
+            'username' => env('FACTURACION_USERNAME', 'forge'),
+            'password' => env('FACTURACION_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+        'comanda' => [
+            'driver' => 'sqlsrv',
+            'host' => env('COMANDA_HOST', 'localhost'),
+            'port' => env('comanda_PORT', '1433'),
+            'database' => env('COMANDA_DATABASE', 'comanda_db'),
+            'username' => env('COMANDA_USERNAME', 'sa'),
+            'password' => env('comanda_PASSWORD', '12345'),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+        
+
+        'crm' => [
+            'driver' => 'sqlsrv',
+            'host' => env('FACTURACION_HOST', 'localhost'),
+            'port' => env('FACTURACION_PORT', '1433'),
+            'database' => env('FACTURACION_DATABASE', 'forge'),
+            'username' => env('FACTURACION_USERNAME', 'forge'),
+            'password' => env('FACTURACION_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+
+        'saf' => [
+            'driver' => 'sqlsrv',
+            'host' => env('SAF_HOST', 'localhost'),
+            'port' => env('SAF_PORT', '1433'),
+            'database' => env('SAF_DATABASE', 'saf_2011'),
+            'username' => env('SAF_USERNAME', 'sa'),
+            'password' => env('SAF_PASSWORD', 'saedesal'),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
     ],
 
     /*
