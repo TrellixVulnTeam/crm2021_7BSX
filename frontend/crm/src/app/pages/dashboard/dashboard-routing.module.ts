@@ -19,6 +19,10 @@ const routes: Routes = [
         loadChildren: () => import('./../clientes/clientes.module').then(m => m.ClientesModule)
       },
       {
+        path: 'cli-prospectos',
+        loadChildren: () => import('./../cli-prospectos/cli-prospectos.module').then(m => m.CliProspectosModule)
+      },
+      {
         path: 'eventos',
         loadChildren: () => import('./../eventos/eventos.module').then(m => m.EventosModule)
       },

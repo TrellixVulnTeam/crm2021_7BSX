@@ -23,51 +23,57 @@
 
 
 <mat-menu #menu="matMenu">
+  <h2 class="cl-title">Clientes</h2>
   <button mat-menu-item routerLink="clientes">
     <mat-icon>people alt</mat-icon>
-    <span>Clientes</span>
+    <span class="span-menu">EDESAL y conectados < 120 días</span>
   </button>
 
+  <button mat-menu-item routerLink="cli-prospectos">
+    <mat-icon>people alt</mat-icon>
+    <span class="span-menu">Prospectos y Compartidos</span>
+  </button>
+  <br><br>
   <mat-divider></mat-divider>
 
   <button mat-menu-item routerLink="suministros">
     <mat-icon>segment</mat-icon>
-    <span>Suministros</span>
+    <span class="span-menu">Suministros</span>
   </button>
 
   <mat-divider></mat-divider>
 
   <button mat-menu-item routerLink="atenciones">
     <mat-icon>notifications</mat-icon>
-    <span>Atenciones</span>
+    <span class="span-menu">Atenciones</span>
   </button>
 
   <mat-divider></mat-divider>
 
   <button mat-menu-item routerLink="eventos">
     <mat-icon>event</mat-icon>
-    <span>Eventos</span>
+    <span class="span-menu">Eventos</span>
   </button>
 
   <mat-divider></mat-divider>
 
   <button mat-menu-item routerLink="tickets">
     <mat-icon>confirmation_number</mat-icon>
-    <span>Tickets</span>
+    <span class="span-menu">Tickets</span>
   </button>
 
   <mat-divider></mat-divider>
 
   <button mat-menu-item routerLink="otecnicas">
     <mat-icon>description</mat-icon>
-    <span>Órdenes técnicas</span>
+    <span class="span-menu">Órdenes técnicas</span>
   </button>
 
   <mat-divider></mat-divider>
 
   <button mat-menu-item routerLink="reportes">
     <mat-icon>print</mat-icon>
-    <span>Reportes</span>
+    <span class="span-menu">Reportes</span>
   </button>
 
 </mat-menu>

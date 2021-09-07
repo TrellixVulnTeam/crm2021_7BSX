@@ -11,7 +11,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 const matmodules = [
   MatSliderModule,
   MatCardModule,
@@ -23,7 +25,10 @@ const matmodules = [
   MatDividerModule,
   MatSnackBarModule,
   MatToolbarModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTabsModule,
+  MatTableModule,
+  MatPaginatorModule
 ]
 @NgModule({
   declarations: [],

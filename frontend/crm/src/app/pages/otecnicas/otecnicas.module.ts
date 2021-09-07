@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { OtecnicasRoutingModule } from './otecnicas-routing.module';
 import { OtecnicasComponent } from './otecnicas/otecnicas.component';
+import { MatModuleModule } from 'src/app/mat-module.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { OtecnicasComponent } from './otecnicas/otecnicas.component';
   ],
   imports: [
     CommonModule,
-    OtecnicasRoutingModule
+    OtecnicasRoutingModule,
+    MatModuleModule
   ]
 })
 export class OtecnicasModule { }

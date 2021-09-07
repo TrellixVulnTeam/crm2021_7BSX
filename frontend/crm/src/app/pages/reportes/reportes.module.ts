@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ReportesRoutingModule } from './reportes-routing.module';
 import { ReportesComponent } from './reportes/reportes.component';
+import { MatModuleModule } from 'src/app/mat-module.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ReportesComponent } from './reportes/reportes.component';
   ],
   imports: [
     CommonModule,
-    ReportesRoutingModule
+    ReportesRoutingModule,
+    MatModuleModule
   ]
 })
 export class ReportesModule { }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AtencionesRoutingModule } from './atenciones-routing.module';
 import { AtencionesComponent } from './atenciones/atenciones.component';
+import { MatModuleModule } from 'src/app/mat-module.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AtencionesComponent } from './atenciones/atenciones.component';
   ],
   imports: [
     CommonModule,
-    AtencionesRoutingModule
+    AtencionesRoutingModule,
+    MatModuleModule
   ]
 })
 export class AtencionesModule { }

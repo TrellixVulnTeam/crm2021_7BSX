@@ -52,3 +52,12 @@ width: 100% !important;
 .btnLogin:hover{
   background-color: rgb(51, 51, 51);
 }
+
+mat-icon{
+  color: white !important;
+}
+
+
+span{
+  color: white !important;
+}

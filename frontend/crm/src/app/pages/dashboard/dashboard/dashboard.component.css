@@ -2,10 +2,13 @@
   float: right !important;
 }
 
-
 .headbar{
   background-color: #FFFFFF !important;
   box-shadow: 0 0px 2px rgba(0,0,0,0.30), 0 3px 5px rgba(0,0,0,0.22);
+  position: fixed !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 10;
 }
 
 .example-spacer {
@@ -17,7 +20,30 @@
 }
 
 .container{
-  margin-top: 2% !important;
+
+  margin-top: 6% !important;
+  margin-left: 4% !important;
+  margin-right: 4% !important;
 }
 
+span{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
+}
+
+mat-menu{
+  width: 900px !important;
+}
+
+.cl-title{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #011624 !important;
+  text-align: center !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+}
+
+.span-menu{
+  font-size: 12px !important;
+}
 

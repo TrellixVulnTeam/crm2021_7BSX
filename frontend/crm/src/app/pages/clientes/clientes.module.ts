@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ClientesRoutingModule } from './clientes-routing.module';
 import { ClientesComponent } from './clientes/clientes.component';
+import { MatModuleModule } from 'src/app/mat-module.module';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -11,7 +14,8 @@ import { ClientesComponent } from './clientes/clientes.component';
   ],
   imports: [
     CommonModule,
-    ClientesRoutingModule
+    ClientesRoutingModule,
+    MatModuleModule,
   ]
 })
 export class ClientesModule { }

@@ -12,11 +12,11 @@ button{
 
 span{
   font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
 }
 
 input{
   font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
 }
 
 h2{
@@ -24,4 +24,19 @@ h2{
 }
 mat-icon{
   color: #003F63 !important;
+}
+
+table {
+  width: 100%;
+}
+th{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+td{
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 12px !important;
 }
