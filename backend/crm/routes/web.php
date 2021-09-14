@@ -21,3 +21,11 @@ Route::post('getRoles', 'UsuarioController@getRoles');
 
 //rutas para clientes
 Route::get('getAllClientesEdesal', 'ClientesController@getAllClientesEdesal');
+Route::post('getclientesbyname', 'ClientesController@getclientesbyname');
+Route::post('listarContactosByCliente', 'ClientesController@listarContactosByCliente');
+Route::post('listarSuministrosByCliente', 'ClientesController@listarSuministrosByCliente');
+
+
+//rutas para atenciones
+Route::get('getMotivosAtenciones', 'AtencionesController@getMotivosAtenciones');
+Route::get('getTiposAtenciones', 'AtencionesController@getTiposAtenciones');

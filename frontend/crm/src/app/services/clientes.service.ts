@@ -26,4 +26,20 @@ export class ClientesService {
   public getAllClientesEdesal(): Observable<Clientes[]> {
    return this.http.get(this.globalservice.getUrlBackEnd() + 'getAllClientesEdesal').pipe(map(data => data as Clientes[]));
  }
+
+ public getclientesbyname(cliente: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'getclientesbyname', cliente, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
+public listarContactosByCliente(cliente: Clientes): Observable<Clientes[]> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'listarContactosByCliente', cliente, httpOptions)
+  .pipe(map(data => data as unknown as Clientes[] ));
+}
+
+public listarSuministrosByCliente(cliente: Clientes): Observable<Clientes[]> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'listarSuministrosByCliente', cliente, httpOptions)
+  .pipe(map(data => data as unknown as Clientes[] ));
+}
+
 }

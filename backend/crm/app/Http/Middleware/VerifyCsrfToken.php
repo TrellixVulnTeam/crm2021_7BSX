@@ -14,6 +14,11 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         'validarCredenciales',
         'getRoles',
-        'getAllClientesEdesal'
+        'getAllClientesEdesal',
+        'getclientesbyname',
+        'listarContactosByCliente',
+        'listarSuministrosByCliente',
+        'getMotivosAtenciones',
+        'getTiposAtenciones'
     ];
 }

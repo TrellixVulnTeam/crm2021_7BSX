@@ -1,11 +1,130 @@
-<h2 class="title">Clientes EDESAL y Conectados < 120 días</h2>
+<h3 class="title">Clientes EDESAL y Conectados < 120 días</h3>
 <mat-divider></mat-divider>
 
 <mat-tab-group>
   <mat-tab label="Clientes EDESAL registrados en FACTELEC" class="tabs">
     <br><br>
 
-      <table mat-table [dataSource]="dataSource">
+    <form [formGroup]="search_cliente_form">
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Digite el nombre del cliente EDESAL registrado en FACTELEC</mat-label>
+            <input matInput placeholder="Cliente EDESAL" autocomplete="off" formControlName="cliente">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="getClienteByName()"><mat-icon>search</mat-icon>Buscar</button>
+
+
+
+    </form>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="cargaDatos"></mat-progress-bar>
+
+    <mat-card class="notfound" *ngIf="notfound">
+      <mat-card-content>
+        <mat-grid-list cols="1" rowHeight="100px">
+          <mat-grid-tile colspan="1" >
+            <img src="./assets/img/not-found.png"> <h1>No se encontraron resultados</h1>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card *ngIf="datosClientes">
+      <mat-card-header>
+        <mat-card-title>Detalles del Cliente
+          <button mat-raised-button color="primary"><mat-icon>notifications</mat-icon>Nueva atención</button>
+          <button mat-raised-button color="accent"><mat-icon>people</mat-icon>Nuevo Contacto</button>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+      <table class="tbl_cliente">
+        <thead>
+          <tr>
+            <th>Código de Cliente</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Usuario Titular</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{datos_cliente.codigo}}</td>
+            <td>{{datos_cliente.nombrecliente}} {{datos_cliente.apellidocliente}}</td>
+            <td>{{datos_cliente.direccion}}</td>
+            <td>{{datos_cliente.usuario}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </mat-card-content>
+
+
+
+      <mat-tab-group>
+        <mat-tab label="Contactos" class="tabs">
+         <h2 class="title">Contactos del cliente</h2>
+         <br><br>
+
+         <table>
+           <thead>
+             <tr>
+               <th>Contacto</th>
+               <th>Cargo</th>
+               <th>Correo</th>
+               <th>Teléfono 1</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr *ngFor="let ob of datos_contacto">
+               <td>{{ob.nombre_contacto}}</td>
+               <td>{{ob.cargo_contacto}}</td>
+               <td>{{ob.correo_contacto}}</td>
+               <td>{{ob.celular_1}}</td>
+               <td>
+                <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left"><mat-icon>edit</mat-icon></button>
+                <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+               </td>
+             </tr>
+           </tbody>
+         </table>
+        </mat-tab>
+        <mat-tab label="Suministros">
+          <h2 class="title">Suministros asociados al cliente</h2><br><br>
+
+          <table>
+            <thead>
+              <tr>
+                <th>N° Suministro</th>
+                <th>Dirección</th>
+                <th>Voltaje</th>
+                <th>Capacidad</th>
+                <th>Tarifa</th>
+                <th>Tipo Tensión</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ob of datos_suministro">
+                <td>{{ob.num_suministro}}</td>
+                <td>{{ob.anexo_direccion}}</td>
+                <td>{{ob.voltaje_energia}}</td>
+                <td>{{ob.capacidad_maxima}}</td>
+                <td>{{ob.CODIGO_TARIFA}}</td>
+                <td>{{ob.tipo_tension}}</td>
+                <td>{{ob.estado}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+
+
+      <!--<table mat-table [dataSource]="dataSource"  >
 
         <ng-container matColumnDef="codigo">
           <th mat-header-cell *matHeaderCellDef> Codigo </th>
@@ -13,7 +132,7 @@
         </ng-container>
         <ng-container matColumnDef="nombrecliente">
           <th mat-header-cell *matHeaderCellDef> Nombre del Cliente </th>
-          <td mat-cell *matCellDef="let row"> {{row.nombrecliente}}  {{row.apellidoCliente}}</td>
+          <td mat-cell *matCellDef="let row"> {{row.nombrecliente }}  {{row.apellidoCliente}}</td>
         </ng-container>
         <ng-container matColumnDef="telefono">
           <th mat-header-cell *matHeaderCellDef> Telefono </th>
@@ -30,16 +149,103 @@
           <td mat-cell *matCellDef="let row"> {{row.usuario}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-mini-fab color="warn" matTooltip="Nueva atención" matTooltipPosition="left"><mat-icon>notifications</mat-icon></button>
+            <button mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
+            <button mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+      <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]"
                      showFirstLastButtons
-                     aria-label="Select page of periodic rows">
-      </mat-paginator>
+                     aria-label="Cantidad de registros a mostrar">
+      </mat-paginator>-->
 
   </mat-tab>
   <mat-tab label="Clientes conectados < 120 días">
-    Content 2 </mat-tab>
+    <br>
+    <h2>Generar nueva atención</h2>
+      <form class="form_atencion" [formGroup]="form_atencion">
+        <mat-form-field appearance="legacy" class="input2">
+          <mat-label>N° Suministro</mat-label>
+          <mat-select formControlName="suministro">
+            <mat-option  *ngFor="let ob of datos_suministro" [value]="ob.num_suministro">
+              {{ob.num_suministro}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input2">
+            <mat-label>Cliente: </mat-label>
+            <input readonly matInput type="text" [(ngModel)]="datos_cliente.nombrecliente" formControlName="cliente">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input2">
+            <mat-label>Contacto</mat-label>
+            <mat-select formControlName="contacto">
+              <mat-option  *ngFor="let ob of datos_contacto" [value]="ob.nombre_contacto">
+                {{ob.nombre_contacto}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input2">
+            <mat-label>Teléfono de contacto</mat-label>
+            <input matInput type="number" formControlName="telefono" placeholder="N° Telefono">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input3">
+            <mat-label>Tipo de atención</mat-label>
+            <mat-select formControlName="contacto">
+              <mat-option  *ngFor="let ob of list_tipo_atenciones" [value]="ob.id">
+                {{ob.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input3">
+            <mat-label>Motivo de atención</mat-label>
+            <mat-select formControlName="contacto">
+              <mat-option  *ngFor="let ob of list_motivo_atenciones" [value]="ob.id">
+                {{ob.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input3">
+            <mat-label>Título de atención</mat-label>
+            <textarea matInput placeholder="Título de atención" maxlength="35"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input3">
+            <mat-label>Descripción de atención</mat-label>
+            <textarea matInput placeholder="Descripción de atención"></textarea>
+          </mat-form-field>
+      </form>
+
+      <h2>Adjuntar archivos a la atención</h2>
+
+      <form class="form_atencion" [formGroup]="form_adjuntos">
+          <input type="file" formControlName="file">
+
+          <mat-form-field appearance="legacy" class="input3">
+            <mat-label>Descripción de archivo</mat-label>
+            <textarea matInput placeholder="Descripción de archivo"></textarea>
+          </mat-form-field>
+
+          <button mat-raised-button color="accent"><mat-icon>cloud_upload</mat-icon>&nbsp;Cargar Archivo</button>
+      </form>
+
+
+  </mat-tab>
 </mat-tab-group>
+
+

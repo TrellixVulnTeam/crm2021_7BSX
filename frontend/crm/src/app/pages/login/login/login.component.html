@@ -25,9 +25,12 @@
               </div>
 
              <div>
-              <mat-form-field  class="loginInput">
-                <input type="password" matInput placeholder="Contraseña" autocomplete="off"
-                formControlName="password">
+              <mat-form-field  class="loginInput" >
+              <input matInput [type]="hide ? 'password' : 'text'"  matInput placeholder="Contraseña" autocomplete="off"
+              formControlName="password">
+              <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </a>
               </mat-form-field>
              </div>
 

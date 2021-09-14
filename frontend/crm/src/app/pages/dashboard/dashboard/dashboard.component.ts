@@ -10,6 +10,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class DashboardComponent implements OnInit {
   user: Usuario = new Usuario();
+  dashboard = 'Inicio';
 
   constructor(private router: Router, private usuarioservice : UsuarioService) { }
 
@@ -30,4 +31,7 @@ export class DashboardComponent implements OnInit {
      this.router.navigate(['login']);
    }
 
+   changeMenu(opcion: string){
+    this.dashboard = opcion;
+   }
 }

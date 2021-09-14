@@ -6,6 +6,8 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,6 +18,9 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
     CommonModule,
     ClientesRoutingModule,
     MatModuleModule,
+    PipesModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ClientesModule { }

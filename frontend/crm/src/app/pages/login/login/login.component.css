@@ -54,10 +54,21 @@ width: 100% !important;
 }
 
 mat-icon{
-  color: white !important;
+  color: black !important;
+  font-size: 15px !important;
 }
 
 
 span{
   color: white !important;
+}
+
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
 }

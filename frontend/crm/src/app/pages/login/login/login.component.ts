@@ -13,6 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class LoginComponent implements OnInit {
   validateForm : FormGroup;
   user: Usuario = new Usuario();
+  hide = true;
 
   constructor(private usuarioservice: UsuarioService, private router: Router,
     private _snackBar: MatSnackBar) {
@@ -70,7 +71,7 @@ export class LoginComponent implements OnInit {
                 horizontalPosition: 'center',
                 verticalPosition: 'top'
               });
-                this.router.navigate(['dashboard']);
+                this.router.navigate(['dashboard/template']);
             },
           );
 
