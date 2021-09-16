@@ -80,7 +80,56 @@ class ClientesController extends Controller
          return response()->json($suministros);
      }
 
+     //get prospectos y stakeholders
+     public function getProspectosStakeholders(Request $request)
+     {
+         $user = $request["id"];
+
+             $clientes = DB::connection('comanda')->select("
+             select c.*, cc.nombre as nomCategoria,
+             c.id as codigo, c.empresa as nombrecliente from CRM_clientes as c
+             inner join CRM_categoria_cliente as cc on cc.id = c.categoria
+             where c.usuario_crm = ".$user."
+             order by c.empresa asc
+             ");
+ 
+         return response()->json($clientes);
+     }
    
+
+      //obtener los contactos para un cliente seleccionado
+    public function getContactosPotenciales(Request $request)
+    {
+
+
+        $contactos = DB::connection('comanda')->select("
+        select c.*, c.nombre as nombre_contacto from CRM_contactos_clientes as c
+        where c.cli_potencial = ".$request['id']."
+        order by c.nombre asc
+        ");
+
+        return response()->json($contactos);
+    }
+
+
+     //funcion para obtener los clientes compartidos
+     public function getClientesCompartidos(Request $request)
+     {
+        $user = $request["id"];
+
+ 
+        $clientes = DB::connection('comanda')->select("
+        select c.*, ccc.nombre as nomCategoria,
+        c.id as codigo, c.empresa as nombrecliente from CRM_clientes as c
+        inner join CRM_cliente_usuario as ccu on ccu.cliente = c.id
+        inner join CRM_categoria_cliente as ccc on ccc.id = c.categoria
+        inner join users u on u.id = c.usuario_crm
+        where ccu.usuario = ".$user."
+        order by c.empresa asc
+        ");
+ 
+         return response()->json($clientes);
+     }
 
 
 

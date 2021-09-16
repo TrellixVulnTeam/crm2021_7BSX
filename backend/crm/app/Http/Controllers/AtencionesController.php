@@ -30,6 +30,24 @@ class AtencionesController extends Controller
            return response()->json($motivos);
        }
 
+
+       public function mover_archivo(Request $request){
+        $file = $request->file('file');
+        $nombreoriginal = strtolower($file->getClientOriginalName());
+        $file->move('files/',date('Ymd').' '.(string)$nombreoriginal);
+
+        $final_name = date('Ymd').' '.(string)$nombreoriginal;
+    
+        return response()->json($final_name);
+        }
+
+        public function eliminar_archivo(Request $request){
+            $file = $request["file"];
+
+            unlink(public_path('files/'.date('Ymd').' '.$file));
+        }
+    
+
 }
 
 

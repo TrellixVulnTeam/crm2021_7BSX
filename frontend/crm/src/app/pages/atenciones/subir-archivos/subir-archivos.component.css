@@ -67,8 +67,7 @@ td{
 
 tr > th{
   background-color:  #003F63 !important;
-  color:  white !important;
-  text-align: center !important;
+  color:  white !important;;
 }
 
 
@@ -92,3 +91,24 @@ mat-form-field{
   margin-bottom: 15px !important;
 }
 
+.close_btn{
+  float: right !important;
+  margin-left: 93% !important;
+}
+
+.lg_btn{
+  width: 90% !important;
+  margin-bottom: 10px !important;
+  margin-left: 5% !important;
+}
+
+.icon{
+  color: black !important;
+}
+
+.notfound{
+  margin: auto !important;
+  width: 80% !important;
+  border: 0px solid white !important;
+  box-shadow: none !important;
+}

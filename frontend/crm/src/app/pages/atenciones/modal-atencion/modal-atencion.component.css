@@ -67,14 +67,13 @@ td{
 
 tr > th{
   background-color:  #003F63 !important;
-  color:  white !important;
-  text-align: center !important;
+  color:  white !important;;
 }
 
 
 .input2{
-  margin-left: 5px !important;
-  width: 24% !important;
+  margin-left: 2% !important;
+  width: 22% !important;
 }
 
 .input3{
@@ -92,3 +91,17 @@ mat-form-field{
   margin-bottom: 15px !important;
 }
 
+.close_btn{
+  float: right !important;
+  margin-left: 93% !important;
+}
+
+.lg_btn{
+  width: 90% !important;
+  margin-bottom: 10px !important;
+  margin-left: 5% !important;
+}
+
+.icon{
+  color: black !important;
+}

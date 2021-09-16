@@ -24,8 +24,13 @@ Route::get('getAllClientesEdesal', 'ClientesController@getAllClientesEdesal');
 Route::post('getclientesbyname', 'ClientesController@getclientesbyname');
 Route::post('listarContactosByCliente', 'ClientesController@listarContactosByCliente');
 Route::post('listarSuministrosByCliente', 'ClientesController@listarSuministrosByCliente');
-
+Route::post('getProspectosStakeholders', 'ClientesController@getProspectosStakeholders');
+Route::post('getContactosPotenciales', 'ClientesController@getContactosPotenciales');
+Route::post('getClientesCompartidos', 'ClientesController@getClientesCompartidos');
 
 //rutas para atenciones
 Route::get('getMotivosAtenciones', 'AtencionesController@getMotivosAtenciones');
 Route::get('getTiposAtenciones', 'AtencionesController@getTiposAtenciones');
+Route::post('mover_archivo', 'AtencionesController@mover_archivo');
+Route::post('eliminar_archivo', 'AtencionesController@eliminar_archivo');
+

@@ -5,6 +5,7 @@ import { GlobalService } from './global.service';
 import { Router } from '@angular/router';
 import {Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Usuario } from '../models/usuario';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -39,6 +40,24 @@ public listarContactosByCliente(cliente: Clientes): Observable<Clientes[]> {
 
 public listarSuministrosByCliente(cliente: Clientes): Observable<Clientes[]> {
   return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'listarSuministrosByCliente', cliente, httpOptions)
+  .pipe(map(data => data as unknown as Clientes[] ));
+}
+
+
+public getProspectosStakeholders(usuario: Usuario): Observable<Usuario[]> {
+  return this.http.post<Usuario>(this.globalservice.getUrlBackEnd() + 'getProspectosStakeholders', usuario, httpOptions)
+  .pipe(map(data => data as unknown as Usuario[] ));
+}
+
+
+public getClientesCompartidos(usuario: Usuario): Observable<Usuario[]> {
+  return this.http.post<Usuario>(this.globalservice.getUrlBackEnd() + 'getClientesCompartidos', usuario, httpOptions)
+  .pipe(map(data => data as unknown as Usuario[] ));
+}
+
+
+public getContactosPotenciales(cliente: Clientes): Observable<Clientes[]> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'getContactosPotenciales', cliente, httpOptions)
   .pipe(map(data => data as unknown as Clientes[] ));
 }
 

@@ -1,0 +1,44 @@
+<form class="form_atencion" [formGroup]="form_adjuntos">
+  <input type="file" formControlName="file" (change)="subir_archivo($event)">
+
+  <mat-form-field appearance="legacy" class="input3">
+    <mat-label>Descripción de archivo</mat-label>
+    <textarea matInput placeholder="Descripción de archivo" formControlName="descripcion"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="basic" (click)="mover_archivo()">
+    <mat-icon class="icon">cloud_upload</mat-icon>
+    &nbsp;Cargar Archivo
+  </button>
+</form>
+
+
+<mat-card class="notfound" *ngIf="obj_archivos.length === 0">
+  <mat-card-content>
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile colspan="1" >
+        <img src="./assets/img/not-found.png"> <h1>No se han cargado archivos</h1>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </mat-card-content>
+</mat-card>
+
+<table *ngIf="obj_archivos.length != 0">
+  <thead>
+    <tr>
+      <th>Archivo</th>
+      <th>Descripción</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let arc of obj_archivos; index as indexOfelement;">
+      <td>{{arc.file.substring(12)}}</td>
+      <td>{{arc.descripcion}}</td>
+      <td><button  mat-mini-fab color="warn"
+        (click)="eliminar_archivo(arc.file.substring(12), indexOfelement)"><mat-icon>delete</mat-icon></button></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>

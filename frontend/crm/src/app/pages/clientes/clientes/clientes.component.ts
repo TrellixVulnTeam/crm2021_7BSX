@@ -7,6 +7,7 @@ import { Atenciones } from 'src/app/models/atenciones';
 import { Clientes } from 'src/app/models/clientes';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
 
 
 @Component({
@@ -20,8 +21,6 @@ export class ClientesComponent implements OnInit {
   dataSource:any = new MatTableDataSource<any>([]);
   texto: any;
   search_cliente_form: FormGroup;
-  form_atencion : FormGroup;
-  form_adjuntos : FormGroup;
   datosClientes = false;
   cargaDatos = false;
   notfound = false;
@@ -33,51 +32,17 @@ export class ClientesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-  constructor(private clienteService : ClientesService, public atencionService: AtencionesService) {
+  constructor(private clienteService : ClientesService, public atencionService: AtencionesService,
+    public dialog: MatDialog) {
     this.search_cliente_form = new FormGroup({
       'cliente': new FormControl('',[Validators.required])
     });
-
-    this.form_atencion = new FormGroup({
-      'suministro': new FormControl('',[Validators.required]),
-      'cliente': new FormControl('',[Validators.required]),
-      'contacto': new FormControl('',[Validators.required]),
-      'telefono': new FormControl('',[Validators.required]),
-      'tipo_atencion': new FormControl('',[Validators.required]),
-      'motivo_atencion': new FormControl('',[Validators.required]),
-      'descripcion_atencion': new FormControl('',[Validators.required]),
-    });
-
-
-    this.form_adjuntos = new FormGroup({
-      'file': new FormControl('',[Validators.required])
-    });
-
 
   }
 
 
   ngOnInit( ): void {
 
-      this.atencionService.getMotivosAtenciones().subscribe(
-      data => {
-        this.list_motivo_atenciones = data;
-      });
-
-
-      this.atencionService.getTiposAtenciones().subscribe(
-        data => {
-          this.list_tipo_atenciones = data;
-        })
-
-    /*this.clienteService.getAllClientesEdesal().subscribe(
-      data => {
-
-        if(this.texto === '') {
-          this.dataSource.data = data;
-        }
-        this.dataSource.data = data;
-      });*/
   }
 
   ngAfterViewInit() {
@@ -139,13 +104,20 @@ export class ClientesComponent implements OnInit {
     );
   }
 
+  open_modal_atenciones() {
 
+    this.dialog.open(ModalAtencionComponent,{
+      data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro}
+    });
+
+  }
 
 
 
 
 
 }
+
 
 
 

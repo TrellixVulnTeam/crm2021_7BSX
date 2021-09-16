@@ -8,11 +8,13 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AtencionesModule } from '../atenciones/atenciones.module';
+
 
 
 @NgModule({
   declarations: [
-    ClientesComponent
+    ClientesComponent,
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatModuleModule,
     PipesModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    AtencionesModule
+  ],
 })
+
 export class ClientesModule { }
