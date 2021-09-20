@@ -19,4 +19,8 @@ export class Clientes {
   public CODIGO_TARIFA!: string;
   public tipo_tension!: string;
   public estado!: string;
+  public nombre!: string;
+  public apellido!: string;
+  public id!: number;
+  public idUsuario!: number;
 }

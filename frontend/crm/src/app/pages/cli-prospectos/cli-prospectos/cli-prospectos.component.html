@@ -1,7 +1,9 @@
-<h3 class="title">Clientes Prospectos, Stakeholders y que otros usuarios me han compartido</h3>
+<h3 class="title">Mis Clientes Prospectos, Stakeholders y que otros usuarios me han compartido</h3>
 <mat-divider></mat-divider>
+
+
 <mat-tab-group>
-  <mat-tab label="Clientes Prospectos y Stakeholders" class="tabs">
+  <mat-tab label="Mis Clientes Prospectos y Stakeholders" class="tabs">
     <br><br>
     <h2>Prospectos y stakeholders</h2>
       <table mat-table [dataSource]="dataSource"  >
@@ -30,7 +32,7 @@
           <td mat-cell *matCellDef="let row">
             <button mat-mini-fab color="warn" matTooltip="Nueva atención" matTooltipPosition="left"
             (click)="open_modal_atenciones(row)"><mat-icon>notifications</mat-icon></button>
-            <button mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
+            <button (click)="getClienteByName(row)" mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
             <button mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
           </td>
         </ng-container>
@@ -39,11 +41,19 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
-      <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
+      <mat-paginator #paginator1 [pageSizeOptions]="[2, 5, 10, 20, 100]"
                      showFirstLastButtons
                      aria-label="Cantidad de registros a mostrar">
       </mat-paginator>
+
+
+
+<app-detalles-cliente [datos_cliente]='datos_cliente' [datos_contacto]='datos_contacto' [datos_suministro]='datos_suministro' [mostrarDatos]="mostrarDatos" [cargaDatos]="cargaDatos" [notfound]="notfound"></app-detalles-cliente>
+
+
   </mat-tab>
+
+
   <mat-tab label="Clientes que otros usuarios me han compartido">
 
     <br><br>
@@ -74,7 +84,7 @@
           <td mat-cell *matCellDef="let row1">
             <button mat-mini-fab color="warn" matTooltip="Nueva atención" matTooltipPosition="left"
             (click)="open_modal_atenciones(row1)"><mat-icon>notifications</mat-icon></button>
-            <button mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
+            <button (click)="getClienteByName(row1)" mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
             <button mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
           </td>
         </ng-container>
@@ -83,10 +93,13 @@
         <tr mat-row *matRowDef="let row1; columns: displayedColumns;"></tr>
       </table>
 
-      <mat-paginator  #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
+      <mat-paginator  #paginator2 [pageSizeOptions]="[2, 5, 10, 20, 100]"
                      showFirstLastButtons
                      aria-label="Cantidad de registros a mostrar">
       </mat-paginator>
+
+      <app-detalles-cliente [datos_cliente]='datos_cliente' [datos_contacto]='datos_contacto' [datos_suministro]='datos_suministro' [mostrarDatos]="mostrarDatos" [cargaDatos]="cargaDatos" [notfound]="notfound"></app-detalles-cliente>
+
 
   </mat-tab>
 

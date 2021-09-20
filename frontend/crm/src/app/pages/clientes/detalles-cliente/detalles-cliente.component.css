@@ -78,7 +78,7 @@ tr > th{
 
 .input3{
   margin-left: 2% !important;
-  width: 35% !important;
+  width: 45% !important;
 }
 
 .form_atencion{
@@ -91,24 +91,3 @@ mat-form-field{
   margin-bottom: 15px !important;
 }
 
-.close_btn{
-  float: right !important;
-  margin-left: 93% !important;
-}
-
-.lg_btn{
-  width: 90% !important;
-  margin-bottom: 10px !important;
-  margin-left: 5% !important;
-}
-
-.icon{
-  color: black !important;
-}
-
-.notfound{
-  margin: auto !important;
-  width: 80% !important;
-  border: 0px solid white !important;
-  box-shadow: none !important;
-}

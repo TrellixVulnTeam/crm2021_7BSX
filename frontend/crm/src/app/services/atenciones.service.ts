@@ -32,4 +32,12 @@ export class AtencionesService {
   public getTiposAtenciones(): Observable<Atenciones[]> {
     return this.http.get(this.globalservice.getUrlBackEnd() + 'getTiposAtenciones').pipe(map(data => data as Atenciones[]));
   }
+
+
+  public guardarAtencion(atencion: Atenciones): Observable<Atenciones> {
+    return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'guardarAtencion', atencion, httpOptions)
+    .pipe(map(data => data as Atenciones ));
+  }
+
+
 }

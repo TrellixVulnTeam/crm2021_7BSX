@@ -1,4 +1,4 @@
 export class Atenciones {
-  public id!: number;
+  public id!: string;
   public nombre!: string;
 }

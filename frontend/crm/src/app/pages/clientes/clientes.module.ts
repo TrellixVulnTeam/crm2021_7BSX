@@ -9,12 +9,16 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AtencionesModule } from '../atenciones/atenciones.module';
+import { DetallesClienteComponent } from './detalles-cliente/detalles-cliente.component';
+import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.component';
 
 
 
 @NgModule({
   declarations: [
     ClientesComponent,
+    DetallesClienteComponent,
+    NuevoContactoComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +29,9 @@ import { AtencionesModule } from '../atenciones/atenciones.module';
     ReactiveFormsModule,
     AtencionesModule
   ],
+  exports:[
+    DetallesClienteComponent,
+  ]
 })
 
 export class ClientesModule { }

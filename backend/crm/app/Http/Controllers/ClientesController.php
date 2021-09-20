@@ -70,6 +70,17 @@ class ClientesController extends Controller
          return response()->json($contactos);
      }
  
+     //listar contactos
+     public function listarContactosByCliente_potenciales(Request $request)
+     {
+         //conexion con comanda
+         $contactos  = DB::connection('comanda')->select("SELECT cc.nombre as nombre_contacto, cc.cargo as cargo_contacto,
+          cc.correo as correo_contacto, cc.celular  as celular1 
+         from CRM_contactos_clientes cc where cc.cli_potencial  = ".$request['id']);
+ 
+         return response()->json($contactos);
+     }
+ 
  
      //listar los suministros por cliente
      public function listarSuministrosByCliente(Request $request)
@@ -131,6 +142,60 @@ class ClientesController extends Controller
          return response()->json($clientes);
      }
 
+     //obtener usuarios a los que se les ha  compartido un cliente
+     public function getUsuariosByCliente(Request $request)
+     {
+         $usuarios = Db::connection('comanda')->table('CRM_cliente_usuario as cliente')
+                                  ->leftjoin('users as usuario','usuario.id','=','cliente.usuario')
+                                  ->select('usuario.nombre as nombre','usuario.apellido as apellido','usuario.id','cliente.id as linea')
+                                  ->where('cliente.cliente',$request['id'])
+                                  ->orderBy('cliente.id','desc')
+                                  ->get();
+ 
+         return response()->json($usuarios);
+     }
+
+     public function getUsuariosDisponibles(Request $request){
+
+        $usuarios = Db::connection('comanda')->select("SELECT u.id, u.nombre, u.apellido from users u 
+            inner join usuario_rol ur on ur.user_id = u.id 
+            inner join roles r on r.id = ur.rol_id 
+            where u.id not in (select usuario from CRM_cliente_usuario ccu where usuario= u.id and cliente = ".$request['id'].")
+            GROUP by u.id, u.nombre, u.apellido
+            order by 2 asc"
+        );
+
+        return response()->json($usuarios);
+     }
+
+
+     public function guardarUsuario(Request $request){
+
+        $insertar =  DB::connection('comanda')->table('CRM_cliente_usuario')
+                     ->insert([
+                       'cliente' => $request['cliente'],
+                       'usuario' => $request['usuario'],
+                       'fecha_creacion' => date('Ymd H:i'),
+                       
+                     ]);
+       
+        
+
+        return response()->json($insertar);
+    }
+
+
+    public function eliminarUsuario(Request $request){
+
+        $eliminar = DB::connection('comanda')->table('CRM_cliente_usuario')
+        ->where('cliente', $request['id'])->where('usuario', $request['idUsuario'])->delete();
+       
+        
+
+        return response()->json($eliminar);
+    }
+
+     
 
 
 }

@@ -1,0 +1,290 @@
+
+
+<div mat-dialog-content minWidth="10px">
+
+  <mat-tab-group>
+    <mat-tab label="Datos para actualizar" class="tabs">
+      <br>
+      <form>
+          <h3>Datos para actualizar</h3>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Porcentaje de costo de la energía: </mat-label>
+              <input  matInput type="text"  autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Facturación Mensual aproximada: </mat-label>
+              <input  matInput type="text"  autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Margen de rentabilidad: </mat-label>
+              <input  matInput type="text"  autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Horas de producción(Mensual): </mat-label>
+              <input  matInput type="text"  autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Costo Total: </mat-label>
+              <input  matInput type="text"  autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Perdida de ganancia por interrupción (Por Hora):</mat-label>
+              <input  matInput type="text"  autocomplete="off">
+            </mat-form-field>
+
+      </form>
+
+      <button mat-raised-button class="lg_btn" color="primary">Guardar información</button>
+
+    </mat-tab>
+    <mat-tab label="Información general" class="tabs">
+      <br>
+      <form>
+
+        <h3>Información General</h3>
+          <mat-form-field appearance="legacy" class="input1">
+            <mat-label>Nombre: </mat-label>
+            <input  matInput type="text"  autocomplete="off">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input1">
+            <mat-label>Rubro:</mat-label>
+            <input  matInput type="text"  autocomplete="off">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input1">
+            <mat-label>Dirección: </mat-label>
+            <input  matInput type="text"  autocomplete="off">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input1">
+            <mat-label>PBX:</mat-label>
+            <input  matInput type="text"  autocomplete="off">
+          </mat-form-field>
+      </form>
+
+      <button mat-raised-button class="lg_btn" color="primary">Guardar información</button>
+
+
+      <mat-divider></mat-divider>
+      <br>
+      <h3>Usuarios a los que se ha compartido</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <form [formGroup]="form_agregar_usuario">
+        <h3>Agregar un nuevo usuario para compartir</h3>
+
+        <input type="hidden" formControlName="cliente" [(ngModel)]="datos_cliente.codigo">
+        <mat-form-field appearance="legacy" class="input1">
+
+          <mat-label>Selecciona el usuario: </mat-label>
+
+          <mat-select formControlName="usuario">
+            <mat-option  *ngFor="let ob of usuarios_disponibles" [value]="ob.id">
+              {{ob.nombre}} {{ob.apellido}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+          <button mat-raised-button color="accent" class="btn" (click)="agregarUsuarioCompartido()"><mat-icon>add</mat-icon> Agregar usuario </button>
+      </form>
+
+      <table>
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let con of datos_usuario_cliente">
+              <td>{{con.nombre}} {{con.apellido}}</td>
+              <td><button mat-mini-fab color="warn" (click)="eliminarUsuario(con.id)"><mat-icon>delete</mat-icon></button></td>
+            </tr>
+          </tbody>
+      </table>
+
+
+
+
+    </mat-tab>
+
+    <mat-tab label="Datos técnicos" class="tabs">
+      <form>
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Tension: </mat-label>
+          <mat-select>
+            <mat-option value="MT">MT</mat-option>
+            <mat-option value="BT">BT</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Fases: </mat-label>
+          <mat-select>
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Hilos: </mat-label>
+          <mat-select>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Uso de servicio: </mat-label>
+          <mat-select>
+            <mat-option value="Residencial">Residencial</mat-option>
+            <mat-option value="Comercial">Comercial</mat-option>
+            <mat-option value="Industrial">Industrial</mat-option>
+            <mat-option value="Provisional">Provisional</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Tarifa: </mat-label>
+          <mat-select>
+            <mat-option value="1R">1R</mat-option>
+            <mat-option value="1AP">1AP</mat-option>
+            <mat-option value="1G">1G</mat-option>
+            <mat-option value="MBP">MBP</mat-option>
+            <mat-option value="MMP">MMP</mat-option>
+            <mat-option value="MBH">MBH</mat-option>
+            <mat-option value="MMH">MMH</mat-option>
+            <mat-option value="GMB">GMB</mat-option>
+            <mat-option value="GMH">GMH</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Potencia: </mat-label>
+          <input  matInput type="number"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Inmueble Propiedad de: </mat-label>
+          <input  matInput type="text"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Ubicación: </mat-label>
+          <input  matInput type="text"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>KVA Instalados: </mat-label>
+          <input  matInput type="number"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Transformadores requeridos: </mat-label>
+          <input  matInput type="number"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Estrella: </mat-label>
+          <mat-select>
+            <mat-option value="Estrella">Estrella</mat-option>
+            <mat-option value="Delta">Delta</mat-option>
+            <mat-option value="Delta Abierta">Delta Abierta</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Montaje: </mat-label>
+          <mat-select>
+            <mat-option value="Poste">Poste</mat-option>
+            <mat-option value="Plataforma">Plataforma</mat-option>
+            <mat-option value="Estructura H">Estructura H</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+          <h3>Información Adicional</h3>
+        <br>
+        <mat-form-field appearance="legacy" class="input1">
+          <mat-label>Numero de turnos de producción: </mat-label>
+          <input  matInput type="number"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input1">
+          <mat-label>Conectados al # de corte: </mat-label>
+          <input  matInput type="text"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input1">
+          <mat-label>Fecha de visita: </mat-label>
+          <input  matInput type="date"  autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input1">
+          <mat-label>Promesa ofrecida por EDESAL: </mat-label>
+          <textarea  matInput autocomplete="off"></textarea>
+        </mat-form-field>
+
+      </form>
+
+      <button mat-raised-button class="lg_btn" color="primary">Guardar información</button>
+    </mat-tab>
+
+    <mat-tab label="Contactos" class="tabs">
+      <br>
+    <h3>Contactos registrados del cliente <button mat-raised-button color="primary" class="btn"><mat-icon>add</mat-icon> Agregar nuevo contacto </button></h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Contacto</th>
+          <th>Cargo</th>
+          <th>Correo</th>
+          <th>Teléfono 1</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ob of datos_contacto">
+          <td>{{ob.nombre_contacto}}</td>
+          <td>{{ob.cargo_contacto}}</td>
+          <td>{{ob.correo_contacto}}</td>
+          <td>{{ob.celular_1}}</td>
+          <td>
+           <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left"><mat-icon>edit</mat-icon></button>
+           <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </mat-tab>
+  </mat-tab-group>
+
+    <mat-divider></mat-divider>
+
+
+
+
+
+    <mat-divider></mat-divider>
+
+
+</div>
+
+<div mat-dialog-actions>
+
+</div>
+

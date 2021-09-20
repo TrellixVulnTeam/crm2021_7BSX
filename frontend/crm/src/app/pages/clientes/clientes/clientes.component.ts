@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild,OnInit} from '@angular/core';
+import {AfterViewInit, Component, ViewChild,OnInit, Input} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -8,6 +8,7 @@ import { Clientes } from 'src/app/models/clientes';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
+import { DetallesClienteComponent } from '../detalles-cliente/detalles-cliente.component';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class ClientesComponent implements OnInit {
   dataSource:any = new MatTableDataSource<any>([]);
   texto: any;
   search_cliente_form: FormGroup;
-  datosClientes = false;
+  mostrarDatos = false;
   cargaDatos = false;
   notfound = false;
   datos_cliente : Clientes = new Clientes();
@@ -29,6 +30,8 @@ export class ClientesComponent implements OnInit {
   datos_suministro : Clientes[] | undefined;
   list_motivo_atenciones : Atenciones[] | undefined;
   list_tipo_atenciones : Atenciones[] | undefined;
+
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
@@ -53,7 +56,7 @@ export class ClientesComponent implements OnInit {
   getClienteByName(){
     this.cargaDatos = true;
     this.notfound = false;
-    this.datosClientes = false;
+    this.mostrarDatos = false;
     let datos : Clientes = new Clientes();
 
     datos = this.search_cliente_form.value;
@@ -65,49 +68,63 @@ export class ClientesComponent implements OnInit {
       },
       () => {
         if(Object.keys(this.datos_cliente).length === 0){
-          this.datosClientes = false;
+          this.mostrarDatos = false;
           this.notfound = true;
           this.cargaDatos = false;
         }else{
-
-
-          this.clienteService.listarContactosByCliente(this.datos_cliente).subscribe(
-            response => {
-              this.datos_contacto = response;
-            },
-            err => {
-
-            },
-            () => {
-
-            }
-          );
-
-
-          this.clienteService.listarSuministrosByCliente(this.datos_cliente).subscribe(
-            response => {
-              this.datos_suministro = response;
-            },
-            err => {
-
-            },
-            () => {
-              this.datosClientes = true;
-              this.cargaDatos = false;
-            }
-          );
-
-
+          this.listarContactos();
+          this.listarSuministros();
         }
+
+      }
+    );
+
+
+
+  }
+
+
+  listarContactos(){
+
+
+    this.clienteService.listarContactosByCliente(this.datos_cliente).subscribe(
+      response => {
+        this.datos_contacto = response;
+      },
+      err => {
+
+      },
+      () => {
 
       }
     );
   }
 
+
+
+  listarSuministros(){
+    this.clienteService.listarSuministrosByCliente(this.datos_cliente).subscribe(
+      response => {
+        this.datos_suministro = response;
+      },
+      err => {
+
+      },
+      () => {
+        this.mostrarDatos = true;
+        this.cargaDatos = false;
+      }
+    );
+  }
+
+
+
+
   open_modal_atenciones() {
 
     this.dialog.open(ModalAtencionComponent,{
-      data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro}
+      data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro},
+      width: '70%',
     });
 
   }

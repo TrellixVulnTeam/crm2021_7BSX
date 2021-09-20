@@ -1,8 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Archivos } from 'src/app/models/archivos';
+import { Atenciones } from 'src/app/models/atenciones';
+import { Usuario } from 'src/app/models/usuario';
 import { ArchivosService } from 'src/app/services/archivos.service';
+import { AtencionesService } from 'src/app/services/atenciones.service';
 import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
@@ -14,8 +20,19 @@ export class SubirArchivosComponent implements OnInit {
   form_adjuntos : FormGroup;
   archivo!: File;
   obj_archivos: Archivos[] = [];
+  user: Usuario = new Usuario();
 
-  constructor(private http: HttpClient, private urlBackEnd: GlobalService, public archivoService: ArchivosService) {
+  atn_id : any | undefined;
+  //variables de entrada
+
+  @Input()  arreglo_atenciones : Atenciones = new Atenciones();
+  @Input()  atencion_id : any;
+
+  constructor(private http: HttpClient, private urlBackEnd: GlobalService,
+    public archivoService: ArchivosService,private _snackBar: MatSnackBar,
+    private router: Router, private atencionService : AtencionesService,
+    public dialog: MatDialog
+    ) {
     this.form_adjuntos = new FormGroup({
       'file': new FormControl('',[Validators.required]),
       'descripcion': new FormControl('',[Validators.required])
@@ -23,6 +40,14 @@ export class SubirArchivosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if(localStorage.getItem('usuario_crm') !== null){
+
+      this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
+
+      }else{
+        this.router.navigate(['login']);
+      }
   }
 
    //validacion del archivo seleccionado
@@ -30,38 +55,87 @@ export class SubirArchivosComponent implements OnInit {
   this.archivo = <File>fileInput.target.files[0];
 }
 
-mover_archivo(){
-  const formData = new FormData();
-  formData.append('file', this.archivo);
+  mover_archivo(){
+    const formData = new FormData();
+    formData.append('file', this.archivo);
 
-  this.http.post(this.urlBackEnd.getUrlBackEnd() +'mover_archivo', formData)
-  .subscribe(
-    response => {
-    },
-    err => {
-    },
-    () => {
-    });
-    let form_archivos: Archivos = this.form_adjuntos.value;
-    this.obj_archivos.push(form_archivos);
+    this.http.post(this.urlBackEnd.getUrlBackEnd() +'mover_archivo', formData)
+    .subscribe(
+      response => {
+      },
+      err => {
+      },
+      () => {
+      });
+      let form_archivos: Archivos = this.form_adjuntos.value;
+
+      this.obj_archivos.push(form_archivos);
+
+      console.log(this.obj_archivos);
+  }
+
+
+  eliminar_archivo(name:any, index:any){
+    var nombre_file = new Archivos();
+    nombre_file.file = name;
+
+    this.http.post(this.urlBackEnd.getUrlBackEnd() +'eliminar_archivo?file=', nombre_file)
+    .subscribe(
+      response => {
+      },
+      err => {
+      },
+      () => {
+      });
+
+      this.obj_archivos.splice(index, 1);
+  }
+
+
+
+
+
+   guardarArchivos(){
+
+        var id_atn = this.atencion_id;
+        var iduser = this.user.id;
+
+        this.obj_archivos.forEach(function(e){
+          if (typeof e === "object" ){
+            e["atencion_id"] =  id_atn;
+            e["usuario_id"] = iduser;
+          }
+        });
+
+        this.archivoService.guardarArchivosAtn(this.obj_archivos).subscribe(
+          response => {
+           // this.atn_id = response;
+          },
+          err => {
+            this._snackBar.open('Error al guardar', 'Ok', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            });
+          },
+          () => {
+            this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            });
+
+            this.dialog.closeAll();
+          }
+          );
+  }
+
+
 }
 
 
-eliminar_archivo(name:any, index:any){
-  var nombre_file = new Archivos();
-  nombre_file.file = name;
-
-  this.http.post(this.urlBackEnd.getUrlBackEnd() +'eliminar_archivo?file=', nombre_file)
-  .subscribe(
-    response => {
-    },
-    err => {
-    },
-    () => {
-    });
-
-    this.obj_archivos.splice(index, 1);
-}
 
 
-}
+
+
+

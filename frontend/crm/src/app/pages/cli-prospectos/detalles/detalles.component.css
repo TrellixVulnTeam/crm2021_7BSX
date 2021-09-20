@@ -1,7 +1,4 @@
-.title{
-  font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
-}
+
 
 mat-icon{
   color: white !important;
@@ -12,30 +9,15 @@ button{
 }
 
 form{
-  width: 70% !important;
+  width: 100% !important;
   margin: auto !important;
   }
 
-.input{
-    width: 70% !important;
-}
-
-.dato{
-  margin-top: auto !important;
-  font-size: 12px !important;
-
-}
+  h3{
+    margin-left: 2% !important;
+  }
 
 
-.datoDireccion{
-  margin-top: 10px !important;
-  font-size: 13px !important;
-}
-
-.dato{
-  margin-top: 15px !important;
-  font-size: 13px !important;
-}
 
 .label{
   margin-top: 15px !important;
@@ -56,10 +38,7 @@ table{
   margin: auto !important;
 }
 
-.tbl_cliente{
-  width: 90% !important;
-  margin: auto !important;
-}
+
 td{
   text-align: center !important;
   border-bottom: 1px solid #CFCCCC !important;
@@ -71,20 +50,15 @@ tr > th{
 }
 
 
-.input2{
-  margin-left: 5px !important;
-  width: 24% !important;
-}
-
-.input3{
+.input{
   margin-left: 2% !important;
-  width: 35% !important;
+  width: 22% !important;
 }
 
-.form_atencion{
-  width: 100% !important;
-  margin: auto !important;
-  margin-top: 15px !important;
+
+.input1{
+  margin-left: 2% !important;
+  width: 45% !important;
 }
 
 mat-form-field{
@@ -106,9 +80,6 @@ mat-form-field{
   color: black !important;
 }
 
-.notfound{
-  margin: auto !important;
-  width: 80% !important;
-  border: 0px solid white !important;
-  box-shadow: none !important;
+.btn{
+  margin-left: 50px !important;
 }

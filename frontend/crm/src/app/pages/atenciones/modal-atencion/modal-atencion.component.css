@@ -81,6 +81,11 @@ tr > th{
   width: 45% !important;
 }
 
+.input4{
+  margin-left: 2% !important;
+  width: 65% !important;
+}
+
 .form_atencion{
   width: 100% !important;
   margin: auto !important;

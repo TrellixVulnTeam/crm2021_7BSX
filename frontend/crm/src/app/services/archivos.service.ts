@@ -30,4 +30,10 @@ export class ArchivosService {
     return this.http.post<Archivos>(this.globalservice.getUrlBackEnd() + 'eliminar_archivo', archivo, httpOptions)
     .pipe(map(data => data as Archivos ));
   }
+
+
+  public guardarArchivosAtn(archivo: Archivos[]): Observable<Archivos[]> {
+    return this.http.post<Archivos[]>(this.globalservice.getUrlBackEnd() + 'guardarArchivosAtn', archivo, httpOptions)
+    .pipe(map(data => data as Archivos[] ));
+  }
 }

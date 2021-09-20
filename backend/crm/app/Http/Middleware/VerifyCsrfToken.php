@@ -24,6 +24,13 @@ class VerifyCsrfToken extends BaseVerifier
         'eliminar_archivo',
         'getProspectosStakeholders',
         'getContactosPotenciales',
-        'getClientesCompartidos'
+        'getClientesCompartidos',
+        'guardarAtencion',
+        'guardarArchivosAtn',
+        'listarContactosByCliente_potenciales',
+        'getUsuariosByCliente',
+        'getUsuariosDisponibles',
+        'guardarUsuario',
+        'eliminarUsuario'
     ];
 }

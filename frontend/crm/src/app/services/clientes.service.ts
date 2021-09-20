@@ -38,6 +38,13 @@ public listarContactosByCliente(cliente: Clientes): Observable<Clientes[]> {
   .pipe(map(data => data as unknown as Clientes[] ));
 }
 
+public listarContactosByCliente_potenciales(cliente: Clientes): Observable<Clientes[]> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'listarContactosByCliente_potenciales', cliente, httpOptions)
+  .pipe(map(data => data as unknown as Clientes[] ));
+}
+
+
+
 public listarSuministrosByCliente(cliente: Clientes): Observable<Clientes[]> {
   return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'listarSuministrosByCliente', cliente, httpOptions)
   .pipe(map(data => data as unknown as Clientes[] ));
@@ -60,5 +67,29 @@ public getContactosPotenciales(cliente: Clientes): Observable<Clientes[]> {
   return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'getContactosPotenciales', cliente, httpOptions)
   .pipe(map(data => data as unknown as Clientes[] ));
 }
+
+public getUsuariosByCliente(cliente: Clientes): Observable<Clientes[]> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'getUsuariosByCliente', cliente, httpOptions)
+  .pipe(map(data => data as unknown as Clientes[] ));
+}
+
+
+public getUsuariosDisponibles(cliente: Clientes): Observable<Clientes[]> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'getUsuariosDisponibles', cliente, httpOptions)
+  .pipe(map(data => data as unknown as Clientes[] ));
+}
+
+
+public guardarUsuario(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'guardarUsuario', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
+
+public eliminarUsuario(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'eliminarUsuario', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
 
 }

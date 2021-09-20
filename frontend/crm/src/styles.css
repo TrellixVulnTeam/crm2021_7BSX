@@ -44,6 +44,10 @@ h1{
 h3{
   font-family: 'Montserrat', sans-serif !important;
 }
+
+textarea{
+    font-family: 'Montserrat', sans-serif !important;
+}
 mat-icon{
   color: #003F63 !important;
 }

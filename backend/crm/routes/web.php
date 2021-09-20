@@ -27,10 +27,17 @@ Route::post('listarSuministrosByCliente', 'ClientesController@listarSuministrosB
 Route::post('getProspectosStakeholders', 'ClientesController@getProspectosStakeholders');
 Route::post('getContactosPotenciales', 'ClientesController@getContactosPotenciales');
 Route::post('getClientesCompartidos', 'ClientesController@getClientesCompartidos');
+Route::post('listarContactosByCliente_potenciales', 'ClientesController@listarContactosByCliente_potenciales');
+Route::post('getUsuariosByCliente', 'ClientesController@getUsuariosByCliente');
+Route::post('getUsuariosDisponibles', 'ClientesController@getUsuariosDisponibles');
+Route::post('guardarUsuario', 'ClientesController@guardarUsuario');
+Route::post('eliminarUsuario', 'ClientesController@eliminarUsuario');
+
 
 //rutas para atenciones
 Route::get('getMotivosAtenciones', 'AtencionesController@getMotivosAtenciones');
 Route::get('getTiposAtenciones', 'AtencionesController@getTiposAtenciones');
 Route::post('mover_archivo', 'AtencionesController@mover_archivo');
 Route::post('eliminar_archivo', 'AtencionesController@eliminar_archivo');
-
+Route::post('guardarAtencion', 'AtencionesController@guardarAtencion');
+Route::post('guardarArchivosAtn', 'AtencionesController@guardarArchivosAtn');
