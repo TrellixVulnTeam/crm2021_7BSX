@@ -9,6 +9,7 @@ import { ClientesService } from 'src/app/services/clientes.service';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
 import { DetallesClienteComponent } from '../../clientes/detalles-cliente/detalles-cliente.component';
 import { DetallesComponent } from '../detalles/detalles.component';
+import { NuevoContactoComponent } from '../nuevo-contacto/nuevo-contacto.component';
 
 @Component({
   selector: 'app-cli-prospectos',
@@ -69,6 +70,41 @@ export class CliProspectosComponent implements OnInit {
   }
 
 
+  getUsuariosByCliente(datos_cli: Clientes){
+    this.clienteService.getUsuariosByCliente(datos_cli).subscribe(
+      response => {
+        this.datos_usuario_cliente = response;
+      },
+      err => {
+
+      },
+      () => {
+
+      }
+    );
+  }
+
+
+  getUsuariosDisponibles(datos_cli: Clientes){
+    this.clienteService.getUsuariosDisponibles(datos_cli).subscribe(
+      response => {
+        this.usuarios_disponibles = response;
+      },
+      err => {
+
+      },
+      () => {
+
+        this.dialog.open(DetallesComponent,{
+          data:{datos_contacto: this.datos_contacto, datos_usuario_cliente:this.datos_usuario_cliente,
+          usuarios_disponibles: this.usuarios_disponibles, datos_cliente: this.datos_cliente },
+          width: '70%'
+      });
+
+      }
+    );
+  }
+
   //Obtener datos clientes
   getClienteByName(datos_cli: Clientes){
     this.datos_cliente = datos_cli;
@@ -76,47 +112,20 @@ export class CliProspectosComponent implements OnInit {
           this.clienteService.listarContactosByCliente_potenciales(datos_cli).subscribe(
             response => {
               this.datos_contacto = response;
+
+              this.clienteService.fillDatosContactos(response);
+
+              this.clienteService._datoscontactos.subscribe(response => {
+              });
             },
             err => {
 
             },
             () => {
-
-              this.clienteService.getUsuariosByCliente(datos_cli).subscribe(
-                response => {
-                  this.datos_usuario_cliente = response;
-                },
-                err => {
-
-                },
-                () => {
-
-                  this.clienteService.getUsuariosDisponibles(datos_cli).subscribe(
-                    response => {
-                      this.usuarios_disponibles = response;
-                    },
-                    err => {
-
-                    },
-                    () => {
-
-                      this.dialog.open(DetallesComponent,{
-                        data:{datos_contacto: this.datos_contacto, datos_usuario_cliente:this.datos_usuario_cliente,
-                        usuarios_disponibles: this.usuarios_disponibles, datos_cliente: this.datos_cliente },
-                        width: '70%'
-                    });
-
-                    }
-                  );
-
-
-
-                }
-              );
+              this.getUsuariosByCliente(datos_cli);
+              this.getUsuariosDisponibles(datos_cli);
 
             });
-
-
   }
 
 
@@ -129,11 +138,22 @@ export class CliProspectosComponent implements OnInit {
 
         this.dialog.open(ModalAtencionComponent,{
           data: {datos_cliente: cliente, datos_contacto: this.datos_contacto, datos_suministro: ''},
-          width: '70%',
+          width: '80%',
         });
       });
 
   }
+
+
+  open_modal_contacto(datos: Clientes) {
+
+    this.dialog.open(NuevoContactoComponent,{
+      data: {datos_cliente: datos},
+      width: '80%',
+    });
+  }
+
+
 
 
 }
