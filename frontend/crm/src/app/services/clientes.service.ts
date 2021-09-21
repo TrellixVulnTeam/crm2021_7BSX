@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Clientes } from '../models/clientes';
 import { GlobalService } from './global.service';
 import { Router } from '@angular/router';
-import {Observable } from 'rxjs';
+import {BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
 
@@ -20,7 +20,19 @@ const httpOptions = {
 })
 export class ClientesService {
 
+  datoscontactos = new BehaviorSubject<Clientes[]>([]);
+  _datoscontactos = this.datoscontactos.asObservable();
+
   constructor(private http: HttpClient, private router: Router, private globalservice: GlobalService) { }
+
+
+
+  // llenar el observable de behaviour subject
+  fillDatosContactos(d: Clientes[]){
+    this.datoscontactos.next(d);
+  }
+
+
 
 
   //metodo para obtener objeto de usuarios para select
@@ -88,6 +100,36 @@ public guardarUsuario(datos: Clientes): Observable<Clientes> {
 
 public eliminarUsuario(datos: Clientes): Observable<Clientes> {
   return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'eliminarUsuario', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
+
+public guardarContacto(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'guardarContacto', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
+public eliminarcontacto(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'eliminarcontacto', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
+public eliminarcontacto_prospectos(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'eliminarcontacto_prospectos', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
+
+
+
+public editarContacto(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'editarContacto', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
+
+public guardarContacto_prospectos(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'guardarContacto_prospectos', datos, httpOptions)
   .pipe(map(data => data as Clientes ));
 }
 

@@ -90,6 +90,11 @@ export class ClientesComponent implements OnInit {
     this.clienteService.listarContactosByCliente(this.datos_cliente).subscribe(
       response => {
         this.datos_contacto = response;
+
+        this.clienteService.fillDatosContactos(response);
+
+        this.clienteService._datoscontactos.subscribe(response => {
+        });
       },
       err => {
 
@@ -124,7 +129,7 @@ export class ClientesComponent implements OnInit {
 
     this.dialog.open(ModalAtencionComponent,{
       data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro},
-      width: '70%',
+      width: '80%',
     });
 
   }

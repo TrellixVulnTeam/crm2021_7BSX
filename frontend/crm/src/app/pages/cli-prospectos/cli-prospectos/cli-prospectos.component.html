@@ -33,7 +33,7 @@
             <button mat-mini-fab color="warn" matTooltip="Nueva atención" matTooltipPosition="left"
             (click)="open_modal_atenciones(row)"><mat-icon>notifications</mat-icon></button>
             <button (click)="getClienteByName(row)" mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
-            <button mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
+            <button (click)="open_modal_contacto(row)" mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
           </td>
         </ng-container>
 
@@ -41,14 +41,11 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
-      <mat-paginator #paginator1 [pageSizeOptions]="[2, 5, 10, 20, 100]"
+      <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
                      showFirstLastButtons
                      aria-label="Cantidad de registros a mostrar">
       </mat-paginator>
 
-
-
-<app-detalles-cliente [datos_cliente]='datos_cliente' [datos_contacto]='datos_contacto' [datos_suministro]='datos_suministro' [mostrarDatos]="mostrarDatos" [cargaDatos]="cargaDatos" [notfound]="notfound"></app-detalles-cliente>
 
 
   </mat-tab>
@@ -85,7 +82,7 @@
             <button mat-mini-fab color="warn" matTooltip="Nueva atención" matTooltipPosition="left"
             (click)="open_modal_atenciones(row1)"><mat-icon>notifications</mat-icon></button>
             <button (click)="getClienteByName(row1)" mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
-            <button mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
+            <button (click)="open_modal_contacto(row1)" mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
           </td>
         </ng-container>
 
@@ -93,12 +90,10 @@
         <tr mat-row *matRowDef="let row1; columns: displayedColumns;"></tr>
       </table>
 
-      <mat-paginator  #paginator2 [pageSizeOptions]="[2, 5, 10, 20, 100]"
+      <mat-paginator  #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
                      showFirstLastButtons
                      aria-label="Cantidad de registros a mostrar">
       </mat-paginator>
-
-      <app-detalles-cliente [datos_cliente]='datos_cliente' [datos_contacto]='datos_contacto' [datos_suministro]='datos_suministro' [mostrarDatos]="mostrarDatos" [cargaDatos]="cargaDatos" [notfound]="notfound"></app-detalles-cliente>
 
 
   </mat-tab>

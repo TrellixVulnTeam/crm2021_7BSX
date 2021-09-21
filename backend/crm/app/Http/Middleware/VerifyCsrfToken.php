@@ -31,6 +31,11 @@ class VerifyCsrfToken extends BaseVerifier
         'getUsuariosByCliente',
         'getUsuariosDisponibles',
         'guardarUsuario',
-        'eliminarUsuario'
+        'eliminarUsuario',
+        'guardarContacto',
+        'eliminarcontacto',
+        'editarContacto',
+        'guardarContacto_prospectos',
+        'eliminarcontacto_prospectos'
     ];
 }

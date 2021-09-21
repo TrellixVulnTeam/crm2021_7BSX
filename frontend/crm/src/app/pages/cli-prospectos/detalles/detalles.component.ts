@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Clientes } from 'src/app/models/clientes';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { EditarContactoComponent } from '../editar-contacto/editar-contacto.component';
+import { NuevoContactoComponent } from '../nuevo-contacto/nuevo-contacto.component';
 
 @Component({
   selector: 'app-detalles',
@@ -19,7 +21,7 @@ export class DetallesComponent implements OnInit {
   form_agregar_usuario: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  private clienteService : ClientesService, private _snackBar: MatSnackBar,) {
+  private clienteService : ClientesService, private _snackBar: MatSnackBar,public dialog: MatDialog,) {
     this.form_agregar_usuario = new FormGroup({
       'cliente': new FormControl('',[Validators.required]),
       'usuario': new FormControl('',[Validators.required]),
@@ -123,4 +125,51 @@ export class DetallesComponent implements OnInit {
       }
       );
     }
+
+
+  editarContacto(datos: Clientes){
+    this.dialog.open(EditarContactoComponent,{
+      data: {datos_cliente: this.datos_cliente, datos_contacto: datos},
+      width: '80%',
+    });
+  }
+
+
+  eliminarContacto(datos: Clientes){
+
+
+    this.clienteService.eliminarcontacto_prospectos(datos).subscribe(
+      response => {
+        //this.usuarios_disponibles = response;
+      },
+      err => {
+        this._snackBar.open('¡¡ Error !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      },
+      () => {
+
+        //this.listarContactos(data);
+
+        this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      //  this.dialog.closeAll();
+
+      });
+
+  }
+
+  open_modal_contacto(){
+    this.dialog.open(NuevoContactoComponent,{
+      data: {datos_cliente: this.datos_cliente},
+      width: '80%',
+    });
+  }
 }

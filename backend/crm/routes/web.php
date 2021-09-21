@@ -32,6 +32,11 @@ Route::post('getUsuariosByCliente', 'ClientesController@getUsuariosByCliente');
 Route::post('getUsuariosDisponibles', 'ClientesController@getUsuariosDisponibles');
 Route::post('guardarUsuario', 'ClientesController@guardarUsuario');
 Route::post('eliminarUsuario', 'ClientesController@eliminarUsuario');
+Route::post('guardarContacto', 'ClientesController@guardarContacto');
+Route::post('eliminarcontacto', 'ClientesController@eliminarcontacto');
+Route::post('editarContacto', 'ClientesController@editarContacto');
+Route::post('guardarContacto_prospectos', 'ClientesController@guardarContacto_prospectos');
+Route::post('eliminarcontacto_prospectos', 'ClientesController@eliminarcontacto_prospectos');
 
 
 //rutas para atenciones

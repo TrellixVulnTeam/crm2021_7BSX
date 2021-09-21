@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -6,16 +6,15 @@ import { Clientes } from 'src/app/models/clientes';
 import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
-  selector: 'app-nuevo-contacto',
-  templateUrl: './nuevo-contacto.component.html',
-  styleUrls: ['./nuevo-contacto.component.css']
+  selector: 'app-editar-contacto',
+  templateUrl: './editar-contacto.component.html',
+  styleUrls: ['./editar-contacto.component.css']
 })
-export class NuevoContactoComponent implements OnInit {
-
+export class EditarContactoComponent implements OnInit {
   datos_cliente : Clientes = new Clientes();
   form_contacto: FormGroup;
   datos_contacto : Clientes[] | undefined;
-  datos_contactos: Clientes[] = [];
+  datos_cont: Clientes = new Clientes;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private clienteService : ClientesService, private _snackBar: MatSnackBar,public dialog: MatDialog) {
@@ -38,10 +37,11 @@ export class NuevoContactoComponent implements OnInit {
 
   ngOnInit(): void {
     this.datos_cliente = this.data.datos_cliente;
+    this.datos_cont = this.data.datos_contacto;
   }
 
 
-  listarContactos(datos: any){
+  listarContactos(datos : Clientes){
     this.clienteService.listarContactosByCliente(datos).subscribe(
       response => {
         this.datos_contacto = response;
@@ -49,7 +49,6 @@ export class NuevoContactoComponent implements OnInit {
         this.clienteService.fillDatosContactos(response);
 
         this.clienteService._datoscontactos.subscribe(response => {
-          console.log(response);
         });
       },
       err => {
@@ -61,12 +60,11 @@ export class NuevoContactoComponent implements OnInit {
     );
   }
 
-
-  guardarContacto(){
+  editarContacto(){
     let datos : Clientes = new Clientes();
     datos = this.form_contacto.value;
 
-    this.clienteService.guardarContacto(datos).subscribe(
+    this.clienteService.editarContacto(datos).subscribe(
       response => {
       },
       err => {

@@ -1,7 +1,6 @@
 <div mat-dialog-content>
-  <h2>Nuevo contacto para cliente {{datos_cliente.nombrecliente}} {{datos_cliente.apellidocliente}}</h2>
+  <h2>Editar contacto para cliente {{datos_cliente.nombrecliente}} {{datos_cliente.apellidocliente}}</h2>
   <mat-divider></mat-divider>
-
   <br>
   <form [formGroup]="form_contacto">
       <h3>Datos para actualizar</h3>
@@ -9,68 +8,69 @@
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Codigo de cliente: </mat-label>
           <input readonly matInput type="text"  autocomplete="off" formControlName="codigo" [(ngModel)]="datos_cliente.codigo">
-          <input readonly  type="hidden"  autocomplete="off" formControlName="correla" [(ngModel)]="datos_cliente.correla">
+          <input readonly  type="hidden"  autocomplete="off" formControlName="correla" [(ngModel)]="datos_cont.correla_contacto">
         </mat-form-field>
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Nombre contacto: </mat-label>
-          <input  matInput type="text"  autocomplete="off" formControlName="nombre">
+          <input  matInput type="text"  autocomplete="off" formControlName="nombre" [(ngModel)]="datos_cont.nombre_contacto">
         </mat-form-field>
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Cargo del contacto: </mat-label>
-          <input  matInput type="text"  autocomplete="off" formControlName="cargo">
+          <input  matInput type="text"  autocomplete="off" formControlName="cargo" [(ngModel)]="datos_cont.cargo_contacto">
         </mat-form-field>
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Correo electrónico: </mat-label>
-          <input  matInput type="text"  autocomplete="off" formControlName="correo">
+          <input  matInput type="text"  autocomplete="off" formControlName="correo" [(ngModel)]="datos_cont.correo_contacto">
         </mat-form-field>
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Telefono 1: </mat-label>
-          <input  matInput type="text"  autocomplete="off" formControlName="telefono1">
+          <input  matInput type="text"  autocomplete="off" formControlName="telefono1" [(ngModel)]="datos_cont.telefono_1">
         </mat-form-field>
 
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Telefono 2: </mat-label>
-          <input  matInput type="text"  autocomplete="off" formControlName="telefono2">
+          <input  matInput type="text"  autocomplete="off" formControlName="telefono2" [(ngModel)]="datos_cont.telefono_2">
         </mat-form-field>
 
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Celular 1: </mat-label>
-          <input  matInput type="text"  autocomplete="off" formControlName="celular1">
+          <input  matInput type="text"  autocomplete="off" formControlName="celular1" [(ngModel)]="datos_cont.celular_1">
         </mat-form-field>
 
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Celular 2: </mat-label>
-          <input  matInput type="text"  autocomplete="off" formControlName="celular2">
+          <input  matInput type="text"  autocomplete="off" formControlName="celular2" [(ngModel)]="datos_cont.celular_2">
         </mat-form-field>
 
 
         <mat-form-field appearance="legacy" class="input1">
           <mat-label>Comentarios: </mat-label>
-          <textarea rows="3" matInput autocomplete="off" formControlName="comentarios"></textarea>
+          <textarea rows="3" matInput autocomplete="off" formControlName="comentarios" [(ngModel)]="datos_cont.comentarios"></textarea>
         </mat-form-field>
 
 
         <mat-form-field appearance="legacy" class="input1">
           <mat-label>Fecha de nacimiento: </mat-label>
-          <input  matInput type="date"  autocomplete="off" formControlName="fecha_nacimiento">
+          <input  matInput type="date"  autocomplete="off" formControlName="fecha_nacimiento" [(ngModel)]="datos_cont.fechaNac">
         </mat-form-field>
 
         <mat-form-field appearance="legacy" class="input1">
           <mat-label>Contacto técnico: </mat-label>
-          <mat-select formControlName="tecnico">
+          <mat-select formControlName="tecnico" [(ngModel)]="datos_cont.contacto_Tecnico">
             <mat-option value="S">Si</mat-option>
             <mat-option value="N">No</mat-option>
           </mat-select>
         </mat-form-field>
   </form>
 
-  <button mat-raised-button class="lg_btn" color="primary" (click)="guardarContacto()">Guardar contacto</button>
+  <button mat-raised-button class="lg_btn" color="primary" (click)="editarContacto()">Editar contacto</button>
+
 
 </div>

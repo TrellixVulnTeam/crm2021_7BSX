@@ -40,7 +40,8 @@ class ClientesController extends Controller
             select distinct c.CODIGO_CLIENTE as codigo,c.NOMBRES as nombrecliente,
             c.APELLIDOS as apellidocliente,
             c.TELEFONO_UNO as telefono,c.direccion,
-            c.DUI as dui,c.NIT as nit,fs.usuario_unicom as usuario
+            c.DUI as dui,c.NIT as nit,fs.usuario_unicom as usuario,(SELECT max(correla_contacto)  
+            from fe_cliente_contacto where codigo_cliente = c.CODIGO_CLIENTE) as correla 
             from FE_CLIENTE c
             inner join fe_suministros fs on fs.CODIGO_CLIENTE = c.CODIGO_CLIENTE
             where (fs.usuario_unicom in ('rchevez','eescobar','oquan')) and 
@@ -75,8 +76,8 @@ class ClientesController extends Controller
      {
          //conexion con comanda
          $contactos  = DB::connection('comanda')->select("SELECT cc.nombre as nombre_contacto, cc.cargo as cargo_contacto,
-          cc.correo as correo_contacto, cc.celular  as celular1 
-         from CRM_contactos_clientes cc where cc.cli_potencial  = ".$request['id']);
+          cc.correo as correo_contacto, cc.celular  as celular1 , cc.id as codigo
+         from CRM_contactos_clientes cc where cc.cli_potencial  = ".$request['codigo']);
  
          return response()->json($contactos);
      }
@@ -195,6 +196,103 @@ class ClientesController extends Controller
         return response()->json($eliminar);
     }
 
+
+    public function guardarContacto(Request $request){
+
+        $fecha1r = $request["fecha_nacimiento"];
+
+        $fecha1 = date_create_from_format('Y-m-d',$fecha1r);
+
+        $fechaIn = date_format($fecha1,'Ymd');
+
+
+        $correla = DB::connection('facturacion')->table('fe_cliente_contacto')->where('codigo_cliente',$request['codigo'])->max('correla_contacto') ;
+
+        $insertar =  DB::connection('facturacion')->table('fe_cliente_contacto')
+        ->insert([
+          'codigo_cliente' => $request['codigo'],
+          'correla_contacto' =>  $correla +1,
+          'nombre_contacto' => $request['nombre'],
+          'cargo_contacto' => $request['cargo'],
+          'correo_contacto' => $request['correo'],
+          'celular_1' => $request['celular1'],
+          'celular_2' => $request['celular2'],
+          'telefono_1' => $request['telefono1'],
+          'telefono_2' => $request['telefono2'],
+          'comentarios' => $request['comentarios'],
+          'fecha_nacimiento' => $fechaIn,
+          'contacto_Tecnico' => $request["tecnico"],
+        ]);
+
+
+
+            return response()->json($insertar);
+    }
+
+    public function eliminarcontacto(Request $request){
+
+        $eliminar = DB::connection('facturacion')->table('fe_cliente_contacto')
+        ->where('codigo_cliente', $request['codigo'])->where('correla_contacto', $request['correla_contacto'])->delete();
+       
+        
+
+        return response()->json($eliminar);
+    }
+
+
+    public function editarContacto(Request $request){
+
+        $fecha1r = $request["fecha_nacimiento"];
+
+        $fecha1 = date_create_from_format('Y-m-d',$fecha1r);
+
+        $fechaIn = date_format($fecha1,'Ymd');
+
+        $editar =  DB::connection('facturacion')->table('fe_cliente_contacto')
+                    ->where('codigo_cliente', $request['codigo'])
+                    ->where('correla_contacto', $request['correla'])
+                         ->update([
+                            'nombre_contacto' => $request['nombre'],
+                            'cargo_contacto' => $request['cargo'],
+                            'correo_contacto' => $request['correo'],
+                            'celular_1' => $request['celular1'],
+                            'celular_2' => $request['celular2'],
+                            'telefono_1' => $request['telefono1'],
+                            'telefono_2' => $request['telefono2'],
+                            'comentarios' => $request['comentarios'],
+                            'fecha_nacimiento' => $fechaIn,
+                            'contacto_Tecnico' => $request["tecnico"],
+                            ]);
+
+        return response()->json($editar);
+    }
+
+    public function guardarContacto_prospectos(Request $request){
+        $insertar =  DB::connection('comanda')->table('CRM_contactos_clientes')
+        ->insert([
+         
+          'nombre' => $request['nombre'],
+          'cargo' => $request['cargo'],
+          'correo' => $request['correo'],
+          'celular' => $request['celular1'],
+          'teldirecto' => $request['telefono1'],
+          'usuario_crm' => $request['usuario'],
+          'fecha_creacion' => date('Ymd H:i'),
+          'cli_potencial' => $request["codigo"],
+        ]);
+            return response()->json($insertar);
+    }
+    
+
+    public function eliminarcontacto_prospectos(Request $request){
+
+        $eliminar = DB::connection('comanda')->table('CRM_contactos_clientes')
+        ->where('id', $request['codigo'])->delete();
+       
+        
+
+        return response()->json($eliminar);
+    }
      
 
 

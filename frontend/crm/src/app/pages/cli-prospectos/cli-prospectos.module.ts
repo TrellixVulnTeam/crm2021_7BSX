@@ -11,6 +11,7 @@ import { ClientesModule } from '../clientes/clientes.module';
 import { DetallesComponent } from './detalles/detalles.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.component';
+import { EditarContactoComponent } from './editar-contacto/editar-contacto.component';
 
 
 
@@ -19,6 +20,7 @@ import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.componen
     CliProspectosComponent,
     DetallesComponent,
     NuevoContactoComponent,
+    EditarContactoComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,10 @@ import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.componen
     ClientesModule,
     ReactiveFormsModule,
     FormsModule
+  ],
+  exports:[
+    NuevoContactoComponent,
+    EditarContactoComponent
   ]
 })
 export class CliProspectosModule { }

@@ -17,7 +17,7 @@
   <mat-card-header>
     <mat-card-title>Detalles del Cliente
       <button mat-raised-button color="primary" (click)="open_modal_atenciones()"><mat-icon>notifications</mat-icon>Nueva atención</button>
-      <button mat-raised-button color="accent"><mat-icon>people</mat-icon>Nuevo Contacto</button>
+      <button mat-raised-button color="accent" (click)="open_modal_contacto()"><mat-icon>people</mat-icon>Nuevo Contacto</button>
     </mat-card-title>
   </mat-card-header>
 
@@ -61,14 +61,14 @@
          </tr>
        </thead>
        <tbody>
-         <tr *ngFor="let ob of datos_contacto">
+         <tr *ngFor="let ob of datos_contactos">
            <td>{{ob.nombre_contacto}}</td>
            <td>{{ob.cargo_contacto}}</td>
            <td>{{ob.correo_contacto}}</td>
            <td>{{ob.celular_1}}</td>
            <td>
-            <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left"><mat-icon>edit</mat-icon></button>
-            <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+            <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left" (click)="editarcontacto(ob)"><mat-icon>edit</mat-icon></button>
+            <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right" (click)="eliminarcontacto(ob)"><mat-icon>delete</mat-icon></button>
            </td>
          </tr>
        </tbody>

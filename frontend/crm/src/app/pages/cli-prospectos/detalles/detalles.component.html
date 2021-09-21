@@ -245,7 +245,7 @@
 
     <mat-tab label="Contactos" class="tabs">
       <br>
-    <h3>Contactos registrados del cliente <button mat-raised-button color="primary" class="btn"><mat-icon>add</mat-icon> Agregar nuevo contacto </button></h3>
+    <h3>Contactos registrados del cliente <button mat-raised-button color="primary" class="btn" (click)="open_modal_contacto()"><mat-icon>add</mat-icon> Agregar nuevo contacto </button></h3>
 
     <table>
       <thead>
@@ -264,8 +264,8 @@
           <td>{{ob.correo_contacto}}</td>
           <td>{{ob.celular_1}}</td>
           <td>
-           <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left"><mat-icon>edit</mat-icon></button>
-           <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right"><mat-icon>delete</mat-icon></button>
+           <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left" (click)="editarContacto(ob)"><mat-icon>edit</mat-icon></button>
+           <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right" (click)="eliminarContacto(ob)"><mat-icon>delete</mat-icon></button>
           </td>
         </tr>
       </tbody>
