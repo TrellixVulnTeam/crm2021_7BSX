@@ -23,6 +23,17 @@ export class ClientesService {
   datoscontactos = new BehaviorSubject<Clientes[]>([]);
   _datoscontactos = this.datoscontactos.asObservable();
 
+
+  datoscontactos_cli = new BehaviorSubject<Clientes[]>([]);
+  _datoscontactos_cli = this.datoscontactos_cli.asObservable();
+
+
+  datos_cli = new BehaviorSubject<Clientes[]>([]);
+  _datos_cli = this.datos_cli.asObservable();
+
+  datos_cli_compartidos = new BehaviorSubject<Clientes[]>([]);
+  _datos_cli_compartidos = this.datos_cli_compartidos.asObservable();
+
   constructor(private http: HttpClient, private router: Router, private globalservice: GlobalService) { }
 
 
@@ -30,6 +41,23 @@ export class ClientesService {
   // llenar el observable de behaviour subject
   fillDatosContactos(d: Clientes[]){
     this.datoscontactos.next(d);
+  }
+
+  fillDatosContactos_cli(d: Clientes[]){
+    this.datoscontactos_cli.next(d);
+
+  }
+
+
+  fillClientes_list(d: Clientes[]){
+    this.datos_cli.next(d);
+
+  }
+
+
+  fillClientes_list_compartidos(d: Clientes[]){
+    this.datos_cli_compartidos.next(d);
+
   }
 
 
@@ -132,6 +160,12 @@ public guardarContacto_prospectos(datos: Clientes): Observable<Clientes> {
   return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'guardarContacto_prospectos', datos, httpOptions)
   .pipe(map(data => data as Clientes ));
 }
+
+public guardarInformacion_Clientes(datos: Clientes): Observable<Clientes> {
+  return this.http.post<Clientes>(this.globalservice.getUrlBackEnd() + 'guardarInformacion_Clientes', datos, httpOptions)
+  .pipe(map(data => data as Clientes ));
+}
+
 
 
 }

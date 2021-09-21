@@ -36,6 +36,7 @@ class VerifyCsrfToken extends BaseVerifier
         'eliminarcontacto',
         'editarContacto',
         'guardarContacto_prospectos',
-        'eliminarcontacto_prospectos'
+        'eliminarcontacto_prospectos',
+        'guardarInformacion_Clientes'
     ];
 }

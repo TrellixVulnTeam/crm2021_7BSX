@@ -37,6 +37,7 @@ Route::post('eliminarcontacto', 'ClientesController@eliminarcontacto');
 Route::post('editarContacto', 'ClientesController@editarContacto');
 Route::post('guardarContacto_prospectos', 'ClientesController@guardarContacto_prospectos');
 Route::post('eliminarcontacto_prospectos', 'ClientesController@eliminarcontacto_prospectos');
+Route::post('guardarInformacion_Clientes', 'ClientesController@guardarInformacion_Clientes');
 
 
 //rutas para atenciones

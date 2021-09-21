@@ -1,11 +1,13 @@
-<h3 class="title">Mis Clientes Prospectos, Stakeholders y que otros usuarios me han compartido</h3>
+<h3 class="title">Mis Clientes Prospectos, Stakeholders y que otros usuarios me han compartido
+
+</h3>
 <mat-divider></mat-divider>
 
 
 <mat-tab-group>
   <mat-tab label="Mis Clientes Prospectos y Stakeholders" class="tabs">
     <br><br>
-    <h2>Prospectos y stakeholders</h2>
+    <h2>Prospectos y stakeholders <button mat-raised-button color="primary" class="btn" (click)="agregarNuevoCliente()"><mat-icon>add</mat-icon> Agregar cliente </button></h2>
       <table mat-table [dataSource]="dataSource"  >
 
         <ng-container matColumnDef="codigo">

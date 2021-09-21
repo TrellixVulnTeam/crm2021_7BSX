@@ -242,11 +242,19 @@ class ClientesController extends Controller
 
     public function editarContacto(Request $request){
 
-        $fecha1r = $request["fecha_nacimiento"];
+ 
+        $fechaRegistro = $request["fecha_nacimiento"];
+        if($fechaRegistro == '1900-01-01 00:00:00.000'){
+            $fechaRegistroConFormato = null;
+        }
+        
+        else if(is_null($fechaRegistro)){
+            $fechaRegistroConFormato = null;
+        }else{
+            $fechaRegistroSinFormato = date_create_from_format('Y-m-d',$fechaRegistro);
 
-        $fecha1 = date_create_from_format('Y-m-d',$fecha1r);
-
-        $fechaIn = date_format($fecha1,'Ymd');
+            $fechaRegistroConFormato = date_format($fechaRegistroSinFormato,'Ymd');
+        }
 
         $editar =  DB::connection('facturacion')->table('fe_cliente_contacto')
                     ->where('codigo_cliente', $request['codigo'])
@@ -260,7 +268,7 @@ class ClientesController extends Controller
                             'telefono_1' => $request['telefono1'],
                             'telefono_2' => $request['telefono2'],
                             'comentarios' => $request['comentarios'],
-                            'fecha_nacimiento' => $fechaIn,
+                            'fecha_nacimiento' => $fechaRegistro,
                             'contacto_Tecnico' => $request["tecnico"],
                             ]);
 
@@ -293,6 +301,60 @@ class ClientesController extends Controller
 
         return response()->json($eliminar);
     }
+
+
+    public function guardarInformacion_Clientes(Request $request){
+
+        $fechaRegistro = $request["fecha_visita"];
+
+
+
+        if($fechaRegistro == '1900-01-01 00:00:00.000'){
+            $fechaRegistroConFormato = null;
+        }
+        
+        else if(is_null($fechaRegistro)){
+            $fechaRegistroConFormato = null;
+        }else{
+            $fechaRegistroSinFormato = date_create_from_format('Y-m-d',$fechaRegistro);
+
+            $fechaRegistroConFormato = date_format($fechaRegistroSinFormato,'Ymd');
+        }
+
+        
+
+        $editar =  DB::connection('comanda')->table('CRM_clientes')
+                    ->where('id', $request['codigo'])
+                         ->update([
+                            'porcentaje_costo_energia' => $request['porcentaje_costo_energia'],
+                            'facturacion_mensual' => $request['facturacion_mensual'],
+                            'margen_rentabilidad' => $request['margen_rentabilidad'],
+                            'horas_produccion' => $request['horas_produccion'],
+                            'empresa' => $request['empresa'],
+                            'rubro' => $request['rubro'],
+                            'direccion' => $request['direccion'],
+                            'pbx' => $request['pbx'],
+                            'tension_servicio' => $request['tension_servicio'],
+                            'fases' => $request['fases'],
+                            'hilos' => $request['hilos'],
+                            'uso_servicio' => $request['uso_servicio'],
+                            'potencia' => $request['potencia'],
+                            'sub_propiedad' => $request['sub_propiedad'],
+                            'sub_ubicacion' => $request['sub_ubicacion'],
+                            'sub_transformadores_req' => $request['sub_transformadores_req'],
+                            'sub_conexion' => $request['sub_conexion'],
+                            'sub_montaje' => $request['sub_montaje'],
+                            'turnos_produccion' => $request['turnos_produccion'],
+                            'conexion_num_cortes' => $request['conexion_num_cortes'],
+                            'fecha_visita' => $fechaRegistroConFormato,
+                            'compromisos' => $request['compromisos'],
+                            'categoria' => $request['categoria'],
+                            ]);
+
+        return response()->json($editar);
+    }
+
+    
      
 
 

@@ -31,5 +31,28 @@ export class Clientes {
   public idUsuario!: number;
   public correla!: number;
   public correla_contacto!: number;
-
+  public porcentaje_costo_energia!: string;
+  public facturacion_mensual!: string;
+  public margen_rentabilidad!: string;
+  public horas_produccion!: string;
+  public empresa!: string;
+  public rubro!: string;
+  public pbx!: string;
+  public tension_servicio!: string;
+  public fases!: string;
+  public hilos!: string;
+  public uso_servicio!: string;
+  public tarifa!: string;
+  public potencia!: string;
+  public sub_propiedad!: string;
+  public sub_ubicacion!: string;
+  public sub_kva_instalados!: string;
+  public sub_transformadores_req!: string;
+  public sub_conexion!: string;
+  public sub_montaje!: string;
+  public turnos_produccion!: string;
+  public conexion_num_cortes!: string;
+  public fecha_visita!: string;
+  public compromisos!: string;
+  public categoria!: string;
 }

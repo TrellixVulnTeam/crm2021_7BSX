@@ -16,7 +16,7 @@ export class NuevoContactoComponent implements OnInit {
 
   datos_cliente : Clientes = new Clientes();
   form_contacto: FormGroup;
-  datos_contacto : Clientes[] | undefined;
+  datos_contacto_cli : Clientes[] | undefined;
   datos_cont: Clientes = new Clientes;
   user: Usuario = new Usuario();
 
@@ -50,12 +50,14 @@ export class NuevoContactoComponent implements OnInit {
   listarContactos(datos : any){
     this.clienteService.listarContactosByCliente_potenciales(datos).subscribe(
       response => {
-        this.datos_contacto = response;
+        this.datos_contacto_cli = response;
 
-        this.clienteService.fillDatosContactos(response);
+        this.clienteService.fillDatosContactos_cli(response);
 
-        this.clienteService._datoscontactos.subscribe(response => {
+        this.clienteService._datoscontactos_cli.subscribe(response => {
         });
+
+        console.log(response);
       },
       err => {
 

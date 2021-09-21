@@ -66,9 +66,9 @@ export class DetallesClienteComponent implements OnInit {
       response => {
         this.datos_contacto = response;
 
-        this.clienteService.fillDatosContactos(response);
+        this.clienteService.fillDatosContactos_cli(response);
 
-        this.clienteService._datoscontactos.subscribe(response => {
+        this.clienteService._datoscontactos_cli.subscribe(response => {
         });
       },
       err => {
