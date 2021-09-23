@@ -93,7 +93,12 @@ export class NuevoContactoComponent implements OnInit {
           verticalPosition: 'top'
         });
 
-        //this.dialog.closeAll();
+
+    this.form_contacto.controls["nombre"].setValue('');
+    this.form_contacto.controls["cargo"].setValue('');
+    this.form_contacto.controls["correo"].setValue('');
+    this.form_contacto.controls["celular1"].setValue('');
+    this.form_contacto.controls["telefono1"].setValue('');
 
       });
 

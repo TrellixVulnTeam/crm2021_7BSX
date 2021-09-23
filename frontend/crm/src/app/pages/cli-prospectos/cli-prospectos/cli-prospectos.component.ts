@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Clientes } from 'src/app/models/clientes';
 import { Usuario } from 'src/app/models/usuario';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
 import { DetallesClienteComponent } from '../../clientes/detalles-cliente/detalles-cliente.component';
 import { DetallesComponent } from '../detalles/detalles.component';
@@ -29,6 +30,7 @@ export class CliProspectosComponent implements OnInit {
   mostrarDatos = false;
   cargaDatos = false;
   notfound = false;
+  texto: any;
   datos_cliente : Clientes = new Clientes();
   datos_contacto_cli : Clientes[] | undefined;
   datos_suministro : Clientes[] | undefined;
@@ -40,7 +42,7 @@ export class CliProspectosComponent implements OnInit {
 
 
   constructor(private router: Router, private clienteService : ClientesService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, public global: GlobalService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('usuario_crm') !== null){
@@ -49,6 +51,10 @@ export class CliProspectosComponent implements OnInit {
 
       this.getClientesCompartidos();
       this.getProspectos();
+
+      setTimeout(() => {
+        this.global.fillOpcionMenu('Clientes prospectos y compartidos');
+      });
 
 
 
@@ -59,6 +65,16 @@ export class CliProspectosComponent implements OnInit {
       this.router.navigate(['login']);
     }
   }
+
+
+  filterTable_misClientes (filterValue :string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+ }
+
+  filterTable_compartidos (filterValue :string) {
+    this.dataSource1.filter = filterValue.trim().toLowerCase();
+ }
+
 
 
 
@@ -168,7 +184,7 @@ export class CliProspectosComponent implements OnInit {
         this.datos_contacto_cli = data;
 
         this.dialog.open(ModalAtencionComponent,{
-          data: {datos_cliente: cliente, datos_contacto_cli: this.datos_contacto_cli, datos_suministro: ''},
+          data: {datos_cliente: cliente, datos_contacto_cli: this.datos_contacto_cli, datos_suministro: '',  cliente: 'cli'},
           width: '80%',
         });
       });

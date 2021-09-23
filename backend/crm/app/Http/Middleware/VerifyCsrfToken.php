@@ -37,6 +37,13 @@ class VerifyCsrfToken extends BaseVerifier
         'editarContacto',
         'guardarContacto_prospectos',
         'eliminarcontacto_prospectos',
-        'guardarInformacion_Clientes'
+        'guardarInformacion_Clientes',
+        'getAllUsuariosDisponibles',
+        'guardarCliente_prospectos',
+        'guardar_usuarios_cliente',
+        'guardar_contactos_cliente',
+        'getAllAtenciones',
+        'getAllEventos',
+        'getAllTickets'
     ];
 }

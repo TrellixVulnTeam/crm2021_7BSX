@@ -87,9 +87,6 @@
 
       <mat-divider></mat-divider>
       <br>
-      <h3>Usuarios a los que se ha compartido</h3>
-      <mat-divider></mat-divider>
-      <br>
       <form [formGroup]="form_agregar_usuario">
         <h3>Agregar un nuevo usuario para compartir</h3>
 
@@ -107,7 +104,24 @@
           <button mat-raised-button color="accent" class="btn" (click)="agregarUsuarioCompartido()"><mat-icon>add</mat-icon> Agregar usuario </button>
       </form>
 
-      <table>
+
+      <br>
+      <h3>Usuarios a los que se ha compartido</h3>
+      <mat-divider></mat-divider>
+      <br>
+
+      <mat-card class="notfound" *ngIf="datos_usuario_cliente.length === 0">
+        <mat-card-content>
+          <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile colspan="1" >
+              <img src="./assets/img/not-found.png"> <h1>No se agregaron usuarios para compartir</h1>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        </mat-card-content>
+      </mat-card>
+
+      <table *ngIf="datos_usuario_cliente.length != 0">
           <thead>
             <tr>
               <th>Usuario</th>
@@ -259,9 +273,20 @@
     <mat-tab label="Contactos" class="tabs">
       <br>
     <h3>Contactos registrados del cliente
-      <button mat-raised-button color="primary" matTooltip="Eliminar contacto" matTooltipPosition="right" (click)="open_modal_contacto()"><mat-icon>add</mat-icon>Agregar Contacto</button></h3>
+      <button mat-raised-button color="accent" matTooltipPosition="right" (click)="open_modal_contacto()"><mat-icon>add</mat-icon>Agregar Contacto</button></h3>
 
-    <table>
+      <mat-card class="notfound" *ngIf="datos_contacto_cli.length === 0">
+        <mat-card-content>
+          <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile colspan="1" >
+              <img src="./assets/img/not-found.png"> <h1>No se agregaron contactos</h1>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        </mat-card-content>
+      </mat-card>
+
+      <table *ngIf="datos_contacto_cli.length != 0">
       <thead>
         <tr>
           <th>Contacto</th>
@@ -276,7 +301,7 @@
           <td>{{ob.nombre_contacto}}</td>
           <td>{{ob.cargo_contacto}}</td>
           <td>{{ob.correo_contacto}}</td>
-          <td>{{ob.celular_1}}</td>
+          <td>{{ob.celular1}}</td>
           <td>
            <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left" (click)="editarContacto(ob)"><mat-icon>edit</mat-icon></button>
            <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right" (click)="eliminarContacto(ob)"><mat-icon>delete</mat-icon></button>
@@ -284,9 +309,11 @@
         </tr>
       </tbody>
     </table>
-    </mat-tab>
-  </mat-tab-group>
 
+    </mat-tab>
+
+  </mat-tab-group>
+  <br><br><br>
 
 </div>
 

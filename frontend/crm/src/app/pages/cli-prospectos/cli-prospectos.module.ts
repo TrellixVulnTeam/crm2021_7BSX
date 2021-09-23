@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.component';
 import { EditarContactoComponent } from './editar-contacto/editar-contacto.component';
 import { NuevoClienteComponent } from './nuevo-cliente/nuevo-cliente.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 
@@ -31,6 +32,7 @@ import { NuevoClienteComponent } from './nuevo-cliente/nuevo-cliente.component';
     AtencionesModule,
     EventosModule,
     TicketsModule,
+    PipesModule,
     ClientesModule,
     ReactiveFormsModule,
     FormsModule

@@ -1,0 +1,118 @@
+.title{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
+}
+
+mat-icon{
+  color: white !important;
+}
+
+button{
+  margin-left: 15px !important;
+}
+
+form{
+  width: 70% !important;
+  margin: auto !important;
+  }
+
+.input{
+    width: 70% !important;
+}
+
+.dato{
+  margin-top: auto !important;
+  font-size: 12px !important;
+
+}
+
+
+.datoDireccion{
+  margin-top: 10px !important;
+  font-size: 13px !important;
+}
+
+.dato{
+  margin-top: 15px !important;
+  font-size: 13px !important;
+}
+
+.label{
+  margin-top: 15px !important;
+  font-weight: bold !important;
+  color: #003F63 !important;
+}
+
+.colspan{
+  float:  left !important;
+}
+
+.notfound{
+  margin: auto !important;
+}
+
+table{
+  width: 95% !important;
+  margin: auto !important;
+}
+
+.tbl_cliente{
+  width: 90% !important;
+  margin: auto !important;
+}
+td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+
+}
+
+tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;
+  text-align: center !important;
+}
+
+
+.input2{
+  margin-left: 5px !important;
+  width: 24% !important;
+}
+
+.input3{
+  margin-left: 2% !important;
+  width: 45% !important;
+}
+
+.form_atencion{
+  width: 100% !important;
+  margin: auto !important;
+  margin-top: 15px !important;
+}
+
+mat-form-field{
+  margin-bottom: 15px !important;
+}
+
+.desc_div{
+  width: 100% !important;
+  max-height:100px;
+  overflow-y:auto !important;
+}
+
+
+.desc{
+  width: 30% !important;
+}
+
+.td{
+  border-left: 1px solid #CFCCCC !important;
+}
+
+
+.cli{
+  width: 15% !important;
+}
+
+.acciones{
+  width: 15% !important;
+}

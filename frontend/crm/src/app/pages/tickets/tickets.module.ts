@@ -5,6 +5,7 @@ import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketsComponent } from './tickets/tickets.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
 import { ModalTicketComponent } from './modal-ticket/modal-ticket.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { ModalTicketComponent } from './modal-ticket/modal-ticket.component';
   imports: [
     CommonModule,
     TicketsRoutingModule,
-    MatModuleModule
+    MatModuleModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports:[
     ModalTicketComponent

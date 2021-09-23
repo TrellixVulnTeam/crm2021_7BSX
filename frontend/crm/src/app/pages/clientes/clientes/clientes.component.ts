@@ -7,6 +7,7 @@ import { Atenciones } from 'src/app/models/atenciones';
 import { Clientes } from 'src/app/models/clientes';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
 import { DetallesClienteComponent } from '../detalles-cliente/detalles-cliente.component';
 
@@ -36,7 +37,7 @@ export class ClientesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   constructor(private clienteService : ClientesService, public atencionService: AtencionesService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog, private global: GlobalService) {
     this.search_cliente_form = new FormGroup({
       'cliente': new FormControl('',[Validators.required])
     });
@@ -45,6 +46,10 @@ export class ClientesComponent implements OnInit {
 
 
   ngOnInit( ): void {
+    setTimeout(() => {
+      this.global.fillOpcionMenu('Clientes EDESAL y conectados < 120 días');
+    });
+
 
   }
 
@@ -128,7 +133,7 @@ export class ClientesComponent implements OnInit {
   open_modal_atenciones() {
 
     this.dialog.open(ModalAtencionComponent,{
-      data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro},
+      data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro, cliente: 'edesal'},
       width: '80%',
     });
 

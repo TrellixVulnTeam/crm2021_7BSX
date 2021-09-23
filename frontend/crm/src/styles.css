@@ -35,14 +35,17 @@ mat-card-title{
 
 h2{
   font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
 }
 
 h1{
   font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
 }
 
 h3{
   font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
 }
 
 textarea{
@@ -54,6 +57,16 @@ mat-icon{
 
 table {
   width: 100%;
+}
+
+mat-paginator{
+  float: left !important;
+  margin-left: 5% !important;
+}
+
+.input_search{
+  margin-left: 5% !important;
+  width: 40% !important;
 }
 th{
   font-family: 'Montserrat', sans-serif !important;

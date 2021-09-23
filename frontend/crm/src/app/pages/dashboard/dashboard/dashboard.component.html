@@ -5,7 +5,7 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <a (click)="changeMenu('Inicio')" mat-button color="warn" routerLink="template">
+  <a mat-button color="warn" routerLink="template">
     <mat-icon>home</mat-icon>
   </a>
 
@@ -26,54 +26,54 @@
 
 <mat-menu #menu="matMenu">
   <h2 class="cl-title">Clientes</h2>
-  <button  (click)="changeMenu('Clientes EDESAL y conectados < 120 días')" mat-menu-item routerLink="clientes">
+  <button  mat-menu-item routerLink="clientes">
     <mat-icon>people alt</mat-icon>
     <span class="span-menu">EDESAL y conectados < 120 días</span>
   </button>
 
-  <button (click)="changeMenu('Clientes prospectos y compartidos')" mat-menu-item routerLink="cli-prospectos">
+  <button  mat-menu-item routerLink="cli-prospectos">
     <mat-icon>people alt</mat-icon>
     <span class="span-menu">Prospectos y Compartidos</span>
   </button>
   <br><br>
   <mat-divider></mat-divider>
 
-  <button (click)="changeMenu('Suministros EDESAL')"mat-menu-item routerLink="suministros">
+  <button mat-menu-item routerLink="suministros">
     <mat-icon>segment</mat-icon>
     <span class="span-menu">Suministros</span>
   </button>
 
   <mat-divider></mat-divider>
 
-  <button (click)="changeMenu('Atenciones')" mat-menu-item routerLink="atenciones">
+  <button  mat-menu-item routerLink="atenciones">
     <mat-icon>notifications</mat-icon>
     <span class="span-menu">Atenciones</span>
   </button>
 
   <mat-divider></mat-divider>
 
-  <button (click)="changeMenu('Eventos')" mat-menu-item routerLink="eventos">
+  <button  mat-menu-item routerLink="eventos">
     <mat-icon>event</mat-icon>
     <span class="span-menu">Eventos</span>
   </button>
 
   <mat-divider></mat-divider>
 
-  <button (click)="changeMenu('Tickets')" mat-menu-item routerLink="tickets">
+  <button mat-menu-item routerLink="tickets">
     <mat-icon>confirmation_number</mat-icon>
     <span class="span-menu">Tickets</span>
   </button>
 
   <mat-divider></mat-divider>
 
-  <button (click)="changeMenu('Órdenes Técnicas')" mat-menu-item routerLink="otecnicas">
+  <button  mat-menu-item routerLink="otecnicas">
     <mat-icon>description</mat-icon>
     <span class="span-menu">Órdenes técnicas</span>
   </button>
 
   <mat-divider></mat-divider>
 
-  <button (click)="changeMenu('Reportes')" mat-menu-item routerLink="reportes">
+  <button  mat-menu-item routerLink="reportes">
     <mat-icon>print</mat-icon>
     <span class="span-menu">Reportes</span>
   </button>
@@ -82,7 +82,6 @@
 
 <div class="container">
   <router-outlet></router-outlet>
-  <br><br>
 </div>
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-reportes',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private global: GlobalService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.global.fillOpcionMenu('Reportes CRM');
+    });
+
   }
 
 }

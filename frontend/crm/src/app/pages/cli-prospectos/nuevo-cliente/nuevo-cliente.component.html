@@ -8,8 +8,7 @@
 
             <mat-form-field appearance="legacy" class="input">
               <mat-label>Porcentaje de costo de la energía: </mat-label>
-              <input  type="hidden"  autocomplete="off" formControlName="codigo" [(ngModel)]="datos_cliente.id">
-
+              <input   type="hidden"  autocomplete="off" formControlName="usuario" [(ngModel)]="user.id">
               <input  matInput type="text"  autocomplete="off" [(ngModel)]="datos_cliente.porcentaje_costo_energia" formControlName="porcentaje_costo_energia">
             </mat-form-field>
             <mat-form-field appearance="legacy" class="input">
@@ -84,28 +83,41 @@
 
 
       <mat-divider></mat-divider>
-      <br>
-      <h3>Usuarios a los que se ha compartido</h3>
-      <mat-divider></mat-divider>
+
       <br>
       <form [formGroup]="form_agregar_usuario">
         <h3>Agregar un nuevo usuario para compartir</h3>
 
-        <input type="hidden" formControlName="cliente" [(ngModel)]="datos_cliente.codigo">
+
         <mat-form-field appearance="legacy" class="input1">
 
           <mat-label>Selecciona el usuario: </mat-label>
 
-          <mat-select formControlName="usuario">
+          <mat-select formControlName="usuario" (selectionChange)="getSelectText($event)">
             <mat-option  *ngFor="let ob of usuarios_disponibles" [value]="ob.id">
               {{ob.nombre}} {{ob.apellido}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-          <button mat-raised-button color="accent" class="btn" (click)="agregarUsuarioCompartido()"><mat-icon>add</mat-icon> Agregar usuario </button>
+          <button mat-raised-button color="accent" class="btn1" (click)="agregarUsuarioCompartido()"><mat-icon>add</mat-icon> Agregar usuario </button>
       </form>
 
-      <table>
+      <br>
+      <h3>Usuarios a los que se ha compartido</h3>
+      <mat-divider></mat-divider>
+
+      <mat-card class="notfound" *ngIf="datos_usuario_cliente.length === 0">
+        <mat-card-content>
+          <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile colspan="1" >
+              <img src="./assets/img/not-found.png"> <h1>No se agregaron usuarios para compartir</h1>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        </mat-card-content>
+      </mat-card>
+
+      <table *ngIf="datos_usuario_cliente.length != 0">
           <thead>
             <tr>
               <th>Usuario</th>
@@ -113,9 +125,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let con of datos_usuario_cliente">
-              <td>{{con.nombre}} {{con.apellido}}</td>
-              <td><button mat-mini-fab color="warn" (click)="eliminarUsuario(con.id)"><mat-icon>delete</mat-icon></button></td>
+            <tr *ngFor="let con of datos_usuario_cliente;  index as indexOfelement;">
+              <td>{{con.nombre}}</td>
+              <td><button mat-mini-fab color="warn" (click)="eliminarUsuario(indexOfelement)"><mat-icon>delete</mat-icon></button></td>
             </tr>
           </tbody>
       </table>
@@ -255,46 +267,81 @@
     </mat-tab>
 
     <mat-tab label="Contactos" class="tabs">
+
       <br>
-    <h3>Contactos registrados del cliente
-      <button mat-raised-button color="primary" matTooltip="Eliminar contacto" matTooltipPosition="right" (click)="open_modal_contacto()"><mat-icon>add</mat-icon>Agregar Contacto</button></h3>
+      <h3>Agregar contactos</h3>
+      <form [formGroup]="form_contacto">
+          <mat-form-field appearance="legacy" class="input2">
+            <mat-label>Nombre contacto: </mat-label>
+            <input  matInput type="text"  autocomplete="off" formControlName="nombre">
+            <input   type="hidden"  autocomplete="off" formControlName="usuario" [(ngModel)]="user.id">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input2">
+            <mat-label>Cargo del contacto: </mat-label>
+            <input  matInput type="text"  autocomplete="off" formControlName="cargo">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input2">
+            <mat-label>Correo electrónico: </mat-label>
+            <input  matInput type="text"  autocomplete="off" formControlName="correo">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input1">
+            <mat-label>Telefono: </mat-label>
+            <input  matInput type="text"  autocomplete="off" formControlName="telefono1">
+          </mat-form-field>
+          <mat-form-field appearance="legacy" class="input1">
+            <mat-label>Celular: </mat-label>
+            <input  matInput type="text"  autocomplete="off" formControlName="celular1">
+          </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="accent" (click)="agregar_contacto()" class="btn"><mat-icon>add</mat-icon>Agregar contacto</button>
 
 
-    <table>
+    <br>
+    <br>
+    <h3>Contactos registrados del cliente</h3>
+    <mat-divider></mat-divider>
+    <mat-card class="notfound" *ngIf="datos_contacto_cli.length === 0">
+      <mat-card-content>
+        <mat-grid-list cols="1" rowHeight="100px">
+          <mat-grid-tile colspan="1" >
+            <img src="./assets/img/not-found.png"> <h1>No se agregaron contactos</h1>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      </mat-card-content>
+    </mat-card>
+
+    <table *ngIf="datos_contacto_cli.length != 0">
       <thead>
         <tr>
           <th>Contacto</th>
           <th>Cargo</th>
           <th>Correo</th>
-          <th>Teléfono 1</th>
+          <th>Teléfono</th>
+          <th>Celular</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ob of datos_contacto_cli">
-          <td>{{ob.nombre_contacto}}</td>
-          <td>{{ob.cargo_contacto}}</td>
-          <td>{{ob.correo_contacto}}</td>
-          <td>{{ob.celular_1}}</td>
+        <tr *ngFor="let ob of datos_contacto_cli; index as indexOfelement;">
+          <td>{{ob.nombre}}</td>
+          <td>{{ob.cargo}}</td>
+          <td>{{ob.correo}}</td>
+          <td>{{ob.telefono1}}</td>
+          <td>{{ob.celular1}}</td>
           <td>
-           <button mat-mini-fab color="primary" matTooltip="Editar contacto" matTooltipPosition="left" (click)="editarContacto(ob)"><mat-icon>edit</mat-icon></button>
-           <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right" (click)="eliminarContacto(ob)"><mat-icon>delete</mat-icon></button>
+           <button mat-mini-fab color="warn" matTooltip="Eliminar contacto" matTooltipPosition="right" (click)="eliminarContacto(indexOfelement)"><mat-icon>delete</mat-icon></button>
           </td>
         </tr>
       </tbody>
     </table>
     </mat-tab>
   </mat-tab-group>
-
-    <mat-divider></mat-divider>
-
-
-
-
-
-    <mat-divider></mat-divider>
-
-
+  <br><br><br>
 </div>
 
 <div mat-dialog-actions>

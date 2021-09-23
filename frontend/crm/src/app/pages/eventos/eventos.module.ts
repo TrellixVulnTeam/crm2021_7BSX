@@ -5,6 +5,7 @@ import { EventosRoutingModule } from './eventos-routing.module';
 import { EventosComponent } from './eventos/eventos.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
 import { ModalEventoComponent } from './modal-evento/modal-evento.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { ModalEventoComponent } from './modal-evento/modal-evento.component';
   imports: [
     CommonModule,
     EventosRoutingModule,
-    MatModuleModule
+    MatModuleModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     ModalEventoComponent

@@ -8,6 +8,7 @@ import { Atenciones } from 'src/app/models/atenciones';
 import { Clientes } from 'src/app/models/clientes';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
+import { ClientesService } from 'src/app/services/clientes.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { SubirArchivosComponent } from '../subir-archivos/subir-archivos.component';
 
@@ -31,7 +32,7 @@ export class ModalAtencionComponent implements OnInit {
 
   constructor(public atencionService: AtencionesService,
     public modal_atencion: MatDialogRef<ModalAtencionComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router, private _snackBar: MatSnackBar) {
+    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService,) {
     this.form_atencion = new FormGroup({
       'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -76,7 +77,21 @@ export class ModalAtencionComponent implements OnInit {
 
         this.datos_cliente = this.data.datos_cliente;
         this.datos_suministro = this.data.datos_suministro;
-        this.datos_contacto = this.data.datos_contacto;
+
+        var cliente = this.data.cliente;
+
+        if(cliente == 'cli'){
+          this.clienteService._datoscontactos_cli.subscribe(response => {
+            this.datos_contacto = response;
+          });
+        }else{
+          this.clienteService._datoscontactos.subscribe(response => {
+            this.datos_contacto = response;
+          });
+
+        }
+
+
 
 
   }

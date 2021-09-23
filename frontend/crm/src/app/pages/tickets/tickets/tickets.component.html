@@ -1,1 +1,455 @@
-<p>tickets works!</p>
+<h3 class="title">Tickets</h3>
+<mat-divider></mat-divider>
+
+
+<mat-tab-group>
+    <mat-tab label="Tickets Generados" class="tabs">
+      <br>
+      <h3 class="title">Tickets Generados</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+      </mat-paginator>
+
+      <mat-form-field appearance="legacy" class="input_search">
+        <mat-label>Buscar en tabla: </mat-label>
+        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_tckGenerados($event)">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource_tckGenerados"  >
+
+        <ng-container matColumnDef="idAte">
+          <th mat-header-cell *matHeaderCellDef> ID Atención</th>
+          <td mat-cell *matCellDef="let row"> {{row.idAte}} </td>
+        </ng-container>
+        <ng-container matColumnDef="evento_id">
+          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreasignado">
+          <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombreasignado}} {{row.apellidoasignado}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombresoli">
+          <th mat-header-cell *matHeaderCellDef> Usuario Solicitante </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombresoli}} {{row.apellidosoli}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let row"  class="desc">
+            <div class="desc_div">
+              {{row.descripcion}}
+            </div> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_creacionD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
+          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let row">
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tab>
+
+    <mat-tab label="Tickets en proceso de resolución" class="tabs">
+      <br>
+      <h3 class="title">Tickets en proceso de resolución</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-paginator #paginator3 [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+      </mat-paginator>
+
+      <mat-form-field appearance="legacy" class="input_search">
+        <mat-label>Buscar en tabla: </mat-label>
+        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_tckProResolucion($event)">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource_tckProResolucion"  >
+
+        <ng-container matColumnDef="idAte">
+          <th mat-header-cell *matHeaderCellDef> ID Atención</th>
+          <td mat-cell *matCellDef="let row"> {{row.idAte}} </td>
+        </ng-container>
+        <ng-container matColumnDef="evento_id">
+          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreasignado">
+          <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombreasignado}} {{row.apellidoasignado}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombresoli">
+          <th mat-header-cell *matHeaderCellDef> Usuario Solicitante </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombresoli}} {{row.apellidosoli}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let row"  class="desc">
+            <div class="desc_div">
+              {{row.descripcion}}
+            </div> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_creacionD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
+          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let row">
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </mat-tab>
+
+
+
+    <mat-tab label="Tickets Solucionados" class="tabs">
+      <br>
+      <h3 class="title">Tickets Solucionados</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-paginator #paginator4 [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+      </mat-paginator>
+
+      <mat-form-field appearance="legacy" class="input_search">
+        <mat-label>Buscar en tabla: </mat-label>
+        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_tckSolucionados($event)">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource_tckSolucionados"  >
+
+        <ng-container matColumnDef="idAte">
+          <th mat-header-cell *matHeaderCellDef> ID Atención</th>
+          <td mat-cell *matCellDef="let row"> {{row.idAte}} </td>
+        </ng-container>
+        <ng-container matColumnDef="evento_id">
+          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreasignado">
+          <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombreasignado}} {{row.apellidoasignado}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombresoli">
+          <th mat-header-cell *matHeaderCellDef> Usuario Solicitante </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombresoli}} {{row.apellidosoli}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let row"  class="desc">
+            <div class="desc_div">
+              {{row.descripcion}}
+            </div> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_creacionD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
+          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let row">
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tab>
+
+    <mat-tab label="Tickets Rechazados" class="tabs">
+      <br>
+      <h3 class="title">Tickets Rechazados</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-paginator #paginator5 [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+      </mat-paginator>
+
+      <mat-form-field appearance="legacy" class="input_search">
+        <mat-label>Buscar en tabla: </mat-label>
+        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_tckRechazados($event)">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource_tckRechazados"  >
+
+        <ng-container matColumnDef="idAte">
+          <th mat-header-cell *matHeaderCellDef> ID Atención</th>
+          <td mat-cell *matCellDef="let row"> {{row.idAte}} </td>
+        </ng-container>
+        <ng-container matColumnDef="evento_id">
+          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreasignado">
+          <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombreasignado}} {{row.apellidoasignado}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombresoli">
+          <th mat-header-cell *matHeaderCellDef> Usuario Solicitante </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombresoli}} {{row.apellidosoli}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let row"  class="desc">
+            <div class="desc_div">
+              {{row.descripcion}}
+            </div> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_creacionD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
+          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let row">
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </mat-tab>
+
+    <mat-tab label="Tickets Cerrados" class="tabs">
+      <br>
+      <h3 class="title">Tickets Cerrados</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-paginator #paginator6 [pageSizeOptions]="[5, 10, 20, 100]"
+      showFirstLastButtons
+      aria-label="Cantidad de registros a mostrar">
+    </mat-paginator>
+
+    <mat-form-field appearance="legacy" class="input_search">
+      <mat-label>Buscar en tabla: </mat-label>
+      <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_tckCerrados($event)">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource_tckCerrados"  >
+
+      <ng-container matColumnDef="idAte">
+        <th mat-header-cell *matHeaderCellDef> ID Atención</th>
+        <td mat-cell *matCellDef="let row"> {{row.idAte}} </td>
+      </ng-container>
+      <ng-container matColumnDef="evento_id">
+        <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+        <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombreasignado">
+        <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
+        <td mat-cell *matCellDef="let row"> {{row.nombreasignado}} {{row.apellidoasignado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombresoli">
+        <th mat-header-cell *matHeaderCellDef> Usuario Solicitante </th>
+        <td mat-cell *matCellDef="let row"> {{row.nombresoli}} {{row.apellidosoli}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let row"  class="desc">
+          <div class="desc_div">
+            {{row.descripcion}}
+          </div> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha_creacionD">
+        <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
+        <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let row">
+          <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </mat-tab>
+
+
+    <mat-tab label="Todos los tickets" class="tabs">
+      <br>
+      <h3 class="title">Todos los tickets</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+      </mat-paginator>
+
+      <mat-form-field appearance="legacy" class="input_search">
+        <mat-label>Buscar en tabla: </mat-label>
+        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_tckTodos($event)">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource_tckTodos"  >
+
+        <ng-container matColumnDef="idAte">
+          <th mat-header-cell *matHeaderCellDef> ID Atención</th>
+          <td mat-cell *matCellDef="let row"> {{row.idAte}} </td>
+        </ng-container>
+        <ng-container matColumnDef="evento_id">
+          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreasignado">
+          <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombreasignado}} {{row.apellidoasignado}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombresoli">
+          <th mat-header-cell *matHeaderCellDef> Usuario Solicitante </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombresoli}} {{row.apellidosoli}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let row"  class="desc">
+            <div class="desc_div">
+              {{row.descripcion}}
+            </div> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha_creacionD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
+          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let row">
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tab>
+
+</mat-tab-group>

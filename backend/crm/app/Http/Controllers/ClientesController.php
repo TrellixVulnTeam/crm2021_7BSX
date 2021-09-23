@@ -102,7 +102,7 @@ class ClientesController extends Controller
              c.id as codigo, c.empresa as nombrecliente from CRM_clientes as c
              inner join CRM_categoria_cliente as cc on cc.id = c.categoria
              where c.usuario_crm = ".$user."
-             order by c.empresa asc
+             order by c.id desc
              ");
  
          return response()->json($clientes);
@@ -354,6 +354,123 @@ class ClientesController extends Controller
         return response()->json($editar);
     }
 
+    public function getAllUsuariosDisponibles(){
+
+        $usuarios = Db::connection('comanda')->select("SELECT u.id, u.nombre, u.apellido from users u 
+            inner join usuario_rol ur on ur.user_id = u.id 
+            inner join roles r on r.id = ur.rol_id 
+            where u.estado = 1
+            GROUP by u.id, u.nombre, u.apellido
+            order by 2 asc"
+        );
+
+        return response()->json($usuarios);
+     }
+
+
+     public function guardarCliente_prospectos(Request $request){
+
+        $fechaRegistro = $request["fecha_visita"];
+
+
+
+        if($fechaRegistro == '1900-01-01 00:00:00.000'){
+            $fechaRegistroConFormato = null;
+        }
+        
+        else if(is_null($fechaRegistro)){
+            $fechaRegistroConFormato = null;
+        }else{
+            $fechaRegistroSinFormato = date_create_from_format('Y-m-d',$fechaRegistro);
+
+            $fechaRegistroConFormato = date_format($fechaRegistroSinFormato,'Ymd');
+        }
+
+        
+        $insertar =  DB::connection('comanda')->table('CRM_clientes')
+        ->insertGetId([
+            'porcentaje_costo_energia' => $request['porcentaje_costo_energia'],
+            'facturacion_mensual' => $request['facturacion_mensual'],
+            'margen_rentabilidad' => $request['margen_rentabilidad'],
+            'horas_produccion' => $request['horas_produccion'],
+            'empresa' => $request['empresa'],
+            'rubro' => $request['rubro'],
+            'direccion' => $request['direccion'],
+            'pbx' => $request['pbx'],
+            'tension_servicio' => $request['tension_servicio'],
+            'fases' => $request['fases'],
+            'hilos' => $request['hilos'],
+            'uso_servicio' => $request['uso_servicio'],
+            'potencia' => $request['potencia'],
+            'sub_propiedad' => $request['sub_propiedad'],
+            'sub_ubicacion' => $request['sub_ubicacion'],
+            'sub_transformadores_req' => $request['sub_transformadores_req'],
+            'sub_conexion' => $request['sub_conexion'],
+            'sub_montaje' => $request['sub_montaje'],
+            'turnos_produccion' => $request['turnos_produccion'],
+            'conexion_num_cortes' => $request['conexion_num_cortes'],
+            'fecha_visita' => $fechaRegistroConFormato,
+            'compromisos' => $request['compromisos'],
+            'categoria' => $request['categoria'],
+            'usuario_crm' => $request['usuario'],
+        ]);
+
+
+
+        return response()->json($insertar);
+     }
+
+
+
+     public function guardar_contactos_cliente(Request $request){
+
+        $json = json_encode($request->all());
+
+        $data = json_decode($json );
+      
+
+        foreach($data as $d){
+            $insertar =  DB::connection('comanda')->table('CRM_contactos_clientes')
+            ->insert([
+                'nombre' => $d->nombre,
+                'cargo' => $d->cargo,
+                'correo' => $d->correo,
+                'celular' => $d->celular1,
+                'teldirecto' => $d->telefono1,
+                'usuario_crm' => $d->usuario,
+                'fecha_creacion' => date('Ymd H:i'),
+                'cli_potencial' => $d->codigo,
+            ]);
+        }
+
+        return response()->json($insertar);
+       
+
+    }
+
+
+    public function guardar_usuarios_cliente(Request $request){
+
+        $json = json_encode($request->all());
+
+        $data = json_decode($json );
+      
+
+        foreach($data as $d){
+            $insertar =  DB::connection('comanda')->table('CRM_cliente_usuario')
+            ->insert([
+              'usuario' => $d->id,
+              'cliente' => $d->codigo,
+              'fecha_creacion' => date('Ymd H:i'),
+            ]);
+        }
+
+        return response()->json($insertar);
+       
+
+    }
+
+    
     
      
 

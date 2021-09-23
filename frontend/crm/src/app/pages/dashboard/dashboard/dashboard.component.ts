@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
+import { GlobalService } from 'src/app/services/global.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -12,12 +13,18 @@ export class DashboardComponent implements OnInit {
   user: Usuario = new Usuario();
   dashboard = 'Inicio';
 
-  constructor(private router: Router, private usuarioservice : UsuarioService) { }
+  constructor(private router: Router, private usuarioservice : UsuarioService, private global: GlobalService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('usuario_crm') !== null){
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
+
+
+
+      this.global._opcionMenu.subscribe(response=>{
+        this.dashboard = response;
+      });
 
   }else{
     this.router.navigate(['login']);
@@ -31,7 +38,5 @@ export class DashboardComponent implements OnInit {
      this.router.navigate(['login']);
    }
 
-   changeMenu(opcion: string){
-    this.dashboard = opcion;
-   }
+
 }

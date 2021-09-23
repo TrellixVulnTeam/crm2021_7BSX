@@ -90,6 +90,16 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
         ],
+        'calidad' => [
+            'driver' => 'sqlsrv',
+            'host' => env('CALIDAD_HOST', 'localhost'),
+            'port' => env('CALIDAD_PORT', '1433'),
+            'database' => env('CALIDAD_DATABASE', 'forge'),
+            'username' => env('CALIDAD_USERNAME', 'forge'),
+            'password' => env('CALIDAD_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
         'comanda' => [
             'driver' => 'sqlsrv',
             'host' => env('COMANDA_HOST', 'localhost'),

@@ -38,6 +38,11 @@ Route::post('editarContacto', 'ClientesController@editarContacto');
 Route::post('guardarContacto_prospectos', 'ClientesController@guardarContacto_prospectos');
 Route::post('eliminarcontacto_prospectos', 'ClientesController@eliminarcontacto_prospectos');
 Route::post('guardarInformacion_Clientes', 'ClientesController@guardarInformacion_Clientes');
+Route::get('getAllUsuariosDisponibles', 'ClientesController@getAllUsuariosDisponibles');
+Route::post('guardarCliente_prospectos', 'ClientesController@guardarCliente_prospectos');
+Route::post('guardar_contactos_cliente', 'ClientesController@guardar_contactos_cliente');
+Route::post('guardar_usuarios_cliente', 'ClientesController@guardar_usuarios_cliente');
+
 
 
 //rutas para atenciones
@@ -47,3 +52,12 @@ Route::post('mover_archivo', 'AtencionesController@mover_archivo');
 Route::post('eliminar_archivo', 'AtencionesController@eliminar_archivo');
 Route::post('guardarAtencion', 'AtencionesController@guardarAtencion');
 Route::post('guardarArchivosAtn', 'AtencionesController@guardarArchivosAtn');
+Route::post('getAllAtenciones', 'AtencionesController@getAllAtenciones');
+
+
+//rutas para eventos
+Route::post('getAllEventos', 'EventosController@getAllEventos');
+
+
+//rutas para tickets
+Route::post('getAllTickets', 'TicketController@getAllTickets');

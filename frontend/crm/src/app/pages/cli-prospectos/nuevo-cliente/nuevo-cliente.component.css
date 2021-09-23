@@ -61,6 +61,11 @@ tr > th{
   width: 45% !important;
 }
 
+.input2{
+  margin-left: 2% !important;
+  width: 30% !important;
+}
+
 mat-form-field{
   margin-bottom: 15px !important;
 }
@@ -81,5 +86,10 @@ mat-form-field{
 }
 
 .btn{
+  float: right !important;
+  margin-right: 50px !important;
+}
+
+.btn1{
   margin-left: 50px !important;
 }

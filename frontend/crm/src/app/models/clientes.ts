@@ -55,4 +55,12 @@ export class Clientes {
   public fecha_visita!: string;
   public compromisos!: string;
   public categoria!: string;
+
+
+  public cargo!: string;
+  public correo!: string;
+  public celular1!: string;
+  public telefono1!: string;
+  public teldirecto!: string;
+  public celular!: string;
 }

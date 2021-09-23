@@ -8,7 +8,18 @@
   <mat-tab label="Mis Clientes Prospectos y Stakeholders" class="tabs">
     <br><br>
     <h2>Prospectos y stakeholders <button mat-raised-button color="primary" class="btn" (click)="agregarNuevoCliente()"><mat-icon>add</mat-icon> Agregar cliente </button></h2>
-      <table mat-table [dataSource]="dataSource"  >
+
+    <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
+                     showFirstLastButtons
+                     aria-label="Cantidad de registros a mostrar">
+      </mat-paginator>
+
+      <mat-form-field appearance="legacy" class="input_search">
+        <mat-label>Buscar en tabla: </mat-label>
+        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_misClientes($event)">
+      </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource"  >
 
         <ng-container matColumnDef="codigo">
           <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -43,10 +54,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
-      <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
-                     showFirstLastButtons
-                     aria-label="Cantidad de registros a mostrar">
-      </mat-paginator>
+
 
 
 
@@ -57,6 +65,17 @@
 
     <br><br>
     <h2>Clientes que otros usuarios me han compartido</h2>
+    <mat-paginator  #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+    </mat-paginator>
+
+
+    <mat-form-field appearance="legacy" class="input_search">
+      <mat-label>Buscar en tabla: </mat-label>
+      <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_compartidos($event)">
+    </mat-form-field>
+
       <table mat-table [dataSource]="dataSource1">
 
         <ng-container matColumnDef="codigo">
@@ -92,10 +111,7 @@
         <tr mat-row *matRowDef="let row1; columns: displayedColumns;"></tr>
       </table>
 
-      <mat-paginator  #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
-                     showFirstLastButtons
-                     aria-label="Cantidad de registros a mostrar">
-      </mat-paginator>
+
 
 
   </mat-tab>
