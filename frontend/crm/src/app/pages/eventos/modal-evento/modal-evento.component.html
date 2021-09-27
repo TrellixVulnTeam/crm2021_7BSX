@@ -1,1 +1,84 @@
-<p>modal-evento works!</p>
+<h2 mat-dialog-title><b>Generar nuevo evento para la atención N°:</b> {{datos_atencion.id}}</h2>
+<h2 mat-dialog-title><b>Título de la atención:</b> {{datos_atencion.titulo_atn}}</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <form class="form_evento" [formGroup]="form_evento">
+    <br>
+    <mat-form-field appearance="legacy" class="input2">
+      <mat-label>N° Suministro</mat-label>
+      <input readonly matInput type="text"  formControlName="suministro" [(ngModel)]="datos_atencion.num_suministro">
+    </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>ID de atención: </mat-label>
+        <input readonly  type="hidden"  formControlName="usuario_crm" [(ngModel)]="user.id">
+        <input readonly matInput type="text"  formControlName="atencion_id" [(ngModel)]="datos_atencion.id">
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>Contacto del cliente</mat-label>
+        <input readonly matInput type="text" formControlName="contacto"  [(ngModel)]="datos_atencion.contacto">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>Cliente:</mat-label>
+        <input readonly matInput type="text" formControlName="cliente"  [(ngModel)]="datos_atencion.cliente">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Título del evento</mat-label>
+        <textarea rows="3"  matInput formControlName="titulo_evt" autocomplete="off"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Descripción del evento</mat-label>
+        <textarea matInput  maxlength="50" autocomplete="off" formControlName="descripcion_evt"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Fecha de Compromiso</mat-label>
+        <input matInput type="date" formControlName="fecha_compromiso" >
+      </mat-form-field>
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Hora de Compromiso</mat-label>
+        <input matInput type="time" formControlName="hora_compromiso" >
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Fecha de Resolución (Con el cliente)</mat-label>
+        <input matInput type="date" formControlName="fecha_resolucion" >
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Hora de Resolución (Con el cliente)</mat-label>
+        <input matInput type="time" formControlName="hora_resolucion" >
+      </mat-form-field>
+
+
+
+
+
+  </form>
+
+    <button mat-raised-button color="primary" class="lg_btn" (click)="guardarEvento()">Generar Evento</button>
+
+    <br><br>
+
+  <h2>Adjuntar archivos al evento</h2>
+
+  <mat-divider></mat-divider>
+
+   <app-subir-archivos [evento_id]="evento_id" [arreglo_evento]="arreglo_evento" [tipo]="tipo"></app-subir-archivos>
+
+  <mat-divider></mat-divider>
+</div>
+
+<div mat-dialog-actions>
+
+</div>
+

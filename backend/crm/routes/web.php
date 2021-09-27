@@ -18,6 +18,7 @@ Route::get('/', function () {
 //rutas para usuarios
 Route::post('validarCredenciales', 'UsuarioController@validarCredenciales');
 Route::post('getRoles', 'UsuarioController@getRoles');
+Route::get('getUsuarios', 'UsuarioController@getUsuarios');
 
 //rutas para clientes
 Route::get('getAllClientesEdesal', 'ClientesController@getAllClientesEdesal');
@@ -57,7 +58,17 @@ Route::post('getAllAtenciones', 'AtencionesController@getAllAtenciones');
 
 //rutas para eventos
 Route::post('getAllEventos', 'EventosController@getAllEventos');
+Route::post('guardarEvento', 'EventosController@guardarEvento');
+Route::post('guardarArchivosEvt', 'EventosController@guardarArchivosEvt');
 
 
 //rutas para tickets
 Route::post('getAllTickets', 'TicketController@getAllTickets');
+Route::post('guardarTicket', 'TicketController@guardarTicket');
+Route::post('guardarTicketOrder', 'TicketController@guardarTicketOrder');
+
+//rutas para ordenes técnicas
+Route::get('getAllOrdenes', 'OrTecnicasController@getAllOrdenes');
+Route::post('guardarTicketOrder', 'OrTecnicasController@guardarTicketOrder');
+//rutas para suministros
+Route::get('getAllSuministros', 'SuministrosController@getAllSuministros');

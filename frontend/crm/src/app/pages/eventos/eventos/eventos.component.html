@@ -59,7 +59,7 @@
         <ng-container matColumnDef="Acciones">
           <th mat-header-cell *matHeaderCellDef> Acciones </th>
           <td mat-cell *matCellDef="let row">
-            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above">
+            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
               <mat-icon>add</mat-icon>
             </button>
             <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
@@ -92,7 +92,7 @@
         <input  matInput type="text" [(ngModel)]="texto2"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtProResolucion($event)">
       </mat-form-field>
 
-      <table mat-table [dataSource]="dataSource_evtProResolucion"  >
+      <table mat-table [dataSource]="dataSource_evtProResolucion">
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Evento</th>

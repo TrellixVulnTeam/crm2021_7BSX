@@ -43,5 +43,7 @@
 </table>
 <br><br>
 
-<button mat-raised-button color="accent" class="lg_btn" (click)="guardarArchivos()">Guardar todos los archivos</button>
+<button mat-raised-button color="warn" class="lg_btn" (click)="guardarArchivos_atn()" *ngIf="tipo == 'atencion'">Guardar todos los archivos</button>
+
+<button mat-raised-button color="warn" class="lg_btn" (click)="guardarArchivos_evt()" *ngIf="tipo == 'evento'">Guardar todos los archivos</button>
 

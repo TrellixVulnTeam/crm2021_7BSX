@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OtecnicasRoutingModule } from './otecnicas-routing.module';
 import { OtecnicasComponent } from './otecnicas/otecnicas.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { MatModuleModule } from 'src/app/mat-module.module';
   imports: [
     CommonModule,
     OtecnicasRoutingModule,
-    MatModuleModule
+    MatModuleModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class OtecnicasModule { }

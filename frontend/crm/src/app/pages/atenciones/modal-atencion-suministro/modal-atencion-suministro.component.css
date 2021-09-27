@@ -12,7 +12,7 @@ button{
 }
 
 form{
-  width: 90% !important;
+  width: 70% !important;
   margin: auto !important;
   }
 
@@ -110,6 +110,3 @@ mat-form-field{
 .icon{
   color: black !important;
 }
-
-
-

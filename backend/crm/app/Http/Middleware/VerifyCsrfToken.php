@@ -44,6 +44,13 @@ class VerifyCsrfToken extends BaseVerifier
         'guardar_contactos_cliente',
         'getAllAtenciones',
         'getAllEventos',
-        'getAllTickets'
+        'getAllTickets',
+        'getAllOrdenes',
+        'getAllSuministros',
+        'guardarEvento',
+        'guardarArchivosEvt',
+        'getUsuarios',
+        'guardarTicket',
+        'guardarTicketOrder'
     ];
 }

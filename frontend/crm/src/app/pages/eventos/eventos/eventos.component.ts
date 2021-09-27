@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
 import { EventosService } from 'src/app/services/eventos.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { ModalTicketComponent } from '../../tickets/modal-ticket/modal-ticket.component';
 
 @Component({
   selector: 'app-eventos',
@@ -23,13 +26,15 @@ export class EventosComponent implements OnInit {
   dataSource_evtAbiertos:any = new MatTableDataSource<any>([]);
   dataSource_evtProResolucion:any = new MatTableDataSource<any>([]);
   dataSource_evtCerrados:any = new MatTableDataSource<any>([]);
+  //datos_evento: Eventos = new Eventos();
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
   @ViewChild('paginator2') paginator2: MatPaginator | undefined;
   @ViewChild('paginator3') paginator3: MatPaginator | undefined;
   @ViewChild('paginator4') paginator4: MatPaginator | undefined;
 
-  constructor( private global: GlobalService, private router: Router, private eventosService: EventosService) { }
+  constructor( private global: GlobalService, private router: Router, private eventosService: EventosService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -133,5 +138,13 @@ filterTable_evtProResolucion(filterValue :string) {
 
 filterTable_evtCerrados(filterValue :string) {
   this.dataSource_evtCerrados.filter = filterValue.trim().toLowerCase();
+}
+
+
+generarTicket(eve: Eventos){
+  this.dialog.open(ModalTicketComponent,{
+    data: {datos_evento: eve},
+    width: '80%',
+  });
 }
 }

@@ -58,6 +58,72 @@ class EventosController extends Controller
 
     }
 
+    public function guardarEvento(Request $request){
+
+        $fechaRes = $request["fecha_resolucion"];
+        $fechaCom = $request["fecha_compromiso"];
+
+
+        if($fechaRes == '1900-01-01 00:00:00.000' || $fechaCom == '1900-01-01 00:00:00.000'){
+            $fechaResConFormato = null;
+            $fechaComConFormato = null;
+        }
+        
+        else if(is_null($fechaRes) || is_null($fechaCom)){
+            $fechaResConFormato = null;
+            $fechaComConFormato = null;
+        }else{
+            $fechaResSinFormato = date_create_from_format('Y-m-d',$fechaRes);
+
+            $fechaResConFormato = date_format($fechaResSinFormato,'Ymd');
+
+            $fechaComSinFormato = date_create_from_format('Y-m-d',$fechaCom);
+
+            $fechaComConFormato = date_format($fechaComSinFormato,'Ymd');
+        } 
+
+        $insertar =  DB::connection('comanda')->table('CRM_eventos')
+                         ->insertGetId([
+                           'num_suministro' => $request['suministro'],
+                           'cliente' => $request['cliente'],
+                           'fecha_compromiso' => $fechaComConFormato.' '.$request['hora_compromiso'],
+                           'fecha_resolucion' => $fechaResConFormato.' '.$request['hora_resolucion'],
+                           'usuario_crm' => $request['usuario_crm'],
+                           'descripcion' => $request['descripcion_evt'],
+                           'fecha_creacion' => date('Ymd H:i'),
+                           'estado' => 1,
+                           'atencion_id' => $request['atencion_id'],
+                           'eventoTitulo' => $request["titulo_evt"],
+                         ]);
+
+        return response()->json($insertar);
+    }
+
+
+    public function guardarArchivosEvt(Request $request){
+
+        $json = json_encode($request->all());
+
+        $arch = json_decode($json );
+      
+
+        foreach($arch as $arc){
+            $insertar =  DB::connection('comanda')->table('CRM_adjuntos')
+            ->insert([
+              'evento_id' => $arc->evento_id,
+              'fecha_creacion' => date('Ymd H:i'),
+              'usuario_id' => $arc->usuario_id,
+              'adjunto' =>  date('Ymd').' '.strtolower(substr($arc->file,12)),
+              'descripcion' => $arc->descripcion,
+              'tipoarchivo' => 30,
+            ]);
+        }
+
+        return response()->json($insertar);
+       
+
+    }
+
 
 }
 

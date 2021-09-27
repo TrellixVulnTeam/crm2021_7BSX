@@ -61,4 +61,9 @@ export class EventosService {
     return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getAllEventos', usuario, httpOptions)
     .pipe(map(data => data as unknown as Eventos[] ));
   }
+
+  public guardarEvento(evento: Eventos): Observable<Eventos> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarEvento', evento, httpOptions)
+    .pipe(map(data => data as Eventos ));
+  }
 }

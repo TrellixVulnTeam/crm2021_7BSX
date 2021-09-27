@@ -133,7 +133,7 @@ export class ClientesComponent implements OnInit {
   open_modal_atenciones() {
 
     this.dialog.open(ModalAtencionComponent,{
-      data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro, cliente: 'edesal'},
+      data: {datos_cliente: this.datos_cliente, datos_contacto: this.datos_contacto, datos_suministro: this.datos_suministro, cliente: 'edesal',},
       width: '80%',
     });
 

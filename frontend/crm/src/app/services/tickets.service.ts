@@ -73,4 +73,15 @@ export class TicketsService {
     return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'getAllTickets', usuario, httpOptions)
     .pipe(map(data => data as unknown as Tickets[] ));
   }
+
+  public guardarTicket(ticket: Tickets): Observable<Tickets> {
+    return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'guardarTicket', ticket, httpOptions)
+    .pipe(map(data => data as Tickets ));
+  }
+
+  public guardarTicketOrder(ticket: Tickets): Observable<Tickets> {
+    return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'guardarTicketOrder', ticket, httpOptions)
+    .pipe(map(data => data as Tickets ));
+  }
+
 }

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
+import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
@@ -28,6 +29,10 @@ export class SubirArchivosComponent implements OnInit {
   @Input()  arreglo_atenciones : Atenciones = new Atenciones();
   @Input()  atencion_id : any;
 
+  @Input()  arreglo_evento : Eventos = new Eventos();
+  @Input()  evento_id : any;
+  @Input()  tipo : string | undefined;
+
   constructor(private http: HttpClient, private urlBackEnd: GlobalService,
     public archivoService: ArchivosService,private _snackBar: MatSnackBar,
     private router: Router, private atencionService : AtencionesService,
@@ -40,6 +45,8 @@ export class SubirArchivosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.tipo);
+
 
     if(localStorage.getItem('usuario_crm') !== null){
 
@@ -95,7 +102,7 @@ export class SubirArchivosComponent implements OnInit {
 
 
 
-   guardarArchivos(){
+  guardarArchivos_atn(){
 
         var id_atn = this.atencion_id;
         var iduser = this.user.id;
@@ -128,6 +135,44 @@ export class SubirArchivosComponent implements OnInit {
             this.dialog.closeAll();
           }
           );
+  }
+
+
+  guardarArchivos_evt(){
+
+
+    var id_evt = this.evento_id;
+    var iduser = this.user.id;
+
+    this.obj_archivos.forEach(function(e){
+      if (typeof e === "object" ){
+        e["evento_id"] =  id_evt;
+        e["usuario_id"] = iduser;
+      }
+    });
+
+    this.archivoService.guardarArchivosEvt(this.obj_archivos).subscribe(
+      response => {
+       // this.atn_id = response;
+      },
+      err => {
+        this._snackBar.open('Error al guardar', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+      },
+      () => {
+        this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+        this.dialog.closeAll();
+      }
+      );
+
   }
 
 

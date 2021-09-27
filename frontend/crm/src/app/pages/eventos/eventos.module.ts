@@ -6,6 +6,9 @@ import { EventosComponent } from './eventos/eventos.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
 import { ModalEventoComponent } from './modal-evento/modal-evento.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SubirArchivosComponent } from '../atenciones/subir-archivos/subir-archivos.component';
+import { AtencionesModule } from '../atenciones/atenciones.module';
+import { TicketsModule } from '../tickets/tickets.module';
 
 
 @NgModule({
@@ -18,10 +21,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventosRoutingModule,
     MatModuleModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AtencionesModule,
+    TicketsModule
   ],
   exports:[
-    ModalEventoComponent
+    ModalEventoComponent,
   ]
 })
 export class EventosModule { }

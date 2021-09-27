@@ -105,113 +105,114 @@ class AtencionesController extends Controller
 
 
         //Obtener las atenciones (RECLAMOS) del sistema de calidad y CRM
-    public function getAllAtenciones(Request $request)
-    {
-
-        $user = $request["alias"];
-        $id = $request["id"];
-        try{
-            $atenciones = DB::connection('calidad')->select("SELECT case when A.reclamo_cerrado = 'S'
-                                                            then 'Cerrada'
-                                                            else
-                                                            'Abierta'
-                                                            end as estado, A.correlativo as id,A.comentario as titulo_atn,
-                                                            A.telefono, A.num_suministro,A.nombres_reporta+' '+A.apellidos_reporta as contacto,
-                                                            A.fecha as fecha_creacion,A.comentario as descripcion,
-                                                            t.descripcion_tipo_rreclamo as tipoatencion,
-                                                            m.descripcion_mreclamo as motivoatencion,CAST(A.sistema AS NVARCHAR(10)) as sistema,
-                                                            FC.NOMBRES+''+FC.APELLIDOS as cliente,
-                                                            B.usuario_unicom as usuarioCreacion,
-                                                            convert(varchar(10),A.fecha,103) as fechaC
-
-                                                            FROM EDESAL_CALIDAD.dbo.fe_calidad_reclamos A
-                                                            INNER JOIN fe_calidad_tipo_rreclamo t ON A.codigo_tipo_rreclamo = t.codigo_tipo_rreclamo
-                                                            INNER JOIN fe_calidad_motivo_reclamo m ON A.codigo_mreclamo = m.codigo_mreclamo
-                                                            INNER JOIN FACTURACION.dbo.FE_SUMINISTROS B ON A.num_suministro = B.num_suministro
-                                                            INNER JOIN FACTURACION.dbo.FE_CLIENTE FC ON FC.CODIGO_CLIENTE = B.CODIGO_CLIENTE
-                                                            WHERE B.usuario_unicom ='".$user."'
-
-                                                            UNION
-
-                                                            SELECT case when c.atencion_cerrada = 'S'
-                                                            then 'Cerrada'
-                                                            else
-                                                            'Abierta'
-                                                            end as estado,
-                                                            CAST(c.id AS NUMERIC(8)) as id, 
-                                                            c.titulo_atn as titulo_atn,
-                                                            CAST(c.telefono AS VARCHAR(8)) as telefono, 
-                                                            c.num_suministro as num_suministro,c.contacto as contacto,
-                                                            c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
-                                                            t.nombre as tipoatencion,m.nombre as motivoatencion,
-                                                            CAST(c.sistema AS NVARCHAR(10)) as sistema,
-                                                            c.cliente as cliente,
-                                                            c.usuario_creacion as usuarioCreacion,
-                                                            convert(varchar(10),c.fecha_creacion,103) as fechaC
-                                                            FROM comanda_db.dbo.CRM_atenciones c
-                                                            LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
-                                                            LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
-                                                            WHERE c.usuario_creacion ='".$user."'
-                                                            UNION
-
-                                                            SELECT case when c.atencion_cerrada = 'S'
-                                                            then 'Cerrada'
-                                                            else
-                                                            'Abierta'
-                                                            end as estado, 
-                                                            CAST(c.id AS NUMERIC(8)) as id, 
-                                                            c.titulo_atn as titulo_atn,
-                                                            CAST(c.telefono AS VARCHAR(8)) as telefono, 
-                                                            c.num_suministro as num_suministro,c.contacto as contacto,
-                                                            c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
-                                                            t.nombre as tipoatencion,m.nombre as motivoatencion,
-                                                            CAST(c.sistema AS NVARCHAR(10)) as sistema,
-                                                            c.cliente as cliente,
-                                                            c.usuario_creacion as usuarioCreacion,
-                                                            convert(varchar(10),c.fecha_creacion,103) as fechaC
-                                                            FROM comanda_db.dbo.CRM_atenciones c
-                                                            LEFT JOIN comanda_db.dbo.crm_clientes cl on cl.empresa = c.cliente
-                                                            LEFT JOIN comanda_db.dbo.users u on u.id = cl.usuario_crm
-                                                            LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
-                                                            LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
-                                                            where u.alias ='".$user."' and c.usuario_creacion != '".$user."'
-
-                                                            UNION
-
-                                                            SELECT  case when c.atencion_cerrada = 'S'
-                                                            then 'Cerrada'
-                                                            else
-                                                            'Abierta'
-                                                            end as estado,  
-                                                            CAST(c.id AS NUMERIC(8)) as id, 
-                                                            c.titulo_atn as titulo_atn,
-                                                            CAST(c.telefono AS VARCHAR(8)) as telefono, 
-                                                            c.num_suministro as num_suministro,c.contacto as contacto,
-                                                            c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
-                                                            t.nombre as tipoatencion,m.nombre as motivoatencion,
-                                                            CAST(c.sistema AS NVARCHAR(10)) as sistema,
-                                                            c.cliente as cliente,
-                                                            c.usuario_creacion as usuarioCreacion,
-                                                            convert(varchar(10),c.fecha_creacion,103) as fechaC
-                                                            FROM comanda_db.dbo.CRM_atenciones c
-                                                            LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
-                                                            LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
-                                                            inner join comanda_db.dbo.crm_clientes cl on cl.empresa = c.cliente
-                                                            inner join comanda_db.dbo.crm_cliente_usuario ccu on ccu.cliente = cl.id
-                                                            WHERE ccu.usuario = ".$id."
-                                                            order by 2 desc
-                                                              ");
-
-            return response()->json($atenciones);
-
-        }catch(\Exception $e)
+    
+        public function getAllAtenciones(Request $request)
         {
-            return response()->json($e->getMessage());
+
+            $user = $request["alias"];
+            $id = $request["id"];
+            try{
+                $atenciones = DB::connection('calidad')->select("SELECT case when A.reclamo_cerrado = 'S'
+                                                                then 'Cerrada'
+                                                                else
+                                                                'Abierta'
+                                                                end as estado, A.correlativo as id,A.comentario as titulo_atn,
+                                                                A.telefono, A.num_suministro,A.nombres_reporta+' '+A.apellidos_reporta as contacto,
+                                                                A.fecha as fecha_creacion,A.comentario as descripcion,
+                                                                t.descripcion_tipo_rreclamo as tipoatencion,
+                                                                m.descripcion_mreclamo as motivoatencion,CAST(A.sistema AS NVARCHAR(10)) as sistema,
+                                                                FC.NOMBRES+''+FC.APELLIDOS as cliente,
+                                                                B.usuario_unicom as usuarioCreacion,
+                                                                convert(varchar(10),A.fecha,103) as fechaC
+
+                                                                FROM EDESAL_CALIDAD.dbo.fe_calidad_reclamos A
+                                                                INNER JOIN fe_calidad_tipo_rreclamo t ON A.codigo_tipo_rreclamo = t.codigo_tipo_rreclamo
+                                                                INNER JOIN fe_calidad_motivo_reclamo m ON A.codigo_mreclamo = m.codigo_mreclamo
+                                                                INNER JOIN FACTURACION.dbo.FE_SUMINISTROS B ON A.num_suministro = B.num_suministro
+                                                                INNER JOIN FACTURACION.dbo.FE_CLIENTE FC ON FC.CODIGO_CLIENTE = B.CODIGO_CLIENTE
+                                                                WHERE B.usuario_unicom ='".$user."'
+
+                                                                UNION
+
+                                                                SELECT case when c.atencion_cerrada = 'S'
+                                                                then 'Cerrada'
+                                                                else
+                                                                'Abierta'
+                                                                end as estado,
+                                                                CAST(c.id AS NUMERIC(8)) as id, 
+                                                                c.titulo_atn as titulo_atn,
+                                                                CAST(c.telefono AS VARCHAR(8)) as telefono, 
+                                                                c.num_suministro as num_suministro,c.contacto as contacto,
+                                                                c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
+                                                                t.nombre as tipoatencion,m.nombre as motivoatencion,
+                                                                CAST(c.sistema AS NVARCHAR(10)) as sistema,
+                                                                c.cliente as cliente,
+                                                                c.usuario_creacion as usuarioCreacion,
+                                                                convert(varchar(10),c.fecha_creacion,103) as fechaC
+                                                                FROM comanda_db.dbo.CRM_atenciones c
+                                                                LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
+                                                                LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
+                                                                WHERE c.usuario_creacion ='".$user."'
+                                                                UNION
+
+                                                                SELECT case when c.atencion_cerrada = 'S'
+                                                                then 'Cerrada'
+                                                                else
+                                                                'Abierta'
+                                                                end as estado, 
+                                                                CAST(c.id AS NUMERIC(8)) as id, 
+                                                                c.titulo_atn as titulo_atn,
+                                                                CAST(c.telefono AS VARCHAR(8)) as telefono, 
+                                                                c.num_suministro as num_suministro,c.contacto as contacto,
+                                                                c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
+                                                                t.nombre as tipoatencion,m.nombre as motivoatencion,
+                                                                CAST(c.sistema AS NVARCHAR(10)) as sistema,
+                                                                c.cliente as cliente,
+                                                                c.usuario_creacion as usuarioCreacion,
+                                                                convert(varchar(10),c.fecha_creacion,103) as fechaC
+                                                                FROM comanda_db.dbo.CRM_atenciones c
+                                                                LEFT JOIN comanda_db.dbo.crm_clientes cl on cl.empresa = c.cliente
+                                                                LEFT JOIN comanda_db.dbo.users u on u.id = cl.usuario_crm
+                                                                LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
+                                                                LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
+                                                                where u.alias ='".$user."' and c.usuario_creacion != '".$user."'
+
+                                                                UNION
+
+                                                                SELECT  case when c.atencion_cerrada = 'S'
+                                                                then 'Cerrada'
+                                                                else
+                                                                'Abierta'
+                                                                end as estado,  
+                                                                CAST(c.id AS NUMERIC(8)) as id, 
+                                                                c.titulo_atn as titulo_atn,
+                                                                CAST(c.telefono AS VARCHAR(8)) as telefono, 
+                                                                c.num_suministro as num_suministro,c.contacto as contacto,
+                                                                c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
+                                                                t.nombre as tipoatencion,m.nombre as motivoatencion,
+                                                                CAST(c.sistema AS NVARCHAR(10)) as sistema,
+                                                                c.cliente as cliente,
+                                                                c.usuario_creacion as usuarioCreacion,
+                                                                convert(varchar(10),c.fecha_creacion,103) as fechaC
+                                                                FROM comanda_db.dbo.CRM_atenciones c
+                                                                LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
+                                                                LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
+                                                                inner join comanda_db.dbo.crm_clientes cl on cl.empresa = c.cliente
+                                                                inner join comanda_db.dbo.crm_cliente_usuario ccu on ccu.cliente = cl.id
+                                                                WHERE ccu.usuario = ".$id."
+                                                                order by 2 desc
+                                                                ");
+
+                return response()->json($atenciones);
+
+            }catch(\Exception $e)
+            {
+                return response()->json($e->getMessage());
+            }
+
+
+
         }
-
-
-
-    }
     
 
 }

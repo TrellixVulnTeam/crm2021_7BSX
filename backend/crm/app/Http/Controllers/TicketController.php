@@ -37,6 +37,43 @@ class TicketController extends Controller
 
     }
 
+    public function guardarTicket(Request $request){
+
+        $fechaRes = $request["fecha_resolucion"];
+
+
+        if($fechaRes == '1900-01-01 00:00:00.000'){
+            $fechaResConFormato = null;
+        }
+        
+        else if(is_null($fechaRes)){
+            $fechaResConFormato = null;
+        }else{
+            $fechaResSinFormato = date_create_from_format('Y-m-d',$fechaRes);
+
+            $fechaResConFormato = date_format($fechaResSinFormato,'Ymd');
+        } 
+
+        $insertar =  DB::connection('comanda')->table('tickets')
+        ->insertGetId([
+          'titulo' => $request['titulo_tck'],
+          'descripcion' => $request['descripcion_tck'],
+          'us_asignado' => $request['asignado_tck'],
+          'us_solicitante' =>$request['usuario_crm'],
+          'fechasolaprox' => $fechaResConFormato.' '.$request['hora_resolucion'],
+          'fechasolicitud' => date('Ymd H:i'),
+          'creador_ticket' => $request['usuario_crm'],
+          'categoria_id' => 8,
+          'estado_id' => 2,
+          'evento_id' => $request["id_evento"],
+        ]);
+
+        return response()->json($insertar);
+    }
+
+
+
+
 }
 
 

@@ -72,6 +72,14 @@ class UsuarioController extends Controller
            
         }
 
+
+        public function getUsuarios(){
+          
+            $users = DB::connection('comanda')->select("SELECT * from users where (estado is null or estado = 1) order by 2 asc");
+    
+            return response()->json($users);
+        }
+
 }
 
 

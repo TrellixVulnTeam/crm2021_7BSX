@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Atenciones } from 'src/app/models/atenciones';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { ModalEventoComponent } from '../../eventos/modal-evento/modal-evento.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -28,7 +31,8 @@ export class AtencionesComponent implements OnInit {
   @ViewChild('paginator3') paginator3: MatPaginator | undefined;
 
 
-  constructor(public atencionService: AtencionesService, private router: Router, private global: GlobalService) { }
+  constructor(public atencionService: AtencionesService, private router: Router, private global: GlobalService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('usuario_crm') !== null){
@@ -122,6 +126,14 @@ filterTable_atnCerradas(filterValue :string) {
 
       //console.table(this.dataSource_atnAbiertas.data);
 
+  }
+
+
+  nuevoEvento(atencion: Atenciones){
+    this.dialog.open(ModalEventoComponent,{
+      data: {datos_atencion: atencion},
+      width: '80%',
+    });
   }
 
 

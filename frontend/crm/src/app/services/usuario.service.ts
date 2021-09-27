@@ -47,6 +47,10 @@ export class UsuarioService {
   }
 
 
+  public getUsuarios(): Observable<Usuario[]> {
+    return this.http.get(this.globalservice.getUrlBackEnd() + 'getUsuarios').pipe(map(data => data as Usuario[]));
+  }
+
 
 
     // metodo para cerrar sesion

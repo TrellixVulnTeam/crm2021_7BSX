@@ -7,13 +7,15 @@ import { MatModuleModule } from 'src/app/mat-module.module';
 import { ModalAtencionComponent } from './modal-atencion/modal-atencion.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubirArchivosComponent } from './subir-archivos/subir-archivos.component';
+import { ModalAtencionSuministroComponent } from './modal-atencion-suministro/modal-atencion-suministro.component';
 
 
 @NgModule({
   declarations: [
     AtencionesComponent,
     ModalAtencionComponent,
-    SubirArchivosComponent
+    SubirArchivosComponent,
+    ModalAtencionSuministroComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { SubirArchivosComponent } from './subir-archivos/subir-archivos.componen
   ],
   exports:[
     ModalAtencionComponent,
-    SubirArchivosComponent
+    SubirArchivosComponent,
+    ModalAtencionSuministroComponent
   ]
 })
 export class AtencionesModule { }

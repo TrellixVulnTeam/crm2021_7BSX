@@ -1,1 +1,56 @@
-<p>suministros works!</p>
+<h3 class="title">Suministros</h3>
+<mat-divider></mat-divider>
+
+<mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
+    showFirstLastButtons
+    aria-label="Cantidad de registros a mostrar">
+    </mat-paginator>
+
+    <mat-form-field appearance="legacy" class="input_search">
+      <mat-label>Buscar en tabla: </mat-label>
+      <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_suministros($event)">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource_suministros"  >
+
+    <ng-container matColumnDef="num_suministro" >
+      <th mat-header-cell *matHeaderCellDef> N° Suministro </th>
+      <td mat-cell *matCellDef="let row"> {{row.num_suministro}} </td>
+    </ng-container>
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let row">{{row.estado}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="nombrecliente">
+      <th mat-header-cell *matHeaderCellDef> Nombre de Cliente </th>
+      <td mat-cell *matCellDef="let row">{{row.nombrecliente}} {{row.apellidocliente}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="anexo_direccion">
+      <th mat-header-cell *matHeaderCellDef> Dirección </th>
+      <td mat-cell *matCellDef="let row"> {{row.anexo_direccion}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuario_unicom">
+      <th mat-header-cell *matHeaderCellDef> Usuario </th>
+      <td mat-cell *matCellDef="let row"> {{row.usuario_unicom}}</td>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="Acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let row" class="acciones">
+        <button mat-mini-fab color="primary" matTooltip="Nueva atención" matTooltipPosition="left"
+        (click)="open_modal_atenciones(row)"><mat-icon>notifications</mat-icon></button> &nbsp;&nbsp;
+        <button  mat-mini-fab color="accent" matTooltip="Detalles de la Orden" matTooltipPosition="above">
+          <mat-icon>list</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>

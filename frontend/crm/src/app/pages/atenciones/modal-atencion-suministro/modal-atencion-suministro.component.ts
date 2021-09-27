@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -6,34 +5,35 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Clientes } from 'src/app/models/clientes';
+import { Suministros } from 'src/app/models/suministros';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { GlobalService } from 'src/app/services/global.service';
-import { SubirArchivosComponent } from '../subir-archivos/subir-archivos.component';
 
 @Component({
-  selector: 'app-modal-atencion',
-  templateUrl: './modal-atencion.component.html',
-  styleUrls: ['./modal-atencion.component.css']
+  selector: 'app-modal-atencion-suministro',
+  templateUrl: './modal-atencion-suministro.component.html',
+  styleUrls: ['./modal-atencion-suministro.component.css']
 })
-export class ModalAtencionComponent implements OnInit {
+export class ModalAtencionSuministroComponent implements OnInit {
+
   datos_contacto : Clientes[] = [];
   datos_suministro : Clientes[] = [];
   list_motivo_atenciones : Atenciones[] = [];
   list_tipo_atenciones : Atenciones[] = [];
   form_atencion : FormGroup;
 
-  datos_cliente : Clientes = new Clientes();
+  datos_cliente : Suministros = new Suministros();
   tipo_atencion = '';
   user: Usuario = new Usuario();
   arreglo_atenciones: Atenciones = new Atenciones();
   atencion_id : Atenciones = new Atenciones()
   tipo = 'atencion';
 
+
   constructor(public atencionService: AtencionesService,
-    public modal_atencion: MatDialogRef<ModalAtencionComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService,) {
+    public modal_atencion: MatDialogRef<ModalAtencionSuministroComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService) {
     this.form_atencion = new FormGroup({
       'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -49,9 +49,6 @@ export class ModalAtencionComponent implements OnInit {
       'whatsapp' : new FormControl(''),
       'usuario_crm' : new FormControl(''),
     });
-
-
-
   }
 
   ngOnInit(): void {
@@ -79,23 +76,10 @@ export class ModalAtencionComponent implements OnInit {
         this.datos_cliente = this.data.datos_cliente;
         this.datos_suministro = this.data.datos_suministro;
 
-        var cliente = this.data.cliente;
-
-        if(cliente == 'cli'){
-          this.clienteService._datoscontactos_cli.subscribe(response => {
-            this.datos_contacto = response;
-          });
-        }else{
-          this.clienteService._datoscontactos.subscribe(response => {
-            this.datos_contacto = response;
-          });
-
-        }
-
-
 
 
   }
+
 
   mostrarDatos(){
     var opcion = this.form_atencion.controls["tipo_atencion"].value;
@@ -117,9 +101,7 @@ export class ModalAtencionComponent implements OnInit {
       this.tipo_atencion = '';
     }
   }
-  cerrarModalAtn(){
-    this.modal_atencion.close();
-  }
+
 
 
   guardarAtencion(){
@@ -145,10 +127,6 @@ export class ModalAtencionComponent implements OnInit {
           verticalPosition: 'top'
         });
       });
-
-
-
-
   }
 
 }

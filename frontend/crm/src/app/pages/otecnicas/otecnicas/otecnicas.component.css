@@ -1,0 +1,38 @@
+.desc_div{
+  width: 100% !important;
+  max-height:100px;
+  overflow-y:auto !important;
+}
+
+
+.desc{
+  width: 30% !important;
+}
+td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+
+}
+
+tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;
+  text-align: center !important;
+}
+
+
+table{
+  width: 85% !important;
+  margin: auto !important;
+}
+
+
+.title{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
+}
+
+mat-icon{
+  color: white !important;
+}
+
