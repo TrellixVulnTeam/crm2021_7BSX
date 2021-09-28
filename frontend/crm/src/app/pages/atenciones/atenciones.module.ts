@@ -8,6 +8,7 @@ import { ModalAtencionComponent } from './modal-atencion/modal-atencion.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubirArchivosComponent } from './subir-archivos/subir-archivos.component';
 import { ModalAtencionSuministroComponent } from './modal-atencion-suministro/modal-atencion-suministro.component';
+import { DetallesComponent } from './detalles/detalles.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ModalAtencionSuministroComponent } from './modal-atencion-suministro/mo
     AtencionesComponent,
     ModalAtencionComponent,
     SubirArchivosComponent,
-    ModalAtencionSuministroComponent
+    ModalAtencionSuministroComponent,
+    DetallesComponent
   ],
   imports: [
     CommonModule,

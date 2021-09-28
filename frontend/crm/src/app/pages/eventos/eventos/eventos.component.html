@@ -22,11 +22,17 @@
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Evento</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.id}}
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
         </ng-container>
         <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}</td>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+            <button mat-mini-fab color="primary" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="cliente">
@@ -41,7 +47,11 @@
 
         <ng-container matColumnDef="titulo">
           <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row"> {{row.titulo}} </td>
+          <td mat-cell *matCellDef="let row" class="desc">
+            <div class="desc_div">
+              {{row.evTitulo}}
+            </div>
+           </td>
         </ng-container>
 
 
@@ -61,9 +71,6 @@
           <td mat-cell *matCellDef="let row">
             <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
               <mat-icon>add</mat-icon>
-            </button>
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
             </button>
             <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above">
               <mat-icon>remove_red_eye</mat-icon>
@@ -96,11 +103,18 @@
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Evento</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.id}}
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
         </ng-container>
         <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}</td>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+            <button mat-mini-fab color="primary" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
+
         </ng-container>
 
         <ng-container matColumnDef="cliente">
@@ -115,7 +129,11 @@
 
         <ng-container matColumnDef="titulo">
           <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row"> {{row.titulo}} </td>
+          <td mat-cell *matCellDef="let row" class="desc">
+            <div class="desc_div">
+              {{row.evTitulo}}
+            </div>
+           </td>
         </ng-container>
 
 
@@ -136,9 +154,7 @@
             <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above">
               <mat-icon>add</mat-icon>
             </button>
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
+
             <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
@@ -175,7 +191,9 @@
         </ng-container>
         <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}</td>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+            <button mat-mini-fab color="primary" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="cliente">
@@ -190,7 +208,11 @@
 
         <ng-container matColumnDef="titulo">
           <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row"> {{row.titulo}} </td>
+          <td mat-cell *matCellDef="let row" class="desc">
+            <div class="desc_div">
+              {{row.evTitulo}}
+            </div>
+           </td>
         </ng-container>
 
 
@@ -240,11 +262,17 @@
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Evento</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.id}}
+            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
+              <mat-icon>list</mat-icon>
+            </button>
+          </td>
         </ng-container>
         <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}</td>
+          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+            <button mat-mini-fab color="primary" matTooltip="Detalles de la atención" matTooltipPosition="right"   (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="cliente">
@@ -259,7 +287,13 @@
 
         <ng-container matColumnDef="titulo">
           <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row"> {{row.titulo}} </td>
+          <td mat-cell *matCellDef="let row" class="desc">
+            <div class="desc_div">
+              {{row.evTitulo}}
+            </div>
+           </td>
+
+
         </ng-container>
 
 
@@ -280,9 +314,7 @@
             <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'">
               <mat-icon>add</mat-icon>
             </button>
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
+
             <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'">
               <mat-icon>remove_red_eye</mat-icon>
             </button>

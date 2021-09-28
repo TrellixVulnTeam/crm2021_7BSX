@@ -3,10 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
+import { AtencionesService } from 'src/app/services/atenciones.service';
 import { EventosService } from 'src/app/services/eventos.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
 import { ModalTicketComponent } from '../../tickets/modal-ticket/modal-ticket.component';
 
 @Component({
@@ -26,7 +29,8 @@ export class EventosComponent implements OnInit {
   dataSource_evtAbiertos:any = new MatTableDataSource<any>([]);
   dataSource_evtProResolucion:any = new MatTableDataSource<any>([]);
   dataSource_evtCerrados:any = new MatTableDataSource<any>([]);
-  //datos_evento: Eventos = new Eventos();
+
+  datos_atn: Atenciones[] = [];
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
   @ViewChild('paginator2') paginator2: MatPaginator | undefined;
@@ -34,7 +38,7 @@ export class EventosComponent implements OnInit {
   @ViewChild('paginator4') paginator4: MatPaginator | undefined;
 
   constructor( private global: GlobalService, private router: Router, private eventosService: EventosService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, private atencionService: AtencionesService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -147,4 +151,18 @@ generarTicket(eve: Eventos){
     width: '80%',
   });
 }
+
+
+verDetalleAtencion(atencion: Atenciones){
+
+  this.atencionService.getDetalleAtencion(atencion).subscribe(
+    data=>{
+      this.dialog.open(DetallesComponent,{
+        data: {datos_atencion: data},
+        width: '80%',
+      });
+    }
+  );
+}
+
 }

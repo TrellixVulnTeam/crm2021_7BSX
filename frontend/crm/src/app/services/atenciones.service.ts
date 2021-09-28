@@ -70,5 +70,10 @@ export class AtencionesService {
   }
 
 
+  public getDetalleAtencion(id_atn: Atenciones): Observable<Atenciones[]> {
+    return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'getDetalleAtencion', id_atn, httpOptions)
+    .pipe(map(data => data as unknown as Atenciones[] ));
+  }
+
 
 }

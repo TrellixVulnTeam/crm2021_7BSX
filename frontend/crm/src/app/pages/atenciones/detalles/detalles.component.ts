@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,31 +8,27 @@ import { Clientes } from 'src/app/models/clientes';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { GlobalService } from 'src/app/services/global.service';
-import { SubirArchivosComponent } from '../subir-archivos/subir-archivos.component';
 
 @Component({
-  selector: 'app-modal-atencion',
-  templateUrl: './modal-atencion.component.html',
-  styleUrls: ['./modal-atencion.component.css']
+  selector: 'app-detalles',
+  templateUrl: './detalles.component.html',
+  styleUrls: ['./detalles.component.css']
 })
-export class ModalAtencionComponent implements OnInit {
-  datos_contacto : Clientes[] = [];
-  datos_suministro : Clientes[] = [];
+export class DetallesComponent implements OnInit {
+  form_atencion : FormGroup;
+  user: Usuario = new Usuario();
+
   list_motivo_atenciones : Atenciones[] = [];
   list_tipo_atenciones : Atenciones[] = [];
-  form_atencion : FormGroup;
-
-  datos_cliente : Clientes = new Clientes();
-  tipo_atencion = '';
-  user: Usuario = new Usuario();
-  arreglo_atenciones: Atenciones = new Atenciones();
-  atencion_id : Atenciones = new Atenciones()
   tipo = 'atencion';
+  tipo_atencion = '';
+  arreglo_atenciones: Atenciones[] = [];
+  atencion_id : Atenciones = new Atenciones()
+
 
   constructor(public atencionService: AtencionesService,
-    public modal_atencion: MatDialogRef<ModalAtencionComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService,) {
+    public modal_atencion: MatDialogRef<DetallesComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService) {
     this.form_atencion = new FormGroup({
       'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -48,13 +43,17 @@ export class ModalAtencionComponent implements OnInit {
       'fax' : new FormControl(''),
       'whatsapp' : new FormControl(''),
       'usuario_crm' : new FormControl(''),
+      'estado': new FormControl(''),
+      'nomUsuario' : new FormControl(''),
+      'fecha_creacion': new FormControl(''),
     });
-
-
-
   }
 
   ngOnInit(): void {
+
+    this.arreglo_atenciones = this.data.datos_atencion;
+
+    console.log(this.arreglo_atenciones);
 
     if(localStorage.getItem('usuario_crm') !== null){
 
@@ -76,26 +75,9 @@ export class ModalAtencionComponent implements OnInit {
           this.list_tipo_atenciones = data;
         });
 
-        this.datos_cliente = this.data.datos_cliente;
-        this.datos_suministro = this.data.datos_suministro;
-
-        var cliente = this.data.cliente;
-
-        if(cliente == 'cli'){
-          this.clienteService._datoscontactos_cli.subscribe(response => {
-            this.datos_contacto = response;
-          });
-        }else{
-          this.clienteService._datoscontactos.subscribe(response => {
-            this.datos_contacto = response;
-          });
-
-        }
-
-
-
 
   }
+
 
   mostrarDatos(){
     var opcion = this.form_atencion.controls["tipo_atencion"].value;
@@ -117,42 +99,10 @@ export class ModalAtencionComponent implements OnInit {
       this.tipo_atencion = '';
     }
   }
-  cerrarModalAtn(){
-    this.modal_atencion.close();
-  }
 
 
   guardarAtencion(){
-    let datos : Atenciones = new Atenciones();
-
-    datos = this.form_atencion.value;
-
-    this.arreglo_atenciones = datos;
-
-
-    this.atencionService.guardarAtencion(this.arreglo_atenciones).subscribe(
-      response => {
-        this.atencion_id = response;
-
-      },
-      err => {
-
-      },
-      () => {
-        this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        });
-      });
-
-
-
 
   }
-
-
-
-
 
 }

@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { ModalEventoComponent } from '../../eventos/modal-evento/modal-evento.component';
+import { DetallesComponent } from '../detalles/detalles.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -136,5 +137,17 @@ filterTable_atnCerradas(filterValue :string) {
     });
   }
 
+
+  verDetalleAtencion(atencion: Atenciones){
+
+    this.atencionService.getDetalleAtencion(atencion).subscribe(
+      data=>{
+        this.dialog.open(DetallesComponent,{
+          data: {datos_atencion: data},
+          width: '80%',
+        });
+      }
+    );
+  }
 
 }

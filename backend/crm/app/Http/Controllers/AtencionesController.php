@@ -123,8 +123,8 @@ class AtencionesController extends Controller
                                                                 m.descripcion_mreclamo as motivoatencion,CAST(A.sistema AS NVARCHAR(10)) as sistema,
                                                                 FC.NOMBRES+''+FC.APELLIDOS as cliente,
                                                                 B.usuario_unicom as usuarioCreacion,
+                                                                A.correlativo as atencion_id,
                                                                 convert(varchar(10),A.fecha,103) as fechaC
-
                                                                 FROM EDESAL_CALIDAD.dbo.fe_calidad_reclamos A
                                                                 INNER JOIN fe_calidad_tipo_rreclamo t ON A.codigo_tipo_rreclamo = t.codigo_tipo_rreclamo
                                                                 INNER JOIN fe_calidad_motivo_reclamo m ON A.codigo_mreclamo = m.codigo_mreclamo
@@ -148,6 +148,7 @@ class AtencionesController extends Controller
                                                                 CAST(c.sistema AS NVARCHAR(10)) as sistema,
                                                                 c.cliente as cliente,
                                                                 c.usuario_creacion as usuarioCreacion,
+                                                                c.id as atencion_id,
                                                                 convert(varchar(10),c.fecha_creacion,103) as fechaC
                                                                 FROM comanda_db.dbo.CRM_atenciones c
                                                                 LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
@@ -169,6 +170,7 @@ class AtencionesController extends Controller
                                                                 CAST(c.sistema AS NVARCHAR(10)) as sistema,
                                                                 c.cliente as cliente,
                                                                 c.usuario_creacion as usuarioCreacion,
+                                                                c.id as atencion_id,
                                                                 convert(varchar(10),c.fecha_creacion,103) as fechaC
                                                                 FROM comanda_db.dbo.CRM_atenciones c
                                                                 LEFT JOIN comanda_db.dbo.crm_clientes cl on cl.empresa = c.cliente
@@ -193,7 +195,9 @@ class AtencionesController extends Controller
                                                                 CAST(c.sistema AS NVARCHAR(10)) as sistema,
                                                                 c.cliente as cliente,
                                                                 c.usuario_creacion as usuarioCreacion,
+                                                                c.id as atencion_id,
                                                                 convert(varchar(10),c.fecha_creacion,103) as fechaC
+                                                                
                                                                 FROM comanda_db.dbo.CRM_atenciones c
                                                                 LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
                                                                 LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
@@ -215,6 +219,31 @@ class AtencionesController extends Controller
         }
     
 
+
+
+
+        public function getDetalleAtencion(Request $request){
+
+            $id = $request["atencion_id"];
+
+            $atenciones  = DB::connection('comanda')->select("
+            SELECT c.*,case when c.atencion_cerrada = 'S'
+            then 'Cerrada'
+            else
+            'Abierta'
+            end as estado,
+            convert(varchar(10),c.fecha_creacion,103) as fechaC,
+            u.nombre+' '+u.apellido as nomUsuario
+            FROM comanda_db.dbo.CRM_atenciones c
+            LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
+            LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
+            LEFT JOIN comanda_db.dbo.users u on u.alias = c.usuario_creacion 
+                WHERE c.id ='".$id."'
+            ");
+   
+           return response()->json($atenciones);
+
+        }
 }
 
 

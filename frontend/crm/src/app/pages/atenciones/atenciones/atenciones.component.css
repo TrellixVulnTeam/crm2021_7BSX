@@ -101,7 +101,7 @@ mat-form-field{
 
 
 .desc{
-  width: 30% !important;
+  width: 20% !important;
 }
 
 .td{
@@ -114,5 +114,5 @@ mat-form-field{
 }
 
 .acciones{
-  width: 15% !important;
+  width: 20% !important;
 }

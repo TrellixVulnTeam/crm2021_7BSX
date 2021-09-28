@@ -14,4 +14,12 @@ export class Atenciones {
   public titulo_atn!: string;
   public usuarioCreacion!: string;
   public nombre!: string;
+
+
+  public nomUsuario!:string;
+  public id_tipo_atencion!:number;
+  public id_motivo_atencion!:number;
+  public fax!:string;
+  public correo!:string;
+  public whatsapp!:string;
 }

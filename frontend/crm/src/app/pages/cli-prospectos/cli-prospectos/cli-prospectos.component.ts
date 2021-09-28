@@ -139,7 +139,7 @@ export class CliProspectosComponent implements OnInit {
         this.dialog.open(DetallesComponent,{
           data:{datos_contacto_cli: this.datos_contacto_cli, datos_usuario_cliente:this.datos_usuario_cliente,
           usuarios_disponibles: this.usuarios_disponibles, datos_cliente: this.datos_cliente },
-          width: '70%'
+          width: '80%'
       });
 
       }

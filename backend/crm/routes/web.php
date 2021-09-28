@@ -54,6 +54,7 @@ Route::post('eliminar_archivo', 'AtencionesController@eliminar_archivo');
 Route::post('guardarAtencion', 'AtencionesController@guardarAtencion');
 Route::post('guardarArchivosAtn', 'AtencionesController@guardarArchivosAtn');
 Route::post('getAllAtenciones', 'AtencionesController@getAllAtenciones');
+Route::post('getDetalleAtencion', 'AtencionesController@getDetalleAtencion');
 
 
 //rutas para eventos
