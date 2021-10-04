@@ -1,10 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Atenciones } from 'src/app/models/atenciones';
+import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
+import { AtencionesService } from 'src/app/services/atenciones.service';
+import { EventosService } from 'src/app/services/eventos.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { TicketsService } from 'src/app/services/tickets.service';
+import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
+import { DetallesEventosComponent } from '../../eventos/detalles-eventos/detalles-eventos.component';
 
 @Component({
   selector: 'app-tickets',
@@ -29,7 +36,8 @@ export class TicketsComponent implements OnInit {
   @ViewChild('paginator5') paginator5: MatPaginator | undefined;
   @ViewChild('paginator6') paginator6: MatPaginator | undefined;
 
-  constructor(private global: GlobalService, private router: Router, private ticketService: TicketsService) { }
+  constructor(private global: GlobalService, private router: Router, private ticketService: TicketsService,
+    private atencionService: AtencionesService, public dialog: MatDialog,private eventosService: EventosService,) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -159,5 +167,34 @@ filterTable_tckRechazados(filterValue :string) {
 filterTable_tckCerrados(filterValue :string) {
   this.dataSource_tckCerrados.filter = filterValue.trim().toLowerCase();
 }
+
+
+
+verDetalleAtencion(atencion: Atenciones){
+
+  this.atencionService.getDetalleAtencion(atencion).subscribe(
+    data=>{
+      this.dialog.open(DetallesComponent,{
+        data: {datos_atencion: data},
+        width: '80%',
+      });
+    }
+  );
+}
+
+
+
+verDetalleEvento(evento: Eventos){
+  this.eventosService.getDetalleEvento(evento).subscribe(
+    data=>{
+      this.dialog.open(DetallesEventosComponent,{
+        data: {datos_evento: data},
+        width: '80%',
+      });
+    }
+  );
+
+}
+
 
 }

@@ -19,6 +19,10 @@
           </mat-form-field>
 
 
+          <mat-form-field appearance="legacy" class="input6">
+            <mat-label>Descripción del ticket</mat-label>
+            <textarea rows="3" matInput  formControlName="descripcion_tck" autocomplete="off"></textarea>
+          </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Asignar ticket a: </mat-label>
@@ -88,10 +92,7 @@
             <input  matInput type="time" formControlName="hora_resolucion" autocomplete="off">
           </mat-form-field>
 
-          <mat-form-field appearance="legacy" class="input3">
-            <mat-label>Descripción del ticket</mat-label>
-            <textarea rows="3" matInput  formControlName="descripcion_tck" autocomplete="off"></textarea>
-          </mat-form-field>
+
 
 
 
@@ -145,10 +146,20 @@
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Gerencia que lo solicita:</mat-label>
-            <input  matInput type="text" formControlName="gerencia_solicita" autocomplete="off">
+            <mat-select formControlName="gerencia_solicita">
+              <mat-option  value='' set selected>Seleccione una gerencia..</mat-option>
+              <mat-option  value='Gerencia Comercial'>Gerencia Comercial</mat-option>
+              <mat-option  value='SEI'>SEI</mat-option>
+              <mat-option  value='Gerencia de Operaciones Comerciales'>Gerencia de Operaciones Comerciales</mat-option>
+              <mat-option  value='Gerencia Técnica'>Gerencia Técnica</mat-option>
+              <mat-option  value='Gerencia General'>Gerencia General</mat-option>
+              <mat-option  value='Gerencia Legal'>Gerencia Legal</mat-option>
+              <mat-option  value='Gerencia de Administración y Finanzas'>Gerencia de Administración y Finanzas</mat-option>
+
+            </mat-select>
           </mat-form-field>
 
-          <mat-form-field appearance="legacy" class="input3">
+          <!--<mat-form-field appearance="legacy" class="input3">
             <mat-label>Unidad que lo solicita:</mat-label>
             <mat-select formControlName="unidad_solicita">
               <mat-option  value='' set selected>Seleccione una agencia..</mat-option>
@@ -164,7 +175,7 @@
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Adjudicado a contratista: (Si aplica)</mat-label>
             <input  matInput type="text" formControlName="adjud_contratista" autocomplete="off">
-          </mat-form-field>
+          </mat-form-field>-->
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Observaciones: </mat-label>

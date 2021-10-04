@@ -1,46 +1,6 @@
 <div mat-dialog-content minWidth="10px">
 
   <mat-tab-group>
-    <mat-tab label="Datos para actualizar" class="tabs">
-      <br>
-      <form [formGroup]="frm_cliente">
-          <h3>Datos para actualizar</h3>
-
-            <mat-form-field appearance="legacy" class="input">
-              <mat-label>Porcentaje de costo de la energía: </mat-label>
-              <input   type="hidden"  autocomplete="off" formControlName="usuario" [(ngModel)]="user.id">
-              <input  matInput type="text"  autocomplete="off" [(ngModel)]="datos_cliente.porcentaje_costo_energia" formControlName="porcentaje_costo_energia">
-            </mat-form-field>
-            <mat-form-field appearance="legacy" class="input">
-              <mat-label>Facturación Mensual aproximada: </mat-label>
-              <input  matInput type="text"  autocomplete="off"  [(ngModel)]="datos_cliente.facturacion_mensual" formControlName="facturacion_mensual">
-            </mat-form-field>
-
-            <mat-form-field appearance="legacy" class="input">
-              <mat-label>Margen de rentabilidad: </mat-label>
-              <input  matInput type="text"  autocomplete="off"  [(ngModel)]="datos_cliente.margen_rentabilidad" formControlName="margen_rentabilidad">
-            </mat-form-field>
-
-            <mat-form-field appearance="legacy" class="input">
-              <mat-label>Horas de producción(Mensual): </mat-label>
-              <input  matInput type="text"  autocomplete="off"  [(ngModel)]="datos_cliente.horas_produccion" formControlName="horas_produccion">
-            </mat-form-field>
-
-            <mat-form-field appearance="legacy" class="input">
-              <mat-label>Costo Total: </mat-label>
-              <input  matInput type="text"  autocomplete="off"  >
-            </mat-form-field>
-
-            <mat-form-field appearance="legacy" class="input">
-              <mat-label>Perdida de ganancia por interrupción (Por Hora):</mat-label>
-              <input  matInput type="text"  autocomplete="off"  >
-            </mat-form-field>
-
-      </form>
-
-
-
-    </mat-tab>
     <mat-tab label="Información general" class="tabs">
       <br>
 
@@ -74,7 +34,7 @@
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input1">
-            <mat-label>PBX:</mat-label>
+            <mat-label>N° Télefono:</mat-label>
             <input  matInput type="text"  autocomplete="off" [(ngModel)]="datos_cliente.pbx" formControlName="pbx">
           </mat-form-field>
 
@@ -132,6 +92,47 @@
           </tbody>
       </table>
 
+
+
+
+    </mat-tab>
+
+    <mat-tab label="Estimación del impacto económico de la energía" class="tabs">
+      <br>
+      <form [formGroup]="frm_cliente">
+          <h3>Estimación del impacto económico de la energía</h3>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Porcentaje de costo de la energía: </mat-label>
+              <input   type="hidden"  autocomplete="off" formControlName="usuario" [(ngModel)]="user.id">
+              <input  matInput type="text"  autocomplete="off" [(ngModel)]="datos_cliente.porcentaje_costo_energia" formControlName="porcentaje_costo_energia">
+            </mat-form-field>
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Facturación Mensual aproximada: </mat-label>
+              <input  matInput type="text"  autocomplete="off"  [(ngModel)]="datos_cliente.facturacion_mensual" formControlName="facturacion_mensual">
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Margen de rentabilidad: </mat-label>
+              <input  matInput type="text"  autocomplete="off"  [(ngModel)]="datos_cliente.margen_rentabilidad" formControlName="margen_rentabilidad">
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Horas de producción(Mensual): </mat-label>
+              <input  matInput type="text"  autocomplete="off"  [(ngModel)]="datos_cliente.horas_produccion" formControlName="horas_produccion">
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Costo Total: </mat-label>
+              <input  matInput type="text"  autocomplete="off"  >
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy" class="input">
+              <mat-label>Perdida de ganancia por interrupción (Por Hora):</mat-label>
+              <input  matInput type="text"  autocomplete="off"  >
+            </mat-form-field>
+
+      </form>
 
 
 

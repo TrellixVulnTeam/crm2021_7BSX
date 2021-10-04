@@ -11,6 +11,7 @@ import { EventosService } from 'src/app/services/eventos.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
 import { ModalTicketComponent } from '../../tickets/modal-ticket/modal-ticket.component';
+import { DetallesEventosComponent } from '../detalles-eventos/detalles-eventos.component';
 
 @Component({
   selector: 'app-eventos',
@@ -163,6 +164,19 @@ verDetalleAtencion(atencion: Atenciones){
       });
     }
   );
+}
+
+
+verDetalleEvento(evento: Eventos){
+  this.eventosService.getDetalleEvento(evento).subscribe(
+    data=>{
+      this.dialog.open(DetallesEventosComponent,{
+        data: {datos_evento: data},
+        width: '80%',
+      });
+    }
+  );
+
 }
 
 }

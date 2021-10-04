@@ -23,6 +23,10 @@ class TicketController extends Controller
         inner join crm_eventos ev on ev.atencion_id = a.id
         inner join tickets tc on tc.evento_id = ev.id
         where tc.id = t.id) as idAte,
+        (select a.id from crm_atenciones a 
+        inner join crm_eventos ev on ev.atencion_id = a.id
+        inner join tickets tc on tc.evento_id = ev.id
+        where tc.id = t.id) as atencion_id,
         u.nombre as nombreasignado, u.apellido as apellidoasignado,
         us.nombre as nombresoli, us.apellido as apellidosoli from tickets t
         inner join estados e on e.id = t.estado_id

@@ -40,24 +40,26 @@
       </mat-form-field>
 
       <mat-form-field appearance="legacy" class="input3">
-        <mat-label>Fecha de Compromiso</mat-label>
-        <input matInput type="date" formControlName="fecha_compromiso" >
-      </mat-form-field>
-      <mat-form-field appearance="legacy" class="input3">
-        <mat-label>Hora de Compromiso</mat-label>
-        <input matInput type="time" formControlName="hora_compromiso" >
-      </mat-form-field>
-
-
-      <mat-form-field appearance="legacy" class="input3">
-        <mat-label>Fecha de Resolución (Con el cliente)</mat-label>
+        <mat-label>Fecha de resolución comprometida con el cliente</mat-label>
         <input matInput type="date" formControlName="fecha_resolucion" >
       </mat-form-field>
 
       <mat-form-field appearance="legacy" class="input3">
-        <mat-label>Hora de Resolución (Con el cliente)</mat-label>
-        <input matInput type="time" formControlName="hora_resolucion" >
+        <mat-label>Hora de resolución comprometida con el cliente</mat-label>
+        <input matInput type="time" formControlName="hora_resolucion">
       </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Fecha de compromiso interno (menor a la fecha de resolución)</mat-label>
+        <input matInput type="date" formControlName="fecha_compromiso" >
+      </mat-form-field>
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Hora de compromiso interno (menor a la hora de resolución)</mat-label>
+        <input matInput type="time" formControlName="hora_compromiso" >
+      </mat-form-field>
+
+
+
 
 
 

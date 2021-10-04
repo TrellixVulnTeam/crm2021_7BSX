@@ -66,4 +66,11 @@ export class EventosService {
     return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarEvento', evento, httpOptions)
     .pipe(map(data => data as Eventos ));
   }
+
+  public getDetalleEvento(evt: Eventos): Observable<Eventos[]> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getDetalleEvento', evt, httpOptions)
+    .pipe(map(data => data as unknown as Eventos[] ));
+  }
+
+
 }

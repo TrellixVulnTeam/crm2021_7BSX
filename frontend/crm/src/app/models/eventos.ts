@@ -19,4 +19,10 @@ export class Eventos {
   public usuario_creacion!: string;
   public usuario_crm!: string;
   public fecha_creacionD!: string;
+  public titulo_atn!: string;
+  public num_suministro!: string;
+  public fecha_resolucionF!: string;
+  public fecha_compromisoF!: string;
+
+
 }

@@ -9,14 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubirArchivosComponent } from '../atenciones/subir-archivos/subir-archivos.component';
 import { AtencionesModule } from '../atenciones/atenciones.module';
 import { TicketsModule } from '../tickets/tickets.module';
-import { DetallesComponent } from './detalles/detalles.component';
+import { DetallesEventosComponent } from './detalles-eventos/detalles-eventos.component';
 
 
 @NgModule({
   declarations: [
     EventosComponent,
     ModalEventoComponent,
-    DetallesComponent
+    DetallesEventosComponent
   ],
   imports: [
     CommonModule,

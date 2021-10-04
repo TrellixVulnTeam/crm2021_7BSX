@@ -61,6 +61,7 @@ Route::post('getDetalleAtencion', 'AtencionesController@getDetalleAtencion');
 Route::post('getAllEventos', 'EventosController@getAllEventos');
 Route::post('guardarEvento', 'EventosController@guardarEvento');
 Route::post('guardarArchivosEvt', 'EventosController@guardarArchivosEvt');
+Route::post('getDetalleEvento', 'EventosController@getDetalleEvento');
 
 
 //rutas para tickets

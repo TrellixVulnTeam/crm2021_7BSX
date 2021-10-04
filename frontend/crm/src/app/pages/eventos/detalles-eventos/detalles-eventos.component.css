@@ -49,7 +49,6 @@ form{
 
 .notfound{
   margin: auto !important;
-  box-shadow: none !important;
 }
 
 table{
@@ -79,18 +78,12 @@ tr > th{
 
 .input3{
   margin-left: 2% !important;
-  width: 42% !important;
-}
-
-.input6{
-  margin-left: 2% !important;
-  width: 95% !important;
+  width: 45% !important;
 }
 
 .input4{
   margin-left: 2% !important;
-  width: 45% !important;
-  margin-top: 15px !important;
+  width: 65% !important;
 }
 
 .form_atencion{
@@ -117,3 +110,6 @@ mat-form-field{
 .icon{
   color: black !important;
 }
+
+
+
