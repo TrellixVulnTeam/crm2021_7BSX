@@ -226,7 +226,7 @@ class AtencionesController extends Controller
 
             $id = $request["atencion_id"];
 
-            $atenciones  = DB::connection('comanda')->select("
+            $atenciones  = json_encode(DB::connection('comanda')->select("
             SELECT c.*,case when c.atencion_cerrada = 'S'
             then 'Cerrada'
             else
@@ -239,10 +239,14 @@ class AtencionesController extends Controller
             LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
             LEFT JOIN comanda_db.dbo.users u on u.alias = c.usuario_creacion 
                 WHERE c.id ='".$id."'
-            ");
+            "));
    
-           return response()->json($atenciones);
-
+            $arrayJson = [];
+            foreach (json_decode($atenciones, true) as $value){
+                $arrayJson = $value;
+            }
+    
+            return $arrayJson;
         }
 }
 

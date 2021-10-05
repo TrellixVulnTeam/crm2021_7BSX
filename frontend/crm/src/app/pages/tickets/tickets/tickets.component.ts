@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
+import { Tickets } from 'src/app/models/tickets';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { EventosService } from 'src/app/services/eventos.service';
@@ -12,6 +13,7 @@ import { GlobalService } from 'src/app/services/global.service';
 import { TicketsService } from 'src/app/services/tickets.service';
 import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
 import { DetallesEventosComponent } from '../../eventos/detalles-eventos/detalles-eventos.component';
+import { DetallesTicketsComponent } from '../detalles-tickets/detalles-tickets.component';
 
 @Component({
   selector: 'app-tickets',
@@ -21,7 +23,7 @@ import { DetallesEventosComponent } from '../../eventos/detalles-eventos/detalle
 export class TicketsComponent implements OnInit {
   user: Usuario = new Usuario();
   texto:any;
-  displayedColumns: string[] = ['idAte',  'evento_id', 'id' , 'nombreasignado', 'nombresoli','descripcion','fecha_creacionD', 'estado', 'Acciones'];
+  displayedColumns: string[] = ['atencion_id',  'evento_id', 'id' , 'nombreasignado', 'nombresoli','descripcion','fecha_creacionD', 'estado', 'Acciones'];
   dataSource_tckTodos:any = new MatTableDataSource<any>([]);
   dataSource_tckGenerados:any = new MatTableDataSource<any>([]);
   dataSource_tckProResolucion:any = new MatTableDataSource<any>([]);
@@ -194,6 +196,14 @@ verDetalleEvento(evento: Eventos){
     }
   );
 
+}
+
+
+verDetalleTicket(ticket: Tickets){
+  this.dialog.open(DetallesTicketsComponent,{
+    data: {detalles_ticket: ticket},
+    width: '80%',
+  });
 }
 
 

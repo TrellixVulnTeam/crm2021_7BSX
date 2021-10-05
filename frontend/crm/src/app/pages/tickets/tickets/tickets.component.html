@@ -16,9 +16,9 @@
 
       <table mat-table [dataSource]="dataSource_tckGenerados"  >
 
-        <ng-container matColumnDef="idAte">
+        <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención</th>
-          <td mat-cell *matCellDef="let row"> {{row.idAte}}
+          <td mat-cell *matCellDef="let row"> {{row.atencion_id}}
             <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
             matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
@@ -36,7 +36,10 @@
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.id}}
+            <button mat-mini-fab color="warn" matTooltip="Detalles del ticket"
+            matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -69,11 +72,8 @@
         </ng-container>
 
         <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <th mat-header-cell *matHeaderCellDef>  </th>
           <td mat-cell *matCellDef="let row">
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
           </td>
         </ng-container>
 
@@ -99,9 +99,9 @@
 
       <table mat-table [dataSource]="dataSource_tckProResolucion"  >
 
-        <ng-container matColumnDef="idAte">
+        <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención</th>
-          <td mat-cell *matCellDef="let row"> {{row.idAte}}
+          <td mat-cell *matCellDef="let row"> {{row.atencion_id}}
             <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
             matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
@@ -118,7 +118,10 @@
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.id}}
+            <button mat-mini-fab color="warn" matTooltip="Detalles del ticket"
+            matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -151,11 +154,8 @@
         </ng-container>
 
         <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
           </td>
         </ng-container>
 
@@ -184,9 +184,9 @@
 
       <table mat-table [dataSource]="dataSource_tckSolucionados"  >
 
-        <ng-container matColumnDef="idAte">
+        <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención</th>
-          <td mat-cell *matCellDef="let row"> {{row.idAte}}
+          <td mat-cell *matCellDef="let row"> {{row.atencion_id}}
             <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
             matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
@@ -203,7 +203,10 @@
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.id}}
+            <button mat-mini-fab color="warn" matTooltip="Detalles del ticket"
+            matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -236,11 +239,8 @@
         </ng-container>
 
         <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let row">
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
           </td>
         </ng-container>
 
@@ -266,9 +266,9 @@
 
       <table mat-table [dataSource]="dataSource_tckRechazados"  >
 
-        <ng-container matColumnDef="idAte">
+        <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención</th>
-          <td mat-cell *matCellDef="let row"> {{row.idAte}}
+          <td mat-cell *matCellDef="let row"> {{row.atencion_id}}
             <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
             matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
@@ -344,9 +344,9 @@
 
     <table mat-table [dataSource]="dataSource_tckCerrados"  >
 
-      <ng-container matColumnDef="idAte">
+      <ng-container matColumnDef="atencion_id">
         <th mat-header-cell *matHeaderCellDef> ID Atención</th>
-        <td mat-cell *matCellDef="let row"> {{row.idAte}}
+        <td mat-cell *matCellDef="let row"> {{row.atencion_id}}
           <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
             matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
         </td>
@@ -363,7 +363,10 @@
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.id}}
+          <button mat-mini-fab color="warn" matTooltip="Detalles del ticket"
+          matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="nombreasignado">
@@ -396,11 +399,8 @@
       </ng-container>
 
       <ng-container matColumnDef="Acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let row">
-          <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
         </td>
       </ng-container>
 
@@ -427,9 +427,9 @@
 
       <table mat-table [dataSource]="dataSource_tckTodos"  >
 
-        <ng-container matColumnDef="idAte">
+        <ng-container matColumnDef="atencion_id">
           <th mat-header-cell *matHeaderCellDef> ID Atención</th>
-          <td mat-cell *matCellDef="let row"> {{row.idAte}}
+          <td mat-cell *matCellDef="let row"> {{row.atencion_id}}
             <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
             matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
@@ -446,7 +446,10 @@
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.id}}
+            <button mat-mini-fab color="warn" matTooltip="Detalles del ticket"
+            matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -479,11 +482,8 @@
         </ng-container>
 
         <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let row">
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
           </td>
         </ng-container>
 

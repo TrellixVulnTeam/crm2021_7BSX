@@ -16,7 +16,7 @@ export class DetallesEventosComponent implements OnInit {
 
   form_evento: FormGroup;
   user: Usuario = new Usuario();
-  eventos_obj: Eventos[] = [];
+  eventos_obj: Eventos = new Eventos();
 
   constructor( public modal_evento: MatDialogRef<DetallesEventosComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   private router: Router, private _snackBar: MatSnackBar,) {

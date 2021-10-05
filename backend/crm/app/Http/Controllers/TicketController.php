@@ -19,15 +19,18 @@ class TicketController extends Controller
         $tickets = DB::connection('comanda')->select("
         select t.*,e.nombre as estado,
         convert(varchar(10),t.fechasolicitud, 103) as fecha_creacionD,
-        (select a.id from crm_atenciones a 
-        inner join crm_eventos ev on ev.atencion_id = a.id
+        convert(varchar(10),t.fechasolaprox, 103) as fechasolaproxD,
+        substring(convert(varchar,t.fechasolaprox, 114),1,5) as horaAproxD,
+        (select ev.id from  crm_eventos ev 
         inner join tickets tc on tc.evento_id = ev.id
-        where tc.id = t.id) as idAte,
+        where tc.id = t.id) as evento_id,
         (select a.id from crm_atenciones a 
         inner join crm_eventos ev on ev.atencion_id = a.id
         inner join tickets tc on tc.evento_id = ev.id
         where tc.id = t.id) as atencion_id,
         u.nombre as nombreasignado, u.apellido as apellidoasignado,
+        u.nombre +' '+ u.apellido as asignado,
+        us.nombre +' '+ us.apellido as solicitante,
         us.nombre as nombresoli, us.apellido as apellidosoli from tickets t
         inner join estados e on e.id = t.estado_id
         inner join users u on u.id = t.us_asignado
@@ -76,6 +79,34 @@ class TicketController extends Controller
     }
 
 
+    public function getDetalleTicket(Request $request){
+
+
+        $id = $request["id"];
+
+        $tickets = DB::connection('comanda')->select("
+        select t.*,e.nombre as estado,
+        convert(varchar(10),t.fechasolicitud, 103) as fecha_creacionD,
+        convert(varchar(10),t.fechasolaprox, 103) as fechasolaproxD,
+        substring(convert(varchar,t.fechasolaprox, 114),1,5) as horaAproxD,
+        (select ev.id from  crm_eventos ev 
+        inner join tickets tc on tc.evento_id = ev.id
+        where tc.id = t.id) as evento_id,
+        (select a.id from crm_atenciones a 
+        inner join crm_eventos ev on ev.atencion_id = a.id
+        inner join tickets tc on tc.evento_id = ev.id
+        where tc.id = t.id) as atencion_id,
+        u.nombre +' '+ u.apellido as apellidoasignado,
+        us.nombre as nombresoli, us.apellido as apellidosoli from tickets t
+        inner join estados e on e.id = t.estado_id
+        inner join users u on u.id = t.us_asignado
+        inner join users us on us.id = t.us_solicitante 
+        where t.id = ".$id ."
+                ");
+
+        return response()->json($tickets);
+
+    }
 
 
 }

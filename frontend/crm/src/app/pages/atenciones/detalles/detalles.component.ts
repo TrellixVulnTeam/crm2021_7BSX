@@ -22,7 +22,7 @@ export class DetallesComponent implements OnInit {
   list_tipo_atenciones : Atenciones[] = [];
   tipo = 'atencion';
   tipo_atencion = '';
-  arreglo_atenciones: Atenciones[] = [];
+  arreglo_atenciones: Atenciones = new Atenciones();
   atencion_id : Atenciones = new Atenciones()
 
 
@@ -52,8 +52,6 @@ export class DetallesComponent implements OnInit {
   ngOnInit(): void {
 
     this.arreglo_atenciones = this.data.datos_atencion;
-
-    console.log(this.arreglo_atenciones);
 
     if(localStorage.getItem('usuario_crm') !== null){
 

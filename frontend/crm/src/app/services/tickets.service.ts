@@ -84,4 +84,9 @@ export class TicketsService {
     .pipe(map(data => data as Tickets ));
   }
 
+  public getDetalleTicket(ticket: Tickets): Observable<Tickets[]> {
+    return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'getDetalleTicket', ticket, httpOptions)
+    .pipe(map(data => data as unknown as Tickets[] ));
+  }
+
 }

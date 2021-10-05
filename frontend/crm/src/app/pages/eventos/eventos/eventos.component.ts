@@ -168,14 +168,12 @@ verDetalleAtencion(atencion: Atenciones){
 
 
 verDetalleEvento(evento: Eventos){
-  this.eventosService.getDetalleEvento(evento).subscribe(
-    data=>{
+
       this.dialog.open(DetallesEventosComponent,{
-        data: {datos_evento: data},
+        data: {datos_evento: evento},
         width: '80%',
       });
-    }
-  );
+
 
 }
 

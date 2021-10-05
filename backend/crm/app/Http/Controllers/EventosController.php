@@ -23,6 +23,8 @@ class EventosController extends Controller
          convert(varchar(10),e.fecha_creacion, 103) as fecha_creacionD,
          (select count(id) from tickets where evento_id = e.id
          and estado_id != 9) as conteoTickets,
+         convert(varchar(10),e.fecha_compromiso,103) as fecha_compromisoF,
+         convert(varchar(10),e.fecha_resolucion,103) as fecha_resolucionF,
          (select alias from comanda_db.dbo.users where id = e.usuario_crm )
           as usuario_creacion from crm_eventos e
          inner join crm_estados_eventos as estado on estado.id = e.estado
@@ -33,6 +35,8 @@ class EventosController extends Controller
          e.id as evento_id,
          convert(varchar(10),e.fecha_creacion, 103) as fecha_creacionD,
          (select count(id) from tickets where evento_id = e.id and estado_id != 9)  as conteoTickets,
+         convert(varchar(10),e.fecha_compromiso,103) as fecha_compromisoF,
+         convert(varchar(10),e.fecha_resolucion,103) as fecha_resolucionF,
            (select alias from comanda_db.dbo.users where id = e.usuario_crm ) as usuario_creacion from 
            comanda_db.dbo.crm_eventos e
            inner join comanda_db.dbo.crm_clientes c on c.empresa = e.cliente
@@ -46,6 +50,8 @@ class EventosController extends Controller
          e.id as evento_id,
          convert(varchar(10),e.fecha_creacion, 103) as fecha_creacionD,
          (select count(id) from tickets where evento_id = e.id) as conteoTickets,
+         convert(varchar(10),e.fecha_compromiso,103) as fecha_compromisoF,
+         convert(varchar(10),e.fecha_resolucion,103) as fecha_resolucionF,
          (select alias from comanda_db.dbo.users where id = e.usuario_crm ) as usuario_creacion from 
          comanda_db.dbo.crm_eventos e
          inner join comanda_db.dbo.crm_clientes c on c.empresa = e.cliente
@@ -135,7 +141,7 @@ class EventosController extends Controller
         $id = $request["evento_id"];
 
          //conexion con COMANDA
-         $eventos = DB::connection('comanda')->select("
+         $eventos = json_encode(DB::connection('comanda')->select("
          select e.*, estado.nombre as estado,e.eventoTitulo as evTitulo,
          convert(varchar(10),e.fecha_creacion, 103) as fecha_creacionD,
          (select count(id) from tickets where evento_id = e.id
@@ -148,10 +154,16 @@ class EventosController extends Controller
          inner join comanda_db.dbo.users u on u.id = e.usuario_crm
          where e.id = ".$id."
        
-        ");
+        "));
  
+
+        $arrayJson = [];
+        foreach (json_decode($eventos, true) as $value){
+            $arrayJson = $value;
+        }
+
+        return $arrayJson;
  
-         return response()->json($eventos);
 
     }
 

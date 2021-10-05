@@ -1,50 +1,50 @@
-<h2 mat-dialog-title *ngFor="let evt of eventos_obj"><b>Detalles del evento N°:</b> {{evt.id}}</h2>
-<h2 mat-dialog-title *ngFor="let evt of eventos_obj"><b>Título del evento:</b> {{evt.eventoTitulo}}</h2>
+<h2 mat-dialog-title ><b>Detalles del evento N°:</b> {{eventos_obj.id}}</h2>
+<h2 mat-dialog-title ><b>Título del evento:</b> {{eventos_obj.eventoTitulo}}</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-content>
 
   <mat-tab-group>
     <mat-tab label="Detalles generales del evento" class="tabs">
 
-      <form class="form_evento" [formGroup]="form_evento" *ngFor="let evt of eventos_obj">
+      <form class="form_evento" [formGroup]="form_evento" >
         <br>
         <mat-form-field appearance="legacy" class="input2">
           <mat-label>N° Suministro</mat-label>
-          <input readonly matInput type="text"  formControlName="suministro" [(ngModel)]="evt.num_suministro">
+          <input readonly matInput type="text"  formControlName="suministro" [(ngModel)]="eventos_obj.num_suministro">
         </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>ID de atención: </mat-label>
             <input readonly  type="hidden"  formControlName="usuario_crm" [(ngModel)]="user.id">
-            <input readonly matInput type="text"  formControlName="atencion_id" [(ngModel)]="evt.id">
+            <input readonly matInput type="text"  formControlName="atencion_id" [(ngModel)]="eventos_obj.id">
           </mat-form-field>
 
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>Cliente:</mat-label>
-            <input readonly matInput type="text" formControlName="cliente"  [(ngModel)]="evt.cliente">
+            <input readonly matInput type="text" formControlName="cliente"  [(ngModel)]="eventos_obj.cliente">
           </mat-form-field>
 
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Título del evento</mat-label>
-            <textarea readonly rows="3"  matInput formControlName="titulo_evt" autocomplete="off" [(ngModel)]="evt.eventoTitulo"></textarea>
+            <textarea readonly rows="3"  matInput formControlName="titulo_evt" autocomplete="off" [(ngModel)]="eventos_obj.eventoTitulo"></textarea>
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Descripción del evento</mat-label>
-            <textarea readonly matInput  maxlength="50" autocomplete="off" formControlName="descripcion_evt" [(ngModel)]="evt.descripcion"></textarea>
+            <textarea readonly matInput  maxlength="50" autocomplete="off" formControlName="descripcion_evt" [(ngModel)]="eventos_obj.descripcion"></textarea>
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Fecha de Compromiso</mat-label>
-            <input readonly matInput type="text" formControlName="fecha_compromiso" [(ngModel)]="evt.fecha_compromisoF">
+            <input readonly matInput type="text" formControlName="fecha_compromiso" [(ngModel)]="eventos_obj.fecha_compromisoF">
           </mat-form-field>
 
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Fecha de Resolución (Con el cliente)</mat-label>
-            <input readonly matInput type="text" formControlName="fecha_resolucion" [(ngModel)]="evt.fecha_resolucionF">
+            <input readonly matInput type="text" formControlName="fecha_resolucion" [(ngModel)]="eventos_obj.fecha_resolucionF">
           </mat-form-field>
 
       </form>

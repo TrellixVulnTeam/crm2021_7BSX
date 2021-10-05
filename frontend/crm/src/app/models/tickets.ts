@@ -36,4 +36,9 @@ export class Tickets {
   public us_asignado!: string;
   public us_solicitante!: string;
   public fecha_creacionD!: string;
+  public atencion_id!: string;
+  public fechasolaproxD!:string;
+  public horaAproxD!:string;
+  public asignado!:string;
+  public solicitante!:string;
 }

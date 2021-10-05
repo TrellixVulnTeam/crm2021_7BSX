@@ -1,53 +1,53 @@
 
-<h2 mat-dialog-title *ngFor="let atn of arreglo_atenciones"><b>Detalle de atención :</b> {{atn.id}}</h2>
-<h2 mat-dialog-title *ngFor="let atn of arreglo_atenciones"><b>Título de atención :</b> {{atn.titulo_atn}}</h2>
+<h2 mat-dialog-title><b>Detalle de atención :</b> {{arreglo_atenciones.id}}</h2>
+<h2 mat-dialog-title><b>Título de atención :</b> {{arreglo_atenciones.titulo_atn}}</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-content>
 
   <mat-tab-group>
     <mat-tab label="Detalles generales de la atención" class="tabs">
-      <form class="form_atencion" [formGroup]="form_atencion" *ngFor="let atn of arreglo_atenciones">
+      <form class="form_atencion" [formGroup]="form_atencion">
 
         <mat-form-field appearance="legacy" class="input3">
           <mat-label>Título de atención</mat-label>
-          <textarea matInput placeholder="Título de atención" maxlength="35" formControlName="titulo_atn"
-          [(ngModel)]="atn.titulo_atn" autocomplete="off"></textarea>
+          <textarea readonly matInput placeholder="Título de atención" maxlength="35" formControlName="titulo_atn"
+          [(ngModel)]="arreglo_atenciones.titulo_atn" autocomplete="off"></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="legacy" class="input3">
           <mat-label>Descripción de atención</mat-label>
-          <textarea matInput placeholder="Descripción de atención" formControlName="descripcion_atencion"
-          [(ngModel)]="atn.descripcion" autocomplete="off"></textarea>
+          <textarea readonly matInput placeholder="Descripción de atención" formControlName="descripcion_atencion"
+          [(ngModel)]="arreglo_atenciones.descripcion" autocomplete="off"></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="legacy" class="input2" *ngIf="atn.num_suministro == null">
+        <mat-form-field appearance="legacy" class="input2" *ngIf="arreglo_atenciones.num_suministro == null">
           <mat-label>N° Suministro</mat-label>
-            <input readonly matInput type="text" [(ngModel)]="atn.num_suministro" formControlName="suministro">
+            <input readonly matInput type="text" [(ngModel)]="arreglo_atenciones.num_suministro" formControlName="suministro">
         </mat-form-field>
 
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>Cliente: </mat-label>
-            <input readonly matInput type="text" [(ngModel)]="atn.cliente" formControlName="cliente"
+            <input readonly matInput type="text" [(ngModel)]="arreglo_atenciones.cliente" formControlName="cliente"
             autocomplete="off">
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>Contacto</mat-label>
-              <input readonly matInput  type="text" [(ngModel)]="atn.contacto" formControlName="contacto"
+              <input readonly matInput  type="text" [(ngModel)]="arreglo_atenciones.contacto" formControlName="contacto"
               autocomplete="off">
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>Teléfono de contacto</mat-label>
-            <input matInput matInput type="number" formControlName="telefono" [(ngModel)]="atn.telefono"
+            <input readonly matInput type="number" formControlName="telefono" [(ngModel)]="arreglo_atenciones.telefono"
             autocomplete="off">
           </mat-form-field>
 
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Tipo de atención</mat-label>
-            <mat-select formControlName="tipo_atencion" (ngModelChange)="mostrarDatos()"  [(ngModel)]="atn.id_tipo_atencion">
+            <mat-select readonly formControlName="tipo_atencion" (ngModelChange)="mostrarDatos()"  [(ngModel)]="arreglo_atenciones.id_tipo_atencion">
               <mat-option  *ngFor="let ob of list_tipo_atenciones" [value]="ob.id">
                 {{ob.nombre}}
               </mat-option>
@@ -57,7 +57,7 @@
 
           <mat-form-field appearance="legacy" class="input3">
             <mat-label>Motivo de atención</mat-label>
-            <mat-select formControlName="motivo_atencion" [(ngModel)]="atn.id_motivo_atencion">
+            <mat-select readonly formControlName="motivo_atencion" [(ngModel)]="arreglo_atenciones.id_motivo_atencion">
               <mat-option  *ngFor="let ob of list_motivo_atenciones" [value]="ob.id">
                 {{ob.nombre}}
               </mat-option>
@@ -67,38 +67,38 @@
 
           <mat-form-field appearance="legacy" class="input4" *ngIf="tipo_atencion === 'email'">
             <mat-label>Email</mat-label>
-            <input  matInput type="text" formControlName="email" placeholder="Email" autocomplete="off"
-            [(ngModel)]="atn.correo" >
+            <input readonly matInput type="text" formControlName="email" placeholder="Email" autocomplete="off"
+            [(ngModel)]="arreglo_atenciones.correo" >
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input4" *ngIf="tipo_atencion === 'fax'">
             <mat-label>Fax</mat-label>
-            <input  matInput type="text" formControlName="fax" placeholder="Fax" autocomplete="off"
-            [(ngModel)]="atn.fax" >
+            <input readonly matInput type="text" formControlName="fax" placeholder="Fax" autocomplete="off"
+            [(ngModel)]="arreglo_atenciones.fax" >
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input4" *ngIf="tipo_atencion === 'whatsapp'">
             <mat-label>Whatsapp</mat-label>
-            <input  matInput type="text" formControlName="whatsapp" placeholder="Whatsapp" autocomplete="off"
-            [(ngModel)]="atn.whatsapp" >
+            <input readonly matInput type="text" formControlName="whatsapp" placeholder="Whatsapp" autocomplete="off"
+            [(ngModel)]="arreglo_atenciones.whatsapp" >
           </mat-form-field>
 
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>Estado: </mat-label>
-            <input readonly matInput type="text" [(ngModel)]="atn.estado" formControlName="estado"
+            <input readonly matInput type="text" [(ngModel)]="arreglo_atenciones.estado" formControlName="estado"
             autocomplete="off">
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>Usuario creación: </mat-label>
-            <input readonly matInput type="text" [(ngModel)]="atn.nomUsuario" formControlName="nomUsuario"
+            <input readonly matInput type="text" [(ngModel)]="arreglo_atenciones.nomUsuario" formControlName="nomUsuario"
             autocomplete="off">
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input2">
             <mat-label>Fecha creación: </mat-label>
-            <input readonly matInput type="text" [(ngModel)]="atn.fechaC" formControlName="fecha_creacion"
+            <input readonly matInput type="text" [(ngModel)]="arreglo_atenciones.fechaC" formControlName="fecha_creacion"
             autocomplete="off">
           </mat-form-field>
       </form>
@@ -112,8 +112,5 @@
 
 </div>
 
-<div mat-dialog-actions>
-  <button mat-raised-button color="primary" class="lg_btn" >Guardar datos modificados</button>
 
-</div>
 
