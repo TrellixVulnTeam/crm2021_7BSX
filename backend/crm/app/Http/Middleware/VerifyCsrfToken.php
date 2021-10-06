@@ -54,6 +54,10 @@ class VerifyCsrfToken extends BaseVerifier
         'guardarTicketOrder',
         'getDetalleAtencion',
         'getDetalleEvento',
-        'getDetalleTicket'
+        'getDetalleTicket',
+        'getEventosAsociados',
+        'getTicketsAsociados',
+        'getAdjuntosAtencion',
+        'getAdjuntosEventos'
     ];
 }

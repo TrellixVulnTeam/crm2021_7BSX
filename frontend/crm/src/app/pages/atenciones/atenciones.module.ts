@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubirArchivosComponent } from './subir-archivos/subir-archivos.component';
 import { ModalAtencionSuministroComponent } from './modal-atencion-suministro/modal-atencion-suministro.component';
 import { DetallesComponent } from './detalles/detalles.component';
+import { VerArchivosComponent } from './ver-archivos/ver-archivos.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DetallesComponent } from './detalles/detalles.component';
     ModalAtencionComponent,
     SubirArchivosComponent,
     ModalAtencionSuministroComponent,
-    DetallesComponent
+    DetallesComponent,
+    VerArchivosComponent
   ],
   imports: [
     CommonModule,

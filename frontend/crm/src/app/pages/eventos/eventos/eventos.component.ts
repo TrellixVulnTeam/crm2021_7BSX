@@ -3,9 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
+import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { EventosService } from 'src/app/services/eventos.service';
 import { GlobalService } from 'src/app/services/global.service';
@@ -30,6 +32,7 @@ export class EventosComponent implements OnInit {
   dataSource_evtAbiertos:any = new MatTableDataSource<any>([]);
   dataSource_evtProResolucion:any = new MatTableDataSource<any>([]);
   dataSource_evtCerrados:any = new MatTableDataSource<any>([]);
+  adjuntos: Archivos[] = [];
 
   datos_atn: Atenciones[] = [];
 
@@ -39,7 +42,7 @@ export class EventosComponent implements OnInit {
   @ViewChild('paginator4') paginator4: MatPaginator | undefined;
 
   constructor( private global: GlobalService, private router: Router, private eventosService: EventosService,
-    public dialog: MatDialog, private atencionService: AtencionesService) { }
+    public dialog: MatDialog, private atencionService: AtencionesService, private adjuntoService: ArchivosService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -156,23 +159,40 @@ generarTicket(eve: Eventos){
 
 verDetalleAtencion(atencion: Atenciones){
 
-  this.atencionService.getDetalleAtencion(atencion).subscribe(
+
+  let datos: any;
+  datos = atencion;
+
+  this.adjuntoService.getAdjuntosAtencion(datos).subscribe(
     data=>{
-      this.dialog.open(DetallesComponent,{
-        data: {datos_atencion: data},
-        width: '80%',
-      });
-    }
-  );
+      this.adjuntos = data;
+      this.atencionService.getDetalleAtencion(atencion).subscribe(
+        data=>{
+          this.dialog.open(DetallesComponent,{
+            data: {datos_atencion: data, datos_adjuntos: this.adjuntos},
+            width: '80%',
+          });
+        }
+      );
+    });
 }
 
 
 verDetalleEvento(evento: Eventos){
 
+  let datos: any;
+  datos = evento;
+
+  this.adjuntoService.getAdjuntosEventos(datos).subscribe(
+    data=>{
+      this.adjuntos = data;
       this.dialog.open(DetallesEventosComponent,{
-        data: {datos_evento: evento},
+        data: {datos_evento: evento, datos_adjuntos: this.adjuntos},
         width: '80%',
       });
+    });
+
+
 
 
 }

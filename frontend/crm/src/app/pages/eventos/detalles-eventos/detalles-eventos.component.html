@@ -51,26 +51,39 @@
     </mat-tab>
 
     <mat-tab label="Archivos adjuntos" class="tabs">
+      <br><br>
+      <h3>Adjuntos cargados al evento</h3>
+      <table class="tbl_archivos">
+        <thead>
+            <tr>
+              <th>Archivo</th>
+              <th>Descripción</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ad of datos_adjuntos">
+            <td>{{ad.adjunto}}</td>
+            <td>{{ad.descripcion}}</td>
+            <td>
+              <a   mat-mini-fab color="accent" matTooltip="Descargar Archivo" matTooltipPosition="above" [href]="rutaFile+ad.adjunto">
+                <mat-icon>cloud_download</mat-icon>
+              </a>
+              <button  mat-mini-fab color="basic" class="success" matTooltip="Ver Archivo" matTooltipPosition="above" (click)="verArchivo(ad)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </mat-tab>
 
   </mat-tab-group>
 
+</div>
 
-
-    <!-- <button mat-raised-button color="primary" class="lg_btn" (click)="guardarEvento()">Generar Evento</button>
-
-    <br><br>
-
-  <h2>Adjuntar archivos al evento</h2>
-
-  <mat-divider></mat-divider>
-
-   <app-subir-archivos [evento_id]="evento_id" [arreglo_evento]="arreglo_evento" [tipo]="tipo"></app-subir-archivos>
-
-  <mat-divider></mat-divider>
-
-<div mat-dialog-actions>
-
-</div>-->
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" class="action"  (click)="Cerrar()"> Cerrar</button>
+  </div>
 
 

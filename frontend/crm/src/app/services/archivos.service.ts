@@ -42,4 +42,19 @@ export class ArchivosService {
     return this.http.post<Archivos[]>(this.globalservice.getUrlBackEnd() + 'guardarArchivosEvt', archivo, httpOptions)
     .pipe(map(data => data as Archivos[] ));
   }
+
+
+  public getAdjuntosAtencion(id_atn: Archivos): Observable<Archivos[]> {
+    return this.http.post<Archivos>(this.globalservice.getUrlBackEnd() + 'getAdjuntosAtencion', id_atn, httpOptions)
+    .pipe(map(data => data as unknown as Archivos[] ));
+  }
+  public getAdjuntosEventos(id_atn: Archivos): Observable<Archivos[]> {
+    return this.http.post<Archivos>(this.globalservice.getUrlBackEnd() + 'getAdjuntosEventos', id_atn, httpOptions)
+    .pipe(map(data => data as unknown as Archivos[] ));
+  }
+
+
+
+
+
 }

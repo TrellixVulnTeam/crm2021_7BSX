@@ -51,24 +51,8 @@ form{
   margin: auto !important;
 }
 
-table{
-  width: 80% !important;
-  margin: auto !important;
-}
 
-.tbl_cliente{
-  width: 90% !important;
-  margin: auto !important;
-}
-td{
-  text-align: center !important;
-  border-bottom: 1px solid #CFCCCC !important;
-}
 
-tr > th{
-  background-color:  #003F63 !important;
-  color:  white !important;;
-}
 
 
 .input2{
@@ -109,4 +93,34 @@ mat-form-field{
 
 .icon{
   color: black !important;
+}
+
+
+h2{
+  float: left !important;
+}
+
+.tbl_titulo{
+  margin: auto !important;
+  width: 90% !important;
+}
+
+.tbl_archivos{
+  margin: auto !important;
+  width: 60% !important;
+}
+.tbl_archivos tr > td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+
+}
+
+.tbl_archivos tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;
+  text-align: center !important;
+}
+
+h3{
+  margin-left: 5% !important;
 }

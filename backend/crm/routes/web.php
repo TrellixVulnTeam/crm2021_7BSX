@@ -55,20 +55,23 @@ Route::post('guardarAtencion', 'AtencionesController@guardarAtencion');
 Route::post('guardarArchivosAtn', 'AtencionesController@guardarArchivosAtn');
 Route::post('getAllAtenciones', 'AtencionesController@getAllAtenciones');
 Route::post('getDetalleAtencion', 'AtencionesController@getDetalleAtencion');
-
+Route::post('getAdjuntosAtencion', 'AtencionesController@getAdjuntosAtencion');
+Route::any('descargarArchivo', 'AtencionesController@descargarArchivo');
 
 //rutas para eventos
 Route::post('getAllEventos', 'EventosController@getAllEventos');
 Route::post('guardarEvento', 'EventosController@guardarEvento');
 Route::post('guardarArchivosEvt', 'EventosController@guardarArchivosEvt');
 Route::post('getDetalleEvento', 'EventosController@getDetalleEvento');
-
+Route::post('getEventosAsociados', 'EventosController@getEventosAsociados');
+Route::post('getAdjuntosEventos', 'EventosController@getAdjuntosEventos');
 
 //rutas para tickets
 Route::post('getAllTickets', 'TicketController@getAllTickets');
 Route::post('guardarTicket', 'TicketController@guardarTicket');
 Route::post('guardarTicketOrder', 'TicketController@guardarTicketOrder');
 Route::post('getDetalleTicket', 'TicketController@getDetalleTicket');
+Route::post('getTicketsAsociados', 'TicketController@getTicketsAsociados');
 
 //rutas para ordenes técnicas
 Route::get('getAllOrdenes', 'OrTecnicasController@getAllOrdenes');

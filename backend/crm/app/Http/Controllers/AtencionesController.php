@@ -248,6 +248,32 @@ class AtencionesController extends Controller
     
             return $arrayJson;
         }
+
+
+        public function getAdjuntosAtencion(Request $request){
+            $id = $request["atencion_id"];
+
+            //conexion con COMANDA
+            $adjuntos = DB::connection('comanda')->select("
+            select * from CRM_adjuntos where atencion_id = ".$id."
+          
+           ");
+    
+   
+           return response()->json($adjuntos);
+        }
+
+        public function descargarArchivo(Request $request){
+
+            $file = strtolower($request["ruta"]);
+    
+            if(file_exists(public_path('files/'.$file))){
+                return response()->download(public_path('files/'.$file));
+            }else{
+                return response()->json('Archivo no encontrado');
+            }
+            
+        }
 }
 
 

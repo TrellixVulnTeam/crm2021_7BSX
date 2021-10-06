@@ -20,7 +20,7 @@
     <ng-container matColumnDef="id" >
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let row1"> {{row1.id}}
-        <button mat-mini-fab color="primary" matTooltip="Detalles de la atención" matTooltipPosition="right"
+        <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right"
          (click)="verDetalleAtencion(row1)"><mat-icon>remove_red_eye</mat-icon></button>
       </td>
     </ng-container>
@@ -167,7 +167,7 @@
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let row"> {{row.id}}
-          <button mat-mini-fab color="primary" matTooltip="Detalles de la atención" matTooltipPosition="right"
+          <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right"
          (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
         </td>
       </ng-container>

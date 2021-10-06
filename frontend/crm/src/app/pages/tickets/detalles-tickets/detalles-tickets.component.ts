@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Archivos } from 'src/app/models/archivos';
 import { Eventos } from 'src/app/models/eventos';
 import { Tickets } from 'src/app/models/tickets';
 import { Usuario } from 'src/app/models/usuario';
+import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { EventosService } from 'src/app/services/eventos.service';
 import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
@@ -20,10 +22,11 @@ export class DetallesTicketsComponent implements OnInit {
   form_ticket : FormGroup;
   detalles_ticket: Tickets = new Tickets();
   user: Usuario = new Usuario();
+  adjuntos: Archivos[] = [];
 
-  constructor( public modal_evento: MatDialogRef<DetallesTicketsComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor( public modal_detalles: MatDialogRef<DetallesTicketsComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   private router: Router, private _snackBar: MatSnackBar,private atencionService: AtencionesService, private eventosService: EventosService,
-  public dialog: MatDialog) {
+  public dialog: MatDialog, private adjuntoService: ArchivosService ) {
     this.form_ticket = new FormGroup({
       //'codigo': new FormControl(''),
       'id_evento': new FormControl(''),
@@ -55,17 +58,26 @@ export class DetallesTicketsComponent implements OnInit {
 
 
   verDetalleEvento(){
-    let evento : any;
-    evento = this.detalles_ticket;
+    let datos: any;
+    datos = this.detalles_ticket;
 
-    this.eventosService.getDetalleEvento(evento).subscribe(
+
+    this.adjuntoService.getAdjuntosEventos(datos).subscribe(
+      data=>{
+        this.adjuntos = data;
+      });
+
+
+    this.eventosService.getDetalleEvento(datos).subscribe(
       data=>{
         this.dialog.open(DetallesEventosComponent,{
-          data: {datos_evento: data},
+          data: {datos_evento: data, datos_adjuntos: this.adjuntos},
           width: '80%',
         });
       }
     );
+
+
 
   }
 
@@ -73,13 +85,25 @@ export class DetallesTicketsComponent implements OnInit {
   verDetalleAtencion(){
     let atencion : any;
     atencion = this.detalles_ticket;
-    this.atencionService.getDetalleAtencion(atencion).subscribe(
+
+
+    this.adjuntoService.getAdjuntosAtencion(atencion).subscribe(
       data=>{
-        this.dialog.open(DetallesComponent,{
-          data: {datos_atencion: data},
-          width: '80%',
-        });
-      }
-    );
+        this.adjuntos = data;
+        this.atencionService.getDetalleAtencion(atencion).subscribe(
+          data=>{
+            this.dialog.open(DetallesComponent,{
+              data: {datos_atencion: data, datos_adjuntos: this.adjuntos},
+              width: '80%',
+            });
+          }
+        );
+      });
+
+  }
+
+
+  cerrar(){
+    this.modal_detalles.close()
   }
 }

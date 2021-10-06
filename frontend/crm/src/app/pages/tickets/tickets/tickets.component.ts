@@ -3,10 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
 import { Tickets } from 'src/app/models/tickets';
 import { Usuario } from 'src/app/models/usuario';
+import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { EventosService } from 'src/app/services/eventos.service';
 import { GlobalService } from 'src/app/services/global.service';
@@ -30,6 +32,7 @@ export class TicketsComponent implements OnInit {
   dataSource_tckSolucionados:any = new MatTableDataSource<any>([]);
   dataSource_tckRechazados:any = new MatTableDataSource<any>([]);
   dataSource_tckCerrados:any = new MatTableDataSource<any>([]);
+  adjuntos: Archivos[] = [];
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
   @ViewChild('paginator2') paginator2: MatPaginator | undefined;
@@ -39,7 +42,8 @@ export class TicketsComponent implements OnInit {
   @ViewChild('paginator6') paginator6: MatPaginator | undefined;
 
   constructor(private global: GlobalService, private router: Router, private ticketService: TicketsService,
-    private atencionService: AtencionesService, public dialog: MatDialog,private eventosService: EventosService,) { }
+    private atencionService: AtencionesService, public dialog: MatDialog,private eventosService: EventosService,
+    private adjuntoService: ArchivosService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -174,27 +178,38 @@ filterTable_tckCerrados(filterValue :string) {
 
 verDetalleAtencion(atencion: Atenciones){
 
-  this.atencionService.getDetalleAtencion(atencion).subscribe(
+
+  let datos: any;
+  datos = atencion;
+
+  this.adjuntoService.getAdjuntosAtencion(datos).subscribe(
     data=>{
-      this.dialog.open(DetallesComponent,{
-        data: {datos_atencion: data},
-        width: '80%',
-      });
-    }
-  );
+      this.adjuntos = data;
+      this.atencionService.getDetalleAtencion(atencion).subscribe(
+        data=>{
+          this.dialog.open(DetallesComponent,{
+            data: {datos_atencion: data, datos_adjuntos: this.adjuntos},
+            width: '80%',
+          });
+        }
+      );
+    });
 }
 
 
 
 verDetalleEvento(evento: Eventos){
-  this.eventosService.getDetalleEvento(evento).subscribe(
+  let datos: any;
+  datos = evento;
+
+  this.adjuntoService.getAdjuntosEventos(datos).subscribe(
     data=>{
+      this.adjuntos = data;
       this.dialog.open(DetallesEventosComponent,{
-        data: {datos_evento: data},
+        data: {datos_evento: evento, datos_adjuntos: this.adjuntos},
         width: '80%',
       });
-    }
-  );
+    });
 
 }
 

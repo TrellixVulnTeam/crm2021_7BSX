@@ -1,0 +1,32 @@
+table{
+  width: 95% !important;
+  margin: auto !important;
+}
+
+
+td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+
+}
+
+tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;
+  text-align: center !important;
+}
+
+h2{
+  margin-left: 3% !important;
+}
+.action{
+  margin-left: 3% !important;
+}
+
+mat-dialog-actions{
+  width: 100% !important;
+}
+
+mat-icon{
+  color: white !important;
+}

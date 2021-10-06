@@ -1,6 +1,23 @@
+<table class="tbl_titulo">
+  <tr>
+    <th> <h2 mat-dialog-title><b>Detalle de atención :</b> {{arreglo_atenciones.id}}</h2> </th>
 
-<h2 mat-dialog-title><b>Detalle de atención :</b> {{arreglo_atenciones.id}}</h2>
-<h2 mat-dialog-title><b>Título de atención :</b> {{arreglo_atenciones.titulo_atn}}</h2>
+    <th>
+      <button  mat-raised-button color="accent"   (click)="eventosAsociados()">
+        <mat-icon>remove_red_eye</mat-icon>  Eventos asociados a la atención N° {{arreglo_atenciones.id}}
+      </button>
+  </th>
+  </tr>
+  <tr>
+    <th>
+      <h2 mat-dialog-title><b>Título de atención :</b> {{arreglo_atenciones.titulo_atn}}</h2>
+    </th>
+  </tr>
+</table>
+
+
+
+
 <mat-divider></mat-divider>
 <div mat-dialog-content>
 
@@ -105,12 +122,39 @@
     </mat-tab>
 
     <mat-tab label="Archivos adjuntos" class="tabs">
+      <br><br>
+      <h3>Adjuntos cargados a la atención</h3>
+      <table class="tbl_archivos">
+        <thead>
+            <tr>
+              <th>Archivo</th>
+              <th>Descripción</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ad of datos_adjuntos">
+            <td>{{ad.adjunto}}</td>
+            <td>{{ad.descripcion}}</td>
+            <td>
+              <a   mat-mini-fab color="accent" matTooltip="Descargar Archivo" matTooltipPosition="above" [href]="rutaFile+ad.adjunto">
+                <mat-icon>cloud_download</mat-icon>
+              </a>
+              <button  mat-mini-fab color="basic" class="success" matTooltip="Ver Archivo" matTooltipPosition="above" (click)="verArchivo(ad)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </mat-tab>
     </mat-tab-group>
 
 
 
 </div>
-
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" class="action"  (click)="Cerrar()"> Cerrar</button>
+</div>
 
 

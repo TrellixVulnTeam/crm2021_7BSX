@@ -10,13 +10,15 @@ import { SubirArchivosComponent } from '../atenciones/subir-archivos/subir-archi
 import { AtencionesModule } from '../atenciones/atenciones.module';
 import { TicketsModule } from '../tickets/tickets.module';
 import { DetallesEventosComponent } from './detalles-eventos/detalles-eventos.component';
+import { EventosAsociadosComponent } from './eventos-asociados/eventos-asociados.component';
 
 
 @NgModule({
   declarations: [
     EventosComponent,
     ModalEventoComponent,
-    DetallesEventosComponent
+    DetallesEventosComponent,
+    EventosAsociadosComponent
   ],
   imports: [
     CommonModule,

@@ -1,13 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Clientes } from 'src/app/models/clientes';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { EventosService } from 'src/app/services/eventos.service';
+import { GlobalService } from 'src/app/services/global.service';
+import { EventosAsociadosComponent } from '../../eventos/eventos-asociados/eventos-asociados.component';
+import { VerArchivosComponent } from '../ver-archivos/ver-archivos.component';
 
 @Component({
   selector: 'app-detalles',
@@ -17,18 +22,19 @@ import { ClientesService } from 'src/app/services/clientes.service';
 export class DetallesComponent implements OnInit {
   form_atencion : FormGroup;
   user: Usuario = new Usuario();
-
+  datos_adjuntos: Archivos[] = [];
   list_motivo_atenciones : Atenciones[] = [];
   list_tipo_atenciones : Atenciones[] = [];
   tipo = 'atencion';
   tipo_atencion = '';
   arreglo_atenciones: Atenciones = new Atenciones();
   atencion_id : Atenciones = new Atenciones()
-
+  rutaFile!: string;
 
   constructor(public atencionService: AtencionesService,
-    public modal_atencion: MatDialogRef<DetallesComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService) {
+    public modal_atencion: MatDialogRef<DetallesComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private eventosService: EventosService,
+    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService, public dialog: MatDialog,
+    private url: GlobalService) {
     this.form_atencion = new FormGroup({
       'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -50,8 +56,11 @@ export class DetallesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.rutaFile = this.url.getUrlBackEnd()+'descargarArchivo?ruta=';
     this.arreglo_atenciones = this.data.datos_atencion;
+    this.datos_adjuntos = this.data.datos_adjuntos;
+
+    console.log(this.datos_adjuntos);
 
     if(localStorage.getItem('usuario_crm') !== null){
 
@@ -102,5 +111,39 @@ export class DetallesComponent implements OnInit {
   guardarAtencion(){
 
   }
+
+
+  eventosAsociados(){
+
+
+    let evento: any;
+    evento = this.arreglo_atenciones;
+
+    this.eventosService.getEventosAsociados(evento).subscribe(
+
+      data=>{
+        this.modal_atencion.close();
+        this.dialog.open(EventosAsociadosComponent,{
+          data: {datos_evento: data, datos_atencion: this.arreglo_atenciones},
+          width: '60%',
+        });
+      }
+    );
+  }
+
+
+  Cerrar(){
+    this.modal_atencion.close();
+  }
+
+
+  verArchivo(adjunto: Archivos){
+    this.dialog.open(VerArchivosComponent,{
+      data: {archivo: adjunto},
+      width: '80%',
+    });
+  }
+
+
 
 }

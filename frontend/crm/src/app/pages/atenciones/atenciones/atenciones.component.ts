@@ -3,8 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Usuario } from 'src/app/models/usuario';
+import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { ModalEventoComponent } from '../../eventos/modal-evento/modal-evento.component';
@@ -27,13 +29,16 @@ export class AtencionesComponent implements OnInit {
   texto1: any;
   texto2:any;
 
+  adjuntos: Archivos[] = [];
+
+
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
   @ViewChild('paginator2') paginator2: MatPaginator | undefined;
   @ViewChild('paginator3') paginator3: MatPaginator | undefined;
 
 
   constructor(public atencionService: AtencionesService, private router: Router, private global: GlobalService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, private adjuntoService: ArchivosService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('usuario_crm') !== null){
@@ -140,14 +145,24 @@ filterTable_atnCerradas(filterValue :string) {
 
   verDetalleAtencion(atencion: Atenciones){
 
-    this.atencionService.getDetalleAtencion(atencion).subscribe(
+    let datos: any;
+    datos = atencion;
+
+    this.adjuntoService.getAdjuntosAtencion(datos).subscribe(
       data=>{
-        this.dialog.open(DetallesComponent,{
-          data: {datos_atencion: data},
-          width: '80%',
-        });
-      }
-    );
+        this.adjuntos = data;
+        this.atencionService.getDetalleAtencion(atencion).subscribe(
+          data=>{
+            this.dialog.open(DetallesComponent,{
+              data: {datos_atencion: data, datos_adjuntos: this.adjuntos},
+              width: '80%',
+            });
+          }
+        );
+      });
+
+
+
   }
 
 }

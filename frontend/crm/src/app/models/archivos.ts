@@ -4,4 +4,5 @@ export class Archivos {
   public atencion_id!:number;
   public usuario_id!:number;
   public evento_id!:number;
+  public adjunto!:string;
 }

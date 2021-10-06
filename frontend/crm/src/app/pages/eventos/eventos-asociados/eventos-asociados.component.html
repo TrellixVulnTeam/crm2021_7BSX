@@ -1,0 +1,51 @@
+<h2 mat-dialog-title><b>Eventos asociados a la atención :</b> {{datos_atencion.id}}</h2>
+<h2 mat-dialog-title><b>Título de la atención :</b> {{datos_atencion.titulo_atn}}</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <br><br>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Usuario creación</th>
+          <th>Título</th>
+          <th>Fecha creación</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ev of datos_evento">
+          <td>{{ev.id}}
+
+            <button  mat-mini-fab color="basic" class="success" matTooltip="Detalles del evento" matTooltipPosition="above"
+            (click)="verDetalleEvento(ev)">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+          </td>
+          <td>{{ev.cliente}}</td>
+          <td>{{ev.usuario_creacion}}</td>
+          <td>{{ev.evTitulo}}</td>
+          <td>{{ev.fecha_creacionD}}</td>
+          <td>{{ev.estado}} </td>
+          <td>
+
+
+            <button  mat-mini-fab color="accent" matTooltip="Tickets asociados al evento" matTooltipPosition="above"
+            (click)="verTicketsAsociados(ev)">
+              <mat-icon>list</mat-icon>
+            </button>
+
+
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+    <br><br>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" class="action"  (click)="volverAtencion()"><mat-icon>backspace</mat-icon> Volver a detalle de atención</button>
+</div>

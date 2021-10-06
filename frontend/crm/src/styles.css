@@ -83,3 +83,9 @@ td{
 mat-tab > label{
   font-family: 'Montserrat', sans-serif !important;
 }
+
+
+.success{
+  background-color: #22bb33 !important;
+  color: white !important;
+}

@@ -72,5 +72,10 @@ export class EventosService {
     .pipe(map(data => data as unknown as Eventos[] ));
   }
 
+  public getEventosAsociados(evt: Eventos): Observable<Eventos[]> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getEventosAsociados', evt, httpOptions)
+    .pipe(map(data => data as unknown as Eventos[] ));
+  }
+
 
 }

@@ -1,10 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Archivos } from 'src/app/models/archivos';
 import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
+import { GlobalService } from 'src/app/services/global.service';
+import { VerArchivosComponent } from '../../atenciones/ver-archivos/ver-archivos.component';
 
 
 @Component({
@@ -13,13 +16,14 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./detalles-eventos.component.css']
 })
 export class DetallesEventosComponent implements OnInit {
-
+  datos_adjuntos: Archivos[] = [];
   form_evento: FormGroup;
   user: Usuario = new Usuario();
   eventos_obj: Eventos = new Eventos();
+  rutaFile!: string;
 
   constructor( public modal_evento: MatDialogRef<DetallesEventosComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-  private router: Router, private _snackBar: MatSnackBar,) {
+  private router: Router, private _snackBar: MatSnackBar,private url: GlobalService, public dialog: MatDialog,) {
     this.form_evento = new FormGroup({
       //'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -43,11 +47,24 @@ export class DetallesEventosComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
 
       this.eventos_obj = this.data.datos_evento;
-
-
+      this.datos_adjuntos = this.data.datos_adjuntos;
+      this.rutaFile = this.url.getUrlBackEnd()+'descargarArchivo?ruta=';
       }else{
         this.router.navigate(['login']);
       }
+  }
+
+
+  Cerrar(){
+    this.modal_evento.close();
+  }
+
+
+  verArchivo(adjunto: Archivos){
+    this.dialog.open(VerArchivosComponent,{
+      data: {archivo: adjunto},
+      width: '80%',
+    });
   }
 
 }

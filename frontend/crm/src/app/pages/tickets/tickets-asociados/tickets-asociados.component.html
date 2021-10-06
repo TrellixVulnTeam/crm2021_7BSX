@@ -1,0 +1,42 @@
+<h2 mat-dialog-title><b>Tickets asociados al evento :</b> {{datos_evento.id}}</h2>
+<h2 mat-dialog-title><b>Título del evento :</b> {{datos_evento.evTitulo}}</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+
+  <br><br>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Usuario Asignado</th>
+        <th>Usuario Solicitante</th>
+        <th>Descripción</th>
+        <th>Fecha de solicitud</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tck of datos_ticket">
+        <td>{{tck.id}}
+
+          <button  mat-mini-fab color="basic" class="success" matTooltip="Detalles del ticket" matTooltipPosition="above"
+          (click)="verDetalleTicket(tck)">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </td>
+        <td>{{tck.apellidoasignado}}</td>
+        <td>{{tck.apellidosoli}}</td>
+        <td>{{tck.descripcion}}</td>
+        <td>{{tck.fecha_creacionD}}</td>
+        <td>{{tck.estado}} </td>
+      </tr>
+    </tbody>
+
+  </table>
+  <br><br>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" class="action"  (click)="volverListadoEventos()"><mat-icon>backspace</mat-icon> Volver a listado de eventos</button>
+</div>
