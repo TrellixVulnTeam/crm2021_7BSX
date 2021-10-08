@@ -18,6 +18,7 @@ export class Suministros {
   public anexo_direccion!: string;
   public autoriza_nocobromedicion!: string;
   public aplica_covid!: string;
+  public apellidocliente!:string;
   public avenida!: string;
   public b_dnotificacion!: string;
   public boulevar!: string;
@@ -74,4 +75,15 @@ export class Suministros {
   public usu_camb_direccion!: string;
   public usuario_unicom!: string;
   public voltaje_energia!: string;
+  public fecha_altaD!: string;
+  public codigo_reclamo!: string;
+  public motivoreclamo!: string;
+  public tiporeclamo!: string;
+  public nombres_reporta!: string;
+  public fecha_cierre!: string;
+  public comentario!: string;
+  public monto_reclamo!: string;
+  public fecha_reclamoD!: string;
+  public fecha_cierreD!: string;
+  public cliente!: string;
 }

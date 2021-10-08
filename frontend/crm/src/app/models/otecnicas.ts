@@ -26,4 +26,6 @@ export class Otecnicas {
   public zona_agencia!: string;
   public us_asignado!: string;
   public fecha_creacionD!: string;
+  public fecha_resolucionD!:string;
+
 }

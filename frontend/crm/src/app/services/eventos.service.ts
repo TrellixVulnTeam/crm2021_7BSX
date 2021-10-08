@@ -77,5 +77,14 @@ export class EventosService {
     .pipe(map(data => data as unknown as Eventos[] ));
   }
 
+  public getConteoEvento(id: Usuario): Observable<Eventos> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getConteoEvento', id, httpOptions)
+    .pipe(map(data => data as unknown as Eventos ));
+  }
+
+  public getUsuariosEventos(): Observable<any> {
+    return this.http.get(this.globalservice.getUrlBackEnd() + 'getUsuariosEventos').pipe(map(data => data as any));
+  }
+
 
 }

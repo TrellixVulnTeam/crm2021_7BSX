@@ -1,0 +1,44 @@
+.input{
+  margin-left: 2% !important;
+  width: 30% !important;
+}
+
+form{
+  width: 100% !important;
+  margin: auto !important;
+  margin-top: 40px !important;
+}
+
+td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+
+}
+
+tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;
+  text-align: center !important;
+}
+
+
+table{
+  width: 95% !important;
+  margin: auto !important;
+}
+
+
+.desc_div{
+  width: 100% !important;
+  max-height:100px;
+  overflow-y:auto !important;
+}
+
+
+.desc{
+  width: 20% !important;
+}
+
+h2{
+  margin-left: 3% !important;
+}

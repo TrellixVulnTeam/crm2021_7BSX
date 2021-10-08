@@ -17,6 +17,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+
+
 const matmodules = [
   MatSliderModule,
   MatCardModule,
@@ -40,6 +42,7 @@ const matmodules = [
   declarations: [],
   imports: [
     CommonModule,
+
   ],
   exports:[
     matmodules

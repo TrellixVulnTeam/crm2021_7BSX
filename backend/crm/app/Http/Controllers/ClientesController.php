@@ -470,6 +470,17 @@ class ClientesController extends Controller
 
     }
 
+
+    public function getClientesAtenciones(){
+        $getDatos =  DB::connection('comanda')->select("
+            select top 10 ca.cliente, (select count(id) from CRM_atenciones ca2 where ca2.cliente = ca.cliente) as atenciones from CRM_atenciones ca 
+            inner join CRM_clientes cc on cc.empresa = ca.cliente 
+            GROUP by ca.cliente order by 2 desc
+        ");
+
+        return response()->json($getDatos);
+    }
+
     
     
      

@@ -41,4 +41,5 @@ export class Tickets {
   public horaAproxD!:string;
   public asignado!:string;
   public solicitante!:string;
+  public conteo!: string;
 }

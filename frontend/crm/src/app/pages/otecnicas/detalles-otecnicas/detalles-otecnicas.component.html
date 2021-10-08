@@ -1,0 +1,71 @@
+<div mat-dialog-content>
+    <h2>Detalles de la orden N° {{detalles_orden.id}}</h2>
+      <form [formGroup]="FormOrden">
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Trabajo: </mat-label>
+          <textarea readonly matInput rows="3"  autocomplete="off" formControlName="trabajo" [(ngModel)]="detalles_orden.solicitud"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Fecha de solicitud: (Creacion de la orden) </mat-label>
+          <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_solicitud" [(ngModel)]="detalles_orden.fecha_creacionD">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Fecha de resolución: (Compromiso con el cliente) </mat-label>
+          <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_resolucion" [(ngModel)]="detalles_orden.fecha_resolucionD">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Dirección: </mat-label>
+          <textarea readonly matInput rows="3"  autocomplete="off" formControlName="direccion" [(ngModel)]="detalles_orden.direccion"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Solicitante: </mat-label>
+          <input readonly matInput type="text"  autocomplete="off" formControlName="solicitante" [(ngModel)]="detalles_orden.solicitante">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Gerencia: </mat-label>
+          <input readonly matInput type="text"  autocomplete="off" formControlName="gerencia" [(ngModel)]="detalles_orden.gerencia_solicita">
+        </mat-form-field>
+
+
+
+
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Observaciones del solicitante: </mat-label>
+          <textarea readonly matInput rows="3"  autocomplete="off" formControlName="observaciones_soli" [(ngModel)]="detalles_orden.observaciones"></textarea>
+        </mat-form-field>
+
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Observaciones de ejecucion: </mat-label>
+          <textarea readonly matInput rows="3"  autocomplete="off" formControlName="observaciones_ejec" [(ngModel)]="detalles_orden.comentarioaprob_admin"></textarea>
+        </mat-form-field>
+
+
+      </form>
+
+
+
+</div>
+
+<div mat-dialog-actions>
+  <table>
+    <tr>
+      <th>
+        <button mat-raised-button color="basic" class="success"><mat-icon>thumb_up</mat-icon>Aprobar orden</button>
+      </th>
+      <th>
+        <button mat-raised-button color="warn"><mat-icon>thumb_down</mat-icon>Denegar orden</button>
+      </th>
+  </table>
+</div>

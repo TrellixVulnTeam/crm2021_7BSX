@@ -14,8 +14,9 @@ class OrTecnicasController extends Controller
     public function getAllOrdenes(){
         
         $ordenes = DB::connection('comanda')->select("
-        SELECT  cot2.*,u.apellido as apellidosolicitante,u.nombre as nombresolicitante,
-        convert(varchar(10),cot2.fecha_solicitud, 103) as fecha_creacionD from CRM_ordenes_trabajo cot2 
+        SELECT  cot2.*,u.apellido as apellidosolicitante,u.nombre as nombresolicitante, u.nombre + ' '+u.apellido as solicitante,
+        convert(varchar(10),cot2.fecha_solicitud, 103) as fecha_creacionD ,
+        convert(varchar(10),cot2.fecha_resolucion, 103) as fecha_resolucionD from CRM_ordenes_trabajo cot2 
         inner join users u on u.id = cot2.solicitante 
         order by cot2.id desc
         ");

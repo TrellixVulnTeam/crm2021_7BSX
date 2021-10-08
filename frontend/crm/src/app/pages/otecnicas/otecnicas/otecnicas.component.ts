@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Otecnicas } from 'src/app/models/otecnicas';
 import { Usuario } from 'src/app/models/usuario';
 import { GlobalService } from 'src/app/services/global.service';
 import { OtecnicasService } from 'src/app/services/otecnicas.service';
+import { DetallesOtecnicasComponent } from '../detalles-otecnicas/detalles-otecnicas.component';
 
 @Component({
   selector: 'app-otecnicas',
@@ -20,7 +23,8 @@ export class OtecnicasComponent implements OnInit {
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
 
-  constructor( private global: GlobalService, private router: Router, private ordenesService: OtecnicasService) { }
+  constructor( private global: GlobalService, private router: Router, private ordenesService: OtecnicasService,
+    public dialog: MatDialog,) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -66,5 +70,13 @@ export class OtecnicasComponent implements OnInit {
 
   filterTable_ordenesTodas(filterValue :string) {
     this.dataSource_ordenesTodas.filter = filterValue.trim().toLowerCase();
+ }
+
+
+ verDetalleOrden(datos: Otecnicas){
+  this.dialog.open(DetallesOtecnicasComponent,{
+    data: {detalles_orden: datos},
+    width: '80%',
+  });
  }
 }

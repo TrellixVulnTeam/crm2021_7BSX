@@ -5,11 +5,13 @@ import { OtecnicasRoutingModule } from './otecnicas-routing.module';
 import { OtecnicasComponent } from './otecnicas/otecnicas.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetallesOtecnicasComponent } from './detalles-otecnicas/detalles-otecnicas.component';
 
 
 @NgModule({
   declarations: [
-    OtecnicasComponent
+    OtecnicasComponent,
+    DetallesOtecnicasComponent
   ],
   imports: [
     CommonModule,

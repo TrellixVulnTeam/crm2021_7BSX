@@ -137,6 +137,39 @@ class TicketController extends Controller
     }
 
 
+    public function getConteoTickets(Request $request){
+        $user = $request["id"];
+
+        try{
+            $ticket = json_encode(DB::connection('comanda')->select("select(
+                (select count(id) as conteo from tickets
+                where estado_id < 8
+                and categoria_id = 8 
+                and us_solicitante = ".$user." )
+                +
+                (select count(id) as conteo from tickets
+                where estado_id < 8
+                and categoria_id = 8 
+                and (us_asignado = ".$user.")
+                 ) )
+                as conteo
+            "));
+
+            $arrayJson = [];
+            foreach (json_decode($ticket, true) as $value){
+                $arrayJson = $value;
+            }
+    
+            return $arrayJson;
+
+        }catch(\Exception $e)
+        {
+            return response()->json($e->getMessage());
+        }
+    }
+
+
+
 }
 
 

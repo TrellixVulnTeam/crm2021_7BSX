@@ -1,0 +1,115 @@
+<div mat-dialog-content>
+
+    <mat-tab-group>
+      <mat-tab label="Datos generales del suministro" >
+
+        <form [formGroup]="FormSuministro">
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>N° Suministro: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="nis" [(ngModel)]="datos_suministro.num_suministro">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Código Cliente: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="codigo_cliente" [(ngModel)]="datos_suministro.CODIGO_CLIENTE">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Nombre Cliente: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="cliente" [(ngModel)]="datos_suministro.cliente">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Dirección: </mat-label>
+            <textarea readonly matInput rows="3"  autocomplete="off" formControlName="direccion" [(ngModel)]="datos_suministro.anexo_direccion"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Tarifa: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="tarifa" [(ngModel)]="datos_suministro.CODIGO_TARIFA">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Capacidad Máxima: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="capacidadmaxima" [(ngModel)]="datos_suministro.capacidad_maxima">
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Tipo de tensión: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="tipo_tension" [(ngModel)]="datos_suministro.tipo_tension">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Descuento: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="descuento" [(ngModel)]="datos_suministro.descuento">
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Voltaje: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="voltaje" [(ngModel)]="datos_suministro.voltaje_energia">
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Tipo ubicación: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="tipo_ubicacion" [(ngModel)]="datos_suministro.tipo_ubicacion">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Fecha de alta: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_alta" [(ngModel)]="datos_suministro.fecha_altaD">
+          </mat-form-field>
+
+        </form>
+      </mat-tab>
+
+      <mat-tab label="Reclamos históricos del suministro" >
+        <br><br>
+        <h2>Historial de reclamos del suministro {{datos_suministro.num_suministro}}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Fecha de reclamo</th>
+              <th>Tipo</th>
+              <th>Motivo</th>
+              <th>Usuario Reporta</th>
+              <th>Reclamo</th>
+              <th>Fecha de cierre</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rec of datos_historico">
+              <td>{{rec.codigo_reclamo}}</td>
+              <td>{{rec.fecha_reclamoD}}</td>
+              <td>{{rec.tiporeclamo}}</td>
+              <td>{{rec.motivoreclamo}}</td>
+              <td>{{rec.nombres_reporta}}</td>
+              <td class="desc">
+                <div class="desc_div">
+                  {{rec.comentario}}
+                </div>
+              </td>
+              <td>{{rec.fecha_cierreD}}</td>
+              <td *ngIf="rec.monto_reclamo != null">$ {{rec.monto_reclamo}}</td>
+              <td *ngIf="rec.monto_reclamo === null">$ 0.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-tab>
+
+    </mat-tab-group>
+
+
+</div>
+

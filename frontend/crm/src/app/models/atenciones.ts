@@ -14,7 +14,7 @@ export class Atenciones {
   public titulo_atn!: string;
   public usuarioCreacion!: string;
   public nombre!: string;
-
+  public conteo!: string;
 
   public nomUsuario!:string;
   public id_tipo_atencion!:number;

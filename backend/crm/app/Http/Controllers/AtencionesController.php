@@ -274,6 +274,55 @@ class AtencionesController extends Controller
             }
             
         }
+
+        public function getConteoAtencion(Request $request){
+            $user = $request["alias"];
+            $id = $request["id"];
+            try{
+                $atenciones = json_encode(DB::connection('comanda')->select("select(
+                    (select count(a.id) as conteo from crm_atenciones a
+                    inner join crm_clientes cl on cl.empresa = a.cliente
+                    inner join crm_cliente_usuario cu on cu.cliente = cl.id
+                    and cl.usuario_crm =  ".$id." and a.atencion_cerrada = 'N'
+                    )
+                    +
+                    (
+                    select count(a.id) as conteo from crm_atenciones a
+                    inner join crm_clientes cl on cl.empresa = a.cliente
+                    inner join crm_cliente_usuario cu on cu.cliente = cl.id
+                    and cu.usuario =  ".$id." and a.atencion_cerrada = 'N'
+                    and a.usuario_creacion != '".$user."'
+                    )+
+                    (select count(id)from CRM_atenciones where atencion_cerrada = 'N' and usuario_creacion= '".$user."')
+                    )as conteo
+                "));
+    
+                $arrayJson = [];
+                foreach (json_decode($atenciones, true) as $value){
+                    $arrayJson = $value;
+                }
+        
+                return $arrayJson;
+    
+            }catch(\Exception $e)
+            {
+                return response()->json($e->getMessage());
+            }
+        }
+
+
+        public function getUsuariosAtenciones(){
+            $getDatos =  DB::connection('comanda')->select("
+                select ca.usuario_creacion as usuario, 
+                (select count(ca2.id) from CRM_atenciones ca2 
+                where ca2.usuario_creacion = ca.usuario_creacion and ca2.usuario_creacion is not null) as atenciones from CRM_atenciones ca 
+                where ca.usuario_creacion is not null and ca.usuario_creacion != ''
+                GROUP by ca.usuario_creacion  order by 2 desc
+            ");
+
+            return response()->json($getDatos);
+        }
+
 }
 
 

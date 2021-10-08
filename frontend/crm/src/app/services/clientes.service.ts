@@ -196,4 +196,7 @@ public guardar_usuarios_cliente(datos: Clientes[]): Observable<Clientes[]> {
   return this.http.get(this.globalservice.getUrlBackEnd() + 'getAllUsuariosDisponibles').pipe(map(data => data as Clientes[]));
 }
 
+public getClientesAtenciones(): Observable<any> {
+  return this.http.get(this.globalservice.getUrlBackEnd() + 'getClientesAtenciones').pipe(map(data => data as any));
+}
 }

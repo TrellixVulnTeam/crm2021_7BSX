@@ -35,4 +35,10 @@ export class SuministrosService {
   }
 
 
+  public getAtencionesBySuministro(nis: Suministros): Observable<Suministros[]> {
+    return this.http.post<Suministros>(this.globalservice.getUrlBackEnd() + 'getAtencionesBySuministro', nis, httpOptions)
+    .pipe(map(data => data as unknown as Suministros[] ));
+  }
+
+
 }

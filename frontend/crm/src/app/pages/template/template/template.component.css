@@ -1,0 +1,44 @@
+.card{
+  float: left !important;
+  width: 80% !important;
+  margin-left: 2% !important;
+}
+
+img{
+  float: left !important;
+  margin-left: 18% !important;
+}
+
+h2{
+  float: left !important;
+  font-weight: bold !important;
+  margin-left: 2% !important;
+}
+
+b{
+  color: #C9140F !important;
+  font-size: 30px !important;
+}
+
+mat-icon{
+  color: white !important;
+}
+
+button{
+  margin: auto !important;
+}
+
+
+tr td{
+  width: 48% !important;
+}
+
+.tbl_graficas{
+  width: 90% !important;
+  margin: auto !important;
+
+}
+
+h3{
+  font-weight: bold !important;
+}

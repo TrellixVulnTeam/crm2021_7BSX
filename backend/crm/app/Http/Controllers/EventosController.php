@@ -211,6 +211,59 @@ class EventosController extends Controller
     }
 
 
+    public function getConteoEvento(Request $request){
+        $user = $request["alias"];
+        $id = $request["id"];
+        try{
+            $evento = json_encode(DB::connection('comanda')->select("select(
+                (select count(id) as conteo from crm_eventos
+                where estado in (1,3)
+                and usuario_crm = ".$id." )
+                +
+                (select count(ev.id) as conteo from crm_eventos ev
+                inner join crm_clientes cl on cl.empresa = ev.cliente
+                inner join crm_cliente_usuario cu on cu.cliente = cl.id
+                    where ev.estado in (1,3)
+                    and cu.usuario =  ".$id."
+                    and ev.usuario_crm !=".$id." )
+                    +
+            
+                (SELECT count (e.id) from comanda_db.dbo.crm_eventos e
+                inner join comanda_db.dbo.crm_clientes c on c.empresa = e.cliente
+                inner join comanda_db.dbo.users u on u.id = c.usuario_crm
+                inner join comanda_db.dbo.CRM_estados_eventos as ee on ee.id = e.estado
+                where u.alias = '".$user."' and e.usuario_crm != 
+                (select id from comanda_db.dbo.users where estado = 1 and alias = '".$user."')
+                 and e.estado in (1,3) )
+                ) as conteo
+            "));
+
+            $arrayJson = [];
+            foreach (json_decode($evento, true) as $value){
+                $arrayJson = $value;
+            }
+    
+            return $arrayJson;
+
+        }catch(\Exception $e)
+        {
+            return response()->json($e->getMessage());
+        }
+    }
+
+
+    public function getUsuariosEventos(){
+        $getDatos =  DB::connection('comanda')->select("
+            select u.alias as usuario, (select count(ce2.id) from CRM_eventos ce2  where ce2.usuario_crm = ce.usuario_crm and ce2.usuario_crm is not null) as eventos
+            from CRM_eventos ce
+            inner join users u on u.id = ce.usuario_crm 
+            where ce.usuario_crm is not null and ce.usuario_crm  != ''
+            GROUP by u.alias, ce.usuario_crm order by 2 desc
+        ");
+
+        return response()->json($getDatos);
+    }
+
 }
 
 

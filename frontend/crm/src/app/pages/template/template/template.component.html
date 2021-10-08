@@ -1,1 +1,75 @@
-<p>template works!</p>
+
+<table>
+  <tr>
+    <th>
+
+      <mat-card class="card">
+        <mat-card-content>
+          <img src="./assets/img/bell.png"> <h2> <b> {{atenciones.conteo}} </b>atenciones pendientes</h2>
+
+          <button mat-raised-button color="primary" (click)="verAtenciones()">
+            <mat-icon>arrow_right_alt</mat-icon> Ver
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+    </th>
+
+    <th>
+      <mat-card class="card">
+        <mat-card-content>
+          <img src="./assets/img/timetable.png"> <h2> <b>{{eventos.conteo}}</b> eventos pendientes</h2>
+          <button mat-raised-button color="primary" (click)="verEventos()">
+            <mat-icon>arrow_right_alt</mat-icon> Ver
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+    </th>
+
+
+    <th>
+      <mat-card class="card">
+        <mat-card-content>
+          <img src="./assets/img/ticket.png"> <h2> <b>{{tickets.conteo}}</b> tickets pendientes</h2>
+          <button mat-raised-button color="primary" (click)="verTickets()">
+            <mat-icon>arrow_right_alt</mat-icon> Ver
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+    </th>
+  </tr>
+</table>
+
+<br><br>
+<mat-card>
+  <mat-card-content>
+    <table class="tbl_graficas">
+      <thead>
+        <tr>
+          <th><h3>Usuarios que generan mayor cantidad de atenciones</h3></th>
+          <th><h3>Clientes prospectos con mayor cantidad de atenciones</h3></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <chart [type]="type_grafica1" [data]="data_grafica1" [options]="options_grafica1"></chart>
+          </td>
+          <td >
+            <chart [type]="type_grafica2" [data]="data_grafica2" [options]="options_grafica2" style="margin-left: 5% !important;"></chart>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+
+

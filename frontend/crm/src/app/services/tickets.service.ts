@@ -95,4 +95,10 @@ export class TicketsService {
     .pipe(map(data => data as unknown as Tickets[] ));
   }
 
+  public getConteoTickets(id: Usuario): Observable<Tickets> {
+    return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'getConteoTickets', id, httpOptions)
+    .pipe(map(data => data as unknown as Tickets ));
+  }
+
+
 }

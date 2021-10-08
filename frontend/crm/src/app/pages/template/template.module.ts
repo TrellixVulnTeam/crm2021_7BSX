@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TemplateRoutingModule } from './template-routing.module';
 import { TemplateComponent } from './template/template.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
-
+import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import { MatModuleModule } from 'src/app/mat-module.module';
   imports: [
     CommonModule,
     TemplateRoutingModule,
-    MatModuleModule
+    MatModuleModule,
+    ChartModule
   ]
 })
 export class TemplateModule { }

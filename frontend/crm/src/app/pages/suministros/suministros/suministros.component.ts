@@ -11,6 +11,7 @@ import { GlobalService } from 'src/app/services/global.service';
 import { SuministrosService } from 'src/app/services/suministros.service';
 import { ModalAtencionSuministroComponent } from '../../atenciones/modal-atencion-suministro/modal-atencion-suministro.component';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
+import { DetallesSuministroComponent } from '../detalles-suministro/detalles-suministro.component';
 
 @Component({
   selector: 'app-suministros',
@@ -89,5 +90,18 @@ export class SuministrosComponent implements OnInit {
       });
 
   }
+
+verDetallesSuministro(row: Suministros){
+
+  this.suministrosService.getAtencionesBySuministro(row).subscribe(
+    data=>{
+      this.dialog.open(DetallesSuministroComponent,{
+        data: {datos_suministro: row, datos_historico: data},
+        width: '80%',
+      });
+    }
+  );
+
+}
 
 }
