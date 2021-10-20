@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Atenciones } from 'src/app/models/atenciones';
@@ -9,8 +9,6 @@ import { Clientes } from 'src/app/models/clientes';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { GlobalService } from 'src/app/services/global.service';
-import { SubirArchivosComponent } from '../subir-archivos/subir-archivos.component';
 
 @Component({
   selector: 'app-modal-atencion',
@@ -33,7 +31,7 @@ export class ModalAtencionComponent implements OnInit {
 
   constructor(public atencionService: AtencionesService,
     public modal_atencion: MatDialogRef<ModalAtencionComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService,) {
+    private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService,public dialog: MatDialog) {
     this.form_atencion = new FormGroup({
       'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -134,6 +132,12 @@ export class ModalAtencionComponent implements OnInit {
       response => {
         this.atencion_id = response;
 
+      /*  this.dialog.open(GenerarEventoComponent,{
+          data:{
+            atencion_id: response, accion: 'adjuntaré archivos'
+          }
+        }
+         );*/
       },
       err => {
 

@@ -86,11 +86,7 @@ tr > th{
   width: 65% !important;
 }
 
-.form_atencion{
-  width: 100% !important;
-  margin: auto !important;
-  margin-top: 15px !important;
-}
+
 
 mat-form-field{
   margin-bottom: 15px !important;

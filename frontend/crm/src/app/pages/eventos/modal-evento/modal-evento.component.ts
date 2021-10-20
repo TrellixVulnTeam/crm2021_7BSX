@@ -1,12 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
 import { EventosService } from 'src/app/services/eventos.service';
+import { GenerarTicketComponent } from '../generar-ticket/generar-ticket.component';
 
 @Component({
   selector: 'app-modal-evento',
@@ -21,7 +22,8 @@ export class ModalEventoComponent implements OnInit {
   evento_id : Eventos = new Eventos();
   tipo="evento";
   constructor( public modal_evento: MatDialogRef<ModalEventoComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-  private router: Router, private eventosService: EventosService, private _snackBar: MatSnackBar) {
+  private router: Router, private eventosService: EventosService, private _snackBar: MatSnackBar,
+  public dialog: MatDialog) {
     this.form_evento = new FormGroup({
       //'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -64,6 +66,12 @@ export class ModalEventoComponent implements OnInit {
       response => {
         this.evento_id = response;
 
+        this.dialog.open(GenerarTicketComponent,{
+          data:{
+            evento_id: response, accion: 'adjuntaré archivos'
+          }
+        }
+         );
       },
       err => {
 

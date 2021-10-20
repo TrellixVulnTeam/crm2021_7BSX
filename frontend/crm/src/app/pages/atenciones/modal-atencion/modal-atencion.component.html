@@ -19,7 +19,7 @@
         <input readonly matInput type="text" [(ngModel)]="datos_cliente.nombrecliente" formControlName="cliente">
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" class="input2">
+      <mat-form-field appearance="legacy" class="input2" *ngIf="datos_contacto.length != 0">
         <mat-label>Contacto</mat-label>
         <mat-select formControlName="contacto">
           <mat-option  *ngFor="let ob of datos_contacto" [value]="ob.nombre_contacto">
@@ -28,9 +28,14 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field appearance="legacy" class="input2" *ngIf="datos_contacto.length === 0">
+        <mat-label>Contacto</mat-label>
+        <input matInput type="text" formControlName="contacto" placeholder="Contacto" autocomplete="off">
+      </mat-form-field>
+
       <mat-form-field appearance="legacy" class="input2">
         <mat-label>Teléfono de contacto</mat-label>
-        <input matInput type="number" formControlName="telefono" placeholder="N° Telefono">
+        <input matInput type="number" formControlName="telefono" placeholder="N° Telefono" autocomplete="off">
       </mat-form-field>
 
 
@@ -93,6 +98,5 @@
 </div>
 
 <div mat-dialog-actions>
-
 </div>
 

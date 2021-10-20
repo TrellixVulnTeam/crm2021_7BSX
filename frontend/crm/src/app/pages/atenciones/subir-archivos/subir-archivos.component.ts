@@ -11,6 +11,9 @@ import { Usuario } from 'src/app/models/usuario';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { GenerarTicketComponent } from '../../eventos/generar-ticket/generar-ticket.component';
+
+
 
 @Component({
   selector: 'app-subir-archivos',
@@ -132,7 +135,8 @@ export class SubirArchivosComponent implements OnInit {
               verticalPosition: 'top'
             });
 
-            this.dialog.closeAll();
+
+
           }
           );
   }
@@ -153,7 +157,7 @@ export class SubirArchivosComponent implements OnInit {
 
     this.archivoService.guardarArchivosEvt(this.obj_archivos).subscribe(
       response => {
-       // this.atn_id = response;
+
       },
       err => {
         this._snackBar.open('Error al guardar', 'Ok', {
@@ -169,7 +173,13 @@ export class SubirArchivosComponent implements OnInit {
           verticalPosition: 'top'
         });
 
-        this.dialog.closeAll();
+        this.dialog.open(GenerarTicketComponent,{
+          data:{
+            evento_id: this.evento_id, accion: 'finalizar evento'
+          }
+        }
+         );
+
       }
       );
 

@@ -6,7 +6,7 @@
 
 img{
   float: left !important;
-  margin-left: 18% !important;
+  margin-left: 6% !important;
 }
 
 h2{
@@ -21,7 +21,7 @@ b{
 }
 
 mat-icon{
-  color: white !important;
+  color: #5151B5 !important;
 }
 
 button{
@@ -40,5 +40,15 @@ tr td{
 }
 
 h3{
+  font-weight: bold !important;
+}
+
+h2{
+  font-size: 19px !important;
+  color: black !important;
+}
+
+
+button{
   font-weight: bold !important;
 }

@@ -1,1 +1,70 @@
-<p>reportes works!</p>
+<br><br>
+<mat-card class="card">
+  <mat-card-content>
+    <h3>Historial por cliente</h3>
+    <form [formGroup]="frm_rpt_cliente">
+      <br>
+      <mat-form-field appearance="legacy" class="input">
+        <mat-label>Nombre de cliente</mat-label>
+        <input  matInput type="text"  formControlName="cliente" placeholder="Nombre de cliente"
+        autocomplete="off">
+      </mat-form-field>
+      <button mat-raised-button class="lg_btn" color="primary">Generar Reporte</button>
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+
+<br><br>
+<mat-card>
+  <mat-card-content>
+    <h3>Reporte por usuario de atenciones, eventos y tickets entre un rango de fechas</h3>
+
+
+    <form [formGroup]="frm_rpt_usuario">
+      <br>
+      <mat-form-field appearance="legacy" class="input1">
+        <mat-label>Nombre de usuario</mat-label>
+        <mat-select formControlName="usuario">
+          <mat-option  *ngFor="let ob of usuario_listado" [value]="ob.id">
+            {{ob.nombre}} {{ob.apellido}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="legacy" class="input1">
+        <mat-label>Fecha Incial:</mat-label>
+        <input  matInput type="date"  formControlName="fecha_inicio" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field appearance="legacy" class="input1">
+        <mat-label>Fecha Final: </mat-label>
+        <input  matInput type="date"  formControlName="fecha_fin" autocomplete="off">
+      </mat-form-field>
+      <button mat-raised-button class="lg_btn1" color="primary">Generar Reporte</button>
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+
+<br><br>
+<mat-card>
+  <mat-card-content>
+    <h3>Reporte global de atenciones, eventos y tickets entre un rango de fechas</h3>
+
+    <form [formGroup]="frm_rpt_global">
+      <br>
+
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>Fecha Incial:</mat-label>
+        <input  matInput type="date"  formControlName="fecha_inicio" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>Fecha Final: </mat-label>
+        <input  matInput type="date"  formControlName="fecha_fin" autocomplete="off">
+      </mat-form-field>
+      <button mat-raised-button class="lg_btn2" color="primary">Generar Reporte</button>
+    </form>
+
+  </mat-card-content>
+</mat-card>

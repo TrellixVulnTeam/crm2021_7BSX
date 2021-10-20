@@ -24,5 +24,5 @@ export class Eventos {
   public fecha_resolucionF!: string;
   public fecha_compromisoF!: string;
   public conteo!: string;
-
+public evento_id!: string;
 }
