@@ -44,6 +44,7 @@ Route::post('guardarCliente_prospectos', 'ClientesController@guardarCliente_pros
 Route::post('guardar_contactos_cliente', 'ClientesController@guardar_contactos_cliente');
 Route::post('guardar_usuarios_cliente', 'ClientesController@guardar_usuarios_cliente');
 Route::get('getClientesAtenciones', 'ClientesController@getClientesAtenciones');
+Route::post('getHistorialCliente', 'ClientesController@getHistorialCliente');
 
 
 //rutas para atenciones

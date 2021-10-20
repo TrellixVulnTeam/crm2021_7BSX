@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
+import { Atenciones } from '../models/atenciones';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -199,4 +200,10 @@ public guardar_usuarios_cliente(datos: Clientes[]): Observable<Clientes[]> {
 public getClientesAtenciones(): Observable<any> {
   return this.http.get(this.globalservice.getUrlBackEnd() + 'getClientesAtenciones').pipe(map(data => data as any));
 }
+
+public getHistorialCliente(cliente: Clientes): Observable<Atenciones[]> {
+  return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'getHistorialCliente', cliente, httpOptions)
+  .pipe(map(data => data as unknown as Atenciones[] ));
+}
+
 }

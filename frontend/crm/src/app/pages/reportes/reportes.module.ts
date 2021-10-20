@@ -5,11 +5,13 @@ import { ReportesRoutingModule } from './reportes-routing.module';
 import { ReportesComponent } from './reportes/reportes.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HistorialClienteComponent } from './historial-cliente/historial-cliente.component';
 
 
 @NgModule({
   declarations: [
-    ReportesComponent
+    ReportesComponent,
+    HistorialClienteComponent
   ],
   imports: [
     CommonModule,

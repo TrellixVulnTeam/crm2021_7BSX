@@ -1,0 +1,31 @@
+table{
+  width: 95% !important;
+  margin: auto !important;
+}
+
+td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+
+}
+
+tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;
+  text-align: center !important;
+}
+
+.desc_div{
+  width: 100% !important;
+  max-height:100px;
+  overflow-y:auto !important;
+}
+
+
+.desc{
+  width: 20% !important;
+}
+
+mat-icon{
+  color: white !important;
+}
