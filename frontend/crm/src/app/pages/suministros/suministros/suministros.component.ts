@@ -83,7 +83,7 @@ export class SuministrosComponent implements OnInit {
  open_modal_atenciones(cliente: Suministros) {
 
 
-      this.dialog.open(ModalAtencionSuministroComponent,{
+      this.dialog.open(ModalAtencionComponent,{
         data: {datos_cliente: cliente, datos_contacto_cli: this.datos_contacto_cli, datos_suministro: '',  cliente: 'edesal',
                 tipo: 'Atencion'},
         width: '80%',

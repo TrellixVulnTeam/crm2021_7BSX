@@ -1,0 +1,53 @@
+.input{
+  width: 100% !important;
+  margin: auto !important;
+}
+
+.lg_btn{
+  margin-top: 15px !important;
+  width: 100% !important;
+}
+
+form{
+  margin: auto !important;
+  width: 60% !important;
+}
+
+.form-title{
+  text-align: center !important;
+   margin-top: 10px !important;
+   font-weight: bold !important;
+}
+
+
+table{
+  width: 95% !important;
+  margin: auto !important;
+}
+
+td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+
+}
+
+tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;
+  text-align: center !important;
+}
+
+.desc_div{
+  width: 100% !important;
+  max-height:100px;
+  overflow-y:auto !important;
+}
+
+
+.desc{
+  width: 30% !important;
+}
+
+h2{
+  color: black !important;
+}

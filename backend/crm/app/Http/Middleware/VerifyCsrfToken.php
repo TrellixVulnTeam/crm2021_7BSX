@@ -66,6 +66,9 @@ class VerifyCsrfToken extends BaseVerifier
         'getUsuariosEventos',
         'getClientesAtenciones',
         'getAtencionesBySuministro',
-        'getHistorialCliente'
+        'getHistorialCliente',
+        'getTicketsPendientes',
+        'guardarResolucion',
+        'getEventosPendientes'
     ];
 }

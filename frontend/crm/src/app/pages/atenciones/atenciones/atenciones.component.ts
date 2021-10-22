@@ -10,6 +10,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { ModalEventoComponent } from '../../eventos/modal-evento/modal-evento.component';
+import { CerrarAtencionComponent } from '../cerrar-atencion/cerrar-atencion.component';
 import { DetallesComponent } from '../detalles/detalles.component';
 
 @Component({
@@ -163,6 +164,14 @@ filterTable_atnCerradas(filterValue :string) {
 
 
 
+  }
+
+
+  cerrarAtencion(atencion: Atenciones){
+    this.dialog.open(CerrarAtencionComponent,{
+      data: {datos_atencion: atencion},
+      width: '80%',
+    });
   }
 
 }

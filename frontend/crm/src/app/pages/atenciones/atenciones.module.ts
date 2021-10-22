@@ -10,6 +10,8 @@ import { SubirArchivosComponent } from './subir-archivos/subir-archivos.componen
 import { ModalAtencionSuministroComponent } from './modal-atencion-suministro/modal-atencion-suministro.component';
 import { DetallesComponent } from './detalles/detalles.component';
 import { VerArchivosComponent } from './ver-archivos/ver-archivos.component';
+import { CerrarAtencionComponent } from './cerrar-atencion/cerrar-atencion.component';
+import { GenerarEventoComponent } from './generar-evento/generar-evento.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { VerArchivosComponent } from './ver-archivos/ver-archivos.component';
     SubirArchivosComponent,
     ModalAtencionSuministroComponent,
     DetallesComponent,
-    VerArchivosComponent
+    VerArchivosComponent,
+    CerrarAtencionComponent,
+    GenerarEventoComponent
   ],
   imports: [
     CommonModule,

@@ -37,6 +37,7 @@ export class DetallesEventosComponent implements OnInit {
       'fecha_resolucion' : new FormControl(''),
       'hora_resolucion' : new FormControl(''),
       'descripcion_evt' : new FormControl(''),
+      'resolucion': new FormControl(''),
     });
    }
 

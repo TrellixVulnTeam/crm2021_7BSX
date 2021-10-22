@@ -12,6 +12,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { GenerarTicketComponent } from '../../eventos/generar-ticket/generar-ticket.component';
+import { GenerarEventoComponent } from '../generar-evento/generar-evento.component';
 
 
 
@@ -134,6 +135,13 @@ export class SubirArchivosComponent implements OnInit {
               horizontalPosition: 'center',
               verticalPosition: 'top'
             });
+
+            this.dialog.open(GenerarEventoComponent,{
+              data:{
+                atencion_id: this.atencion_id, accion: 'finalizar atención'
+              }
+            }
+             );
 
 
 

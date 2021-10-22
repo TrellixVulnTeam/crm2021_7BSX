@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
+import { Tickets } from 'src/app/models/tickets';
 import { Usuario } from 'src/app/models/usuario';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
@@ -14,6 +15,7 @@ import { GlobalService } from 'src/app/services/global.service';
 import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
 import { ModalTicketComponent } from '../../tickets/modal-ticket/modal-ticket.component';
 import { DetallesEventosComponent } from '../detalles-eventos/detalles-eventos.component';
+import { ResolucionEventoComponent } from '../resolucion-evento/resolucion-evento.component';
 
 @Component({
   selector: 'app-eventos',
@@ -33,7 +35,7 @@ export class EventosComponent implements OnInit {
   dataSource_evtProResolucion:any = new MatTableDataSource<any>([]);
   dataSource_evtCerrados:any = new MatTableDataSource<any>([]);
   adjuntos: Archivos[] = [];
-
+  ticketsPendientes : Tickets[] = [];
   datos_atn: Atenciones[] = [];
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
@@ -195,6 +197,15 @@ verDetalleEvento(evento: Eventos){
 
 
 
+}
+
+
+
+resolucionEvento(evento: Eventos){
+  this.dialog.open(ResolucionEventoComponent,{
+    data: {detalle_evento: evento},
+    width: '70%',
+  });
 }
 
 }

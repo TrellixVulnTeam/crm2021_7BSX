@@ -70,7 +70,7 @@
             <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
               <mat-icon>add</mat-icon>
             </button>
-            <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above">
+            <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above" (click)="resolucionEvento(row)">
               <mat-icon>done_outline</mat-icon>
             </button>
           </td>
@@ -150,11 +150,11 @@
         <ng-container matColumnDef="Acciones">
           <th mat-header-cell *matHeaderCellDef> Acciones </th>
           <td mat-cell *matCellDef="let row">
-            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above">
+            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
               <mat-icon>add</mat-icon>
             </button>
 
-            <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above">
+            <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above" (click)="resolucionEvento(row)">
               <mat-icon>done_outline</mat-icon>
             </button>
           </td>
@@ -314,11 +314,12 @@
         <ng-container matColumnDef="Acciones">
           <th mat-header-cell *matHeaderCellDef> Acciones </th>
           <td mat-cell *matCellDef="let row">
-            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'">
+            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'" (click)="generarTicket(row)">
               <mat-icon>add</mat-icon>
             </button>
 
-            <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'">
+            <button  mat-mini-fab color="warn" matTooltip="Resolución del evento" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'"
+            (click)="resolucionEvento(row)">
               <mat-icon>done_outline</mat-icon>
             </button>
           </td>

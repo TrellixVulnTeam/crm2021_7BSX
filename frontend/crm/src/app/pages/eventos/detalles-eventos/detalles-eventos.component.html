@@ -47,6 +47,11 @@
             <input readonly matInput type="text" formControlName="fecha_resolucion" [(ngModel)]="eventos_obj.fecha_resolucionF">
           </mat-form-field>
 
+          <mat-form-field appearance="legacy" class="input3" *ngIf="eventos_obj.estado === 'Cerrado'">
+            <mat-label>Resolución</mat-label>
+            <input readonly matInput type="text" formControlName="resolucion" [(ngModel)]="eventos_obj.resolucion">
+          </mat-form-field>
+
       </form>
     </mat-tab>
 

@@ -1,0 +1,45 @@
+<h3 mat-dialog-title ><b>Detalles de la atención N°:</b> {{datos_atencion.id}}</h3>
+<h3 mat-dialog-title ><b>Título de la atención:</b> {{datos_atencion.descripcion}}</h3>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<div mat-dialog-content *ngIf="no_eventos">
+      <h2 class="form-title">Confirmación para cerrar atención</h2>
+      <form [formGroup]="frm_resolucion_atn">
+
+          <input type="hidden" formControlName="evt_id" [(ngModel)]="datos_atencion.id">
+
+        <button mat-raised-button class="lg_btn1" color="warn" (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button class="lg_btn1" color="primary" (click)="cerrarAtencion()">Cerrar Atención</button>
+      </form>
+
+</div>
+
+<div mat-dialog-content *ngIf="si_eventos">
+  <h2 class="form-title">La Atención no se puede cerrar porque los siguientes eventos no se han cerrado</h2><br>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Usuario Creación</th>
+        <th>Descripción</th>
+        <th>Fecha de compromiso</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tck of eventosPendientes">
+        <td>{{tck.id}}</td>
+        <td>{{tck.cliente}}</td>
+        <td>{{tck.usuario_creacion}}</td>
+        <td class="desc">
+          <div class="desc_div">
+            {{tck.descripcion}}
+          </div>
+        </td>
+        <td>{{tck.fecha_compromisoF}}</td>
+        <td>{{tck.estado}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

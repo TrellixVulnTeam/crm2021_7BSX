@@ -60,6 +60,7 @@ Route::post('getAdjuntosAtencion', 'AtencionesController@getAdjuntosAtencion');
 Route::any('descargarArchivo', 'AtencionesController@descargarArchivo');
 Route::post('getConteoAtencion', 'AtencionesController@getConteoAtencion');
 Route::get('getUsuariosAtenciones', 'AtencionesController@getUsuariosAtenciones');
+Route::post('getEventosPendientes', 'AtencionesController@getEventosPendientes');
 
 //rutas para eventos
 Route::post('getAllEventos', 'EventosController@getAllEventos');
@@ -70,6 +71,8 @@ Route::post('getEventosAsociados', 'EventosController@getEventosAsociados');
 Route::post('getAdjuntosEventos', 'EventosController@getAdjuntosEventos');
 Route::post('getConteoEvento', 'EventosController@getConteoEvento');
 Route::get('getUsuariosEventos', 'EventosController@getUsuariosEventos');
+Route::post('getTicketsPendientes', 'EventosController@getTicketsPendientes');
+Route::post('guardarResolucion', 'EventosController@guardarResolucion');
 
 //rutas para tickets
 Route::post('getAllTickets', 'TicketController@getAllTickets');

@@ -323,6 +323,27 @@ class AtencionesController extends Controller
             return response()->json($getDatos);
         }
 
+
+        public function getEventosPendientes(Request $request){
+
+            $eventos = DB::connection('comanda')->select("
+            select e.*, estado.nombre as estado,e.eventoTitulo as evTitulo,
+            e.id as evento_id,
+            convert(varchar(10),e.fecha_creacion, 103) as fecha_creacionD,
+            (select count(id) from tickets where evento_id = e.id
+            and estado_id != 9) as conteoTickets,
+            convert(varchar(10),e.fecha_compromiso,103) as fecha_compromisoF,
+            convert(varchar(10),e.fecha_resolucion,103) as fecha_resolucionF,
+            (select alias from comanda_db.dbo.users where id = e.usuario_crm )
+             as usuario_creacion from crm_eventos e
+            inner join crm_estados_eventos as estado on estado.id = e.estado
+            inner join comanda_db.dbo.users u on u.id = e.usuario_crm
+            where e.atencion_id = ".$request["id"]."
+                ");
+
+            return response()->json($eventos);
+        }
+
 }
 
 

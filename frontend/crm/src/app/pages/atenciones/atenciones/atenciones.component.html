@@ -56,13 +56,11 @@
     <ng-container matColumnDef="Acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let row1" class="acciones">
-        <button mat-mini-fab color="accent" matTooltip="Nuevo evento" matTooltipPosition="above" (click)="nuevoEvento(row1)">
+        <button mat-mini-fab color="primary" matTooltip="Nuevo evento" matTooltipPosition="above" (click)="nuevoEvento(row1)">
           <mat-icon>add</mat-icon>
         </button>
-        <button  mat-mini-fab color="primary" matTooltip="Historial de la atención" matTooltipPosition="above">
-          <mat-icon>print</mat-icon>
-        </button>
-        <button  mat-mini-fab color="warn" matTooltip="Cerrar atención" matTooltipPosition="above">
+
+        <button  mat-mini-fab color="warn" matTooltip="Cerrar atención" matTooltipPosition="above" (click)="cerrarAtencion(row1)">
           <mat-icon>close</mat-icon>
         </button>
       </td>
@@ -129,12 +127,10 @@
     </ng-container>
 
     <ng-container matColumnDef="Acciones">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let row2" class="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row2">
 
-        <button  mat-mini-fab color="primary" matTooltip="Historial de la atención" matTooltipPosition="above">
-          <mat-icon>print</mat-icon>
-        </button>
+
       </td>
     </ng-container>
 
@@ -202,13 +198,10 @@
       <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let row" class="acciones">
-          <button mat-mini-fab color="accent" matTooltip="Nuevo evento" matTooltipPosition="above" *ngIf="row.estado=='Cerrada'">
+          <button mat-mini-fab color="primary" matTooltip="Nuevo evento" matTooltipPosition="above" *ngIf="row.estado !='Cerrada'" (click)="nuevoEvento(row)">
             <mat-icon>add</mat-icon>
           </button>
-          <button  mat-mini-fab color="primary" matTooltip="Historial de la atención" matTooltipPosition="above">
-            <mat-icon>print</mat-icon>
-          </button>
-          <button  mat-mini-fab color="warn" matTooltip="Cerrar atención" matTooltipPosition="above" *ngIf="row.estado=='Cerrada'">
+          <button  mat-mini-fab color="warn" matTooltip="Cerrar atención" matTooltipPosition="above" *ngIf="row.estado !='Cerrada'" (click)="cerrarAtencion(row)">
             <mat-icon>close</mat-icon>
           </button>
         </td>

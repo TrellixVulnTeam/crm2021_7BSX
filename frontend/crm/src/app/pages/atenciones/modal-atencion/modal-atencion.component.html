@@ -11,6 +11,10 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-form-field appearance="legacy" class="input2"  *ngIf="datos_suministro.length === 0">
+      <mat-label>Cliente: </mat-label>
+      <input readonly matInput type="text" [(ngModel)]="datos_cliente.num_suministro" formControlName="suministro">
+    </mat-form-field>
 
       <mat-form-field appearance="legacy" class="input2">
         <mat-label>Cliente: </mat-label>

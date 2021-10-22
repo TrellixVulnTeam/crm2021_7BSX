@@ -11,6 +11,7 @@ import { TicketsModule } from '../tickets/tickets.module';
 import { DetallesEventosComponent } from './detalles-eventos/detalles-eventos.component';
 import { EventosAsociadosComponent } from './eventos-asociados/eventos-asociados.component';
 import { GenerarTicketComponent } from './generar-ticket/generar-ticket.component';
+import { ResolucionEventoComponent } from './resolucion-evento/resolucion-evento.component';
 
 
 
@@ -20,7 +21,8 @@ import { GenerarTicketComponent } from './generar-ticket/generar-ticket.componen
     ModalEventoComponent,
     DetallesEventosComponent,
     EventosAsociadosComponent,
-    GenerarTicketComponent
+    GenerarTicketComponent,
+    ResolucionEventoComponent
   ],
   imports: [
     CommonModule,

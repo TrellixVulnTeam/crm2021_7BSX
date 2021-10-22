@@ -6,6 +6,7 @@ import { GlobalService } from './global.service';
 import { Router } from '@angular/router';
 import {BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Tickets } from '../models/tickets';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -84,6 +85,16 @@ export class EventosService {
 
   public getUsuariosEventos(): Observable<any> {
     return this.http.get(this.globalservice.getUrlBackEnd() + 'getUsuariosEventos').pipe(map(data => data as any));
+  }
+
+  public getTicketsPendientes(evt: Eventos): Observable<Tickets[]> {
+    return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'getTicketsPendientes', evt, httpOptions)
+    .pipe(map(data => data as unknown as Tickets[] ));
+  }
+
+  public guardarResolucion(evt: Eventos): Observable<Eventos[]> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarResolucion', evt, httpOptions)
+    .pipe(map(data => data as unknown as Eventos[] ));
   }
 
 

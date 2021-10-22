@@ -9,6 +9,7 @@ import { Clientes } from 'src/app/models/clientes';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { GenerarEventoComponent } from '../generar-evento/generar-evento.component';
 
 @Component({
   selector: 'app-modal-atencion',
@@ -54,6 +55,7 @@ export class ModalAtencionComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     if(localStorage.getItem('usuario_crm') !== null){
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
@@ -93,7 +95,13 @@ export class ModalAtencionComponent implements OnInit {
 
 
 
+
   }
+
+
+
+
+
 
   mostrarDatos(){
     var opcion = this.form_atencion.controls["tipo_atencion"].value;
@@ -132,12 +140,12 @@ export class ModalAtencionComponent implements OnInit {
       response => {
         this.atencion_id = response;
 
-      /*  this.dialog.open(GenerarEventoComponent,{
+       this.dialog.open(GenerarEventoComponent,{
           data:{
-            atencion_id: response, accion: 'adjuntaré archivos'
+            atencion_id: this.atencion_id, accion: 'adjuntaré archivos'
           }
         }
-         );*/
+         );
       },
       err => {
 
