@@ -16,7 +16,7 @@
 </mat-card>
 
 
-<!--<br><br>
+<br><br>
 <mat-card>
   <mat-card-content>
     <h3>Reporte por usuario de atenciones, eventos y tickets entre un rango de fechas</h3>
@@ -26,7 +26,7 @@
       <br>
       <mat-form-field appearance="legacy" class="input1">
         <mat-label>Nombre de usuario</mat-label>
-        <mat-select formControlName="usuario">
+        <mat-select formControlName="usuario" (selectionChange)="getSelectText($event)">
           <mat-option  *ngFor="let ob of usuario_listado" [value]="ob.id">
             {{ob.nombre}} {{ob.apellido}}
           </mat-option>
@@ -40,7 +40,7 @@
         <mat-label>Fecha Final: </mat-label>
         <input  matInput type="date"  formControlName="fecha_fin" autocomplete="off">
       </mat-form-field>
-      <button mat-raised-button class="lg_btn1" color="primary">Generar Reporte</button>
+      <button [disabled] = "frm_rpt_usuario.invalid" mat-raised-button class="lg_btn1" color="primary" (click)="generarRptUsuario()">Generar Reporte</button>
     </form>
 
   </mat-card-content>
@@ -63,8 +63,8 @@
         <mat-label>Fecha Final: </mat-label>
         <input  matInput type="date"  formControlName="fecha_fin" autocomplete="off">
       </mat-form-field>
-      <button mat-raised-button class="lg_btn2" color="primary">Generar Reporte</button>
+      <button mat-raised-button [disabled] = "frm_rpt_global.invalid" class="lg_btn2" color="primary" (click)="generarRptGlobal()">Generar Reporte</button>
     </form>
 
   </mat-card-content>
-</mat-card>-->
+</mat-card>

@@ -21,6 +21,9 @@ export class HistorialClienteComponent implements OnInit {
 
   adjuntos: Archivos[] = [];
 
+  titulo: any;
+  subtitulo: any;
+
   texto1: any;
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
 
@@ -29,6 +32,8 @@ export class HistorialClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource_atn.data = this.data.listado_atenciones;
+    this.titulo = this.data.titulo;
+    this.subtitulo = this.data.subtitulo;
   }
 
   ngAfterViewInit() {

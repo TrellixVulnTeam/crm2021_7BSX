@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::post('validarCredenciales', 'UsuarioController@validarCredenciales');
 Route::post('getRoles', 'UsuarioController@getRoles');
 Route::get('getUsuarios', 'UsuarioController@getUsuarios');
-
+Route::post('getUsuarioRpt', 'UsuarioController@getUsuarioRpt');
 //rutas para clientes
 Route::get('getAllClientesEdesal', 'ClientesController@getAllClientesEdesal');
 Route::post('getclientesbyname', 'ClientesController@getclientesbyname');
@@ -61,6 +61,7 @@ Route::any('descargarArchivo', 'AtencionesController@descargarArchivo');
 Route::post('getConteoAtencion', 'AtencionesController@getConteoAtencion');
 Route::get('getUsuariosAtenciones', 'AtencionesController@getUsuariosAtenciones');
 Route::post('getEventosPendientes', 'AtencionesController@getEventosPendientes');
+Route::post('generarRptGlobal', 'AtencionesController@generarRptGlobal');
 
 //rutas para eventos
 Route::post('getAllEventos', 'EventosController@getAllEventos');

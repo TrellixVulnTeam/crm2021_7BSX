@@ -1,9 +1,9 @@
 
-<h2 mat-dialog-title>Historial del cliente</h2>
+<h2 mat-dialog-title><b>{{titulo}}</b> <b style="color: black;">{{subtitulo}}</b></h2>
 <mat-divider></mat-divider>
 <div mat-dialog-content>
-    <br><br>
-    <h3>Atenciones generadas</h3>
+    <br>
+    <h3><b>Atenciones generadas</b></h3>
 
     <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
     showFirstLastButtons

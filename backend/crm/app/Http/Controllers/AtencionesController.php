@@ -344,6 +344,50 @@ class AtencionesController extends Controller
             return response()->json($eventos);
         }
 
+
+        public function generarRptGlobal(Request $request){
+           // $usuario = $request["usuario"];
+            $fecha_inicio = $request["fecha_inicio"];
+            $fecha_fin = $request["fecha_fin"];
+
+
+            $fechaInicioSinFormato = date_create_from_format('Y-m-d',$fecha_inicio);
+
+            $fechaInicioConFormato = date_format($fechaInicioSinFormato,'Ymd');
+
+            $fechaFinSinFormato = date_create_from_format('Y-m-d',$fecha_fin);
+
+            $fechaFinConFormato = date_format($fechaFinSinFormato,'Ymd');
+    
+            $getDatos =  DB::connection('comanda')
+            ->select("SELECT case when c.atencion_cerrada = 'S'
+                        then 'Cerrada'
+                        else
+                        'Abierta'
+                        end as estado,
+                        CAST(c.id AS NUMERIC(8)) as id, 
+                        c.titulo_atn as titulo_atn,
+                        CAST(c.telefono AS VARCHAR(8)) as telefono, 
+                        c.num_suministro as num_suministro,c.contacto as contacto,
+                        c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
+                        t.nombre as tipoatencion,m.nombre as motivoatencion,
+                        CAST(c.sistema AS NVARCHAR(10)) as sistema,
+                        c.cliente as cliente,
+                        c.usuario_creacion as usuarioCreacion,
+                        c.id as atencion_id,
+                        convert(varchar(10),c.fecha_creacion,103) as fechaC
+                        FROM comanda_db.dbo.CRM_atenciones c
+                        LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
+                        LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
+                        LEFT JOIN comanda_db.dbo.users u on u.alias = c.usuario_creacion
+                        WHERE c.fecha_creacion between '".$fechaInicioConFormato." 00:00:00' and '".$fechaFinConFormato." 00:00:00'
+                        order by 1 asc
+                        ");
+    
+            return response()->json($getDatos);
+    
+        }
+
 }
 
 
