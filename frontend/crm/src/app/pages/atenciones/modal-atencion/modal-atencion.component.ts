@@ -30,6 +30,8 @@ export class ModalAtencionComponent implements OnInit {
   atencion_id : Atenciones = new Atenciones()
   tipo = 'atencion';
 
+  validarArchivos = false;
+
   constructor(public atencionService: AtencionesService,
     public modal_atencion: MatDialogRef<ModalAtencionComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService,public dialog: MatDialog) {
@@ -140,22 +142,27 @@ export class ModalAtencionComponent implements OnInit {
       response => {
         this.atencion_id = response;
 
+
+        this._snackBar.open('¡¡ Atención Guardada !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
        this.dialog.open(GenerarEventoComponent,{
           data:{
-            atencion_id: this.atencion_id, accion: 'adjuntaré archivos'
+            atencion_id: this.atencion_id, accion: 'Adjuntar archivos'
           }
         }
          );
+
+         this.validarArchivos = true;
       },
       err => {
 
       },
       () => {
-        this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        });
+
       });
 
 

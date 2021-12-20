@@ -35,7 +35,7 @@ import { GenerarEventoComponent } from './generar-evento/generar-evento.componen
   exports:[
     ModalAtencionComponent,
     SubirArchivosComponent,
-    ModalAtencionSuministroComponent
+    ModalAtencionSuministroComponent,
   ]
 })
 export class AtencionesModule { }

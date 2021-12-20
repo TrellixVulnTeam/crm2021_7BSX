@@ -8,9 +8,11 @@ import { Suministros } from 'src/app/models/suministros';
 import { Usuario } from 'src/app/models/usuario';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { ReportesService } from 'src/app/services/reportes.service';
 import { SuministrosService } from 'src/app/services/suministros.service';
 import { ModalAtencionSuministroComponent } from '../../atenciones/modal-atencion-suministro/modal-atencion-suministro.component';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
+import { HistorialClienteComponent } from '../../reportes/historial-cliente/historial-cliente.component';
 import { DetallesSuministroComponent } from '../detalles-suministro/detalles-suministro.component';
 
 @Component({
@@ -30,7 +32,7 @@ export class SuministrosComponent implements OnInit {
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
 
   constructor(private global: GlobalService, private router: Router, private suministrosService: SuministrosService, private clienteService : ClientesService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, private rpt_service: ReportesService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -97,6 +99,23 @@ verDetallesSuministro(row: Suministros){
     data=>{
       this.dialog.open(DetallesSuministroComponent,{
         data: {datos_suministro: row, datos_historico: data},
+        width: '80%',
+      });
+    }
+  );
+
+}
+
+
+getHistorialCliente(data: Clientes){
+
+  let datos : Clientes = new Clientes();
+  datos = data;
+
+  this.rpt_service.getHistorialCliente(datos).subscribe(
+    data => {
+      this.dialog.open(HistorialClienteComponent,{
+        data: {listado_atenciones: data, titulo: 'Historial de atenciones de: ', subtitulo: datos.nombrecliente},
         width: '80%',
       });
     }

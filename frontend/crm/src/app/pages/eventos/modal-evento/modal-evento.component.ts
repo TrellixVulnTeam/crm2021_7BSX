@@ -21,6 +21,8 @@ export class ModalEventoComponent implements OnInit {
   arreglo_evento: Eventos = new Eventos();
   evento_id : Eventos = new Eventos();
   tipo="evento";
+  validarArchivosEv = false;
+
   constructor( public modal_evento: MatDialogRef<ModalEventoComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   private router: Router, private eventosService: EventosService, private _snackBar: MatSnackBar,
   public dialog: MatDialog) {
@@ -66,22 +68,27 @@ export class ModalEventoComponent implements OnInit {
       response => {
         this.evento_id = response;
 
+        this._snackBar.open('¡¡ Evento Guardado !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+
         this.dialog.open(GenerarTicketComponent,{
           data:{
             evento_id: response, accion: 'adjuntaré archivos'
           }
         }
          );
+
+         this.validarArchivosEv = true;
       },
       err => {
 
       },
       () => {
-        this._snackBar.open('¡¡ Evento Guardado !!', 'Ok', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        });
+
       });
 
   }

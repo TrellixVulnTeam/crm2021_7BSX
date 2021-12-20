@@ -2,7 +2,7 @@
 <h2 mat-dialog-title><b>Título de la atención:</b> {{datos_atencion.titulo_atn}}</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-content>
-  <form class="form_evento" [formGroup]="form_evento">
+  <form class="form_evento" [formGroup]="form_evento" *ngIf="validarArchivosEv === false">
     <br>
     <mat-form-field appearance="legacy" class="input2">
       <mat-label>N° Suministro</mat-label>
@@ -67,17 +67,19 @@
 
   </form>
 
-    <button mat-raised-button color="primary" class="lg_btn" (click)="guardarEvento()">Generar Evento</button>
+    <button mat-raised-button color="primary" class="lg_btn" (click)="guardarEvento()" *ngIf="!validarArchivosEv">Generar Evento</button>
 
     <br><br>
 
-  <h2>Adjuntar archivos al evento</h2>
 
-  <mat-divider></mat-divider>
 
-   <app-subir-archivos [evento_id]="evento_id" [arreglo_evento]="arreglo_evento" [tipo]="tipo"></app-subir-archivos>
+    <div *ngIf="validarArchivosEv">
+      <app-subir-archivos [evento_id]="evento_id" [arreglo_evento]="arreglo_evento" [tipo]="tipo"></app-subir-archivos>
 
-  <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+    </div>
+
+
 </div>
 
 <div mat-dialog-actions>

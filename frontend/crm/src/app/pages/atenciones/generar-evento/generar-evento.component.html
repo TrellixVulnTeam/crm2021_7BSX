@@ -1,4 +1,6 @@
 <div mat-dialog-content>
+  <h2 style="color: green !important; text-align: center !important;">¡¡Se guardó la atención !!</h2><br>
+
   <h2>¿Desea generar evento sobre la atención {{atencion_id}}?</h2>
 </div>
 
@@ -7,11 +9,11 @@
   <table>
     <tr>
       <th>
-        <button mat-raised-button color="basic" class="success" (click)="generarEvento()"><mat-icon>thumb_up</mat-icon>Si, generar evento</button>
+        <button mat-raised-button color="basic" class="success" (click)="generarEvento()">Si, Generar evento</button>
       </th>
       <th>
         <button mat-raised-button color="warn"
-        (click)="cerrarModal()"><mat-icon>thumb_down</mat-icon>No, {{accion}}</button>
+        (click)="cerrarModal()">{{accion}}</button>
       </th>
   </table>
 </div>

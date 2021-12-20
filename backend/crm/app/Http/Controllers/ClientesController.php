@@ -98,7 +98,7 @@ class ClientesController extends Controller
          $user = $request["id"];
 
              $clientes = DB::connection('comanda')->select("
-             select c.*, cc.nombre as nomCategoria,
+             select c.*, cc.nombre as nomCategoria, c.empresa as cliente,
              c.id as codigo, c.empresa as nombrecliente from CRM_clientes as c
              inner join CRM_categoria_cliente as cc on cc.id = c.categoria
              where c.usuario_crm = ".$user."
@@ -131,7 +131,7 @@ class ClientesController extends Controller
 
  
         $clientes = DB::connection('comanda')->select("
-        select c.*, ccc.nombre as nomCategoria,
+        select c.*, ccc.nombre as nomCategoria, c.empresa as cliente,
         c.id as codigo, c.empresa as nombrecliente from CRM_clientes as c
         inner join CRM_cliente_usuario as ccu on ccu.cliente = c.id
         inner join CRM_categoria_cliente as ccc on ccc.id = c.categoria

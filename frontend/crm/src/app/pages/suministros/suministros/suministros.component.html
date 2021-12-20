@@ -40,10 +40,14 @@
     <ng-container matColumnDef="Acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let row" class="acciones">
-        <button mat-mini-fab color="primary" matTooltip="Nueva atención" matTooltipPosition="left"
+        <button mat-mini-fab color="accent" matTooltip="Nueva atención" matTooltipPosition="left"
         (click)="open_modal_atenciones(row)"><mat-icon>notifications</mat-icon></button> &nbsp;&nbsp;
-        <button  mat-mini-fab color="accent" matTooltip="Detalles del suministro" matTooltipPosition="above" (click)="verDetallesSuministro(row)">
+        <button  mat-mini-fab color="primary" matTooltip="Detalles del suministro" matTooltipPosition="above" (click)="verDetallesSuministro(row)">
           <mat-icon>list</mat-icon>
+        </button>
+        &nbsp;&nbsp;
+        <button  mat-mini-fab color="warn" matTooltip="Historial del suministro" matTooltipPosition="above" (click)="getHistorialCliente(row)">
+          <mat-icon>history</mat-icon>
         </button>
       </td>
     </ng-container>

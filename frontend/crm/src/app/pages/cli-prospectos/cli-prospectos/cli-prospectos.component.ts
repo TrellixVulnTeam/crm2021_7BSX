@@ -7,8 +7,10 @@ import { Clientes } from 'src/app/models/clientes';
 import { Usuario } from 'src/app/models/usuario';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { ReportesService } from 'src/app/services/reportes.service';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
 import { DetallesClienteComponent } from '../../clientes/detalles-cliente/detalles-cliente.component';
+import { HistorialClienteComponent } from '../../reportes/historial-cliente/historial-cliente.component';
 import { DetallesComponent } from '../detalles/detalles.component';
 import { NuevoClienteComponent } from '../nuevo-cliente/nuevo-cliente.component';
 import { NuevoContactoComponent } from '../nuevo-contacto/nuevo-contacto.component';
@@ -42,7 +44,7 @@ export class CliProspectosComponent implements OnInit {
 
 
   constructor(private router: Router, private clienteService : ClientesService,
-    public dialog: MatDialog, public global: GlobalService) { }
+    public dialog: MatDialog, public global: GlobalService, private rpt_service: ReportesService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('usuario_crm') !== null){
@@ -208,5 +210,20 @@ export class CliProspectosComponent implements OnInit {
   }
 
 
+  getHistorialCliente(data: Clientes){
+
+    let datos : Clientes = new Clientes();
+    datos = data;
+
+    this.rpt_service.getHistorialCliente(datos).subscribe(
+      data => {
+        this.dialog.open(HistorialClienteComponent,{
+          data: {listado_atenciones: data, titulo: 'Historial de atenciones de: ', subtitulo: datos.nombrecliente},
+          width: '80%',
+        });
+      }
+    );
+
+  }
 
 }
