@@ -1,0 +1,114 @@
+.title{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #003F63 !important;
+}
+
+mat-icon{
+  color: white !important;
+}
+
+button{
+  margin-left: 15px !important;
+}
+
+form{
+  width: 70% !important;
+  margin: auto !important;
+  }
+
+.input{
+    width: 70% !important;
+}
+
+.dato{
+  margin-top: auto !important;
+  font-size: 12px !important;
+
+}
+
+
+.datoDireccion{
+  margin-top: 10px !important;
+  font-size: 13px !important;
+}
+
+.dato{
+  margin-top: 15px !important;
+  font-size: 13px !important;
+}
+
+.label{
+  margin-top: 15px !important;
+  font-weight: bold !important;
+  color: #003F63 !important;
+}
+
+.colspan{
+  float:  left !important;
+}
+
+.notfound{
+  margin: auto !important;
+}
+
+table{
+  width: 80% !important;
+  margin: auto !important;
+}
+
+.tbl_cliente{
+  width: 90% !important;
+  margin: auto !important;
+}
+td{
+  text-align: center !important;
+  border-bottom: 1px solid #CFCCCC !important;
+}
+
+tr > th{
+  background-color:  #003F63 !important;
+  color:  white !important;;
+}
+
+
+.input2{
+  margin-left: 5px !important;
+  width: 24% !important;
+}
+
+.input3{
+  margin-left: 2% !important;
+  width: 35% !important;
+}
+
+.form_atencion{
+  width: 100% !important;
+  margin: auto !important;
+  margin-top: 15px !important;
+}
+
+mat-form-field{
+  margin-bottom: 15px !important;
+}
+
+.close_btn{
+  float: right !important;
+  margin-left: 93% !important;
+}
+
+.lg_btn{
+  width: 90% !important;
+  margin-bottom: 10px !important;
+  margin-left: 5% !important;
+}
+
+.icon{
+  color: black !important;
+}
+
+.notfound{
+  margin: auto !important;
+  width: 80% !important;
+  border: 0px solid white !important;
+  box-shadow: none !important;
+}

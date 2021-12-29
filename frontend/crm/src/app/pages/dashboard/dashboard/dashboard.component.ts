@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { GlobalService } from 'src/app/services/global.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { ManualMdComponent } from './manual-md/manual-md.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,8 @@ export class DashboardComponent implements OnInit {
   user: Usuario = new Usuario();
   dashboard = 'Inicio';
 
-  constructor(private router: Router, private usuarioservice : UsuarioService, private global: GlobalService) { }
+  constructor(private router: Router, private usuarioservice : UsuarioService, private global: GlobalService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('usuario_crm') !== null){
@@ -37,6 +40,15 @@ export class DashboardComponent implements OnInit {
      localStorage.clear();
      this.router.navigate(['login']);
    }
+
+
+   verManual(){
+    this.dialog.open(ManualMdComponent,{
+      width: '80%',
+    });
+   }
+
+
 
 
 }

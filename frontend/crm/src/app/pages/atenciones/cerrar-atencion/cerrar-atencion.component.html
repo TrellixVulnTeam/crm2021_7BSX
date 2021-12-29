@@ -6,7 +6,7 @@
       <h2 class="form-title">Confirmación para cerrar atención</h2>
       <form [formGroup]="frm_resolucion_atn">
 
-          <input type="hidden" formControlName="evt_id" [(ngModel)]="datos_atencion.id">
+          <input type="hidden" formControlName="id_atencion" [(ngModel)]="datos_atencion.id">
 
         <button mat-raised-button class="lg_btn1" color="warn" (click)="cancelar()">Cancelar</button>
         <button mat-raised-button class="lg_btn1" color="primary" (click)="cerrarAtencion()">Cerrar Atención</button>

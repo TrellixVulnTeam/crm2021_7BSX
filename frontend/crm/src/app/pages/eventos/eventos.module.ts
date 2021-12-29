@@ -6,12 +6,13 @@ import { EventosComponent } from './eventos/eventos.component';
 import { MatModuleModule } from 'src/app/mat-module.module';
 import { ModalEventoComponent } from './modal-evento/modal-evento.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AtencionesModule } from '../atenciones/atenciones.module';
 import { TicketsModule } from '../tickets/tickets.module';
 import { DetallesEventosComponent } from './detalles-eventos/detalles-eventos.component';
 import { EventosAsociadosComponent } from './eventos-asociados/eventos-asociados.component';
 import { GenerarTicketComponent } from './generar-ticket/generar-ticket.component';
 import { ResolucionEventoComponent } from './resolucion-evento/resolucion-evento.component';
+import { SubirArchivosComponent } from './subir-archivos/subir-archivos.component';
+
 
 
 
@@ -22,7 +23,8 @@ import { ResolucionEventoComponent } from './resolucion-evento/resolucion-evento
     DetallesEventosComponent,
     EventosAsociadosComponent,
     GenerarTicketComponent,
-    ResolucionEventoComponent
+    ResolucionEventoComponent,
+    SubirArchivosComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,7 @@ import { ResolucionEventoComponent } from './resolucion-evento/resolucion-evento
     MatModuleModule,
     FormsModule,
     ReactiveFormsModule,
-    AtencionesModule,
+   // AtencionesModule,
     TicketsModule
   ],
   exports:[

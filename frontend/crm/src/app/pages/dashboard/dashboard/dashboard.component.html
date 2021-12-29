@@ -13,7 +13,9 @@
   <img src="./assets/img/user.png">&nbsp; <h2 class="navTittle">{{user.nombre}} {{user.apellido}}</h2>
 
   <span class="indicador_menu">Estás en: </span><span class="nombre_menu">{{dashboard}} </span>
+
   <span class="example-spacer"></span>
+  <button mat-raised-button color="warn" (click)="verManual()" class="btn_manual">Ver manual</button>
   <a mat-button color="warn" (click)="cerrarSesion()">
     <mat-icon>logout</mat-icon>
     <span>Salir</span>

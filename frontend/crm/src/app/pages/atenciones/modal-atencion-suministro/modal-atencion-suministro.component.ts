@@ -35,7 +35,7 @@ export class ModalAtencionSuministroComponent implements OnInit {
     public modal_atencion: MatDialogRef<ModalAtencionSuministroComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService) {
     this.form_atencion = new FormGroup({
-      'codigo': new FormControl('',[Validators.required]),
+      'codigo': new FormControl(''),
       'suministro': new FormControl(''),
       'cliente': new FormControl('',[Validators.required]),
       'contacto': new FormControl(''),
@@ -43,7 +43,7 @@ export class ModalAtencionSuministroComponent implements OnInit {
       'tipo_atencion': new FormControl('',[Validators.required]),
       'motivo_atencion': new FormControl('',[Validators.required]),
       'titulo_atn': new FormControl('',[Validators.required]),
-      'descripcion_atencion': new FormControl('',[Validators.required]),
+      'descripcion_atencion': new FormControl(''),
       'email' : new FormControl(''),
       'fax' : new FormControl(''),
       'whatsapp' : new FormControl(''),

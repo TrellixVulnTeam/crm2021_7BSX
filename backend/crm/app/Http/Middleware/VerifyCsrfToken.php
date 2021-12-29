@@ -71,6 +71,7 @@ class VerifyCsrfToken extends BaseVerifier
         'guardarResolucion',
         'getEventosPendientes',
         'getUsuarioRpt',
-        'generarRptGlobal'
+        'generarRptGlobal',
+        'cerrarAtencion'
     ];
 }

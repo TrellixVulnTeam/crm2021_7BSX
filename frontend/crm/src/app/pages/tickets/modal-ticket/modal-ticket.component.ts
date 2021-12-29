@@ -27,12 +27,11 @@ export class ModalTicketComponent implements OnInit {
   private userService: UsuarioService, private ticketService: TicketsService, private _snackBar: MatSnackBar) {
     this.form_ticket = new FormGroup({
       //'codigo': new FormControl(''),
-      'id_evento': new FormControl(''),
-      'titulo_tck': new FormControl(''),
-      'asignado_tck': new FormControl(''),
+      'id_evento': new FormControl('',[Validators.required]),
+      'titulo_tck': new FormControl('',[Validators.required]),
+      'asignado_tck': new FormControl('',[Validators.required]),
       'copia_tck': new FormControl(''),
-      'fecha_resolucion': new FormControl(''),
-      'hora_resolucion': new FormControl(''),
+      'fecha_resolucion': new FormControl('',[Validators.required]),
       'descripcion_tck': new FormControl(''),
       'usuario_crm': new FormControl(''),
       'trabajo_solicitado': new FormControl(''),

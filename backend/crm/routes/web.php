@@ -62,6 +62,7 @@ Route::post('getConteoAtencion', 'AtencionesController@getConteoAtencion');
 Route::get('getUsuariosAtenciones', 'AtencionesController@getUsuariosAtenciones');
 Route::post('getEventosPendientes', 'AtencionesController@getEventosPendientes');
 Route::post('generarRptGlobal', 'AtencionesController@generarRptGlobal');
+Route::post('cerrarAtencion', 'AtencionesController@cerrarAtencion');
 
 //rutas para eventos
 Route::post('getAllEventos', 'EventosController@getAllEventos');

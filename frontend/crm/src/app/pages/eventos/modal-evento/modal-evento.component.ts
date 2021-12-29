@@ -29,15 +29,13 @@ export class ModalEventoComponent implements OnInit {
     this.form_evento = new FormGroup({
       //'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
-      'usuario_crm': new FormControl('',[Validators.required]),
+      'usuario_crm': new FormControl(''),
       'cliente': new FormControl(''),
-      'titulo_evt': new FormControl(''),
-      'contacto': new FormControl('',[Validators.required]),
+      'titulo_evt': new FormControl('',[Validators.required]),
+      'contacto': new FormControl(''),
       'atencion_id': new FormControl('',[Validators.required]),
       'fecha_compromiso': new FormControl('',[Validators.required]),
-      'hora_compromiso': new FormControl('',[Validators.required]),
-      'fecha_resolucion' : new FormControl(''),
-      'hora_resolucion' : new FormControl(''),
+      'fecha_resolucion' : new FormControl('',[Validators.required]),
       'descripcion_evt' : new FormControl(''),
     });
   }

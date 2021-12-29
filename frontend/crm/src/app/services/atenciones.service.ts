@@ -91,6 +91,10 @@ export class AtencionesService {
   }
 
 
+  public cerrarAtencion(atn: Atenciones): Observable<Atenciones[]> {
+    return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'cerrarAtencion', atn, httpOptions)
+    .pipe(map(data => data as unknown as Atenciones[] ));
+  }
 
 
 

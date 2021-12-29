@@ -1,5 +1,6 @@
-<h2 mat-dialog-title><b>Generar nuevo ticket para el evento N°:</b> {{datos_evento.id}}</h2>
-<h2 mat-dialog-title><b>Título del evento:</b> {{datos_evento.evTitulo}}</h2>
+<h3 mat-dialog-title><b>Generar nuevo ticket para el evento N°:</b> {{datos_evento.id}}</h3>
+<h3 mat-dialog-title><b>Título del evento:</b> {{datos_evento.evTitulo}}</h3>
+<h3 mat-dialog-title><b>Fecha de compromiso con cliente:</b> {{datos_evento.fecha_compromisoF}}</h3>
 <div mat-dialog-content minWidth="10px">
 
   <mat-tab-group>
@@ -87,21 +88,10 @@
             <input  matInput type="date" formControlName="fecha_resolucion" autocomplete="off">
           </mat-form-field>
 
-          <mat-form-field appearance="legacy" class="input4">
-            <mat-label>Hora de compromiso</mat-label>
-            <input  matInput type="time" formControlName="hora_resolucion" autocomplete="off">
-          </mat-form-field>
-
-
-
-
-
-
-
-
       </form>
 
-      <button mat-raised-button class="lg_btn" color="primary" (click)="guardarTicket()">Guardar Solo Ticket</button>
+      <button mat-raised-button class="lg_btn" color="primary" (click)="guardarTicket()"
+      [disabled] = "form_ticket.invalid">Guardar Solo Ticket</button>
     </mat-tab>
 
     <mat-tab label="Orden de trabajo (Solo Aplica para el área técnica)" class="tabs">
@@ -185,7 +175,8 @@
 
       </form>
 
-      <button mat-raised-button class="lg_btn" color="primary" (click)="guardarTicketOrder()">Guardar Ticket y Orden</button>
+      <button mat-raised-button class="lg_btn" color="primary" (click)="guardarTicketOrder()"
+      [disabled] = "form_ticket.invalid">Guardar Ticket y Orden</button>
     </mat-tab>
     </mat-tab-group>
 
