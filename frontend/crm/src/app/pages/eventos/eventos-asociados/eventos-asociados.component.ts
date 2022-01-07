@@ -27,6 +27,7 @@ export class EventosAsociadosComponent implements OnInit {
 
     this.datos_evento = this.data.datos_evento;
     this.datos_atencion =  this.data.datos_atencion;
+
   }
 
 

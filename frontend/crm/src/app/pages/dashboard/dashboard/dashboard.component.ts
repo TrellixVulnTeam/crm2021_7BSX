@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Roles } from 'src/app/models/roles';
 import { Usuario } from 'src/app/models/usuario';
 import { GlobalService } from 'src/app/services/global.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -14,6 +15,7 @@ import { ManualMdComponent } from './manual-md/manual-md.component';
 export class DashboardComponent implements OnInit {
   user: Usuario = new Usuario();
   dashboard = 'Inicio';
+  roles: Roles = new Roles();
 
   constructor(private router: Router, private usuarioservice : UsuarioService, private global: GlobalService,
     public dialog: MatDialog) { }
@@ -23,7 +25,9 @@ export class DashboardComponent implements OnInit {
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
 
+      this.roles = JSON.parse(localStorage.getItem("roles_crm") || '{}');
 
+      console.log(this.roles);
 
       this.global._opcionMenu.subscribe(response=>{
         this.dashboard = response;

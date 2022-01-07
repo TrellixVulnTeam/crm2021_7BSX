@@ -334,7 +334,7 @@ class AtencionesController extends Controller
              as usuario_creacion from crm_eventos e
             inner join crm_estados_eventos as estado on estado.id = e.estado
             inner join comanda_db.dbo.users u on u.id = e.usuario_crm
-            where e.atencion_id = ".$request["id"]."
+            where e.atencion_id = ".$request["id"]." and e.estado != 3
                 ");
 
             return response()->json($eventos);

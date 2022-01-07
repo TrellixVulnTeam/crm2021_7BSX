@@ -1,6 +1,7 @@
 .title{
   font-family: 'Montserrat', sans-serif !important;
   color: #003F63 !important;
+  font-weight: bold !important;
 }
 
 mat-icon{
@@ -101,7 +102,7 @@ mat-form-field{
 
 
 .desc{
-  width: 30% !important;
+  width: 20% !important;
 }
 
 .td{
@@ -111,4 +112,11 @@ mat-form-field{
 
 .cli{
   width: 10% !important;
+}
+
+
+.mensaje{
+  float: right !important;
+  color: orangered !important;
+   font-weight: bold !important;
 }

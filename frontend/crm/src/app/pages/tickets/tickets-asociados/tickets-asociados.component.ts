@@ -4,6 +4,7 @@ import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
 import { Tickets } from 'src/app/models/tickets';
 import { EventosService } from 'src/app/services/eventos.service';
+import { DetallesEventosComponent } from '../../eventos/detalles-eventos/detalles-eventos.component';
 import { EventosAsociadosComponent } from '../../eventos/eventos-asociados/eventos-asociados.component';
 import { DetallesTicketsComponent } from '../detalles-tickets/detalles-tickets.component';
 
@@ -17,6 +18,7 @@ export class TicketsAsociadosComponent implements OnInit {
   datos_evento: Eventos = new Eventos();
   datos_atencion: Atenciones = new Atenciones();
   datos_ticket: Tickets[] = [];
+  validar_btn: any;
 
   constructor( public modal_ticket: MatDialogRef<TicketsAsociadosComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   public dialog: MatDialog, private eventosService: EventosService) { }
@@ -25,7 +27,7 @@ export class TicketsAsociadosComponent implements OnInit {
     this.datos_evento = this.data.datos_evento;
     this.datos_atencion = this.data.datos_atencion;
     this.datos_ticket = this.data.datos_ticket;
-
+    this.validar_btn = this.data.validar_btn;
   }
 
 
@@ -45,6 +47,11 @@ export class TicketsAsociadosComponent implements OnInit {
       }
     );
 
+
+  }
+
+  volverEvento(){
+    this.modal_ticket.close();
 
   }
 

@@ -66,7 +66,7 @@ class UsuarioController extends Controller
             select r.nombre as rol from users u 
             inner join usuario_rol ur on ur.user_id =u.id 
             INNER JOIN roles r on r.id = ur.rol_id 
-            where u.alias = '".$alias."'");
+            where u.alias = '".$alias."' and r.sistema IN('CRM', 'COMANDA Y CRM')");
     
             return response()->json($roles);
            

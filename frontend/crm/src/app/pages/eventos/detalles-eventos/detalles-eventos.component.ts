@@ -7,7 +7,9 @@ import { Archivos } from 'src/app/models/archivos';
 import { Eventos } from 'src/app/models/eventos';
 import { Usuario } from 'src/app/models/usuario';
 import { GlobalService } from 'src/app/services/global.service';
+import { TicketsService } from 'src/app/services/tickets.service';
 import { VerArchivosComponent } from '../../atenciones/ver-archivos/ver-archivos.component';
+import { TicketsAsociadosComponent } from '../../tickets/tickets-asociados/tickets-asociados.component';
 
 
 @Component({
@@ -23,7 +25,7 @@ export class DetallesEventosComponent implements OnInit {
   rutaFile!: string;
 
   constructor( public modal_evento: MatDialogRef<DetallesEventosComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-  private router: Router, private _snackBar: MatSnackBar,private url: GlobalService, public dialog: MatDialog,) {
+  private router: Router, private _snackBar: MatSnackBar,private url: GlobalService, public dialog: MatDialog,private ticketService: TicketsService) {
     this.form_evento = new FormGroup({
       //'codigo': new FormControl('',[Validators.required]),
       'suministro': new FormControl(''),
@@ -68,4 +70,19 @@ export class DetallesEventosComponent implements OnInit {
     });
   }
 
+  verTicketsAsociados(evento: Eventos){
+    //this.modal_evento.close();
+
+    let ticket : any;
+
+    ticket = evento;
+    this.ticketService.getTicketsAsociados(ticket).subscribe(
+      data=>{
+        this.dialog.open(TicketsAsociadosComponent,{
+          data: {datos_evento: evento, datos_atencion: '', datos_ticket: data, validar_btn: 'Evento'},
+          width: '80%',
+        });
+      }
+    );
+  }
 }

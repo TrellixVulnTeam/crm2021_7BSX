@@ -26,6 +26,11 @@ form{
 
 }
 
+.tbl_titulo{
+  margin: auto !important;
+  width: 90% !important;
+}
+
 
 .datoDireccion{
   margin-top: 10px !important;
@@ -61,13 +66,11 @@ table{
   margin: auto !important;
 }
 td{
-  text-align: center !important;
-  border-bottom: 1px solid #CFCCCC !important;
+text-align: left !important;
 }
 
 tr > th{
-  background-color:  #003F63 !important;
-  color:  white !important;;
+  text-align: left !important;
 }
 
 

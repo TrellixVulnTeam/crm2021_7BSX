@@ -68,14 +68,21 @@
 
   <mat-divider></mat-divider>
 
-  <button  mat-menu-item routerLink="otecnicas">
+  <!--<button  mat-menu-item routerLink="otecnicas">
     <mat-icon>description</mat-icon>
     <span class="span-menu">Órdenes técnicas</span>
-  </button>
+  </button>-->
 
   <mat-divider></mat-divider>
 
-  <button  mat-menu-item routerLink="reportes">
+  <button  mat-menu-item routerLink="reportes" *ngIf="
+  (user.alias =='fsolano' ||
+  user.alias =='leobolanos' ||
+  user.alias =='rlopez' ||
+  user.alias =='rchevez' ||
+  user.alias =='arivera' ||
+  user.alias =='aortiz' ||
+  user.alias =='mvanegas' )">
     <mat-icon>print</mat-icon>
     <span class="span-menu">Reportes</span>
   </button>

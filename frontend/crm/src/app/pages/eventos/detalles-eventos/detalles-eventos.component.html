@@ -1,5 +1,25 @@
-<h2 mat-dialog-title ><b>Detalles del evento N°:</b> {{eventos_obj.id}}</h2>
-<h2 mat-dialog-title ><b>Título del evento:</b> {{eventos_obj.eventoTitulo}}</h2>
+
+
+
+<table class="tbl_titulo">
+  <tr>
+    <th> <h2 mat-dialog-title ><b>Detalles del evento N°:</b> {{eventos_obj.id}}</h2></th>
+
+    <th>
+      <button  mat-raised-button color="accent"   (click)="verTicketsAsociados(eventos_obj)">
+        <mat-icon>remove_red_eye</mat-icon>  Tickets asociados al evento {{eventos_obj.id}}
+      </button>
+  </th>
+  </tr>
+  <tr>
+    <th>
+      <h2 mat-dialog-title ><b>Título del evento:</b> {{eventos_obj.eventoTitulo}}</h2>
+    </th>
+  </tr>
+</table>
+
+
+
 <mat-divider></mat-divider>
 <div mat-dialog-content>
 
