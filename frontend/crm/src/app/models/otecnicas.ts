@@ -27,5 +27,7 @@ export class Otecnicas {
   public us_asignado!: string;
   public fecha_creacionD!: string;
   public fecha_resolucionD!:string;
+  public aprobVentas!:string;
+  public aprobTecnica!:string;
 
 }

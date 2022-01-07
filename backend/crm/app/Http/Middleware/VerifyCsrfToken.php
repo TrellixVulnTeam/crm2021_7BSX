@@ -72,6 +72,11 @@ class VerifyCsrfToken extends BaseVerifier
         'getEventosPendientes',
         'getUsuarioRpt',
         'generarRptGlobal',
-        'cerrarAtencion'
+        'cerrarAtencion',
+        'aprobarOrdenTecnica',
+        'aprobarOrdenVentas',
+        'denegarOrdenTecnica',
+        'denegarOrdenVentas',
+        'imprimirorden'
     ];
 }

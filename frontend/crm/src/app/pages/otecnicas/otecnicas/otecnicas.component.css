@@ -36,3 +36,17 @@ mat-icon{
   color: white !important;
 }
 
+.aprobada{
+  background-color: #BDF7BF !important;
+  font-weight: bold !important;
+}
+
+.pendiente{
+  background-color: #F9D59E !important;
+  font-weight: bold !important;
+}
+
+.denegada{
+  background-color: #FC9292 !important;
+   font-weight: bold !important;
+}

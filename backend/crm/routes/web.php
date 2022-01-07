@@ -87,6 +87,12 @@ Route::post('getConteoTickets', 'TicketController@getConteoTickets');
 //rutas para ordenes técnicas
 Route::get('getAllOrdenes', 'OrTecnicasController@getAllOrdenes');
 Route::post('guardarTicketOrder', 'OrTecnicasController@guardarTicketOrder');
+Route::post('aprobarOrdenTecnica', 'OrTecnicasController@aprobarOrdenTecnica');
+Route::post('aprobarOrdenVentas', 'OrTecnicasController@aprobarOrdenVentas');
+Route::post('denegarOrdenTecnica', 'OrTecnicasController@denegarOrdenTecnica');
+Route::post('denegarOrdenVentas', 'OrTecnicasController@denegarOrdenVentas');
+
+Route::any('imprimirorden','OrTecnicasController@imprimirOrden');
 //rutas para suministros
 Route::get('getAllSuministros', 'SuministrosController@getAllSuministros');
 Route::post('getAtencionesBySuministro', 'SuministrosController@getAtencionesBySuministro');
