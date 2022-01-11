@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Response as FacadeResponse;
 use Session;
+use Mail;
 
 class TicketController extends Controller
 {
@@ -79,7 +80,95 @@ class TicketController extends Controller
           'evento_id' => $request["id_evento"],
         ]);
 
-        return response()->json($insertar);
+
+
+        $fechaAproxSinFormato = date_create_from_format('Y-m-d',$fechaRes);
+
+        $fechaAproxConFormato = date_format($fechaAproxSinFormato,'Ymd');
+        /*$ultimoticket = DB::connection('comanda')->select("select top 1 id, convert(varchar(10),t.fechasolaprox, 103) as fechasolaproxD from tickets t order by 1 desc")
+        ->first();*/
+
+        $ultimoticket = DB::connection('comanda')->table('tickets')->select('tickets.id')->orderBy('tickets.id','desc')->first();
+
+
+        $correo_asignado = DB::connection('comanda')->table("tickets")
+        ->join('users','users.id','=','tickets.us_asignado')
+        ->select("users.correo")->orderBy('tickets.id','desc')->first();
+
+
+        $nombre_soli = DB::connection('comanda')->table("tickets")
+        ->join('users','users.id','=','tickets.us_solicitante')
+        ->select("users.nombre")->orderBy('tickets.id','desc')->first();
+
+        $apellido_soli = DB::connection('comanda')->table("tickets")
+        ->join('users','users.id','=','tickets.us_solicitante')
+        ->select("users.apellido")->orderBy('tickets.id','desc')->first();
+
+
+        $nombre_asig = DB::connection('comanda')->table("tickets")
+        ->join('users','users.id','=','tickets.us_asignado')
+        ->select("users.nombre")->orderBy('tickets.id','desc')->first();
+
+        $apellido_asig = DB::connection('comanda')->table("tickets")
+        ->join('users','users.id','=','tickets.us_asignado')
+        ->select("users.apellido")->orderBy('tickets.id','desc')->first();
+
+
+        $user_soli = $nombre_soli->nombre.' '.$apellido_soli->apellido;
+        $user_asig = $nombre_asig->nombre.' '.$apellido_asig->apellido;
+        $correo_asig = $correo_asignado->correo;
+
+
+
+        //detalle de evento
+        $id_evento = DB::connection('comanda')->table("tickets")
+        ->join('CRM_eventos','CRM_eventos.id','=','tickets.evento_id')
+        ->select("CRM_eventos.id")->orderBy('tickets.id','desc')->first();
+
+        $titulo_evento = DB::connection('comanda')->table("tickets")
+        ->join('CRM_eventos','CRM_eventos.id','=','tickets.evento_id')
+        ->select("CRM_eventos.eventoTitulo")->orderBy('tickets.id','desc')->first();
+
+
+        //detalle atencion
+        $id_atencion = DB::connection('comanda')->table("tickets")
+        ->join('CRM_eventos','CRM_eventos.id','=','tickets.evento_id')
+        ->join('CRM_atenciones','CRM_atenciones.id','=','CRM_eventos.atencion_id')
+        ->select("CRM_atenciones.id")->orderBy('tickets.id','desc')->first();
+
+
+        $titulo_atencion = DB::connection('comanda')->table("tickets")
+        ->join('CRM_eventos','CRM_eventos.id','=','tickets.evento_id')
+        ->join('CRM_atenciones','CRM_atenciones.id','=','CRM_eventos.atencion_id')
+        ->select("CRM_atenciones.titulo_atn")->orderBy('tickets.id','desc')->first();
+
+        Session::put('id',$insertar);
+        Session::put('titulo',$request['titulo_tck']);
+        Session::put('descripcion',$request['descripcion_tck']);
+        Session::put('fechaSolucionaprox',$fechaAproxConFormato);
+        Session::put('fechaSolicitud',date('Ymd H:i'));
+        Session::put('solicitante',$user_soli);
+        Session::put('asignado',$user_asig);
+        Session::put('correo',$correo_asig);
+        Session::put('id_evento',$id_evento->id);
+        Session::put('titulo_evento',$titulo_evento->eventoTitulo);
+        Session::put('id_atencion',$id_atencion->id);
+        Session::put('titulo_atencion',$titulo_atencion->titulo_atn);
+
+        $usuarioprincipal = DB::connection('comanda')->select("SELECT * from users where id=".$id_usuario->id."");
+        $usuariosolicitante = DB::connection('comanda')->select("SELECT * from users where id=".$request['usuario_crm']."");
+       
+
+        Mail::send('Correos.nuevoticket', ['usuarioprincipal' => $usuarioprincipal,'usuariosolicitante'=>$usuariosolicitante], 
+        function ($m) use ($usuarioprincipal,$usuariosolicitante) {
+
+            $m->from('comanda@edesal.com', Session::get('solicitante'));
+
+            $m->to(Session::get('correo'), '')->subject('Nuevo ticket - '.Session::get('titulo'));
+        });
+
+       
+        return response()->json($correo_asig);
     }
 
 

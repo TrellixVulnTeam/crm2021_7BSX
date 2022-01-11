@@ -104,13 +104,22 @@
 
                                                     Nro Ticket: <b>{{Session::get('id')}}</b><br/>
                                                     Titulo: <b>{{Session::get('titulo')}}</b><br/>
-                                                    Fecha de solicitud: <b> <?php $fecha1 = date_create(Session::get('fechaSolicitud')) ; 
-                                                    echo date_format($fecha1,'d/m/Y H:i')?></b><br/>
+                                                    Descripcion: <b>{{Session::get('descripcion')}}</b><br/>
                                                     Solicitante: <b>{{Session::get('solicitante')}}</b><br/>
                                                     Asignado: <b>{{Session::get('asignado')}}</b><br/>
-                                                    Descripcion: <b>{{Session::get('descripcion')}}</b><br/>
                                                     Fecha propuesta de solución: <b> <?php $fecha1 = date_create(Session::get('fechaSolucionaprox')) ; 
-                                                    echo date_format($fecha1,'d/m/Y H:i')?></b><br/>
+                                                    echo date_format($fecha1,'d/m/Y')?></b><br/>
+                                                    Fecha de solicitud: <b> <?php $fecha1 = date_create(Session::get('fechaSolicitud')) ; 
+                                                    echo date_format($fecha1,'d/m/Y')?></b><br/>
+
+                                                    <br/>
+
+                                                    Evento al que está asociado: <b>{{Session::get('id_evento')}}</b><br/>
+                                                    Titulo del evento: <b>{{Session::get('titulo_evento')}}</b><br/><br/>
+
+
+                                                    Atención a la que está asociada: <b>{{Session::get('id_atencion')}}</b><br/>
+                                                    Titulo de la atención: <b>{{Session::get('titulo_atencion')}}</b><br/><br/>
                                                 </td>
                                             </tr>
                                             </tbody></table>
