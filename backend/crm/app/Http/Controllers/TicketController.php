@@ -61,11 +61,15 @@ class TicketController extends Controller
             $fechaResConFormato = date_format($fechaResSinFormato,'Ymd');
         } 
 
+
+        $id_usuario = DB::connection('comanda')->table("users")
+        ->select("users.id")->where('users.alias',$request['asignado_tck'])->first();
+
         $insertar =  DB::connection('comanda')->table('tickets')
         ->insertGetId([
           'titulo' => $request['titulo_tck'],
           'descripcion' => $request['descripcion_tck'],
-          'us_asignado' => $request['asignado_tck'],
+          'us_asignado' => $id_usuario->id,
           'us_solicitante' =>$request['usuario_crm'],
           'fechasolaprox' => $fechaResConFormato.' '.$request['hora_resolucion'],
           'fechasolicitud' => date('Ymd H:i'),

@@ -25,25 +25,31 @@
             <textarea rows="3" matInput  formControlName="descripcion_tck" autocomplete="off"></textarea>
           </mat-form-field>
 
-          <mat-form-field appearance="legacy" class="input3">
-            <mat-label>Asignar ticket a: </mat-label>
-            <mat-select formControlName="asignado_tck">
-              <mat-option  *ngFor="let ob of usuario_listado" [value]="ob.id">
-                {{ob.nombre}} {{ob.apellido}}
-              </mat-option>
-            </mat-select>
-
-
-          </mat-form-field>
 
 
           <mat-form-field appearance="legacy" class="input3">
-            <mat-label>Notificar ticket a:</mat-label>
-            <mat-select formControlName="copia_tck" (selectionChange)="getSelectText($event)">
-              <mat-option  *ngFor="let ob of usuario_listado" [value]="ob.id">
-                {{ob.nombre}} {{ob.apellido}}
+            <input type="text" matInput  [(ngModel)]="_texto" id="texto"
+            placeholder="Selecciona el usuario para asignar ticket"
+             [matAutocomplete]="auto" (ngModelChange)="ConvertToLower($event)" formControlName="asignado_tck">
+            <mat-autocomplete #auto="matAutocomplete">
+               <mat-option *ngFor="let ob of usuario_listado | usuario : texto " [value]="ob.alias">
+                 {{ ob.nombre }} {{ ob.apellido }}
+               </mat-option>
+             </mat-autocomplete>
+           </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input3">
+
+            <input type="text" matInput  [(ngModel)]="_texto2" id="texto2"
+            placeholder="Selecciona el usuario para notificar el ticket"
+             [matAutocomplete]="auto2" (ngModelChange)="ConvertToLower2($event)" formControlName="copia_tck">
+
+             <mat-autocomplete #auto2="matAutocomplete">
+              <mat-option *ngFor="let ob of usuario_listado | usuario : texto2" [value]="ob.alias">
+                {{ ob.nombre }} {{ ob.apellido }}
               </mat-option>
-            </mat-select>
+            </mat-autocomplete>
           </mat-form-field>
 
           <button mat-mini-fab color="accent" (click)="addUserNotificar()"><mat-icon>add</mat-icon></button>
@@ -72,7 +78,7 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let us of usuario_listado_notificar; index as indexOfelement;">
-                      <td>{{us.nombre}}</td>
+                      <td>{{us.alias}}</td>
                       <td><button mat-mini-fab color="warn" (click)="deleteUserNotificar(indexOfelement)"><mat-icon>delete</mat-icon></button></td>
                     </tr>
                   </tbody>

@@ -8,6 +8,7 @@ import { ModalTicketComponent } from './modal-ticket/modal-ticket.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetallesTicketsComponent } from './detalles-tickets/detalles-tickets.component';
 import { TicketsAsociadosComponent } from './tickets-asociados/tickets-asociados.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 
@@ -23,7 +24,8 @@ import { TicketsAsociadosComponent } from './tickets-asociados/tickets-asociados
     TicketsRoutingModule,
     MatModuleModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ],
   exports:[
     ModalTicketComponent

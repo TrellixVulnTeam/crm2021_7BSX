@@ -22,6 +22,11 @@ export class ModalTicketComponent implements OnInit {
   usuario_listado_notificar : Usuario[] = [];
   selectedData!: { value: any; text: string; };
   ticket_id : any;
+  texto!: string;
+  _texto:string | undefined;
+
+  texto2!: string;
+  _texto2:string | undefined;
 
   constructor(public modal_ticket: MatDialogRef<ModalTicketComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   private userService: UsuarioService, private ticketService: TicketsService, private _snackBar: MatSnackBar) {
@@ -44,7 +49,7 @@ export class ModalTicketComponent implements OnInit {
       'gerencia_solicita' : new FormControl(''),
       'adjud_contratista' : new FormControl(''),
       'observaciones_or' : new FormControl(''),
-
+      'txt_usuario1': new FormControl(''),
     });
   }
 
@@ -60,6 +65,16 @@ export class ModalTicketComponent implements OnInit {
   }
 
 
+  ConvertToLower(evt : string) {
+      this.texto = evt.toLowerCase();
+  }
+
+  ConvertToLower2(evt : string) {
+    this.texto2 = evt.toLowerCase();
+
+}
+
+
   deleteUserNotificar(index: any){
 
     this.usuario_listado_notificar.splice(index, 1);
@@ -68,21 +83,15 @@ export class ModalTicketComponent implements OnInit {
   addUserNotificar(){
     let datos : Usuario = new Usuario();
 
-    datos.id = this.selectedData?.value;
-    datos.nombre = this.selectedData?.text;
+    datos.alias = this.form_ticket.controls["copia_tck"].value;
+   // datos.nombre = this.selectedData?.text;
 
     this.usuario_listado_notificar.push(datos);
 
   }
 
 
-  getSelectText(event: MatSelectChange) {
-    this.selectedData = {
-      value: event.value,
-      text: event.source.triggerValue
-    };
 
-  }
 
   guardarTicket(){
     let datos: Tickets = new Tickets();
@@ -105,6 +114,7 @@ export class ModalTicketComponent implements OnInit {
       });
       this.modal_ticket.close();
 
+      //console.table(datos);
 
   }
 
