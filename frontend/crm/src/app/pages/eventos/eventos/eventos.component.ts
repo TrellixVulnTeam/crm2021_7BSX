@@ -29,7 +29,7 @@ export class EventosComponent implements OnInit {
   texto1:any;
   texto2:any;
   texto3:any;
-  displayedColumns: string[] = ['id',  'atencion_id', 'cliente' , 'usuario_creacion', 'titulo','fecha_creacionD', 'estado', 'Acciones'];
+  displayedColumns: string[] = ['id',  'atencion_id', 'cliente' , 'usuario_creacion', 'titulo','fecha_creacionD','fecha_compromisoF', 'estado', 'Acciones'];
   dataSource_evtTodos:any = new MatTableDataSource<any>([]);
   dataSource_evtAbiertos:any = new MatTableDataSource<any>([]);
   dataSource_evtProResolucion:any = new MatTableDataSource<any>([]);
@@ -48,7 +48,7 @@ export class EventosComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.global.fillOpcionMenu('Eventos');
+      this.global.fillOpcionMenu('Macrotarea');
     });
 
 
@@ -56,7 +56,7 @@ export class EventosComponent implements OnInit {
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
       setTimeout(() => {
-        this.global.fillOpcionMenu('Eventos');
+        this.global.fillOpcionMenu('Macrotarea');
       });
 
     }else{

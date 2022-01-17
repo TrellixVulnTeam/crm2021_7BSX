@@ -114,8 +114,8 @@
 
                                                     <br/>
 
-                                                    Evento al que está asociado: <b>{{Session::get('id_evento')}}</b><br/>
-                                                    Titulo del evento: <b>{{Session::get('titulo_evento')}}</b><br/><br/>
+                                                    Macrotarea a la que está asociado: <b>{{Session::get('id_evento')}}</b><br/>
+                                                    Titulo de Macrotarea: <b>{{Session::get('titulo_evento')}}</b><br/><br/>
 
 
                                                     Atención a la que está asociada: <b>{{Session::get('id_atencion')}}</b><br/>

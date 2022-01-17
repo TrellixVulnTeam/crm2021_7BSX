@@ -3,17 +3,17 @@
 
 <table class="tbl_titulo">
   <tr>
-    <th> <h2 mat-dialog-title ><b>Detalles del evento N°:</b> {{eventos_obj.id}}</h2></th>
+    <th> <h2 mat-dialog-title ><b>Detalles de la macrotarea N°:</b> {{eventos_obj.id}}</h2></th>
 
     <th>
       <button  mat-raised-button color="accent"   (click)="verTicketsAsociados(eventos_obj)">
-        <mat-icon>remove_red_eye</mat-icon>  Tickets asociados al evento {{eventos_obj.id}}
+        <mat-icon>remove_red_eye</mat-icon>  Tickets asociados a la macrotarea {{eventos_obj.id}}
       </button>
   </th>
   </tr>
   <tr>
     <th>
-      <h2 mat-dialog-title ><b>Título del evento:</b> {{eventos_obj.eventoTitulo}}</h2>
+      <h2 mat-dialog-title ><b>Título de la macrotarea:</b> {{eventos_obj.eventoTitulo}}</h2>
     </th>
   </tr>
 </table>
@@ -24,7 +24,7 @@
 <div mat-dialog-content>
 
   <mat-tab-group>
-    <mat-tab label="Detalles generales del evento" class="tabs">
+    <mat-tab label="Detalles generales de la macrotarea" class="tabs">
 
       <form class="form_evento" [formGroup]="form_evento" >
         <br>
@@ -47,12 +47,12 @@
 
 
           <mat-form-field appearance="legacy" class="input3">
-            <mat-label>Título del evento</mat-label>
+            <mat-label>Título de la macrotarea</mat-label>
             <textarea readonly rows="3"  matInput formControlName="titulo_evt" autocomplete="off" [(ngModel)]="eventos_obj.eventoTitulo"></textarea>
           </mat-form-field>
 
           <mat-form-field appearance="legacy" class="input3">
-            <mat-label>Descripción del evento</mat-label>
+            <mat-label>Descripción de la macrotarea</mat-label>
             <textarea readonly matInput  maxlength="50" autocomplete="off" formControlName="descripcion_evt" [(ngModel)]="eventos_obj.descripcion"></textarea>
           </mat-form-field>
 
@@ -77,7 +77,7 @@
 
     <mat-tab label="Archivos adjuntos" class="tabs">
       <br><br>
-      <h3>Adjuntos cargados al evento</h3>
+      <h3>Adjuntos cargados a la macrotarea</h3>
       <table class="tbl_archivos">
         <thead>
             <tr>

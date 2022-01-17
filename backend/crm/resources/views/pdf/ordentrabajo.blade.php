@@ -202,39 +202,37 @@
         </table>
     </div>
 
-
+    <br><br>
     <div style="position: relative; margin-top:30px;  width: 700px">
         <table class="minimalistBlack" style="border: none">
             <thead>
             <tr>
-                <th colspan="4">Firmas</th>
+                <th colspan="3">Usuarios involucrados en el proceso</th>
             </tr>
             </thead>
             <tbody style="border:none">
             <tr>
-                <td  style="width: 75px; border:none"><b style="font-size: 10px; ">Solicitante:</b></td>
-                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 ">{{$orden->solicitantenombre}} {{$orden->solicitanteapellido}}</b></td>
-                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 "><b></b></b></td>
-                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 "><b>Fechas de aprobación</b></b></td>
+                <td  style="width: 75px; border:none"><b style="font-size: 10px; "><br><br>Solicitante:</b></td>
+                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 "><br><br>{{$orden->solicitantenombre}} {{$orden->solicitanteapellido}}</b></td>
+                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 "><br><br><b>Fechas de aprobación</b></b></td>
             </tr>
             <tr>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
-                <td style="border:none"></td>
             </tr>
             <tr>
-                <td style="border:none"></td>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
             </tr>
             <tr style="">
-                <td  style="width: 75px; border:none"><b style="font-size: 10px; ">Autorizado por:</b></td>
-                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 ">Leonel Bolaños 
-                     
+                <td  style="width: 75px; border:none"><b style="font-size: 10px; ">Autorizado desde CRM por:</b></td>
+                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 ">
+                    {{$orden->nom_tec}} {{$orden->ape_tec}}<br>
+                        <b>(Gerencia técnica)</b>
                 </b></td>
-                <td style="border:none"><b>F: __________________</b></td>
+               
                 <td style="border:none"><?php
                  $fecha1 = date_create($orden->fechaAuto1); echo date_format($fecha1,'d/m/Y H:i')
                 ?></td>
@@ -243,25 +241,24 @@
                 <td style="border:none"></td>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
-                <td style="border:none"></td>
             </tr>
             <tr>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
-                <td style="border:none"></td>
             </tr>
             <tr>
-                <td style="border:none"></td>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
                 <td style="border:none"></td>
             </tr>
             <tr style="">
                 <td  style="width: 75px; border:none"></td>
-                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 ">Ricardo Chevez
+                <td  style="width: 120px; border:none"><b style="font-size: 10px; font-weight: 400 ">
+                    {{$orden->nom_comer}} {{$orden->ape_comer}}<br>
+                        <b>(Aprobación secundaria)</b>
                  </b></td>
-                 <td style="border:none"><b>F: __________________</b></td>
+                 
                 <td style="border:none">
                 <?php
                  $fecha2 = date_create($orden->fechaAuto2); echo date_format($fecha2,'d/m/Y H:i')

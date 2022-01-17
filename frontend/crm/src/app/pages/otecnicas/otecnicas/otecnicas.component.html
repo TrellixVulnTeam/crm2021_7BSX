@@ -42,7 +42,7 @@
 
 
     <ng-container matColumnDef="aprobTecnica">
-      <th mat-header-cell *matHeaderCellDef> Aprob. Técnica </th>
+      <th mat-header-cell *matHeaderCellDef> Aprob. G. Técnica </th>
       <td mat-cell *matCellDef="let row">
         <div class="pendiente" *ngIf="row.aprobTecnica == 'Pendiente'">Pendiente</div>
         <div class="aprobada" *ngIf="row.aprobTecnica == 'Aprobada'">Aprobada</div>
@@ -52,7 +52,7 @@
     </ng-container>
 
     <ng-container matColumnDef="aprobVentas">
-      <th mat-header-cell *matHeaderCellDef> Aprob. Ventas </th>
+      <th mat-header-cell *matHeaderCellDef> Aprob. Secundaria </th>
       <td mat-cell *matCellDef="let row">
         <div class="pendiente" *ngIf="row.aprobVentas == 'Pendiente'">Pendiente</div>
         <div class="aprobada"  *ngIf="row.aprobVentas == 'Aprobada'">Aprobada</div>

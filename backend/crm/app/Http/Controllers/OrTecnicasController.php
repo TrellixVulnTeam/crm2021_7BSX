@@ -39,11 +39,16 @@ class OrTecnicasController extends Controller
             else
             'Denegada'
 
-            end as aprobVentas
-
+            end as aprobVentas,
+			CONCAT(convert(varchar, fechaAuto1, 103), ' ', substring(convert(varchar,fechaAuto1, 114),1,5)) as fecha_tecnica_aprob,
+			CONCAT(convert(varchar, fechaAuto2, 103), ' ', substring(convert(varchar,fechaAuto2, 114),1,5)) as fecha_comercial_aprob,
+            CONCAT(utec.nombre, ' ', utec.apellido) as usuario_tec, CONCAT(ucom.nombre, ' ', ucom.apellido) as usuario_comer
+			
 
         from CRM_ordenes_trabajo cot2 
         inner join users u on u.id = cot2.solicitante 
+        left join users utec on utec.id = cot2.usuario_tec 
+        left join users ucom on ucom.id = cot2.usuario_comer 
         order by cot2.id desc
         ");
 
@@ -98,6 +103,7 @@ class OrTecnicasController extends Controller
                             'autorizado_1' => 1,
                             'comentarioaprob_admin' => $request['comentario'],
                             'fechaAuto1' => date('Ymd H:i'),
+                            'usuario_tec' => $request['user'],
                             ]);
 
         return response()->json($editar);
@@ -112,6 +118,7 @@ class OrTecnicasController extends Controller
                         'autorizado_2' => 1,
                         'comentarioaprob_ventas' => $request['comentario'],
                         'fechaAuto2' => date('Ymd H:i'),
+                        'usuario_comer' => $request['user'],
                         ]);
 
         return response()->json($editar);
@@ -125,6 +132,8 @@ class OrTecnicasController extends Controller
         ->update([
             'autorizado_1' => 0,
             'comentariodenegacion' => $request['comentario'],
+            'fechaAuto1' => date('Ymd H:i'),
+            'usuario_tec' => $request['user'],
             ]);
 
         return response()->json($editar);
@@ -137,6 +146,8 @@ class OrTecnicasController extends Controller
         ->update([
             'autorizado_2' => 0,
             'comentariodenegacion_ventas' => $request['comentario'],
+            'fechaAuto2' => date('Ymd H:i'),
+            'usuario_comer' => $request['user'],
             ]);
 
         return response()->json($editar);
@@ -148,8 +159,11 @@ class OrTecnicasController extends Controller
         $orden = DB::connection('comanda')
             ->table('CRM_ordenes_trabajo as orden')
             ->leftjoin('users as u','u.id','=','orden.solicitante')
+            ->leftjoin('users as utec','utec.id','=','orden.usuario_tec')
+            ->leftjoin('users as ucom','ucom.id','=','orden.usuario_comer')
             ->leftjoin('CRM_eventos as e','e.id','=','orden.evento')
-            ->select('u.nombre as solicitantenombre','u.apellido as solicitanteapellido','orden.*','e.cliente as cliente')
+            ->select('u.nombre as solicitantenombre','u.apellido as solicitanteapellido','orden.*','e.cliente as cliente',
+             'utec.nombre as nom_tec', 'utec.apellido as ape_tec', 'ucom.nombre as nom_comer', 'ucom.apellido as ape_comer', )
             ->where('orden.id',$request['id'])
             ->first();
 

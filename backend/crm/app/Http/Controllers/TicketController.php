@@ -32,10 +32,12 @@ class TicketController extends Controller
         u.nombre as nombreasignado, u.apellido as apellidoasignado,
         u.nombre +' '+ u.apellido as asignado,
         us.nombre +' '+ us.apellido as solicitante,
-        us.nombre as nombresoli, us.apellido as apellidosoli from tickets t
+        us.nombre as nombresoli, us.apellido as apellidosoli,
+		ev.cliente as cliente from tickets t
         inner join estados e on e.id = t.estado_id
         inner join users u on u.id = t.us_asignado
         inner join users us on us.id = t.us_solicitante 
+        inner join CRM_Eventos ev on ev.id = t.evento_id
         where t.categoria_id = 8 and (t.us_solicitante = ".$id ."
         or t.us_asignado= ".$id .")
         order by t.id desc

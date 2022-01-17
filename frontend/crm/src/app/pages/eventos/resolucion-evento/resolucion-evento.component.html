@@ -1,15 +1,15 @@
 
-<h3 mat-dialog-title ><b>Detalles del evento N°:</b> {{detalle_evento.id}}</h3>
-<h3 mat-dialog-title ><b>Título del evento:</b> {{detalle_evento.eventoTitulo}}</h3>
+<h3 mat-dialog-title ><b>Detalles de la macrotarea N°:</b> {{detalle_evento.id}}</h3>
+<h3 mat-dialog-title ><b>Título de la macrotarea:</b> {{detalle_evento.eventoTitulo}}</h3>
 <mat-divider></mat-divider>
 <mat-divider></mat-divider>
 <div mat-dialog-content *ngIf="no_tickets">
-      <h2 class="form-title">Confirmación para guardar resolución del evento</h2>
+      <h2 class="form-title">Confirmación para guardar resolución de la macrotarea</h2>
       <form [formGroup]="frm_resolucion_evt">
         <br>
         <mat-form-field appearance="legacy" class="input">
-          <mat-label>Resolución del evento</mat-label>
-          <textarea  matInput rows="4" formControlName="resolucion_evt" placeholder="Digite la resolución del evento"
+          <mat-label>Resolución de la macrotarea</mat-label>
+          <textarea  matInput rows="4" formControlName="resolucion_evt" placeholder="Digite la resolución de la macrotarea"
           autocomplete="off"></textarea>
           <input type="hidden" formControlName="evt_id" [(ngModel)]="detalle_evento.id">
         </mat-form-field>
@@ -19,7 +19,7 @@
 </div>
 
 <div mat-dialog-content *ngIf="si_tickets">
-  <h2 class="form-title">El evento no se puede cerrar porque los siguientes tickets no se han cerrado</h2><br>
+  <h2 class="form-title">La macrotarea no se puede cerrar porque los siguientes tickets no se han cerrado</h2><br>
   <table>
     <thead>
       <tr>

@@ -56,7 +56,7 @@
     <ng-container matColumnDef="Acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let row1" class="acciones">
-        <button mat-mini-fab color="primary" matTooltip="Nuevo evento" matTooltipPosition="above" (click)="nuevoEvento(row1)">
+        <button mat-mini-fab color="primary" matTooltip="Nueva macrotarea" matTooltipPosition="above" (click)="nuevoEvento(row1)">
           <mat-icon>add</mat-icon>
         </button>
 
@@ -198,7 +198,7 @@
       <ng-container matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let row" class="acciones">
-          <button mat-mini-fab color="primary" matTooltip="Nuevo evento" matTooltipPosition="above" *ngIf="row.estado !='Cerrada'" (click)="nuevoEvento(row)">
+          <button mat-mini-fab color="primary" matTooltip="Nueva macrotarea" matTooltipPosition="above" *ngIf="row.estado !='Cerrada'" (click)="nuevoEvento(row)">
             <mat-icon>add</mat-icon>
           </button>
           <button  mat-mini-fab color="warn" matTooltip="Cerrar atención" matTooltipPosition="above" *ngIf="row.estado !='Cerrada'" (click)="cerrarAtencion(row)">

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title><b>Eventos asociados a la atención :</b> {{datos_atencion.id}}</h2>
+<h2 mat-dialog-title><b>Macrotareas asociadas a la atención :</b> {{datos_atencion.id}}</h2>
 <h2 mat-dialog-title><b>Título de la atención :</b> {{datos_atencion.titulo_atn}}</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-content>
@@ -19,7 +19,7 @@
         <tr *ngFor="let ev of datos_evento">
           <td>{{ev.id}}
 
-            <button  mat-mini-fab color="basic" class="success" matTooltip="Detalles del evento" matTooltipPosition="above"
+            <button  mat-mini-fab color="basic" class="success" matTooltip="Detalles de macrotarea" matTooltipPosition="above"
             (click)="verDetalleEvento(ev)">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
@@ -32,7 +32,7 @@
           <td>
 
 
-            <button  mat-mini-fab color="accent" matTooltip="Tickets asociados al evento" matTooltipPosition="above"
+            <button  mat-mini-fab color="accent" matTooltip="Tickets asociados a la macrotarea" matTooltipPosition="above"
             (click)="verTicketsAsociados(ev)">
               <mat-icon>list</mat-icon>
             </button>

@@ -1,5 +1,9 @@
+
+
+<h2 mat-dialog-title>Detalles de la orden N° {{detalles_orden.id}}</h2>
+<mat-divider></mat-divider>
 <div mat-dialog-content>
-    <h2>Detalles de la orden N° {{detalles_orden.id}}</h2>
+
       <form [formGroup]="FormOrden">
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Trabajo: </mat-label>
@@ -71,22 +75,22 @@
           </table>
 
         </div>
+        <br>
 
-
-        <div style="margin-left: 3% !important;" *ngIf="(user.alias == 'rchevez' || user.alias == 'oquan' || user.alias == 'fmejia') && (detalles_orden.aprobVentas == 'Pendiente')">
-          <h2 style="color: orangered !important;">Aprobar/Denegar orden por área de ventas</h2>
+        <div style="margin-left: 3% !important;" *ngIf="(user.alias == 'rchevez' || user.alias == 'eescobar' || user.alias == 'aortiz' || user.alias == 'fsolano') && (detalles_orden.aprobVentas == 'Pendiente')">
+          <h2 style="color: orangered !important;">Aprobar/Denegar orden por área comercial</h2>
 
           <mat-form-field appearance="legacy" style="width: 90% !important;">
             <mat-label>Comentario: </mat-label>
             <textarea  matInput rows="3"  autocomplete="off" formControlName="comentario" ></textarea>
           </mat-form-field>
-
+          <input type="hidden" formControlName="user" [(ngModel)]="user.id">
           <br>
 
           <table>
             <tr>
               <th>
-                <button mat-raised-button color="basic" class="success" (click)="aprobarOrdenVentas()"><mat-icon>thumb_up</mat-icon> Aprobar orden por área de ventas</button>
+                <button mat-raised-button color="basic" class="success" (click)="aprobarOrdenVentas()"><mat-icon>thumb_up</mat-icon> Aprobar orden por área comercial</button>
               </th>
               <th>
                 <button mat-raised-button color="warn" (click)="denegarOrdenVentas()"><mat-icon>thumb_down</mat-icon> Denegar orden</button>
@@ -97,32 +101,66 @@
 
         <br>
         <div *ngIf="detalles_orden.aprobVentas == 'Aprobada'" style="margin-left: 3% !important;">
-          <h2 style="color: orangered !important;">Aprobación de área de ventas</h2>
+          <h2 style="color: orangered !important;">Aprobación de área comercial</h2>
 
-          <mat-form-field appearance="legacy" style="width: 90% !important;">
+          <mat-form-field appearance="legacy" class="input">
             <mat-label>Comentario: </mat-label>
             <textarea readonly matInput rows="3"  autocomplete="off" formControlName="comentario_apV"  [(ngModel)]="detalles_orden.comentarioaprob_ventas"></textarea>
           </mat-form-field>
+
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Fecha de aprobación: </mat-label>
+          <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_comercial_aprob" [(ngModel)]="detalles_orden.fecha_comercial_aprob">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Usuario: </mat-label>
+          <input readonly matInput type="text"  autocomplete="off" formControlName="usuario_comer" [(ngModel)]="detalles_orden.usuario_comer">
+        </mat-form-field>
         </div>
 
 
         <div *ngIf="detalles_orden.aprobTecnica == 'Aprobada'" style="margin-left: 3% !important;">
           <h2 style="color: orangered !important;">Aprobación de área técnica</h2>
 
-          <mat-form-field appearance="legacy" style="width: 90% !important;">
+          <mat-form-field appearance="legacy"  class="input">
             <mat-label>Comentario: </mat-label>
             <textarea readonly matInput rows="3"  autocomplete="off" formControlName="comentario_apAd"  [(ngModel)]="detalles_orden.comentarioaprob_admin"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Fecha de aprobación: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_tecnica_aprob" [(ngModel)]="detalles_orden.fecha_tecnica_aprob">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Usuario: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="usuario_tec" [(ngModel)]="detalles_orden.usuario_tec">
           </mat-form-field>
         </div>
 
 
 
         <div *ngIf="detalles_orden.aprobVentas == 'Denegada'" style="margin-left: 3% !important;">
-          <h2 style="color: orangered !important;">Denegación de área de ventas</h2>
+          <h2 style="color: orangered !important;">Denegación de área comercial</h2>
 
-          <mat-form-field appearance="legacy" style="width: 90% !important;">
+          <mat-form-field appearance="legacy" class="input">
             <mat-label>Comentario: </mat-label>
             <textarea readonly matInput rows="3"  autocomplete="off" formControlName="comentario_deV"  [(ngModel)]="detalles_orden.comentariodenegacion_ventas"></textarea>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Fecha de denegación: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_comercial_aprob" [(ngModel)]="detalles_orden.fecha_comercial_aprob">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Usuario: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="usuario_comer" [(ngModel)]="detalles_orden.usuario_comer">
           </mat-form-field>
         </div>
 
@@ -130,9 +168,19 @@
         <div *ngIf="detalles_orden.aprobTecnica == 'Denegada'" style="margin-left: 3% !important;">
           <h2 style="color: orangered !important;">Denegación de área técnica</h2>
 
-          <mat-form-field appearance="legacy" style="width: 90% !important;">
+          <mat-form-field appearance="legacy" class="input">
             <mat-label>Comentario: </mat-label>
             <textarea readonly matInput rows="3"  autocomplete="off" formControlName="comentario_deAd"  [(ngModel)]="detalles_orden.comentariodenegacion"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Fecha de denegación: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_tecnica_aprob" [(ngModel)]="detalles_orden.fecha_tecnica_aprob">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Usuario: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="usuario_tec" [(ngModel)]="detalles_orden.usuario_tec">
           </mat-form-field>
         </div>
 

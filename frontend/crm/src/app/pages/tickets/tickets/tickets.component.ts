@@ -25,7 +25,7 @@ import { DetallesTicketsComponent } from '../detalles-tickets/detalles-tickets.c
 export class TicketsComponent implements OnInit {
   user: Usuario = new Usuario();
   texto:any;
-  displayedColumns: string[] = ['atencion_id',  'evento_id', 'id' , 'nombreasignado', 'nombresoli','descripcion','fecha_creacionD', 'estado', 'Acciones'];
+  displayedColumns: string[] = ['atencion_id',  'evento_id', 'id' ,'cliente', 'nombreasignado', 'nombresoli','descripcion','fechasolaproxD','estado', 'Acciones'];
   dataSource_tckTodos:any = new MatTableDataSource<any>([]);
   dataSource_tckGenerados:any = new MatTableDataSource<any>([]);
   dataSource_tckProResolucion:any = new MatTableDataSource<any>([]);

@@ -28,10 +28,10 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="evento_id">
-          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <th mat-header-cell *matHeaderCellDef> ID Macrotarea </th>
           <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}
 
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above"
+            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
             (click)="verDetalleEvento(row)">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
@@ -44,6 +44,11 @@
             <button mat-mini-fab color="basic" class="success" matTooltip="Detalles del ticket"
             matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <td mat-cell *matCellDef="let row"> {{row.cliente}}</td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -65,9 +70,10 @@
             </div> </td>
         </ng-container>
 
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+
+        <ng-container matColumnDef="fechasolaproxD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de compromiso </th>
+          <td mat-cell *matCellDef="let row"> {{row.fechasolaproxD}} </td>
         </ng-container>
 
         <ng-container matColumnDef="estado">
@@ -113,9 +119,9 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="evento_id">
-          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
           <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above"
+            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
             (click)="verDetalleEvento(row)">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
@@ -128,6 +134,11 @@
             <button mat-mini-fab color="basic" class="success" matTooltip="Detalles del ticket"
             matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <td mat-cell *matCellDef="let row"> {{row.cliente}}</td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -149,9 +160,11 @@
             </div> </td>
         </ng-container>
 
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+
+
+        <ng-container matColumnDef="fechasolaproxD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de compromiso </th>
+          <td mat-cell *matCellDef="let row"> {{row.fechasolaproxD}} </td>
         </ng-container>
 
         <ng-container matColumnDef="estado">
@@ -200,9 +213,9 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="evento_id">
-          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <th mat-header-cell *matHeaderCellDef> ID Macrotarea </th>
           <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above"
+            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
             (click)="verDetalleEvento(row)">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
@@ -215,6 +228,10 @@
             <button mat-mini-fab color="basic" class="success" matTooltip="Detalles del ticket"
             matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
+        </ng-container>
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <td mat-cell *matCellDef="let row"> {{row.cliente}}</td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -236,9 +253,11 @@
             </div> </td>
         </ng-container>
 
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+
+
+        <ng-container matColumnDef="fechasolaproxD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de compromiso </th>
+          <td mat-cell *matCellDef="let row"> {{row.fechasolaproxD}} </td>
         </ng-container>
 
         <ng-container matColumnDef="estado">
@@ -258,84 +277,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </mat-tab>
-
-   <!-- <mat-tab label="Tickets Rechazados" class="tabs">
-      <br>
-      <h3 class="title">Tickets Rechazados</h3>
-      <mat-divider></mat-divider>
-      <br>
-      <mat-paginator #paginator5 [pageSizeOptions]="[5, 10, 20, 100]"
-        showFirstLastButtons
-        aria-label="Cantidad de registros a mostrar">
-      </mat-paginator>
-
-      <mat-form-field appearance="legacy" class="input_search">
-        <mat-label>Buscar en tabla: </mat-label>
-        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_tckRechazados($event)">
-      </mat-form-field>
-
-      <table mat-table [dataSource]="dataSource_tckRechazados"  >
-
-        <ng-container matColumnDef="atencion_id">
-          <th mat-header-cell *matHeaderCellDef> ID Atención</th>
-          <td mat-cell *matCellDef="let row"> {{row.atencion_id}}
-            <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
-            matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="evento_id">
-          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
-          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="nombreasignado">
-          <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
-          <td mat-cell *matCellDef="let row"> {{row.nombreasignado}} {{row.apellidoasignado}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="nombresoli">
-          <th mat-header-cell *matHeaderCellDef> Usuario Solicitante </th>
-          <td mat-cell *matCellDef="let row"> {{row.nombresoli}} {{row.apellidosoli}}</td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef> Descripción </th>
-          <td mat-cell *matCellDef="let row"  class="desc">
-            <div class="desc_div">
-              {{row.descripcion}}
-            </div> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef> Estado </th>
-          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
-          <td mat-cell *matCellDef="let row">
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above">
-              <mat-icon>list</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-    </mat-tab>-->
 
     <mat-tab label="Tickets Cerrados" class="tabs">
       <br>
@@ -362,9 +303,9 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="evento_id">
-        <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+        <th mat-header-cell *matHeaderCellDef> ID Macrotarea </th>
         <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}
-          <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above"
+          <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
           (click)="verDetalleEvento(row)">
             <mat-icon>remove_red_eye</mat-icon>
           </button>
@@ -377,6 +318,11 @@
           <button mat-mini-fab color="basic" class="success" matTooltip="Detalles del ticket"
           matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
         </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef> Cliente </th>
+        <td mat-cell *matCellDef="let row"> {{row.cliente}}</td>
       </ng-container>
 
       <ng-container matColumnDef="nombreasignado">
@@ -401,6 +347,12 @@
       <ng-container matColumnDef="fecha_creacionD">
         <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
         <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="fechasolaproxD">
+        <th mat-header-cell *matHeaderCellDef> Fecha de compromiso </th>
+        <td mat-cell *matCellDef="let row"> {{row.fechasolaproxD}} </td>
       </ng-container>
 
       <ng-container matColumnDef="estado">
@@ -447,9 +399,9 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="evento_id">
-          <th mat-header-cell *matHeaderCellDef> ID Evento </th>
+          <th mat-header-cell *matHeaderCellDef> ID Macrotarea </th>
           <td mat-cell *matCellDef="let row" class="cli"> {{row.evento_id }}
-            <button  mat-mini-fab color="accent" matTooltip="Detalles del evento" matTooltipPosition="above"
+            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
             (click)="verDetalleEvento(row)">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
@@ -462,6 +414,11 @@
             <button mat-mini-fab color="basic" class="success" matTooltip="Detalles del ticket"
             matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
           </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <td mat-cell *matCellDef="let row"> {{row.cliente}}</td>
         </ng-container>
 
         <ng-container matColumnDef="nombreasignado">
@@ -483,9 +440,10 @@
             </div> </td>
         </ng-container>
 
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha de solicitud </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+
+        <ng-container matColumnDef="fechasolaproxD">
+          <th mat-header-cell *matHeaderCellDef> Fecha de compromiso </th>
+          <td mat-cell *matCellDef="let row"> {{row.fechasolaproxD}} </td>
         </ng-container>
 
         <ng-container matColumnDef="estado">

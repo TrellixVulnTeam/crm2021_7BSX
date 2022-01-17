@@ -1,5 +1,5 @@
-<h2 mat-dialog-title><b>Tickets asociados al evento :</b> {{datos_evento.id}}</h2>
-<h2 mat-dialog-title><b>Título del evento :</b> {{datos_evento.evTitulo}}</h2>
+<h2 mat-dialog-title><b>Tickets asociados a la Macrotarea :</b> {{datos_evento.id}}</h2>
+<h2 mat-dialog-title><b>Título de la Macrotarea :</b> {{datos_evento.evTitulo}}</h2>
 <mat-divider></mat-divider>
 <div mat-dialog-content>
 
@@ -38,7 +38,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" class="action"  (click)="volverListadoEventos()" *ngIf="validar_btn == 'Eventos'"><mat-icon>backspace</mat-icon> Volver a listado de eventos</button>
+  <button mat-raised-button color="primary" class="action"  (click)="volverListadoEventos()" *ngIf="validar_btn == 'Eventos'"><mat-icon>backspace</mat-icon> Volver a listado de macrotareas</button>
 
-  <button mat-raised-button color="primary" class="action"  (click)="volverEvento()" *ngIf="validar_btn == 'Evento'"><mat-icon>backspace</mat-icon> Volver a detalle de evento</button>
+  <button mat-raised-button color="primary" class="action"  (click)="volverEvento()" *ngIf="validar_btn == 'Evento'"><mat-icon>backspace</mat-icon> Volver a detalle de macrotarea</button>
 </div>

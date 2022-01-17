@@ -29,5 +29,8 @@ export class Otecnicas {
   public fecha_resolucionD!:string;
   public aprobVentas!:string;
   public aprobTecnica!:string;
-
+  public fecha_tecnica_aprob!:string;
+  public fecha_comercial_aprob!:string;
+  public usuario_tec!:string;
+  public usuario_comer!:string;
 }

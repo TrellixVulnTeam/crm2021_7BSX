@@ -33,12 +33,16 @@ export class DetallesOtecnicasComponent implements OnInit {
       'observaciones_soli': new FormControl('',),
       'observaciones_ejec': new FormControl('',),
       'comentario': new FormControl('',),
-      'comentario_res': new FormControl('',),
-      'comentario_apV': new FormControl('',),
-      'comentario_apAd': new FormControl('',),
-      'comentario_deV': new FormControl('',),
-      'comentario_deAd': new FormControl('',),
-
+      'comentario_res': new FormControl(''),
+      'comentario_apV': new FormControl(''),
+      'comentario_apAd': new FormControl(''),
+      'comentario_deV': new FormControl(''),
+      'comentario_deAd': new FormControl(''),
+      'user': new FormControl(''),
+      'fecha_tecnica_aprob': new FormControl(''),
+      'fecha_comercial_aprob': new FormControl(''),
+      'usuario_tec': new FormControl(''),
+      'usuario_comer': new FormControl(''),
     });
   }
 
