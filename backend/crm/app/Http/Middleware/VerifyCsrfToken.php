@@ -77,6 +77,7 @@ class VerifyCsrfToken extends BaseVerifier
         'aprobarOrdenVentas',
         'denegarOrdenTecnica',
         'denegarOrdenVentas',
-        'imprimirorden'
+        'imprimirorden',
+        'notificarUsuarios'
     ];
 }

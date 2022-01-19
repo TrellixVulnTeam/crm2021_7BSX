@@ -101,4 +101,11 @@ export class TicketsService {
   }
 
 
+
+
+  public notificarUsuarios(users: Usuario[]): Observable<Usuario[]> {
+    return this.http.post<Usuario[]>(this.globalservice.getUrlBackEnd() + 'notificarUsuarios', users, httpOptions)
+    .pipe(map(data => data as Usuario[] ));
+  }
+
 }

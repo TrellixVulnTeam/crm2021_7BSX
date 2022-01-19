@@ -107,6 +107,15 @@
                                                     Descripcion: <b>{{Session::get('descripcion')}}</b><br/>
                                                     Solicitante: <b>{{Session::get('solicitante')}}</b><br/>
                                                     Asignado: <b>{{Session::get('asignado')}}</b><br/>
+                                                    <br>
+                                                    
+                                                    Notificado a:<br>
+                                                        <?php $obj = json_decode(Session::get('usuarios_noti')); ?>
+                                                        @foreach($obj as $u)
+                                                            <b> - {{$u->nombre}} {{$u->apellido}} </b><br>
+                                                        @endforeach
+
+                                                    <br>
                                                     Fecha propuesta de solución: <b> <?php $fecha1 = date_create(Session::get('fechaSolucionaprox')) ; 
                                                     echo date_format($fecha1,'d/m/Y')?></b><br/>
                                                     Fecha de solicitud: <b> <?php $fecha1 = date_create(Session::get('fechaSolicitud')) ; 

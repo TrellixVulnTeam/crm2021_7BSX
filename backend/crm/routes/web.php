@@ -83,6 +83,8 @@ Route::post('guardarTicketOrder', 'TicketController@guardarTicketOrder');
 Route::post('getDetalleTicket', 'TicketController@getDetalleTicket');
 Route::post('getTicketsAsociados', 'TicketController@getTicketsAsociados');
 Route::post('getConteoTickets', 'TicketController@getConteoTickets');
+Route::post('notificarUsuarios', 'TicketController@notificarUsuarios');
+
 
 //rutas para ordenes técnicas
 Route::get('getAllOrdenes', 'OrTecnicasController@getAllOrdenes');

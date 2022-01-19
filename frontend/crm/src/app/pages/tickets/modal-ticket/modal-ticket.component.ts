@@ -91,7 +91,12 @@ export class ModalTicketComponent implements OnInit {
   }
 
 
+  notificarUsuarios(){
+      this.ticketService.notificarUsuarios(this.usuario_listado_notificar).subscribe(
 
+      );
+
+  }
 
   guardarTicket(){
     let datos: Tickets = new Tickets();
@@ -113,7 +118,7 @@ export class ModalTicketComponent implements OnInit {
         });
       });
       this.modal_ticket.close();
-
+      this.notificarUsuarios();
       //console.table(datos);
 
   }

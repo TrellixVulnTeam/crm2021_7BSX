@@ -8,4 +8,5 @@ export class Usuario {
   public apellido!: string;
   public rol!: string;
   public correo!: string;
+  public nombre_apellido !: string;
 }
