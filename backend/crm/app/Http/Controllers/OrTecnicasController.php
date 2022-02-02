@@ -40,15 +40,29 @@ class OrTecnicasController extends Controller
             'Denegada'
 
             end as aprobVentas,
+
+            case when cot2.autorizado_3 is null
+            then
+            'Pendiente'
+            when cot2.autorizado_3 = 1
+            then
+            'Aprobada'
+            else
+            'Denegada'
+
+            end as aprobGg,
+
 			CONCAT(convert(varchar, fechaAuto1, 103), ' ', substring(convert(varchar,fechaAuto1, 114),1,5)) as fecha_tecnica_aprob,
 			CONCAT(convert(varchar, fechaAuto2, 103), ' ', substring(convert(varchar,fechaAuto2, 114),1,5)) as fecha_comercial_aprob,
-            CONCAT(utec.nombre, ' ', utec.apellido) as usuario_tec, CONCAT(ucom.nombre, ' ', ucom.apellido) as usuario_comer
-			
+            CONCAT(convert(varchar, fechaAuto3, 103), ' ', substring(convert(varchar,fechaAuto3, 114),1,5)) as fecha_gg_aprob,
+            CONCAT(utec.nombre, ' ', utec.apellido) as usuario_tec, CONCAT(ucom.nombre, ' ', ucom.apellido) as usuario_comer,
+			CONCAT(ugg.nombre, ' ', ugg.apellido) as usuario_gg
 
         from CRM_ordenes_trabajo cot2 
         inner join users u on u.id = cot2.solicitante 
         left join users utec on utec.id = cot2.usuario_tec 
         left join users ucom on ucom.id = cot2.usuario_comer 
+        left join users ugg on ugg.id = cot2.usuario_gg
         order by cot2.id desc
         ");
 
@@ -125,6 +139,20 @@ class OrTecnicasController extends Controller
     }
 
 
+    public function aprobarOrdenGG(Request $request){
+
+        $editar =  DB::connection('comanda')->table('CRM_ordenes_trabajo')
+                    ->where('id', $request['id'])
+                    ->update([
+                        'autorizado_3' => 1,
+                        'comentarioaprob_gg' => $request['comentario1gg'],
+                        'fechaAuto3' => date('Ymd H:i'),
+                        'usuario_gg' => $request['user'],
+                        ]);
+
+        return response()->json($editar);
+    }
+
     public function denegarOrdenTecnica(Request $request){
 
         $editar =  DB::connection('comanda')->table('CRM_ordenes_trabajo')
@@ -152,6 +180,22 @@ class OrTecnicasController extends Controller
 
         return response()->json($editar);
     }
+
+
+    public function denegarOrdenGG(Request $request){
+
+        $editar =  DB::connection('comanda')->table('CRM_ordenes_trabajo')
+        ->where('id', $request['id'])
+        ->update([
+            'autorizado_3' => 0,
+            'comentariodenegacion_gg' => $request['comentario1gg'],
+            'fechaAuto3' => date('Ymd H:i'),
+            'usuario_gg' => $request['user'],
+            ]);
+
+        return response()->json($editar);
+    }
+
 
 
     public function imprimirOrden(Request $request)

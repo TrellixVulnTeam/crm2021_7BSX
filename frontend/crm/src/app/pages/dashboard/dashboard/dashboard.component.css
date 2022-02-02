@@ -26,7 +26,7 @@
 }
 
 .navTittle{
-  color: #003F63 !important;
+  color: black !important;
 }
 
 .container{
@@ -39,7 +39,7 @@
 
 span{
   font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
+  color: black !important;
 }
 
 mat-menu{

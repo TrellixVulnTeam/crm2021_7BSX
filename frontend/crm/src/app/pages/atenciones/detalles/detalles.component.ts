@@ -125,7 +125,7 @@ export class DetallesComponent implements OnInit {
         this.modal_atencion.close();
         this.dialog.open(EventosAsociadosComponent,{
           data: {datos_evento: data, datos_atencion: this.arreglo_atenciones},
-          width: '60%',
+          width: '80%',
         });
       }
     );

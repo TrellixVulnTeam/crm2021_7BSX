@@ -12,6 +12,7 @@
         <th>Usuario Solicitante</th>
         <th>Descripción</th>
         <th>Fecha de solicitud</th>
+        <th>Fecha compromiso</th>
         <th>Estado</th>
       </tr>
     </thead>
@@ -28,6 +29,7 @@
         <td>{{tck.apellidosoli}}</td>
         <td>{{tck.descripcion}}</td>
         <td>{{tck.fecha_creacionD}}</td>
+        <td>{{tck.fechasolaproxD}}</td>
         <td>{{tck.estado}} </td>
       </tr>
     </tbody>
@@ -38,7 +40,5 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" class="action"  (click)="volverListadoEventos()" *ngIf="validar_btn == 'Eventos'"><mat-icon>backspace</mat-icon> Volver a listado de macrotareas</button>
 
-  <button mat-raised-button color="primary" class="action"  (click)="volverEvento()" *ngIf="validar_btn == 'Evento'"><mat-icon>backspace</mat-icon> Volver a detalle de macrotarea</button>
 </div>

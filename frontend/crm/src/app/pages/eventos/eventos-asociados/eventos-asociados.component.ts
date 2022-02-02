@@ -59,7 +59,7 @@ export class EventosAsociadosComponent implements OnInit {
 
 
   verTicketsAsociados(evento: Eventos){
-    this.modal_eventos_asociados.close();
+   // this.modal_eventos_asociados.close();
 
     let ticket : any;
 

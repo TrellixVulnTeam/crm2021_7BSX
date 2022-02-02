@@ -56,4 +56,17 @@ export class OtecnicasService {
     return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'denegarOrdenVentas', ot, httpOptions)
     .pipe(map(data => data as Otecnicas ));
   }
+
+
+  public aprobarOrdenGG(ot: Otecnicas): Observable<Otecnicas> {
+    return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'aprobarOrdenGG', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas ));
+  }
+
+
+  public denegarOrdenGG(ot: Otecnicas): Observable<Otecnicas> {
+    return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'denegarOrdenGG', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas ));
+  }
+
 }

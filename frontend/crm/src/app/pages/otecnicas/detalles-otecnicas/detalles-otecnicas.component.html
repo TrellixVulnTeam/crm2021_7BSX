@@ -61,6 +61,7 @@
           <mat-form-field appearance="legacy" style="width: 90% !important;">
             <mat-label>Comentario: </mat-label>
             <textarea  matInput rows="3"  autocomplete="off" formControlName="comentario" ></textarea>
+            <input type="hidden" formControlName="user" [(ngModel)]="user.id">
           </mat-form-field>
           <br>
 
@@ -75,6 +76,31 @@
           </table>
 
         </div>
+
+
+        <div *ngIf="(user.alias == 'fsolano' || user.alias == 'fmejia') && detalles_orden.aprobGg == 'Pendiente'" style="margin-left: 3% !important;">
+          <h2 style="color: orangered !important;">Aprobar/Denegar orden por Gerencia General</h2>
+
+          <mat-form-field appearance="legacy" style="width: 90% !important;">
+            <mat-label>Comentario: </mat-label>
+            <textarea  matInput rows="3"  autocomplete="off" formControlName="comentario1gg" ></textarea>
+            <input type="hidden" formControlName="user" [(ngModel)]="user.id">
+          </mat-form-field>
+          <br>
+
+          <table>
+            <tr>
+              <th>
+                <button mat-raised-button color="basic" class="success" (click)="aprobarOrdenGG()"><mat-icon>thumb_up</mat-icon> Aprobar orden por gerencia general</button>
+              </th>
+              <th>
+                <button mat-raised-button color="warn" (click)="denegarOrdenGG()"><mat-icon>thumb_down</mat-icon> Denegar orden</button>
+              </th>
+          </table>
+
+        </div>
+
+
         <br>
 
         <div style="margin-left: 3% !important;" *ngIf="(user.alias == 'rchevez' || user.alias == 'eescobar' || user.alias == 'aortiz' || user.alias == 'fsolano') && (detalles_orden.aprobVentas == 'Pendiente')">
@@ -141,6 +167,47 @@
           </mat-form-field>
         </div>
 
+        <div *ngIf="detalles_orden.aprobGg == 'Aprobada'" style="margin-left: 3% !important;">
+          <h2 style="color: orangered !important;">Aprobación de Gerencia General</h2>
+
+          <mat-form-field appearance="legacy"  class="input">
+            <mat-label>Comentario: </mat-label>
+            <textarea readonly matInput rows="3"  autocomplete="off" formControlName="comentario_apgg"  [(ngModel)]="detalles_orden.comentarioaprob_gg"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Fecha de aprobación: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_gg_aprob" [(ngModel)]="detalles_orden.fecha_gg_aprob">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Usuario: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="usuario_gg" [(ngModel)]="detalles_orden.usuario_gg">
+          </mat-form-field>
+        </div>
+
+
+
+        <div *ngIf="detalles_orden.aprobGg == 'Denegada'" style="margin-left: 3% !important;">
+          <h2 style="color: orangered !important;">Denegación de Gerencia General</h2>
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Comentario: </mat-label>
+            <textarea readonly matInput rows="3"  autocomplete="off" formControlName="comentario_gg"  [(ngModel)]="detalles_orden.comentariodenegacion_gg"></textarea>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Fecha de denegación: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_gg_aprob" [(ngModel)]="detalles_orden.fecha_gg_aprob">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class="input">
+            <mat-label>Usuario: </mat-label>
+            <input readonly matInput type="text"  autocomplete="off" formControlName="usuario_gg" [(ngModel)]="detalles_orden.usuario_gg">
+          </mat-form-field>
+        </div>
 
 
         <div *ngIf="detalles_orden.aprobVentas == 'Denegada'" style="margin-left: 3% !important;">
@@ -185,9 +252,11 @@
         </div>
 
 
-        <div *ngIf="detalles_orden.aprobTecnica == 'Aprobada' && detalles_orden.aprobVentas == 'Aprobada'" style="margin-left: 3% !important;">
-          <button mat-raised-button color="basic" class="success" (click)="generarHoja()"> Imprimir Orden</button>
-        </div>
+
+
+
+
+
 
       </form>
 
@@ -196,10 +265,13 @@
 </div>
 
 <div mat-dialog-actions>
-
-
-
-
-
-
+  <br><br>
+  <div *ngIf="detalles_orden.aprobTecnica == 'Aprobada' && detalles_orden.aprobVentas == 'Aprobada' && detalles_orden.aprobGg == 'Aprobada'"
+  style="width: 90% !important;margin-left: 5% !important;margin-right: 5% !important;">
+    <button mat-raised-button color="basic" class="success" (click)="generarHoja()" style="width: 100% !important;"> Imprimir Orden</button>
+  </div>
 </div>
+
+
+
+

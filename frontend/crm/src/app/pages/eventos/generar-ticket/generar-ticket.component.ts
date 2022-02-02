@@ -45,4 +45,9 @@ export class GenerarTicketComponent implements OnInit {
     }
   }
 
+
+  cerrarModalTodos(){
+    this.dialog.closeAll();
+  }
+
 }

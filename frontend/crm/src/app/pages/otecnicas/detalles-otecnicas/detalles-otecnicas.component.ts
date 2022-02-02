@@ -33,6 +33,7 @@ export class DetallesOtecnicasComponent implements OnInit {
       'observaciones_soli': new FormControl('',),
       'observaciones_ejec': new FormControl('',),
       'comentario': new FormControl('',),
+      'comentario1gg' : new FormControl('',),
       'comentario_res': new FormControl(''),
       'comentario_apV': new FormControl(''),
       'comentario_apAd': new FormControl(''),
@@ -43,6 +44,11 @@ export class DetallesOtecnicasComponent implements OnInit {
       'fecha_comercial_aprob': new FormControl(''),
       'usuario_tec': new FormControl(''),
       'usuario_comer': new FormControl(''),
+
+      'comentario_apgg': new FormControl(''),
+      'fecha_gg_aprob': new FormControl(''),
+      'usuario_gg': new FormControl(''),
+      'comentario_gg': new FormControl(''),
     });
   }
 
@@ -78,6 +84,59 @@ export class DetallesOtecnicasComponent implements OnInit {
 
   }
 
+
+  aprobarOrdenGG(){
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.aprobarOrdenGG(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.getAllOrdenes();
+        this._snackBar.open('¡¡ Orden aprobada !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+
+
+  }
+
+
+
+  denegarOrdenGG(){
+
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.denegarOrdenGG(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.getAllOrdenes();
+        this._snackBar.open('¡¡ Orden denegada !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+  }
 
 
   aprobarOrdenVentas(){

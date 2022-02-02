@@ -60,6 +60,16 @@
       </td>
     </ng-container>
 
+
+    <ng-container matColumnDef="aprobGg">
+      <th mat-header-cell *matHeaderCellDef> Aprob. G. General </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="pendiente" *ngIf="row.aprobGg == 'Pendiente'">Pendiente</div>
+        <div class="aprobada"  *ngIf="row.aprobGg == 'Aprobada'">Aprobada</div>
+        <div class="denegada"  *ngIf="row.aprobGg == 'Denegada'">Denegada</div>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

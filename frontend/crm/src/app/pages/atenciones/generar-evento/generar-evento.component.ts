@@ -47,4 +47,9 @@ export class GenerarEventoComponent implements OnInit {
     }
   }
 
+
+  cerrarModalTodos(){
+    this.dialog.closeAll();
+  }
+
 }

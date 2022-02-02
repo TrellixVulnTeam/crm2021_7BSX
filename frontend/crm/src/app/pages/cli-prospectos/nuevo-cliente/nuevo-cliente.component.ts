@@ -174,31 +174,22 @@ export class NuevoClienteComponent implements OnInit {
 
 
         this.clienteService.guardar_contactos_cliente(this.datos_contacto_cli).subscribe(
-          response => {
-
-          },
+          response => {},
           err => {},
-          () => {
+          () => {});
 
-            this.clienteService.guardar_usuarios_cliente(this.datos_usuario_cliente).subscribe(
-              response => {
+          this.clienteService.guardar_usuarios_cliente(this.datos_usuario_cliente).subscribe(
+            response => {},
+            err => {},
+            () => {});
 
-              },
-              err => {},
-              () => {
-                this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
-                  duration: 3000,
-                  horizontalPosition: 'center',
-                  verticalPosition: 'top'
-                });
-                this.dialog.closeAll();
-                this.getProspectos();
-              });
-
-
+          this._snackBar.open('¡¡ Cliente creado !!', 'Ok', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
           });
-        //this.listarContactos(datos);
-
+          this.dialog.closeAll();
+          this.getProspectos();
 
       });
   }

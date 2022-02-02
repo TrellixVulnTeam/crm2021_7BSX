@@ -33,4 +33,11 @@ export class Otecnicas {
   public fecha_comercial_aprob!:string;
   public usuario_tec!:string;
   public usuario_comer!:string;
+  public aprobGg!:string;
+
+  public comentarioaprob_gg!:string;
+  public fecha_gg_aprob!:string;
+  public usuario_gg!:string;
+  public comentariodenegacion_gg!:string;
+
 }

@@ -1,6 +1,6 @@
 .title{
   font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
+  color: black !important;
 }
 
 mat-icon{
@@ -40,7 +40,7 @@ form{
 .label{
   margin-top: 15px !important;
   font-weight: bold !important;
-  color: #003F63 !important;
+  color: black !important;
 }
 
 .colspan{

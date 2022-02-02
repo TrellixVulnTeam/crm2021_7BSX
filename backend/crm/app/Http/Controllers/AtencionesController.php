@@ -151,6 +151,31 @@ class AtencionesController extends Controller
                      FROM comanda_db.dbo.CRM_atenciones c
                      LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
                      LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
+                     INNER JOIN FACTURACION.dbo.FE_SUMINISTROS B ON c.num_suministro = B.num_suministro
+                     INNER JOIN FACTURACION.dbo.FE_CLIENTE FC ON FC.CODIGO_CLIENTE = B.CODIGO_CLIENTE
+                     WHERE B.usuario_unicom ='".$user."'
+
+
+                     UNION
+
+                     SELECT case when c.atencion_cerrada = 'S' then 'Cerrada'
+                     else
+                     'Abierta'
+                     end as estado,
+                     CAST(c.id AS NUMERIC(8)) as id, 
+                     c.titulo_atn as titulo_atn,
+                     CAST(c.telefono AS VARCHAR(8)) as telefono, 
+                     c.num_suministro as num_suministro,c.contacto as contacto,
+                     c.fecha_creacion as fecha_creacion,CAST(c.descripcion AS VARCHAR(1000)) as descripcion,
+                     t.nombre as tipoatencion,m.nombre as motivoatencion,
+                     CAST(c.sistema AS NVARCHAR(10)) as sistema,
+                     c.cliente as cliente,
+                     c.usuario_creacion as usuarioCreacion,
+                     c.id as atencion_id,
+                     convert(varchar(10),c.fecha_creacion,103) as fechaC
+                     FROM comanda_db.dbo.CRM_atenciones c
+                     LEFT JOIN comanda_db.dbo.CRM_motivo_atenciones m ON m.id = c.id_motivo_atencion
+                     LEFT JOIN comanda_db.dbo.CRM_tipo_atenciones t ON t.id = c.id_tipo_atencion
                      WHERE c.usuario_creacion ='".$user."'
                      UNION
 
@@ -334,7 +359,7 @@ class AtencionesController extends Controller
              as usuario_creacion from crm_eventos e
             inner join crm_estados_eventos as estado on estado.id = e.estado
             inner join comanda_db.dbo.users u on u.id = e.usuario_crm
-            where e.atencion_id = ".$request["id"]." and e.estado != 3
+            where e.atencion_id = ".$request["id"]." and e.estado in (1,3)
                 ");
 
             return response()->json($eventos);

@@ -93,6 +93,9 @@ Route::post('aprobarOrdenTecnica', 'OrTecnicasController@aprobarOrdenTecnica');
 Route::post('aprobarOrdenVentas', 'OrTecnicasController@aprobarOrdenVentas');
 Route::post('denegarOrdenTecnica', 'OrTecnicasController@denegarOrdenTecnica');
 Route::post('denegarOrdenVentas', 'OrTecnicasController@denegarOrdenVentas');
+Route::post('denegarOrdenGG', 'OrTecnicasController@denegarOrdenGG');
+Route::post('aprobarOrdenGG', 'OrTecnicasController@aprobarOrdenGG');
+
 
 Route::any('imprimirorden','OrTecnicasController@imprimirOrden');
 //rutas para suministros
