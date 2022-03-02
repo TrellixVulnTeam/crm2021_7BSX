@@ -51,12 +51,58 @@ class OrTecnicasController extends Controller
             'Denegada'
 
             end as aprobGg,
+            case when cot2.presupuesto is null
+            then
+            '$ 0.00'
+            else
 
-			CONCAT(convert(varchar, fechaAuto1, 103), ' ', substring(convert(varchar,fechaAuto1, 114),1,5)) as fecha_tecnica_aprob,
-			CONCAT(convert(varchar, fechaAuto2, 103), ' ', substring(convert(varchar,fechaAuto2, 114),1,5)) as fecha_comercial_aprob,
-            CONCAT(convert(varchar, fechaAuto3, 103), ' ', substring(convert(varchar,fechaAuto3, 114),1,5)) as fecha_gg_aprob,
+            '$ ' + LTRIM(str(cot2.presupuesto,12,2))
+            end as presupuesto,
+
+			case when cot2.ingr_mensuales is null
+            then
+            '$ 0.00'
+            else
+
+            '$ ' + LTRIM(str(cot2.ingr_mensuales,12,2))
+            end as ingr_mensuales,
+
+			case when cot2.ingr_anuales is null
+            then
+            '$ 0.00'
+            else
+
+            '$ ' + LTRIM(str(cot2.ingr_anuales,12,2))
+            end as ingr_anuales,
+
+			case when cot2.anios_est is null
+            then
+            '0'
+            else
+                LTRIM(cot2.anios_est)
+            end as anios_est,
+			convert(varchar, fechaAuto1, 103) as fecha_tecnica_aprob,
+			convert(varchar, fechaAuto2, 103) as fecha_comercial_aprob,
+            convert(varchar, fechaAuto3, 103) as fecha_gg_aprob,
             CONCAT(utec.nombre, ' ', utec.apellido) as usuario_tec, CONCAT(ucom.nombre, ' ', ucom.apellido) as usuario_comer,
-			CONCAT(ugg.nombre, ' ', ugg.apellido) as usuario_gg
+			CONCAT(ugg.nombre, ' ', ugg.apellido) as usuario_gg,
+            (select titulo from tickets where id = cot2.ticket_id ) as ticket,
+            (select eventoTitulo from CRM_eventos where id = cot2.evento ) as evento_tt,
+            (
+            select at.id from CRM_eventos ev 
+            inner join CRM_atenciones at on at.id = ev.atencion_id
+            where ev.id = cot2.evento
+            ) as id_atencion,
+            (
+            select at.descripcion from CRM_eventos ev 
+            inner join CRM_atenciones at on at.id = ev.atencion_id
+            where ev.id = cot2.evento
+            ) as atencion,
+            (
+            select at.cliente from CRM_eventos ev 
+            inner join CRM_atenciones at on at.id = ev.atencion_id
+            where ev.id = cot2.evento
+            ) as cliente
 
         from CRM_ordenes_trabajo cot2 
         inner join users u on u.id = cot2.solicitante 
@@ -87,21 +133,30 @@ class OrTecnicasController extends Controller
             $fechaResConFormato = date_format($fechaResSinFormato,'Ymd');
         } 
 
+        $id_usuario = DB::connection('comanda')->table("users")
+        ->select("users.id")->where('users.alias',$request['asignado_tck'])->first();
+
+
+
 
         $insertar =  DB::connection('comanda')->table('CRM_ordenes_trabajo')
         ->insertGetId([
           'solicitud' => $request['trabajo_solicitado'],
           'fecha_solicitud' => date('Ymd H:i'),
-          'fecha_resolucion' => $fechaResConFormato.' '.$request['hora_resolucion_orden'],
+          'fecha_resolucion' => $fechaResConFormato,
           'direccion' =>$request['direccion_orden'],
           'gerencia_solicita' => $request['gerencia_solicita'],
           'persona_contacto' => $request['contacto_orden'],
           'telefono_contacto' => $request['tel_contacto_orden'],
           'observaciones' => $request['observaciones_or'],
           'solicitante' => $request['usuario_crm'],
-          'asignado' => $request["asignado_tck"],
+          'asignado' => $id_usuario->id,
           'evento' => $request["id_evento"],
           'ticket_id' => $request["id"],
+          'presupuesto' => $request["presupuesto"],
+          'ingr_mensuales' => $request["ingr_mensuales"],
+          'ingr_anuales' => $request["ingr_anuales"],
+          'anios_est' => $request["anios_est"],
         ]);
 
         return response()->json($insertar);

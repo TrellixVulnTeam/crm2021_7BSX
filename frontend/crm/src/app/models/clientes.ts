@@ -63,4 +63,5 @@ export class Clientes {
   public telefono1!: string;
   public teldirecto!: string;
   public celular!: string;
+
 }

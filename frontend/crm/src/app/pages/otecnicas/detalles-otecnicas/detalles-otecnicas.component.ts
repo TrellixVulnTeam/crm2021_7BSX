@@ -49,6 +49,17 @@ export class DetallesOtecnicasComponent implements OnInit {
       'fecha_gg_aprob': new FormControl(''),
       'usuario_gg': new FormControl(''),
       'comentario_gg': new FormControl(''),
+      'cliente': new FormControl(''),
+      'ticket': new FormControl(''),
+      'evento': new FormControl(''),
+      'id_atencion': new FormControl(''),
+      'atencion': new FormControl(''),
+      'ticket_id': new FormControl(''),
+      'evento_tt': new FormControl(''),
+      'presupuesto': new FormControl(''),
+      'ingr_mensuales': new FormControl(''),
+      'ingr_anuales': new FormControl(''),
+      'anios_est': new FormControl(''),
     });
   }
 

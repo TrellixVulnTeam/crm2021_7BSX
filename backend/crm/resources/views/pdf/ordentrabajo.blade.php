@@ -68,7 +68,7 @@
 
 <div style=" font-family: Tahoma, Helvetica, Arial">
     <div>
-        <img style="" src="C:\xampp\htdocs\crm\backend\crm\public\img\edesal1.png" alt="">
+        <img style="" src="C:\xampp\htdocs\crm_backend\public\img\edesal1.png" alt="">
     </div>
 
     <div style="margin-top: 14px; ">
@@ -104,7 +104,7 @@
     </div>
 
 
-    <div style="margin-top: 50px;width: 700px">
+    <div style="margin-top: 10px;width: 700px">
         <table class="minimalistBlack" style="font-family: Tahoma, Helvetica, Arial; border: none">
             <thead>
             <tr>
@@ -122,30 +122,95 @@
             </tr>
             <tr style="border:none">
                 <td style="border:none">Fecha de resolución: (Compromiso con el cliente)</td>
-                <td style="border:none"><?php $fecha = date_create($orden->fecha_resolucion); echo date_format($fecha,'d/m/Y H:i')?></td>
+                <td style="border:none"><?php $fecha = date_create($orden->fecha_resolucion); echo date_format($fecha,'d/m/Y')?></td>
             </tr>
             <tr style="border:none">
                 <td style="border:none">Fecha de solicitud: (Area EDESAL solicitante)</td>
-                <td style="border:none"><?php $fecha = date_create($orden->fecha_solicitud); echo date_format($fecha,'d/m/Y H:i')?></td>
+                <td style="border:none"><?php $fecha = date_create($orden->fecha_solicitud); echo date_format($fecha,'d/m/Y')?></td>
             </tr>
             <tr style="border:none">
                 <td style="border:none">Dirección:</td>
                 <td style="border:none">{{$orden->direccion}}</td>
             </tr>
             <tr style="border:none">
-                <td style="border:none">Agencia:</td>
-                <td style="border:none">{{$orden->zona_agencia}}</td>
-            </tr>
-            <tr style="border:none">
                 <td style="border:none">Gerencia que solicita:</td>
                 <td style="border:none">{{$orden->gerencia_solicita}}</td>
+            </tr>
+
+            <tr style="border:none">
+                <td style="border:none">Presupuesto:</td>
+                <td style="border:none">
+                <?php
+                    if($orden->presupuesto == null){
+                        echo "N/D";
+                    }
+                    else{
+                ?>
+                $ {{$orden->presupuesto}}
+                <?php
+                
+                    }
+                ?>
+                </td>
+            </tr>
+
+            <tr style="border:none">
+                <td style="border:none">Ingresos Mensuales:</td>
+
+                <td style="border:none">
+                <?php
+                    if($orden->ingr_mensuales == null){
+                        echo "N/D";
+                    }
+                    else{
+                ?>
+                $ {{$orden->ingr_mensuales}}
+                <?php
+                
+                    }
+                ?>
+                </td>
+            </tr>
+
+            <tr style="border:none">
+                <td style="border:none">Ingresos anuales:</td>
+                <td style="border:none">
+                <?php
+                    if($orden->ingr_anuales == null){
+                        echo "N/D";
+                    }
+                    else{
+                ?>
+                $ {{$orden->ingr_anuales}}
+                <?php
+                
+                    }
+                ?>
+                </td>
+            </tr>
+            <tr style="border:none">
+                <td style="border:none">Años estimados:</td>
+
+                <td style="border:none">
+                <?php
+                    if($orden->anios_est == null){
+                        echo "N/D";
+                    }
+                    else{
+                ?>
+                 {{$orden->anios_est}}
+                <?php
+                
+                    }
+                ?>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 
 
-    <div style=" margin-top:30px; width: 700px">
+    <div style=" margin-top:15px; width: 700px">
         <table  class="minimalistBlack" style="font-family: Tahoma, Helvetica, Arial; ">
             <thead>
             <tr>
@@ -164,7 +229,7 @@
         </table>
     </div>
 
-    <div style=" margin-top:30px; width: 700px">
+    <div style=" margin-top:15px; width: 700px">
         <table  class="minimalistBlack" style="font-family: Tahoma, Helvetica, Arial; ">
             <thead>
             <tr>
@@ -183,7 +248,7 @@
         </table>
     </div>
 
-    <div style=" margin-top:30px; width: 700px">
+    <div style=" margin-top:15px; width: 700px">
         <table  class="minimalistBlack" style="font-family: Tahoma, Helvetica, Arial; ">
             <thead>
             <tr>
@@ -202,7 +267,7 @@
         </table>
     </div>
 
-    <br><br>
+
     <div style="position: relative; margin-top:30px;  width: 700px">
         <table class="minimalistBlack" style="border: none">
             <thead>
@@ -234,7 +299,7 @@
                 </b></td>
                
                 <td style="border:none"><?php
-                 $fecha1 = date_create($orden->fechaAuto1); echo date_format($fecha1,'d/m/Y H:i')
+                 $fecha1 = date_create($orden->fechaAuto1); echo date_format($fecha1,'d/m/Y')
                 ?></td>
             </tr>
             <tr>
@@ -261,7 +326,7 @@
                  
                 <td style="border:none">
                 <?php
-                 $fecha2 = date_create($orden->fechaAuto2); echo date_format($fecha2,'d/m/Y H:i')
+                 $fecha2 = date_create($orden->fechaAuto2); echo date_format($fecha2,'d/m/Y')
                 ?>
                 </td>
             </tr>

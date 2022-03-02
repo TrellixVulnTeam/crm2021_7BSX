@@ -41,7 +41,6 @@ export class ModalTicketComponent implements OnInit {
       'usuario_crm': new FormControl(''),
       'trabajo_solicitado': new FormControl(''),
       'fecha_resolucion_orden': new FormControl(''),
-      'hora_resolucion_orden': new FormControl(''),
       'direccion_orden': new FormControl(''),
       'contacto_orden': new FormControl(''),
       'tel_contacto_orden': new FormControl(''),
@@ -50,6 +49,10 @@ export class ModalTicketComponent implements OnInit {
       'adjud_contratista' : new FormControl(''),
       'observaciones_or' : new FormControl(''),
       'txt_usuario1': new FormControl(''),
+      'presupuesto': new FormControl(''),
+      'ingr_mensuales': new FormControl(''),
+      'ingr_anuales': new FormControl(''),
+      'anios_est': new FormControl(''),
     });
   }
 
@@ -161,6 +164,7 @@ export class ModalTicketComponent implements OnInit {
 
 
       });
-      //this.modal_ticket.close();
+      this.modal_ticket.close();
+      this.notificarUsuarios();
   }
 }

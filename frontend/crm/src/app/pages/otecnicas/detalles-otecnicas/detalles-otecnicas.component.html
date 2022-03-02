@@ -5,6 +5,49 @@
 <div mat-dialog-content>
 
       <form [formGroup]="FormOrden">
+
+        <mat-form-field appearance="legacy" style="width: 95% !important;margin-left: 2% !important;">
+          <mat-label>Cliente: </mat-label>
+          <input readonly matInput formControlName="cliente" [(ngModel)]="detalles_orden.cliente">
+
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input4">
+          <mat-label>ID Atención: </mat-label>
+          <input readonly matInput formControlName="id_atencion" [(ngModel)]="detalles_orden.id_atencion">
+
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="input3">
+          <mat-label>Titulo atención: </mat-label>
+          <textarea readonly matInput rows="3"  formControlName="atencion" [(ngModel)]="detalles_orden.atencion"></textarea>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input4">
+          <mat-label>ID Macrotarea: </mat-label>
+          <input readonly matInput formControlName="evento" [(ngModel)]="detalles_orden.evento">
+
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input3">
+          <mat-label>Macrotarea: </mat-label>
+          <textarea readonly matInput rows="3"  formControlName="evento_tt" [(ngModel)]="detalles_orden.evento_tt"></textarea>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input4">
+          <mat-label>ID Ticket: </mat-label>
+          <input readonly matInput formControlName="ticket_id" [(ngModel)]="detalles_orden.ticket_id">
+
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input3">
+          <mat-label>Ticket: </mat-label>
+          <textarea readonly matInput rows="3" formControlName="ticket" [(ngModel)]="detalles_orden.ticket"></textarea>
+
+        </mat-form-field>
+
+        <br><br>
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Trabajo: </mat-label>
           <textarea readonly matInput rows="3"  autocomplete="off" formControlName="trabajo" [(ngModel)]="detalles_orden.solicitud"></textarea>
@@ -24,6 +67,26 @@
           <input readonly matInput type="text"  autocomplete="off" formControlName="fecha_resolucion" [(ngModel)]="detalles_orden.fecha_resolucionD">
         </mat-form-field>
 
+
+        <mat-form-field appearance="legacy" class="input3">
+          <mat-label>Presupuesto</mat-label>
+          <input readonly matInput type="text" formControlName="presupuesto" autocomplete="off" [(ngModel)]="detalles_orden.presupuesto">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input3">
+          <mat-label>Ingresos mensuales</mat-label>
+          <input readonly matInput type="text" formControlName="ingr_mensuales" autocomplete="off" [(ngModel)]="detalles_orden.ingr_mensuales">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input3">
+          <mat-label>Ingresos anuales</mat-label>
+          <input readonly matInput type="text" formControlName="ingr_anuales" autocomplete="off" [(ngModel)]="detalles_orden.ingr_anuales">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input3">
+          <mat-label>Años estimados</mat-label>
+          <input readonly matInput type="text" formControlName="anios_est" autocomplete="off" [(ngModel)]="detalles_orden.anios_est">
+        </mat-form-field>
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Dirección: </mat-label>

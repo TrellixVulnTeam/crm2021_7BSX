@@ -39,5 +39,13 @@ export class Otecnicas {
   public fecha_gg_aprob!:string;
   public usuario_gg!:string;
   public comentariodenegacion_gg!:string;
-
+  public cliente!: string;
+  public atencion!: string;
+  public id_atencion!: string;
+  public ticket!: string;
+  public evento_tt!: string;
+  public presupuesto!: string;
+  public ingr_mensuales!: string;
+  public ingr_anuales!: string;
+  public anios_est!: string;
 }

@@ -79,13 +79,19 @@ tr > th{
 
 .input3{
   margin-left: 2% !important;
-  width: 42% !important;
+  width: 43% !important;
 }
 
 .input6{
   margin-left: 2% !important;
   width: 95% !important;
 }
+
+.input5{
+  margin-left: 2% !important;
+  width: 30% !important;
+}
+
 
 .input4{
   margin-left: 2% !important;

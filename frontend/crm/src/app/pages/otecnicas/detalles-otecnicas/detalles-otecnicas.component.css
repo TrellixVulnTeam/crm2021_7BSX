@@ -3,6 +3,8 @@
   width: 30% !important;
 }
 
+
+
 form{
   width: 100% !important;
   margin: auto !important;
@@ -22,3 +24,16 @@ button{
   margin-left: 2% !important;
   width: 45% !important;
 }
+
+
+.input3{
+  margin-left: 2% !important;
+  width: 21% !important;
+}
+
+
+.input4{
+  margin-left: 2% !important;
+  width: 6% !important;
+}
+

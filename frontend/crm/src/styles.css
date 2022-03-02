@@ -89,3 +89,11 @@ mat-tab > label{
   background-color: #22bb33 !important;
   color: white !important;
 }
+
+
+
+mat-label{
+  color: black !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+}
