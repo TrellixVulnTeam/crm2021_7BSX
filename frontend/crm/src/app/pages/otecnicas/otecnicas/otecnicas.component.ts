@@ -18,7 +18,7 @@ export class OtecnicasComponent implements OnInit {
   user: Usuario = new Usuario();
   texto:any;
 
-  displayedColumns: string[] = ['id',  'solicitud', 'fecha_creacionD' , 'nombresolicitante',  'aprobTecnica', 'aprobVentas', 'aprobGg'];
+  displayedColumns: string[] = ['id',  'solicitud', 'fecha_creacionD' , 'cliente', 'fecha_resolucionD', 'nombresolicitante',  'aprobTecnica', 'aprobVentas', 'aprobGg'];
   dataSource_ordenesTodas:any = new MatTableDataSource<any>([]);
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;

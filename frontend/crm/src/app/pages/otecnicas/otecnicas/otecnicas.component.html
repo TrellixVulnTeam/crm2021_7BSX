@@ -33,6 +33,16 @@
       <td mat-cell *matCellDef="let row">{{row.fecha_creacionD}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="cliente">
+      <th mat-header-cell *matHeaderCellDef> Cliente</th>
+      <td mat-cell *matCellDef="let row">{{row.cliente}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_resolucionD">
+      <th mat-header-cell *matHeaderCellDef> Fecha de resolución </th>
+      <td mat-cell *matCellDef="let row">{{row.fecha_resolucionD}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="nombresolicitante">
       <th mat-header-cell *matHeaderCellDef> Solicitante </th>
       <td mat-cell *matCellDef="let row"> {{row.nombresolicitante}} {{row.apellidosolicitante}} </td>
