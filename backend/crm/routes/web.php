@@ -75,6 +75,7 @@ Route::post('getConteoEvento', 'EventosController@getConteoEvento');
 Route::get('getUsuariosEventos', 'EventosController@getUsuariosEventos');
 Route::post('getTicketsPendientes', 'EventosController@getTicketsPendientes');
 Route::post('guardarResolucion', 'EventosController@guardarResolucion');
+Route::post('guardarEventoByAtencion', 'EventosController@guardarEventoByAtencion');
 
 //rutas para tickets
 Route::post('getAllTickets', 'TicketController@getAllTickets');

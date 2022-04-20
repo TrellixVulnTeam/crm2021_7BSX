@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import {BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Tickets } from '../models/tickets';
+import { Atenciones } from '../models/atenciones';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -67,6 +68,12 @@ export class EventosService {
     return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarEvento', evento, httpOptions)
     .pipe(map(data => data as Eventos ));
   }
+
+  public guardarEventoByAtencion(atn: Atenciones): Observable<Eventos> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarEventoByAtencion', atn, httpOptions)
+    .pipe(map(data => data as Eventos ));
+  }
+
 
   public getDetalleEvento(evt: Eventos): Observable<Eventos[]> {
     return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getDetalleEvento', evt, httpOptions)

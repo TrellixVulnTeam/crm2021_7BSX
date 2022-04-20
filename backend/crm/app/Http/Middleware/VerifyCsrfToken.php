@@ -80,6 +80,7 @@ class VerifyCsrfToken extends BaseVerifier
         'imprimirorden',
         'notificarUsuarios',
         'aprobarOrdenGG',
-        'denegarOrdenGG'
+        'denegarOrdenGG',
+        'guardarEventoByAtencion'
     ];
 }

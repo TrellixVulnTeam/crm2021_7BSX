@@ -1,7 +1,7 @@
 <div mat-dialog-content>
   <h2 style="color: green !important; text-align: center !important;">¡¡Se guardó la atención !!</h2><br>
 
-  <h2>¿Desea generar macrotarea sobre la atención {{atencion_id}}?</h2>
+  <h2>¿Desea generar macrotarea o ticket sobre la atención {{atencion_id}}?</h2>
 </div>
 
 
@@ -9,10 +9,15 @@
   <table>
     <tr>
       <th>
-        <button mat-raised-button color="basic" class="success" (click)="generarEvento()">Si, Generar macrotarea</button>
+        <button mat-raised-button color="basic" class="success" (click)="generarEvento()">Generar macrotarea</button>
       </th>
+
       <th>
-        <button mat-raised-button color="primary"
+        <button mat-raised-button color="primary" (click)="generarTicket()">Generar ticket</button>
+      </th>
+
+      <th>
+        <button mat-raised-button color="accent"
         (click)="cerrarModal()">{{accion}}</button>
       </th>
 

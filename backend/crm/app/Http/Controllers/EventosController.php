@@ -109,6 +109,36 @@ class EventosController extends Controller
     }
 
 
+
+    public function guardarEventoByAtencion(Request $request){
+
+        $atencion_id = $request["atencion_id"];
+
+
+        $titulo_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.titulo_atn')->where('CRM_atenciones.id',$atencion_id)->first();
+        $descripcion_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.descripcion')->where('CRM_atenciones.id',$atencion_id)->first();
+        $usuario_atn =  DB::connection('comanda')->table("CRM_atenciones")
+        ->join('users','users.id','=','CRM_atenciones.usuario_creacion')
+        ->select("users.id")->where('CRM_atenciones.id',$atencion_id)->first();
+        $cliente_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.cliente')->where('CRM_atenciones.id',$atencion_id)->first();
+        $nis_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.num_suministro')->where('CRM_atenciones.id',$atencion_id)->first();
+
+
+        $insertar =  DB::connection('comanda')->table('CRM_eventos')
+                         ->insertGetId([
+                           'num_suministro' => $nis_atn,
+                           'cliente' => $cliente_atn,
+                           'usuario_crm' => $usuario_atn,
+                           'descripcion' => $descripcion_atn,
+                           'fecha_creacion' => date('Ymd H:i'),
+                           'estado' => 1,
+                           'atencion_id' =>     $atencion_id,
+                           'eventoTitulo' => $titulo_atn,
+                         ]);
+
+        return response()->json($insertar);
+    }
+
     public function guardarArchivosEvt(Request $request){
 
         $json = json_encode($request->all());
