@@ -21,7 +21,7 @@ import { DetallesComponent } from '../detalles/detalles.component';
 export class AtencionesComponent implements OnInit {
 
   user: Usuario = new Usuario();
-  displayedColumns: string[] = ['id',  'cliente', 'usuarioCreacion' , 'descripcion', 'fechaC','estado', 'Acciones'];
+  displayedColumns: string[] = ['id',  'cliente', 'usuarioCreacion' ,'titulo_atn','descripcion', 'fechaC','estado', 'Acciones'];
   dataSource_atnTodas:any = new MatTableDataSource<any>([]);
 
   dataSource_atnAbiertas:any = new MatTableDataSource<any>([]);
