@@ -28,11 +28,25 @@ export class SuministrosService {
   }
 
 
+  datos_Suministros1 = new BehaviorSubject<Suministros[]>([]);
+  _datos_Suministros1 = this.datos_Suministros.asObservable();
+
+  fillSuministros_list1(d: Suministros[]){
+    this.datos_Suministros1.next(d);
+  }
+
+
+
   constructor(private http: HttpClient, private router: Router, private globalservice: GlobalService) { }
 
-  public getAllSuministros(): Observable<Suministros[]> {
-    return this.http.get(this.globalservice.getUrlBackEnd() + 'getAllSuministros').pipe(map(data => data as Suministros[]));
+  public getAllSuministrosCorporativa(): Observable<Suministros[]> {
+    return this.http.get(this.globalservice.getUrlBackEnd() + 'getAllSuministrosCorporativa').pipe(map(data => data as Suministros[]));
   }
+
+  public getAllSuministrosComercial(): Observable<Suministros[]> {
+    return this.http.get(this.globalservice.getUrlBackEnd() + 'getAllSuministrosComercial').pipe(map(data => data as Suministros[]));
+  }
+
 
 
   public getAtencionesBySuministro(nis: Suministros): Observable<Suministros[]> {

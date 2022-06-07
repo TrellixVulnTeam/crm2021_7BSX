@@ -48,7 +48,7 @@ Route::post('getHistorialCliente', 'ClientesController@getHistorialCliente');
 
 
 //rutas para atenciones
-Route::get('getMotivosAtenciones', 'AtencionesController@getMotivosAtenciones');
+
 Route::get('getTiposAtenciones', 'AtencionesController@getTiposAtenciones');
 Route::post('mover_archivo', 'AtencionesController@mover_archivo');
 Route::post('eliminar_archivo', 'AtencionesController@eliminar_archivo');
@@ -100,5 +100,21 @@ Route::post('aprobarOrdenGG', 'OrTecnicasController@aprobarOrdenGG');
 
 Route::any('imprimirorden','OrTecnicasController@imprimirOrden');
 //rutas para suministros
-Route::get('getAllSuministros', 'SuministrosController@getAllSuministros');
+Route::get('getAllSuministrosCorporativa', 'SuministrosController@getAllSuministrosCorporativa');
+Route::get('getAllSuministrosComercial', 'SuministrosController@getAllSuministrosComercial');
+
 Route::post('getAtencionesBySuministro', 'SuministrosController@getAtencionesBySuministro');
+
+
+//rutas para gestiones comerciales
+Route::get('getMotivosAtenciones', 'MotivosAtnController@getMotivosAtenciones');
+Route::post('save_motivoatn', 'MotivosAtnController@save');
+Route::post('delete_motivoatn', 'MotivosAtnController@delete');
+Route::post('edit_motivoatn', 'MotivosAtnController@edit');
+Route::get('getMotivosAtenciones_GC', 'MotivosAtnController@getMotivosAtenciones_GC');
+
+
+//cartas
+Route::post('getDatosbyCarta', 'ClausulasController@getDatosbyCarta');
+Route::post('save_parrafo', 'ClausulasController@save_parrafo');
+Route::post('edit_parrafo', 'ClausulasController@edit_parrafo');

@@ -1,0 +1,30 @@
+<div mat-dialog-content>
+  <h2>Motivos de atención(CRM) / Tipos de solicitud (Gestiones comerciales)</h2>
+  <mat-divider></mat-divider>
+  <br>
+  <form [formGroup]="form">
+        <mat-form-field appearance="legacy" class="input">
+
+          <mat-label>Descripción: </mat-label>
+          <input type="hidden" formControlName="id" [(ngModel)]="datos.id">
+          <textarea rows="3" matInput  autocomplete="off" formControlName="descripcion" [(ngModel)]="datos.nombre"></textarea>
+        </mat-form-field>
+
+
+
+        <mat-form-field appearance="legacy" class="input">
+          <mat-label>Sistema: </mat-label>
+          <mat-select formControlName="sistema" [(ngModel)]="datos.sistema">
+            <mat-option  value="CRM">CRM</mat-option>
+            <mat-option  value="GEST. COMERCIAL">Gestiones comerciales</mat-option>
+          </mat-select>
+        </mat-form-field>
+  </form>
+</div>
+<br><br>
+<div mat-dialog-actions>
+
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">Guardar información</button>
+  <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+</div>
+

@@ -26,10 +26,16 @@ export class SuministrosComponent implements OnInit {
   texto:any;
   datos_contacto_cli : Clientes[] | undefined;
 
+
   displayedColumns: string[] = ['num_suministro',  'estado', 'nombrecliente' , 'anexo_direccion','usuario_unicom',  'Acciones'];
   dataSource_suministros:any = new MatTableDataSource<any>([]);
 
+  displayedColumns1: string[] = ['num_suministro',  'estado', 'nombrecliente' , 'anexo_direccion','usuario_unicom',  'Acciones'];
+  dataSource_suministros1:any = new MatTableDataSource<any>([]);
+
+
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
+  @ViewChild('paginator2') paginator2: MatPaginator | undefined;
 
   constructor(private global: GlobalService, private router: Router, private suministrosService: SuministrosService, private clienteService : ClientesService,
     public dialog: MatDialog, private rpt_service: ReportesService) { }
@@ -55,12 +61,13 @@ export class SuministrosComponent implements OnInit {
 
 
 
-  getAllOrdenes(){
-    this.suministrosService.getAllSuministros().subscribe(
+  getAllSuministrosCorporativa(){
+    this.suministrosService.getAllSuministrosCorporativa().subscribe(
       data => {
 
         //llenando arreglos
         this.dataSource_suministros.data = data;
+
       });
 
 
@@ -71,9 +78,29 @@ export class SuministrosComponent implements OnInit {
       });
   }
 
+
+
   ngAfterViewInit() {
     this.dataSource_suministros.paginator = this.paginator1;
-    this.getAllOrdenes();
+    this.dataSource_suministros1.paginator = this.paginator2;
+    this.getAllSuministrosCorporativa();
+    this.getAllSuministrosComercial();
+  }
+
+  getAllSuministrosComercial(){
+    this.suministrosService.getAllSuministrosComercial().subscribe(
+      data => {
+
+        //llenando arreglos
+        this.dataSource_suministros1.data = data;
+      });
+
+
+      this.suministrosService.fillSuministros_list1(this.dataSource_suministros.data);
+
+      this.suministrosService._datos_Suministros1.subscribe(response => {
+        this.dataSource_suministros1.data = response;
+      });
   }
 
 
@@ -81,6 +108,11 @@ export class SuministrosComponent implements OnInit {
   filterTable_suministros(filterValue :string) {
     this.dataSource_suministros.filter = filterValue.trim().toLowerCase();
  }
+
+
+ filterTable_suministros1(filterValue :string) {
+  this.dataSource_suministros1.filter = filterValue.trim().toLowerCase();
+}
 
  open_modal_atenciones(cliente: Suministros) {
 

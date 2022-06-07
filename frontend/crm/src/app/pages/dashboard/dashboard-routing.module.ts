@@ -46,6 +46,14 @@ const routes: Routes = [
         path: 'tickets',
         loadChildren: () => import('./../tickets/tickets.module').then(m => m.TicketsModule)
       },
+      {
+        path: 'mttocartas',
+        loadChildren: () => import('./../mtto-cartas/mtto-cartas.module').then(m => m.MttoCartasModule)
+      },
+      {
+        path: 'motivoatn',
+        loadChildren: () => import('./../motivo-atenciones/motivo-atenciones.module').then(m => m.MotivoAtencionesModule)
+      },
 
 
 

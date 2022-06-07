@@ -10,7 +10,7 @@ use Session;
 
 class SuministrosController extends Controller
 {
-    public function getAllSuministros(){
+    public function getAllSuministrosCorporativa(){
 
         $suministros = DB::connection('facturacion')->select("
         select fs.*, convert(varchar(10),fs.fecha_alta, 103) as fecha_altaD, fc.NOMBRES as nombrecliente,
@@ -22,6 +22,20 @@ class SuministrosController extends Controller
 
          return response()->json($suministros);
     }
+
+
+    public function getAllSuministrosComercial(){
+
+      $suministros = DB::connection('facturacion')->select("
+      select fs.*, convert(varchar(10),fs.fecha_alta, 103) as fecha_altaD, fc.NOMBRES as nombrecliente,
+      fc.APELLIDOS as apellidocliente,fc.NOMBRES +' '+ fc.APELLIDOS as cliente from FE_SUMINISTROS fs 
+      inner join FE_CLIENTE fc on fc.CODIGO_CLIENTE = fs.CODIGO_CLIENTE 
+      where fs.usuario_unicom in('ACOMERCIAL')
+     ");
+
+
+       return response()->json($suministros);
+  }
 
     public function getAtencionesBySuministro(Request $request)
     {

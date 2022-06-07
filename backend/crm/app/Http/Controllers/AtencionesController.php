@@ -25,7 +25,7 @@ class AtencionesController extends Controller
        {
            //conexion con COMANDA
            $motivos = DB::connection('comanda')->table('CRM_motivo_atenciones')
-           ->where('sistema','CRM')->orderBy('nombre','ASC')->get();
+           ->where('sistema','CRM')->orWhere('sistema','GEST. COMERCIAL')->orderBy('nombre','ASC')->get();
    
            return response()->json($motivos);
        }

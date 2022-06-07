@@ -75,6 +75,25 @@
 
   <mat-divider></mat-divider>
 
+  <button  mat-menu-item routerLink="mttocartas">
+    <mat-icon>description</mat-icon>
+    <span class="span-menu">Mtto. Cartas Auxiliares</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button  mat-menu-item routerLink="motivoatn" *ngIf="user.alias == 'fsolano'">
+    <mat-icon>notifications</mat-icon>
+    <span class="span-menu">Motivos de atención</span>
+  </button>
+
+
+  <button  mat-menu-item routerLink="motivoatn" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
+    <mat-icon>notifications</mat-icon>
+    <span class="span-menu">Tipo de Solicitud</span>
+  </button>
+  <mat-divider></mat-divider>
+
   <button  mat-menu-item routerLink="reportes" *ngIf="
   (user.alias =='fsolano' ||
   user.alias =='leobolanos' ||

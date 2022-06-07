@@ -1,0 +1,15 @@
+.input{
+  width: 30% !important;
+}
+
+.input_f{
+  width: 70% !important;
+}
+
+
+.btn_form{
+  margin-left: 3% !important;
+}
+mat-icon{
+  color: white !important;
+}

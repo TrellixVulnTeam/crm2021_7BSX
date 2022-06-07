@@ -46,7 +46,8 @@ class VerifyCsrfToken extends BaseVerifier
         'getAllEventos',
         'getAllTickets',
         'getAllOrdenes',
-        'getAllSuministros',
+        'getAllSuministrosComercial',
+        'getAllSuministrosCorporativa',
         'guardarEvento',
         'guardarArchivosEvt',
         'getUsuarios',
@@ -81,6 +82,13 @@ class VerifyCsrfToken extends BaseVerifier
         'notificarUsuarios',
         'aprobarOrdenGG',
         'denegarOrdenGG',
-        'guardarEventoByAtencion'
+        'guardarEventoByAtencion',
+        'save_motivoatn',
+        'delete_motivoatn',
+        'edit_motivoatn',
+        'getMotivosAtenciones_GC',
+        'getDatosbyCarta',
+        'save_parrafo',
+        'edit_parrafo'
     ];
 }
