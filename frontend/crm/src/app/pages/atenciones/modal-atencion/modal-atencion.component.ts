@@ -168,7 +168,7 @@ export class ModalAtencionComponent implements OnInit {
           let datos_evt : Atenciones = new Atenciones();
           datos_evt.atencion_id = this.atencion_id;
 
-          this.eventosService.guardarEventoByAtencion(datos_evt).subscribe(
+          this.eventosService.guardarEventoGC(datos_evt).subscribe(
             response => {
             },
             err => {
