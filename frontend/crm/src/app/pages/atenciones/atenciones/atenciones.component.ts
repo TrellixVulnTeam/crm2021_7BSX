@@ -38,6 +38,22 @@ export class AtencionesComponent implements OnInit {
   @ViewChild('paginator3') paginator3: MatPaginator | undefined;
 
 
+
+  //gestiones comerciales
+
+  dataSource_atnTodasgc:any = new MatTableDataSource<any>([]);
+  dataSource_atnAbiertasgc:any = new MatTableDataSource<any>([]);
+  dataSource_atnCerradasgc:any = new MatTableDataSource<any>([]);
+
+
+  @ViewChild('paginator1gc') paginator1gc: MatPaginator | undefined;
+  @ViewChild('paginator2gc') paginator2gc: MatPaginator | undefined;
+  @ViewChild('paginator3gc') paginator3gc: MatPaginator | undefined;
+
+  textogc: any;
+  texto1gc: any;
+  texto2gc:any;
+
   constructor(public atencionService: AtencionesService, private router: Router, private global: GlobalService,
     public dialog: MatDialog, private adjuntoService: ArchivosService) { }
 
@@ -62,7 +78,13 @@ export class AtencionesComponent implements OnInit {
     this.dataSource_atnTodas.paginator = this.paginator1;
     this.dataSource_atnAbiertas.paginator = this.paginator2;
     this.dataSource_atnCerradas.paginator = this.paginator3;
+
+    this.dataSource_atnTodasgc.paginator = this.paginator1gc;
+    this.dataSource_atnAbiertasgc.paginator = this.paginator2gc;
+    this.dataSource_atnCerradasgc.paginator = this.paginator3gc;
+
     this.getAllAtenciones();
+    this.getAllAtencionesgc();
   }
 
 
@@ -77,10 +99,30 @@ export class AtencionesComponent implements OnInit {
 
 filterTable_atnCerradas(filterValue :string) {
 
-  this.dataSource_atnCerradas.filter = filterValue.trim().toLowerCase();
+  this.dataSource_atnCerradasgc.filter = filterValue.trim().toLowerCase();
 
 
 }
+
+
+
+filterTable_atnTodasgc (filterValue :string) {
+  console.log(filterValue);
+  this.dataSource_atnTodasgc.filter = filterValue.trim().toLowerCase();
+}
+
+
+filterTable_atnAbiertasgc(filterValue :string) {
+  this.dataSource_atnAbiertasgc.filter = filterValue.trim().toLowerCase();
+}
+
+filterTable_atnCerradasgc(filterValue :string) {
+
+this.dataSource_atnCerradasgc.filter = filterValue.trim().toLowerCase();
+
+
+}
+
 
   getAllAtenciones(){
     this.atencionService.getAllAtenciones(this.user).subscribe(
@@ -136,6 +178,59 @@ filterTable_atnCerradas(filterValue :string) {
   }
 
 
+
+  getAllAtencionesgc(){
+    this.atencionService.getAllAtencionesGC(this.user).subscribe(
+      data => {
+
+        //llenanado listas de tabla html
+        this.dataSource_atnTodasgc.data = data;
+
+        data.forEach((element: any) => {
+          if(element["estado"]==='Abierta'){
+            this.dataSource_atnAbiertasgc.data.push(element);
+
+          }
+        });
+
+
+        data.forEach((element: any) => {
+          if(element["estado"]==='Cerrada'){
+            this.dataSource_atnCerradasgc.data.push(element);
+
+          }
+        });
+
+        //llenanado arreglo del service
+        this.atencionService.fillatnCerradas_listgc(this.dataSource_atnCerradasgc.data);
+
+        this.atencionService.fillatnAbiertas_listgc(this.dataSource_atnAbiertasgc.data);
+
+        this.atencionService.fillatnTodas_listgc(this.dataSource_atnTodasgc.data);
+
+
+        //suscribiendose al arreglo para obtener data
+        this.atencionService._datos_atnTodasgc.subscribe(response => {
+          this.dataSource_atnTodasgc.data = response;
+        });
+
+        this.atencionService._datos_atnAbiertasgc.subscribe(response => {
+          this.dataSource_atnAbiertasgc.data = response;
+        });
+
+
+        this.atencionService._datos_atnCerradasgc.subscribe(response => {
+          this.dataSource_atnCerradasgc.data = response;
+        });
+
+
+    });
+
+
+
+      //console.table(this.dataSource_atnAbiertas.data);
+
+  }
   nuevoEvento(atencion: Atenciones){
     this.dialog.open(ModalEventoComponent,{
       data: {datos_atencion: atencion},

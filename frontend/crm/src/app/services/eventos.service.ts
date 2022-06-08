@@ -105,4 +105,9 @@ export class EventosService {
   }
 
 
+  public guardarEventoGC(evento: Eventos): Observable<Eventos> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarEventoGC', evento, httpOptions)
+    .pipe(map(data => data as Eventos ));
+  }
+
 }

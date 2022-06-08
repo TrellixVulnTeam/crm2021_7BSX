@@ -36,4 +36,15 @@ export class MttoCartasService {
     .pipe(map(data => data as MttoCartas ));
   }
 
+  public delete_parrafo(datos: MttoCartas): Observable<MttoCartas> {
+    return this.http.post<MttoCartas>(this.globalservice.getUrlBackEnd() + 'delete_parrafo', datos, httpOptions)
+    .pipe(map(data => data as MttoCartas ));
+  }
+
+  public getClausulaAclaratoria(data: MttoCartas): Observable<MttoCartas> {
+    return this.http.post<MttoCartas>(this.globalservice.getUrlBackEnd() + 'getClausulaAclaratoria', data, httpOptions)
+    .pipe(map(data => data as unknown as MttoCartas ));
+  }
+
+
 }

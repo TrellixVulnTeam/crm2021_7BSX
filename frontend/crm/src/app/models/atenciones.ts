@@ -22,4 +22,5 @@ public atencion_id!: string;
   public fax!:string;
   public correo!:string;
   public whatsapp!:string;
+  public user_id_evt!: number;
 }

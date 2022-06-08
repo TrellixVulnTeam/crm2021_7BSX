@@ -23,6 +23,14 @@
       <mat-label>Descripción: </mat-label>
       <textarea rows="6" matInput  autocomplete="off" formControlName="parrafo" ></textarea>
     </mat-form-field>
+
+    <mat-form-field appearance="legacy" class="inputf2">
+      <mat-label>Tipo: </mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option value="Aclaratoria">Aclaratoria</mat-option>
+        <mat-option value="Fija">Fija</mat-option>
+      </mat-select>
+    </mat-form-field>
     <button mat-raised-button color="accent" (click)="addnew_parrafo()" [disabled]="nuevo_parrafo_form.invalid" class="btn_form"><mat-icon>add</mat-icon> Agregar</button>
   </form>
   <br><br>
@@ -43,7 +51,13 @@
           <mat-label>Descripción: </mat-label>
           <textarea rows="6" matInput  autocomplete="off" formControlName="parrafo" ></textarea>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="edit_parrafo(item.value.id, pointIndex)"  class="btn_form"><mat-icon>edit</mat-icon> Guardar modificaciones</button>
+
+        <mat-form-field appearance="legacy" class="inputf2">
+          <mat-label>Tipo: </mat-label>
+          <input type="text" formControlName="tipo" readonly="true" matInput>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" matTooltip="Guardar modificaciones" matTooltipPosition="above" (click)="edit_parrafo(item.value.id, pointIndex)"  class="btn_form"><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab color="warn" (click)="delete_parrafo(item.value.id, pointIndex)" matTooltip="Eliminar" matTooltipPosition="above" class="btn_form"><mat-icon>delete</mat-icon></button>
       </div>
     </div>
   </form>

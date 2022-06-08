@@ -28,6 +28,7 @@ class ClausulasController extends Controller
         ->insertGetId([
           'id_tipo_solicitud' => $request['id_tipo_solicitud'],
           'parrafo' => $request['parrafo'],
+          'tipo' => $request['tipo'],
           'estado' => 1
         ]);
         return response()->json($insertar);
@@ -41,6 +42,20 @@ class ClausulasController extends Controller
         ->where('id', $request['id'])
              ->update([
                 'parrafo' => $request['parrafo'],
+                ]);
+
+        return response()->json($editar);
+
+    }
+
+
+    public function delete_parrafo(Request $request)
+    {
+
+        $editar =  DB::connection('comanda')->table('GC_clausulas')
+        ->where('id', $request['id'])
+             ->update([
+                'estado' => 2,
                 ]);
 
         return response()->json($editar);

@@ -112,9 +112,14 @@ Route::post('save_motivoatn', 'MotivosAtnController@save');
 Route::post('delete_motivoatn', 'MotivosAtnController@delete');
 Route::post('edit_motivoatn', 'MotivosAtnController@edit');
 Route::get('getMotivosAtenciones_GC', 'MotivosAtnController@getMotivosAtenciones_GC');
+Route::post('getSistemaMotivoAtn', 'MotivosAtnController@getSistemaMotivoAtn');
+Route::post('guardarEventoGC', 'EventosController@guardarEventoGC');
+Route::post('getClausulaAclaratoria', 'MotivosAtnController@getClausulaAclaratoria');
 
+Route::post('getAllAtencionesGC', 'AtencionesController@getAllAtencionesGC');
 
 //cartas
 Route::post('getDatosbyCarta', 'ClausulasController@getDatosbyCarta');
 Route::post('save_parrafo', 'ClausulasController@save_parrafo');
 Route::post('edit_parrafo', 'ClausulasController@edit_parrafo');
+Route::post('delete_parrafo', 'ClausulasController@delete_parrafo');

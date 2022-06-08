@@ -21,6 +21,35 @@ const httpOptions = {
 })
 export class AtencionesService {
 
+  datos_atnTodasgc = new BehaviorSubject<Atenciones[]>([]);
+  _datos_atnTodasgc = this.datos_atnTodasgc.asObservable();
+
+  fillatnTodas_listgc(d: Atenciones[]){
+    this.datos_atnTodasgc.next(d);
+  }
+
+
+  datos_atnAbiertasgc = new BehaviorSubject<Atenciones[]>([]);
+  _datos_atnAbiertasgc = this.datos_atnAbiertasgc.asObservable();
+
+  fillatnAbiertas_listgc(d: Atenciones[]){
+    this.datos_atnAbiertasgc.next(d);
+  }
+
+
+
+  datos_atnCerradasgc = new BehaviorSubject<Atenciones[]>([]);
+  _datos_atnCerradasgc = this.datos_atnCerradasgc.asObservable();
+
+  fillatnCerradas_listgc(d: Atenciones[]){
+    this.datos_atnCerradasgc.next(d);
+  }
+
+
+
+  //gestiones
+
+
   datos_atnTodas = new BehaviorSubject<Atenciones[]>([]);
   _datos_atnTodas = this.datos_atnTodas.asObservable();
 
@@ -45,6 +74,8 @@ export class AtencionesService {
     this.datos_atnCerradas.next(d);
   }
 
+
+
   constructor(private http: HttpClient, private router: Router, private globalservice: GlobalService) { }
 
 
@@ -64,6 +95,13 @@ export class AtencionesService {
     return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'guardarAtencion', atencion, httpOptions)
     .pipe(map(data => data as Atenciones ));
   }
+
+
+  public getAllAtencionesGC(usuario: Usuario): Observable<Atenciones[]> {
+    return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'getAllAtencionesGC', usuario, httpOptions)
+    .pipe(map(data => data as unknown as Atenciones[] ));
+  }
+
 
   public getAllAtenciones(usuario: Usuario): Observable<Atenciones[]> {
     return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'getAllAtenciones', usuario, httpOptions)

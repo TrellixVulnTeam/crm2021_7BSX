@@ -31,6 +31,7 @@ export class MttoCartasComponent implements OnInit {
     });
     this.nuevo_parrafo_form = new FormGroup({
       'parrafo': new FormControl('',[Validators.required]),
+      'tipo': new FormControl('',[Validators.required]),
     });
   }
 
@@ -88,6 +89,7 @@ export class MttoCartasComponent implements OnInit {
                 id: element["id"],
                 id_tipo_solicitud: element["id_tipo_solicitud"],
                 parrafo: element["parrafo"],
+                tipo: element["tipo"],
               }
             )
           );
@@ -96,13 +98,49 @@ export class MttoCartasComponent implements OnInit {
 
         this.visibilidad = true;
       }
-    )};
+    )
+  }
+
+
+  choose_afterdelete(){
+    this.parrafos_form = this.formbuilder.group({parrafos: this.formbuilder.array([]),});
+
+
+    let datos : MttoCartas = new MttoCartas();
+    datos = this.carta_form.value;
+
+    this.mttocartas_service.getDatosbyCarta(datos).subscribe(
+      data=>{
+        this.datos_cartas = data;
+      },
+      err=>{},
+      ()=>{
+
+        this.datos_cartas?.forEach(element =>{
+          this.parrafos.push(
+            this.formbuilder.group(
+              {
+                id: element["id"],
+                id_tipo_solicitud: element["id_tipo_solicitud"],
+                parrafo: element["parrafo"],
+                tipo: element["tipo"],
+              }
+            )
+          );
+        });
+
+
+
+      }
+    )
+  }
 
 
     addnew_parrafo(){
       let datos : MttoCartas = new MttoCartas();
       datos.id_tipo_solicitud = this.carta_form.controls["carta"].value;
       datos.parrafo = this.nuevo_parrafo_form.controls["parrafo"].value;
+      datos.tipo = this.nuevo_parrafo_form.controls["tipo"].value;
 
       this.mttocartas_service.save_parrafo(datos).subscribe(
         response=>{
@@ -112,6 +150,7 @@ export class MttoCartasComponent implements OnInit {
                   id: response,
                   id_tipo_solicitud: datos.id_tipo_solicitud,
                   parrafo: datos.parrafo,
+                  tipo: datos.tipo,
                 }
               )
             );
@@ -137,8 +176,6 @@ export class MttoCartasComponent implements OnInit {
       datos.parrafo = parrafo_nuevo.parrafo;
       datos.id = item;
 
-      console.log(parrafo_nuevo);
-
       this.mttocartas_service.edit_parrafo(datos).subscribe(
         response=>{},
         err=>{
@@ -154,6 +191,39 @@ export class MttoCartasComponent implements OnInit {
             horizontalPosition: 'center',
             verticalPosition: 'top'
           });
+        }
+      );
+
+    }
+
+
+    delete_parrafo(item: any, i: any){
+
+      var all_parrafos = this.parrafos_form.get('parrafos') as FormArray;
+      var parrafo_byindex = all_parrafos.at(i);
+      var parrafo_nuevo = parrafo_byindex.value;
+
+      let datos : MttoCartas = new MttoCartas();
+      datos.parrafo = parrafo_nuevo.parrafo;
+      datos.id = item;
+
+      this.mttocartas_service.delete_parrafo(datos).subscribe(
+        response=>{},
+        err=>{
+          this._snackBar.open('¡¡ Error  al guardar!!', 'Ok', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
+        },
+        ()=>{
+          this._snackBar.open('¡¡ Datos eliminados !!', 'Ok', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
+
+          this.choose_afterdelete();
         }
       );
 

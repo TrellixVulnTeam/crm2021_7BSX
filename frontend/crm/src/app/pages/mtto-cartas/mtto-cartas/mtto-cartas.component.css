@@ -3,7 +3,12 @@
 }
 
 .input_f{
-  width: 70% !important;
+  width: 60% !important;
+  margin-right: 5% !important;
+}
+
+.input_f2{
+  width: 35% !important;
 }
 
 

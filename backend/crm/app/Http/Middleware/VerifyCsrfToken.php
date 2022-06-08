@@ -89,6 +89,11 @@ class VerifyCsrfToken extends BaseVerifier
         'getMotivosAtenciones_GC',
         'getDatosbyCarta',
         'save_parrafo',
-        'edit_parrafo'
+        'edit_parrafo',
+        'getSistemaMotivoAtn',
+        'guardarEventoGC',
+        'getClausulaAclaratoria',
+        'delete_parrafo',
+        'getAllAtencionesGC'
     ];
 }

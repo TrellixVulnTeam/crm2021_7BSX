@@ -25,4 +25,5 @@ export class Eventos {
   public fecha_compromisoF!: string;
   public conteo!: string;
 public evento_id!: string;
+public user_id_evt!: number;
 }

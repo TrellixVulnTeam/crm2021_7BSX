@@ -1,348 +1,357 @@
 
 <mat-tab-group>
-    <mat-tab label="Macrotareas abiertas" class="tabs">
-      <br>
-      <h3 class="title">Macrotareas abiertas</h3>
-      <mat-divider></mat-divider>
+  <mat-tab label="CRM">
+    <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;">
+      <mat-tab label="Macrotareas abiertas" class="tabs">
+        <br>
+        <h3 class="title">Macrotareas abiertas</h3>
+        <mat-divider></mat-divider>
 
-      <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
-        showFirstLastButtons
-        aria-label="Cantidad de registros a mostrar">
-      </mat-paginator>
-
-      <mat-form-field appearance="legacy" class="input_search">
-        <mat-label>Buscar en tabla: </mat-label>
-        <input  matInput type="text" [(ngModel)]="texto1"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtAbiertos($event)">
-      </mat-form-field>
-
-      <table mat-table [dataSource]="dataSource_evtAbiertos"  >
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}}
-            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
-            (click)="verDetalleEvento(row)">
-              <mat-icon>remove_red_eye</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="atencion_id">
-          <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
-            <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="cliente">
-          <th mat-header-cell *matHeaderCellDef> Cliente </th>
-          <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="usuario_creacion">
-          <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
-          <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="titulo">
-          <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row" class="desc">
-            <div class="desc_div">
-              {{row.evTitulo}}
-            </div>
-           </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fecha_compromisoF">
-          <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef> Estado </th>
-          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button  mat-mini-fab color="warn" matTooltip="Resolución de macrotarea" matTooltipPosition="above" (click)="resolucionEvento(row)">
-              <mat-icon>done_outline</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-    </mat-tab>
-
-    <mat-tab label="Macrotareas en proceso de resolución" class="tabs">
-      <br>
-      <h3 class="title">Macrotareas en proceso de resolución</h3>
-      <mat-divider></mat-divider>
-
-      <mat-paginator #paginator3 [pageSizeOptions]="[5, 10, 20, 100]"
-        showFirstLastButtons
-        aria-label="Cantidad de registros a mostrar">
-      </mat-paginator>
-
-      <mat-form-field appearance="legacy" class="input_search">
-        <mat-label>Buscar en tabla: </mat-label>
-        <input  matInput type="text" [(ngModel)]="texto2"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtProResolucion($event)">
-      </mat-form-field>
-
-      <table mat-table [dataSource]="dataSource_evtProResolucion">
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}}
-            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
-            (click)="verDetalleEvento(row)">
-              <mat-icon>remove_red_eye</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="atencion_id">
-          <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
-            <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
-          </td>
-
-        </ng-container>
-
-        <ng-container matColumnDef="cliente">
-          <th mat-header-cell *matHeaderCellDef> Cliente </th>
-          <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="usuario_creacion">
-          <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
-          <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="titulo">
-          <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row" class="desc">
-            <div class="desc_div">
-              {{row.evTitulo}}
-            </div>
-           </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
-        </ng-container>
-        <ng-container matColumnDef="fecha_compromisoF">
-          <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef> Estado </th>
-          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
-              <mat-icon>add</mat-icon>
-            </button>
-
-            <button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" (click)="resolucionEvento(row)">
-              <mat-icon>done_outline</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-    </mat-tab>
-
-
-
-    <mat-tab label="Macrotareas Cerradas" class="tabs">
-      <br>
-      <h3 class="title">Macrotareas Cerradas</h3>
-      <mat-divider></mat-divider>
-        <mat-paginator #paginator4 [pageSizeOptions]="[5, 10, 20, 100]"
+        <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
           showFirstLastButtons
           aria-label="Cantidad de registros a mostrar">
         </mat-paginator>
 
-      <mat-form-field appearance="legacy" class="input_search">
-        <mat-label>Buscar en tabla: </mat-label>
-        <input  matInput type="text" [(ngModel)]="texto2"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtCerrados($event)">
-      </mat-form-field>
+        <mat-form-field appearance="legacy" class="input_search">
+          <mat-label>Buscar en tabla: </mat-label>
+          <input  matInput type="text" [(ngModel)]="texto1"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtAbiertos($event)">
+        </mat-form-field>
 
-      <table mat-table [dataSource]="dataSource_evtCerrados"  >
+        <table mat-table [dataSource]="dataSource_evtAbiertos"  >
 
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}}
-            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
-            (click)="verDetalleEvento(row)">
-              <mat-icon>remove_red_eye</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="atencion_id">
-          <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
-            <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
+            <td mat-cell *matCellDef="let row"> {{row.id}}
+              <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
+              (click)="verDetalleEvento(row)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="atencion_id">
+            <th mat-header-cell *matHeaderCellDef> ID Atención </th>
+            <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+              <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="cliente">
-          <th mat-header-cell *matHeaderCellDef> Cliente </th>
-          <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
-        </ng-container>
+          <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef> Cliente </th>
+            <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
+          </ng-container>
 
-        <ng-container matColumnDef="usuario_creacion">
-          <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
-          <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
-        </ng-container>
+          <ng-container matColumnDef="usuario_creacion">
+            <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
+            <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
+          </ng-container>
 
-        <ng-container matColumnDef="titulo">
-          <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row" class="desc">
-            <div class="desc_div">
-              {{row.evTitulo}}
-            </div>
-           </td>
-        </ng-container>
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef> Título </th>
+            <td mat-cell *matCellDef="let row" class="desc">
+              <div class="desc_div">
+                {{row.evTitulo}}
+              </div>
+             </td>
+          </ng-container>
 
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
-        </ng-container>
-        <ng-container matColumnDef="fecha_compromisoF">
-          <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
-        </ng-container>
+          <ng-container matColumnDef="fecha_creacionD">
+            <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+          </ng-container>
 
-        <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef> Estado </th>
-          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
-        </ng-container>
+          <ng-container matColumnDef="fecha_compromisoF">
+            <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
+          </ng-container>
 
-
-        <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row">
-
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </mat-tab>
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+          </ng-container>
 
 
+          <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button  mat-mini-fab color="warn" matTooltip="Resolución de macrotarea" matTooltipPosition="above" (click)="resolucionEvento(row)">
+                <mat-icon>done_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
 
-    <mat-tab label="Todas los Macrotareas" class="tabs">
-      <br>
-      <h3 class="title">Todos las Macrotareas</h3>
-      <mat-divider></mat-divider>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
 
-      <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
-        showFirstLastButtons
-        aria-label="Cantidad de registros a mostrar">
-      </mat-paginator>
+      </mat-tab>
 
-      <mat-form-field appearance="legacy" class="input_search">
-        <mat-label>Buscar en tabla: </mat-label>
-        <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtTodos($event)">
-      </mat-form-field>
+      <mat-tab label="Macrotareas en proceso de resolución" class="tabs">
+        <br>
+        <h3 class="title">Macrotareas en proceso de resolución</h3>
+        <mat-divider></mat-divider>
 
-      <table mat-table [dataSource]="dataSource_evtTodos"  >
+        <mat-paginator #paginator3 [pageSizeOptions]="[5, 10, 20, 100]"
+          showFirstLastButtons
+          aria-label="Cantidad de registros a mostrar">
+        </mat-paginator>
 
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
-          <td mat-cell *matCellDef="let row"> {{row.id}}
-            <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
-            (click)="verDetalleEvento(row)">
-              <mat-icon>remove_red_eye</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="atencion_id">
-          <th mat-header-cell *matHeaderCellDef> ID Atención </th>
-          <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
-            <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right"   (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
-          </td>
-        </ng-container>
+        <mat-form-field appearance="legacy" class="input_search">
+          <mat-label>Buscar en tabla: </mat-label>
+          <input  matInput type="text" [(ngModel)]="texto2"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtProResolucion($event)">
+        </mat-form-field>
 
-        <ng-container matColumnDef="cliente">
-          <th mat-header-cell *matHeaderCellDef> Cliente </th>
-          <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
-        </ng-container>
+        <table mat-table [dataSource]="dataSource_evtProResolucion">
 
-        <ng-container matColumnDef="usuario_creacion">
-          <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
-          <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
-        </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
+            <td mat-cell *matCellDef="let row"> {{row.id}}
+              <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
+              (click)="verDetalleEvento(row)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="atencion_id">
+            <th mat-header-cell *matHeaderCellDef> ID Atención </th>
+            <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+              <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+            </td>
 
-        <ng-container matColumnDef="titulo">
-          <th mat-header-cell *matHeaderCellDef> Título </th>
-          <td mat-cell *matCellDef="let row" class="desc">
-            <div class="desc_div">
-              {{row.evTitulo}}
-            </div>
-           </td>
-        </ng-container>
-        <ng-container matColumnDef="fecha_creacionD">
-          <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
-        </ng-container>
+          </ng-container>
 
-        <ng-container matColumnDef="fecha_compromisoF">
-          <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
-        </ng-container>
+          <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef> Cliente </th>
+            <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
+          </ng-container>
 
-        <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef> Estado </th>
-          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
-        </ng-container>
+          <ng-container matColumnDef="usuario_creacion">
+            <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
+            <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef> Título </th>
+            <td mat-cell *matCellDef="let row" class="desc">
+              <div class="desc_div">
+                {{row.evTitulo}}
+              </div>
+             </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha_creacionD">
+            <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+          </ng-container>
+          <ng-container matColumnDef="fecha_compromisoF">
+            <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+          </ng-container>
 
 
-        <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'" (click)="generarTicket(row)">
-              <mat-icon>add</mat-icon>
-            </button>
+          <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" (click)="generarTicket(row)">
+                <mat-icon>add</mat-icon>
+              </button>
 
-            <button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'"
-            (click)="resolucionEvento(row)">
-              <mat-icon>done_outline</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+              <button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" (click)="resolucionEvento(row)">
+                <mat-icon>done_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
 
-    </mat-tab>
+      </mat-tab>
 
+
+
+      <mat-tab label="Macrotareas Cerradas" class="tabs">
+        <br>
+        <h3 class="title">Macrotareas Cerradas</h3>
+        <mat-divider></mat-divider>
+          <mat-paginator #paginator4 [pageSizeOptions]="[5, 10, 20, 100]"
+            showFirstLastButtons
+            aria-label="Cantidad de registros a mostrar">
+          </mat-paginator>
+
+        <mat-form-field appearance="legacy" class="input_search">
+          <mat-label>Buscar en tabla: </mat-label>
+          <input  matInput type="text" [(ngModel)]="texto2"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtCerrados($event)">
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource_evtCerrados"  >
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
+            <td mat-cell *matCellDef="let row"> {{row.id}}
+              <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
+              (click)="verDetalleEvento(row)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="atencion_id">
+            <th mat-header-cell *matHeaderCellDef> ID Atención </th>
+            <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+              <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef> Cliente </th>
+            <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="usuario_creacion">
+            <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
+            <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef> Título </th>
+            <td mat-cell *matCellDef="let row" class="desc">
+              <div class="desc_div">
+                {{row.evTitulo}}
+              </div>
+             </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha_creacionD">
+            <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+          </ng-container>
+          <ng-container matColumnDef="fecha_compromisoF">
+            <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-tab>
+
+
+
+      <mat-tab label="Todas los Macrotareas" class="tabs">
+        <br>
+        <h3 class="title">Todos las Macrotareas</h3>
+        <mat-divider></mat-divider>
+
+        <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
+          showFirstLastButtons
+          aria-label="Cantidad de registros a mostrar">
+        </mat-paginator>
+
+        <mat-form-field appearance="legacy" class="input_search">
+          <mat-label>Buscar en tabla: </mat-label>
+          <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_evtTodos($event)">
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource_evtTodos"  >
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID Macrotarea</th>
+            <td mat-cell *matCellDef="let row"> {{row.id}}
+              <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
+              (click)="verDetalleEvento(row)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="atencion_id">
+            <th mat-header-cell *matHeaderCellDef> ID Atención </th>
+            <td mat-cell *matCellDef="let row" class="cli"> {{row.atencion_id }}
+              <button mat-mini-fab color="basic" class="success" matTooltip="Detalles de la atención" matTooltipPosition="right"   (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef> Cliente </th>
+            <td mat-cell *matCellDef="let row"> {{row.cliente}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="usuario_creacion">
+            <th mat-header-cell *matHeaderCellDef> Usuario Creación </th>
+            <td mat-cell *matCellDef="let row"> {{row.usuario_creacion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef> Título </th>
+            <td mat-cell *matCellDef="let row" class="desc">
+              <div class="desc_div">
+                {{row.evTitulo}}
+              </div>
+             </td>
+          </ng-container>
+          <ng-container matColumnDef="fecha_creacionD">
+            <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_creacionD}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha_compromisoF">
+            <th mat-header-cell *matHeaderCellDef> Fecha Compromiso </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha_compromisoF}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-mini-fab color="primary" matTooltip="Nuevo Ticket" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'" (click)="generarTicket(row)">
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'"
+              (click)="resolucionEvento(row)">
+                <mat-icon>done_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </mat-tab>
+
+  </mat-tab-group>
+  </mat-tab>
+
+  <mat-tab label="GESTIONES COMERCIALES">
+
+  </mat-tab>
 </mat-tab-group>
+
 
 
 

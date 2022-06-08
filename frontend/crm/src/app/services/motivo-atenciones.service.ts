@@ -54,5 +54,10 @@ export class MotivoAtencionesService {
   }
 
 
+  public getSistemaMotivoAtn(data: MotivoAtenciones): Observable<MotivoAtenciones> {
+    return this.http.post<MotivoAtenciones>(this.globalservice.getUrlBackEnd() + 'getSistemaMotivoAtn', data, httpOptions)
+    .pipe(map(data => data as unknown as MotivoAtenciones ));
+  }
+
 
 }

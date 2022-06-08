@@ -70,6 +70,41 @@ class MotivosAtnController extends Controller
 
         return response()->json($motivos);
     }
+
+
+    public function getSistemaMotivoAtn(Request $request){
+
+        
+        $motivos = json_encode(DB::connection('comanda')->table('CRM_motivo_atenciones')->where('id',$request["id"])->get());
+
+        $arrayJson = [];
+        foreach (json_decode($motivos, true) as $value){
+            $arrayJson = $value;
+        }
+
+        return $arrayJson;
+
+    }
+
+
+    public function getClausulaAclaratoria(Request $request){
+
+        
+        $clausula = json_encode(
+            DB::connection('comanda')->select("SELECT top 1 gc.id, parrafo as parrafo, cma.nombre as titulo from GC_clausulas gc 
+            inner join  CRM_motivo_atenciones cma ON cma.id = gc.id_tipo_solicitud 
+            where gc.id_tipo_solicitud = ".$request["id"]." and gc.tipo = 'Aclaratoria' and gc.estado = 1
+            order by 1 asc"));
+
+        $arrayJson = [];
+        foreach (json_decode($clausula, true) as $value){
+            $arrayJson = $value;
+        }
+
+        return $arrayJson;
+
+    }
+    
 }
 
 ?>

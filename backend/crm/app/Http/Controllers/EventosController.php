@@ -29,7 +29,9 @@ class EventosController extends Controller
           as usuario_creacion from crm_eventos e
          inner join crm_estados_eventos as estado on estado.id = e.estado
          inner join comanda_db.dbo.users u on u.id = e.usuario_crm
-         where e.usuario_crm = ".$id."
+         inner join comanda_db.dbo.CRM_atenciones ca on ca.id = e.atencion_id 
+         inner join comanda_db.dbo.CRM_motivo_atenciones cma on cma.id = ca.id_motivo_atencion 
+         where e.usuario_crm = ".$id." and cma.sistema = 'CRM'
          union
          SELECT e.*,ee.nombre as estado,e.eventoTitulo as evTitulo,
          e.id as evento_id,
@@ -42,7 +44,9 @@ class EventosController extends Controller
            inner join comanda_db.dbo.crm_clientes c on c.empresa = e.cliente
            inner join comanda_db.dbo.users u on u.id = c.usuario_crm
            inner join comanda_db.dbo.CRM_estados_eventos as ee on ee.id = e.estado
-           where u.alias = '".$user."' and e.usuario_crm != 
+           inner join comanda_db.dbo.CRM_atenciones ca on ca.id = e.atencion_id 
+           inner join comanda_db.dbo.CRM_motivo_atenciones cma on cma.id = ca.id_motivo_atencion 
+           where u.alias = '".$user."' and cma.sistema = 'CRM' and e.usuario_crm != 
            (select id from comanda_db.dbo.users where estado = 1 and alias = '".$user."')
           
          union 
@@ -58,7 +62,9 @@ class EventosController extends Controller
          inner join crm_cliente_usuario ccu on ccu.cliente = c.id
          inner join comanda_db.dbo.users u on u.id = c.usuario_crm
          inner join comanda_db.dbo.CRM_estados_eventos as ee on ee.id = e.estado
-         WHERE ccu.usuario =".$id."    
+         inner join comanda_db.dbo.CRM_atenciones ca on ca.id = e.atencion_id 
+         inner join comanda_db.dbo.CRM_motivo_atenciones cma on cma.id = ca.id_motivo_atencion 
+         WHERE ccu.usuario =".$id."  and cma.sistema = 'CRM'
          order by e.id desc
              ");
  
@@ -118,8 +124,40 @@ class EventosController extends Controller
         $titulo_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.titulo_atn')->where('CRM_atenciones.id',$atencion_id)->first();
         $descripcion_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.descripcion')->where('CRM_atenciones.id',$atencion_id)->first();
         $usuario_atn =  DB::connection('comanda')->table("CRM_atenciones")
-        ->join('users','users.id','=','CRM_atenciones.usuario_creacion')
+        ->join('users','users.alias','=','CRM_atenciones.usuario_creacion')
         ->select("users.id")->where('CRM_atenciones.id',$atencion_id)->first();
+        $cliente_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.cliente')->where('CRM_atenciones.id',$atencion_id)->first();
+        $nis_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.num_suministro')->where('CRM_atenciones.id',$atencion_id)->first();
+
+
+        $insertar =  DB::connection('comanda')->table('CRM_eventos')
+                         ->insertGetId([
+                           'num_suministro' => $nis_atn->num_suministro,
+                           'cliente' => $cliente_atn->cliente,
+                           'usuario_crm' => $usuario_atn->id,
+                           'descripcion' => $descripcion_atn->descripcion,
+                           'fecha_creacion' => date('Ymd H:i'),
+                           'estado' => 1,
+                           'atencion_id' =>     $atencion_id,
+                           'eventoTitulo' => $titulo_atn->titulo_atn,
+                         ]);
+
+        return response()->json($atencion_id);
+    }
+
+
+    public function guardarEventoGC(Request $request){
+
+        $atencion_id = $request["atencion_id"];
+        $user_id_evt = $request["user_id_evt"];
+        
+
+
+        $titulo_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.titulo_atn')->where('CRM_atenciones.id',$atencion_id)->first();
+        $descripcion_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.descripcion')->where('CRM_atenciones.id',$atencion_id)->first();
+       //$usuario_atn =  DB::connection('comanda')->table("CRM_atenciones")
+       //->join('users','users.alias','=','CRM_atenciones.usuario_creacion')
+       //->select("users.id")->where('CRM_atenciones.id',$atencion_id)->first();
         $cliente_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.cliente')->where('CRM_atenciones.id',$atencion_id)->first();
         $nis_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.num_suministro')->where('CRM_atenciones.id',$atencion_id)->first();
 
@@ -128,7 +166,7 @@ class EventosController extends Controller
                          ->insertGetId([
                            'num_suministro' => $nis_atn,
                            'cliente' => $cliente_atn,
-                           'usuario_crm' => $usuario_atn,
+                           'usuario_crm' => $user_id_evt,
                            'descripcion' => $descripcion_atn,
                            'fecha_creacion' => date('Ymd H:i'),
                            'estado' => 1,
