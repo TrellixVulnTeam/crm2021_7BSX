@@ -55,12 +55,54 @@ export class EventosService {
   }
 
 
+
+  //gestiones comerciales
+
+
+  datos_evtTodosgc = new BehaviorSubject<Eventos[]>([]);
+  _datos_evtTodosgc = this.datos_evtTodosgc.asObservable();
+
+  fillevtTodos_listgc(d: Eventos[]){
+    this.datos_evtTodosgc.next(d);
+  }
+
+
+
+  datos_evtAbiertosgc = new BehaviorSubject<Eventos[]>([]);
+  _datos_evtAbiertosgc = this.datos_evtAbiertosgc.asObservable();
+
+  fillevtAbiertos_listgc(d: Eventos[]){
+    this.datos_evtAbiertosgc.next(d);
+  }
+
+
+  datos_evtProResoluciongc = new BehaviorSubject<Eventos[]>([]);
+  _datos_evtProResoluciongc = this.datos_evtProResoluciongc.asObservable();
+
+  fillevtProResolucion_listgc(d: Eventos[]){
+    this.datos_evtProResoluciongc.next(d);
+  }
+
+
+  datos_evtCerradosgc = new BehaviorSubject<Eventos[]>([]);
+  _datos_evtCerradosgc = this.datos_evtCerradosgc.asObservable();
+
+  fillevtCerrados_listgc(d: Eventos[]){
+    this.datos_evtCerradosgc.next(d);
+  }
+
+
   constructor(private http: HttpClient, private router: Router, private globalservice: GlobalService) { }
 
 
 
   public getAllEventos(usuario: Usuario): Observable<Eventos[]> {
     return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getAllEventos', usuario, httpOptions)
+    .pipe(map(data => data as unknown as Eventos[] ));
+  }
+
+  public getAllEventosGC(usuario: Usuario): Observable<Eventos[]> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getAllEventosGC', usuario, httpOptions)
     .pipe(map(data => data as unknown as Eventos[] ));
   }
 
@@ -105,8 +147,8 @@ export class EventosService {
   }
 
 
-  public guardarEventoGC(evento: Eventos): Observable<Eventos> {
-    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarEventoGC', evento, httpOptions)
+  public guardarEventoGC(atn: Atenciones): Observable<Eventos> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarEventoGC', atn, httpOptions)
     .pipe(map(data => data as Eventos ));
   }
 

@@ -94,6 +94,7 @@ class VerifyCsrfToken extends BaseVerifier
         'guardarEventoGC',
         'getClausulaAclaratoria',
         'delete_parrafo',
-        'getAllAtencionesGC'
+        'getAllAtencionesGC',
+        'getAllEventosGC'
     ];
 }

@@ -118,6 +118,8 @@ Route::post('getClausulaAclaratoria', 'MotivosAtnController@getClausulaAclarator
 
 Route::post('getAllAtencionesGC', 'AtencionesController@getAllAtencionesGC');
 
+Route::post('getAllEventosGC', 'EventosController@getAllEventosGC');
+
 //cartas
 Route::post('getDatosbyCarta', 'ClausulasController@getDatosbyCarta');
 Route::post('save_parrafo', 'ClausulasController@save_parrafo');
