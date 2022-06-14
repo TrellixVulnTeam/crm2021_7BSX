@@ -30,7 +30,7 @@ export class SuministrosComponent implements OnInit {
   displayedColumns: string[] = ['num_suministro',  'estado', 'nombrecliente' , 'anexo_direccion','usuario_unicom',  'Acciones'];
   dataSource_suministros:any = new MatTableDataSource<any>([]);
 
-  displayedColumns1: string[] = ['num_suministro',  'estado', 'nombrecliente' , 'anexo_direccion','usuario_unicom',  'Acciones'];
+  displayedColumns1: string[] = ['num_suministro',  'estado', 'nombrecliente' , 'anexo_direccion', 'Acciones'];
   dataSource_suministros1:any = new MatTableDataSource<any>([]);
 
 

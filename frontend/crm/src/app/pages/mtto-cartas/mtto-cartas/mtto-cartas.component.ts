@@ -174,6 +174,7 @@ export class MttoCartasComponent implements OnInit {
 
       let datos : MttoCartas = new MttoCartas();
       datos.parrafo = parrafo_nuevo.parrafo;
+      datos.tipo = parrafo_nuevo.tipo;
       datos.id = item;
 
       this.mttocartas_service.edit_parrafo(datos).subscribe(

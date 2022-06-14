@@ -54,8 +54,12 @@
 
         <mat-form-field appearance="legacy" class="inputf2">
           <mat-label>Tipo: </mat-label>
-          <input type="text" formControlName="tipo" readonly="true" matInput>
+          <mat-select formControlName="tipo">
+            <mat-option value="Aclaratoria">Aclaratoria</mat-option>
+            <mat-option value="Fija">Fija</mat-option>
+          </mat-select>
         </mat-form-field>
+
         <button mat-mini-fab color="primary" matTooltip="Guardar modificaciones" matTooltipPosition="above" (click)="edit_parrafo(item.value.id, pointIndex)"  class="btn_form"><mat-icon>edit</mat-icon></button>
         <button mat-mini-fab color="warn" (click)="delete_parrafo(item.value.id, pointIndex)" matTooltip="Eliminar" matTooltipPosition="above" class="btn_form"><mat-icon>delete</mat-icon></button>
       </div>

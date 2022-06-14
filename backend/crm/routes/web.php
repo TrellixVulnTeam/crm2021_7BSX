@@ -125,3 +125,4 @@ Route::post('getDatosbyCarta', 'ClausulasController@getDatosbyCarta');
 Route::post('save_parrafo', 'ClausulasController@save_parrafo');
 Route::post('edit_parrafo', 'ClausulasController@edit_parrafo');
 Route::post('delete_parrafo', 'ClausulasController@delete_parrafo');
+Route::any('imprimir_carta', 'ClausulasController@imprimir_carta');

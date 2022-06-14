@@ -26,12 +26,11 @@ class SuministrosController extends Controller
 
     public function getAllSuministrosComercial(){
 
-      $suministros = DB::connection('facturacion')->select("
-      select fs.*, convert(varchar(10),fs.fecha_alta, 103) as fecha_altaD, fc.NOMBRES as nombrecliente,
+      $suministros = DB::connection('facturacion')->select("SELECT fs.*, convert(varchar(10),fs.fecha_alta, 103) as fecha_altaD, fc.NOMBRES as nombrecliente,
       fc.APELLIDOS as apellidocliente,fc.NOMBRES +' '+ fc.APELLIDOS as cliente from FE_SUMINISTROS fs 
       inner join FE_CLIENTE fc on fc.CODIGO_CLIENTE = fs.CODIGO_CLIENTE 
-      where fs.usuario_unicom in('ACOMERCIAL')
-     ");
+      where fs.usuario_unicom in('ACOMERCIAL') and fs.CODIGO_COLONIA  not in ('02','03','000')
+      and fs.estado = 'A'");
 
 
        return response()->json($suministros);

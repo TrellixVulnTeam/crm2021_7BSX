@@ -230,7 +230,8 @@ class EventosController extends Controller
                            'usuario_crm' => $usuario_atn->id,
                            'descripcion' => $descripcion_atn->descripcion,
                            'fecha_creacion' => date('Ymd H:i'),
-                           'estado' => 2,
+                           'fecha_compromiso' => date('Ymd H:i'),
+                           'estado' => 3,
                            'atencion_id' =>     $atencion_id,
                            'eventoTitulo' => $titulo_atn->titulo_atn,
                          ]);

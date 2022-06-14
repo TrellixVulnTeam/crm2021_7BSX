@@ -349,7 +349,7 @@
 
   <mat-tab label="GESTIONES COMERCIALES">
     <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;">
-      <mat-tab label="Macrotareas abiertas" class="tabs">
+      <!--<mat-tab label="Macrotareas abiertas" class="tabs">
         <br>
         <h3 class="title">Macrotareas abiertas</h3>
         <mat-divider></mat-divider>
@@ -433,7 +433,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-      </mat-tab>
+      </mat-tab>-->
 
       <mat-tab label="Macrotareas en proceso de resolución" class="tabs">
         <br>
@@ -510,8 +510,13 @@
                 <mat-icon>add</mat-icon>
               </button>
 
-              <button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" (click)="resolucionEvento(row)">
+              <!--<button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" (click)="resolucionEvento(row)">
                 <mat-icon>done_outline</mat-icon>
+              </button>-->
+
+
+              <button  mat-mini-fab color="accent" matTooltip="Imprimir documento" matTooltipPosition="above" (click)="imprimirDoc(row)">
+                <mat-icon>print</mat-icon>
               </button>
             </td>
           </ng-container>
@@ -678,10 +683,10 @@
                 <mat-icon>add</mat-icon>
               </button>
 
-              <button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'"
+              <!--<button  mat-mini-fab color="warn" matTooltip="Resolución del macrotarea" matTooltipPosition="above" *ngIf="row.estado != 'Cerrado'"
               (click)="resolucionEvento(row)">
                 <mat-icon>done_outline</mat-icon>
-              </button>
+              </button>-->
             </td>
           </ng-container>
 

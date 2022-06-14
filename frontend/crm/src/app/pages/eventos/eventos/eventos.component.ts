@@ -60,7 +60,7 @@ export class EventosComponent implements OnInit {
   texto3gc:any;
 
   constructor( private global: GlobalService, private router: Router, private eventosService: EventosService,
-    public dialog: MatDialog, private atencionService: AtencionesService, private adjuntoService: ArchivosService) { }
+    public dialog: MatDialog, private atencionService: AtencionesService, private adjuntoService: ArchivosService,) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -301,6 +301,12 @@ resolucionEvento(evento: Eventos){
     data: {detalle_evento: evento},
     width: '70%',
   });
+}
+
+
+imprimirDoc(evento: Eventos){
+  const ur =  this.global.getUrlBackEnd() + 'imprimir_carta?id_evento=' + evento.id+'&id_atencion='+evento.atencion_id+'&nis='+evento.num_suministro;
+  window.open(ur, '_blank');
 }
 
 }

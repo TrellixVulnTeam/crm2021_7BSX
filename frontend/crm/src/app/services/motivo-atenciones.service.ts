@@ -26,6 +26,14 @@ export class MotivoAtencionesService {
     this.datos_motivoatn.next(d);
   }
 
+
+  datos_motivoatngc = new BehaviorSubject<MotivoAtenciones[]>([]);
+  _datos_motivoatngc = this.datos_motivoatngc.asObservable();
+
+  fill_motivoatngc(d: MotivoAtenciones[]){
+    this.datos_motivoatngc.next(d);
+  }
+
   constructor(private http: HttpClient, private router: Router, private globalservice: GlobalService) { }
 
   public getMotivosAtenciones(): Observable<MotivoAtenciones[]> {
@@ -58,6 +66,8 @@ export class MotivoAtencionesService {
     return this.http.post<MotivoAtenciones>(this.globalservice.getUrlBackEnd() + 'getSistemaMotivoAtn', data, httpOptions)
     .pipe(map(data => data as unknown as MotivoAtenciones ));
   }
+
+
 
 
 }

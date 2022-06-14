@@ -24,6 +24,12 @@ export class MotivoAtencionesComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator | undefined;
 
 
+  //gestiones comerciales
+  data_motivosatn_gc:any = new MatTableDataSource<any>([]);
+  displayedColumns_gc: string[] = ['id',  'nombre', 'sistema'];
+  @ViewChild('paginator') paginator_1: MatPaginator | undefined;
+  texto1:any;
+
   constructor(private motivoatn_service: MotivoAtencionesService, private global: GlobalService, private router: Router,
     public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
@@ -50,6 +56,7 @@ export class MotivoAtencionesComponent implements OnInit {
 
   ngAfterViewInit() {
     this.data_motivosatn.paginator = this.paginator;
+    this.data_motivosatn_gc.paginator = this.paginator_1;
     this.getMotivosAtn();
   }
 
@@ -66,6 +73,18 @@ export class MotivoAtencionesComponent implements OnInit {
       this.motivoatn_service._datos_motivoatn.subscribe(response => {
         this.data_motivosatn.data = response;
       });
+
+
+      this.motivoatn_service.getMotivosAtenciones_GC().subscribe(
+        data => {
+          //llenando arreglos
+          this.data_motivosatn_gc.data = data;
+        });
+        this.motivoatn_service.fill_motivoatngc(this.data_motivosatn_gc.data);
+
+        this.motivoatn_service._datos_motivoatngc.subscribe(response => {
+          this.data_motivosatn_gc.data = response;
+        });
   }
 
 
@@ -74,6 +93,10 @@ export class MotivoAtencionesComponent implements OnInit {
     this.data_motivosatn.filter = filterValue.trim().toLowerCase();
  }
 
+
+ filterTable_gc(filterValue :string) {
+  this.data_motivosatn_gc.filter = filterValue.trim().toLowerCase();
+}
 
 
  delete(data: MotivoAtenciones){

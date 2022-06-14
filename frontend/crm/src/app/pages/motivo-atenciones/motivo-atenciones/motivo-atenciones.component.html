@@ -4,44 +4,93 @@
 <mat-divider></mat-divider>
 <br>
 
-<mat-paginator #paginator [pageSizeOptions]="[5, 10, 20, 100]"
+<mat-tab-group>
+  <mat-tab label="CRM">
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+    </mat-paginator>
+    <mat-form-field appearance="legacy" class="input_search">
+      <mat-label>Buscar en tabla: </mat-label>
+      <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable($event)">
+    </mat-form-field>
+
+
+    <table mat-table [dataSource]="data_motivosatn">
+
+      <ng-container matColumnDef="id" >
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} &nbsp;
+          <button  mat-mini-fab color="accent" matTooltip="Editar datos" matTooltipPosition="above" (click)="edit(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          &nbsp;&nbsp;
+          <button  mat-mini-fab color="warn" matTooltip="Eliminar" matTooltipPosition="above" (click)="delete(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let row">{{row.nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sistema">
+        <th mat-header-cell *matHeaderCellDef> Sistema </th>
+        <td mat-cell *matCellDef="let row">{{row.sistema}} </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  </mat-tab>
+
+  <mat-tab label="GESTIONES COMERCIALES">
+    <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
     showFirstLastButtons
     aria-label="Cantidad de registros a mostrar">
-</mat-paginator>
-<mat-form-field appearance="legacy" class="input_search">
-  <mat-label>Buscar en tabla: </mat-label>
-  <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable($event)">
-</mat-form-field>
+    </mat-paginator>
+    <mat-form-field appearance="legacy" class="input_search">
+      <mat-label>Buscar en tabla: </mat-label>
+      <input  matInput type="text" [(ngModel)]="texto1"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_gc($event)">
+    </mat-form-field>
 
 
-<table mat-table [dataSource]="data_motivosatn">
+    <table mat-table [dataSource]="data_motivosatn_gc">
 
-  <ng-container matColumnDef="id" >
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let row"> {{row.id}} &nbsp;
-      <button  mat-mini-fab color="accent" matTooltip="Editar datos" matTooltipPosition="above" (click)="edit(row)">
-        <mat-icon>edit</mat-icon>
-      </button>
-      &nbsp;&nbsp;
-      <button  mat-mini-fab color="warn" matTooltip="Eliminar" matTooltipPosition="above" (click)="delete(row)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> Descripción </th>
-    <td mat-cell *matCellDef="let row">{{row.nombre}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="sistema">
-    <th mat-header-cell *matHeaderCellDef> Sistema </th>
-    <td mat-cell *matCellDef="let row">{{row.sistema}} </td>
-  </ng-container>
+      <ng-container matColumnDef="id" >
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} &nbsp;
+          <button  mat-mini-fab color="accent" matTooltip="Editar datos" matTooltipPosition="above" (click)="edit(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          &nbsp;&nbsp;
+          <button  mat-mini-fab color="warn" matTooltip="Eliminar" matTooltipPosition="above" (click)="delete(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
 
 
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let row">{{row.nombre}} </td>
+      </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <ng-container matColumnDef="sistema">
+        <th mat-header-cell *matHeaderCellDef> Sistema </th>
+        <td mat-cell *matCellDef="let row">{{row.sistema}} </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns_gc"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns_gc;"></tr>
+      </table>
+  </mat-tab>
+</mat-tab-group>
+
