@@ -131,7 +131,7 @@ export class MotivoAtencionesComponent implements OnInit {
  agregarNuevo(){
   this.dialog.open(AddComponent,{
     data: {},
-    width: '50%',
+    width: '70%',
   });
  }
 
@@ -139,7 +139,7 @@ export class MotivoAtencionesComponent implements OnInit {
  edit(data: MotivoAtenciones){
   this.dialog.open(EditComponent,{
     data: {data: data},
-    width: '50%',
+    width: '70%',
   });
  }
 

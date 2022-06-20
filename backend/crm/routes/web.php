@@ -115,10 +115,12 @@ Route::get('getMotivosAtenciones_GC', 'MotivosAtnController@getMotivosAtenciones
 Route::post('getSistemaMotivoAtn', 'MotivosAtnController@getSistemaMotivoAtn');
 Route::post('guardarEventoGC', 'EventosController@guardarEventoGC');
 Route::post('getClausulaAclaratoria', 'MotivosAtnController@getClausulaAclaratoria');
-
-Route::post('getAllAtencionesGC', 'AtencionesController@getAllAtencionesGC');
+Route::post('guardarEventoGC', 'EventosController@guardarEventoGC');
+Route::post('guardarResolucion_gc', 'EventosController@guardarResolucion_gc');
 
 Route::post('getAllEventosGC', 'EventosController@getAllEventosGC');
+Route::post('getAllAtencionesGC', 'AtencionesController@getAllAtencionesGC');
+Route::get('getOrdenesTrabajo', 'AtencionesController@getOrdenesTrabajo');
 
 //cartas
 Route::post('getDatosbyCarta', 'ClausulasController@getDatosbyCarta');

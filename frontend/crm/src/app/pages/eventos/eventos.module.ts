@@ -12,6 +12,7 @@ import { EventosAsociadosComponent } from './eventos-asociados/eventos-asociados
 import { GenerarTicketComponent } from './generar-ticket/generar-ticket.component';
 import { ResolucionEventoComponent } from './resolucion-evento/resolucion-evento.component';
 import { SubirArchivosComponent } from './subir-archivos/subir-archivos.component';
+import { ResolucionEvtgcComponent } from './resolucion-evtgc/resolucion-evtgc.component';
 
 
 
@@ -24,7 +25,8 @@ import { SubirArchivosComponent } from './subir-archivos/subir-archivos.componen
     EventosAsociadosComponent,
     GenerarTicketComponent,
     ResolucionEventoComponent,
-    SubirArchivosComponent
+    SubirArchivosComponent,
+    ResolucionEvtgcComponent
   ],
   imports: [
     CommonModule,

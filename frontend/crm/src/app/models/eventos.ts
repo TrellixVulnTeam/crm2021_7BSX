@@ -26,4 +26,7 @@ export class Eventos {
   public conteo!: string;
 public evento_id!: string;
 public user_id_evt!: number;
+public file!: string;
+public fecha_cierre!: string;
+public user_id_save!: number;
 }

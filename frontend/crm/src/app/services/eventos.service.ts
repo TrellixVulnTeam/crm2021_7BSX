@@ -152,4 +152,10 @@ export class EventosService {
     .pipe(map(data => data as Eventos ));
   }
 
+
+  public guardarResolucion_gc(evt: Eventos): Observable<Eventos[]> {
+    return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'guardarResolucion_gc', evt, httpOptions)
+    .pipe(map(data => data as unknown as Eventos[] ));
+  }
+
 }

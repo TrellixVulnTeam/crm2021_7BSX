@@ -10,11 +10,31 @@
 
         <mat-form-field appearance="legacy" class="input">
           <mat-label>Sistema: </mat-label>
-          <mat-select formControlName="sistema">
+          <mat-select formControlName="sistema" (ngModelChange)="validar_campos($event)">
+
             <mat-option  value="CRM">CRM</mat-option>
             <mat-option  value="GEST. COMERCIAL">Gestiones comerciales</mat-option>
           </mat-select>
         </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="input" *ngIf="validar">
+          <mat-label>Orden de trabajo asociada: </mat-label>
+          <mat-select formControlName="orden_trabajo">
+            <mat-option  value="N/D">Selecciona</mat-option>
+            <mat-option  *ngFor="let data of data_orden" [value]="data.codigo_tipo_ordentrabajo">{{data.codigo_tipo_ordentrabajo}} -- {{data.descripcion_tipo_ordentrabajo}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="input" *ngIf="validar">
+          <mat-label>Persona: </mat-label>
+          <mat-select formControlName="tipo_persona">
+            <mat-option  value="N/D">Selecciona</mat-option>
+            <mat-option  value="Jurídica">Jurídica</mat-option>
+            <mat-option  value="Natural">Natural</mat-option>
+          </mat-select>
+        </mat-form-field>
+
   </form>
 </div>
 <br><br>

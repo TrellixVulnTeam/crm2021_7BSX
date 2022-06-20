@@ -75,7 +75,7 @@
 
   <mat-divider></mat-divider>
 
-  <button  mat-menu-item routerLink="mttocartas">
+  <button  mat-menu-item routerLink="mttocartas" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
     <mat-icon>description</mat-icon>
     <span class="span-menu">Mtto. Cartas Auxiliares</span>
   </button>

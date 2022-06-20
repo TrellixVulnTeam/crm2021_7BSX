@@ -28,6 +28,8 @@ class MotivosAtnController extends Controller
                        'nombre' => $request['descripcion'],
                        'sistema' => $request['sistema'],
                        'estado' => 1,
+                       'tipo_persona' => $request['tipo_persona'],
+                       'orden_trabajo' => $request['orden_trabajo'],
                      ]);
        
         
@@ -57,6 +59,8 @@ class MotivosAtnController extends Controller
                          ->update([
                             'nombre' => $request['descripcion'],
                             'sistema' => $request['sistema'],
+                            'tipo_persona' => $request['tipo_persona'],
+                            'orden_trabajo' => $request['orden_trabajo'],
                             ]);
 
         return response()->json($editar);

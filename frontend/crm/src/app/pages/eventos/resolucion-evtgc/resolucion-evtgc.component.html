@@ -1,0 +1,21 @@
+
+<h3 mat-dialog-title ><b>Detalles de la macrotarea N°:</b> {{detalle_evento.id}}</h3>
+<h3 mat-dialog-title ><b>Título de la macrotarea:</b> {{detalle_evento.eventoTitulo}}</h3>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <form class="form_cerrar_evt" [formGroup]="form_cerrar_evt">
+
+    <mat-form-field appearance="legacy" class="input" >
+      <mat-label>Fecha</mat-label>
+      <input  matInput type="date" formControlName="fecha"  autocomplete="off">
+    </mat-form-field>
+      <input  type="file" formControlName="file" class="input" (change)="subir_archivo($event)">
+    </form>
+</div>
+
+<div mat-dialog-actions>
+
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="form_cerrar_evt.invalid">Cerrar macrotarea</button>
+  <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+</div>

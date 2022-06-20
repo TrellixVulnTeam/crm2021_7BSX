@@ -96,6 +96,8 @@ class VerifyCsrfToken extends BaseVerifier
         'delete_parrafo',
         'getAllAtencionesGC',
         'getAllEventosGC',
-        'imprimir_carta'
+        'imprimir_carta',
+        'guardarResolucion_gc',
+        'getOrdenesTrabajo'
     ];
 }

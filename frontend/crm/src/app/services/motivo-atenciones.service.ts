@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MotivoAtenciones } from '../models/motivo-atenciones';
+import { orden_trabajo } from '../models/orden_trabajo';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -66,6 +67,12 @@ export class MotivoAtencionesService {
     return this.http.post<MotivoAtenciones>(this.globalservice.getUrlBackEnd() + 'getSistemaMotivoAtn', data, httpOptions)
     .pipe(map(data => data as unknown as MotivoAtenciones ));
   }
+
+
+  public getOrdenesTrabajo(): Observable<orden_trabajo[]> {
+    return this.http.get(this.globalservice.getUrlBackEnd() + 'getOrdenesTrabajo').pipe(map(data => data as orden_trabajo[]));
+  }
+
 
 
 

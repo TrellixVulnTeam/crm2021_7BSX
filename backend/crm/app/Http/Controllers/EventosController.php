@@ -439,6 +439,47 @@ class EventosController extends Controller
         return response()->json($editar);
     }
 
+
+
+
+    
+    public function guardarResolucion_gc(Request $request){
+
+        $fechaResSinFormato = date_create_from_format('Y-m-d',$request['fecha_cierre']);
+
+        $fechaResConFormato = date_format($fechaResSinFormato,'Ymd');
+
+        $editar =  DB::connection('comanda')->table('CRM_eventos')
+                    ->where('id', $request['evento_id'])
+                         ->update([
+                            'resolucion' => "El cliente firmó el archivo",
+                            'estado' => 2,
+                            'fecha_resolucion' => $fechaResConFormato,
+                            ]);
+        
+        $insertar =  DB::connection('comanda')->table('CRM_adjuntos')
+        ->insert([
+          'atencion_id' => $request['atencion_id'],
+          'evento_id' => $request['evento_id'],
+          'fecha_creacion' => $fechaResConFormato,
+          'usuario_id' => $request['user_id_save'],
+          'adjunto' =>  date('Ymd').' '.strtolower(substr($request['file'],12)),
+          'descripcion' => "Carta firmada por cliente para gestiones comerciales",
+          'tipoarchivo' => 30,
+        ]);
+
+
+        
+        $editar_atn =  DB::connection('comanda')->table('CRM_atenciones')
+        ->where('id', $request['atencion_id'])
+             ->update([
+                'atencion_cerrada' => 'S',
+                ]);
+
+
+        return response()->json($editar_atn);
+    }
+
 }
 
 

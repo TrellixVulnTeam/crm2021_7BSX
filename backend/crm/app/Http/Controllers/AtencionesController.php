@@ -532,6 +532,14 @@ class AtencionesController extends Controller
 
             return response()->json($editar);
         }
+
+
+        public function getOrdenesTrabajo(){
+            $datos = DB::connection('calidad')->select("SELECT * from fe_calidad_tipo_ordentrabajo fcto where fcto.asocia_gestion_comercial = 'S'");
+
+
+            return response()->json($datos);
+        }
 }
 
 

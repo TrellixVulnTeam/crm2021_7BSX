@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MotivoAtenciones } from 'src/app/models/motivo-atenciones';
+import { orden_trabajo } from 'src/app/models/orden_trabajo';
 import { MotivoAtencionesService } from 'src/app/services/motivo-atenciones.service';
 
 @Component({
@@ -13,16 +14,22 @@ import { MotivoAtencionesService } from 'src/app/services/motivo-atenciones.serv
 export class AddComponent implements OnInit {
   form : FormGroup;
   data_motivosatn: MotivoAtenciones[] | undefined;
+  validar!: boolean;
+  data_orden: orden_trabajo[] | undefined;
 
   constructor(private motivoatn_service: MotivoAtencionesService, private _snackBar: MatSnackBar, public dialog: MatDialog) {
     this.form = new FormGroup({
       'sistema': new FormControl('',[Validators.required]),
       'descripcion': new FormControl('',[Validators.required]),
+      'orden_trabajo': new FormControl('N/D',),
+      'tipo_persona': new FormControl('N/D',),
     });
 
    }
 
   ngOnInit(): void {
+    this.validar = false;
+    this.getordenestrabajo();
   }
 
   save(){
@@ -62,7 +69,26 @@ export class AddComponent implements OnInit {
   }
 
 
+  getordenestrabajo(){
+    this.motivoatn_service.getOrdenesTrabajo().subscribe(
+      data => {
+        this.data_orden = data;
+        console.log(this.data_orden);
+      });
 
+  }
+
+validar_campos(data: any){
+  if(data === "GEST. COMERCIAL"){
+    this.validar = true;
+    this.form.controls["orden_trabajo"].setValue("N/D");
+    this.form.controls["tipo_persona"].setValue("N/D");
+  }else{
+    this.validar = false;
+    this.form.controls["orden_trabajo"].setValue("N/D");
+    this.form.controls["tipo_persona"].setValue("N/D");
+  }
+}
 
   getMotivosAtn(){
     this.motivoatn_service.getMotivosAtenciones().subscribe(

@@ -16,6 +16,7 @@ import { DetallesComponent } from '../../atenciones/detalles/detalles.component'
 import { ModalTicketComponent } from '../../tickets/modal-ticket/modal-ticket.component';
 import { DetallesEventosComponent } from '../detalles-eventos/detalles-eventos.component';
 import { ResolucionEventoComponent } from '../resolucion-evento/resolucion-evento.component';
+import { ResolucionEvtgcComponent } from '../resolucion-evtgc/resolucion-evtgc.component';
 
 @Component({
   selector: 'app-eventos',
@@ -309,4 +310,11 @@ imprimirDoc(evento: Eventos){
   window.open(ur, '_blank');
 }
 
+
+resolucionEvento_gc(evento: Eventos){
+  this.dialog.open(ResolucionEvtgcComponent,{
+    data: {detalle_evento: evento},
+    width: '50%',
+  });
+}
 }
