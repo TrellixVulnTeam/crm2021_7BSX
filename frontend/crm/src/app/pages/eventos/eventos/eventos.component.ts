@@ -281,6 +281,7 @@ verDetalleEvento(evento: Eventos){
   let datos: any;
   datos = evento;
 
+
   this.adjuntoService.getAdjuntosEventos(datos).subscribe(
     data=>{
       this.adjuntos = data;
