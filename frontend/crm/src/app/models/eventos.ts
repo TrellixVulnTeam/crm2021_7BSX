@@ -29,4 +29,14 @@ public user_id_evt!: number;
 public file!: string;
 public fecha_cierre!: string;
 public user_id_save!: number;
+
+
+public ap_nombre!: string;
+public ap_profesion!: string;
+public ap_dui!: string;
+public ap_nit!: string;
+public ap_domicilio!: string;
+public ap_departamento!: string;
+public ap_actua!: string;
+
 }

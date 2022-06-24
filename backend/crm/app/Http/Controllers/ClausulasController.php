@@ -16,7 +16,9 @@ class ClausulasController extends Controller
     {
         $id = $request["carta"];
 
-        $data = DB::connection('comanda')->select("select * from GC_clausulas where estado = 1 and id_tipo_solicitud = ".$id ."");
+        $data = DB::connection('comanda')->select("select gc.*, cma.tipo_persona as tipo_persona  from GC_clausulas gc 
+        inner join CRM_motivo_atenciones cma on cma.id = gc.id_tipo_solicitud 
+        where gc.estado = 1 and gc.id_tipo_solicitud = ".$id ."");
 
         return response()->json($data);
     }
@@ -93,7 +95,67 @@ class ClausulasController extends Controller
         inner join GC_clausulas gc on gc.id_tipo_solicitud = ca.id_motivo_atencion 
         where ca.id = ".$id_atencion." and gc.estado = 1");
 
-        $view =  \View::make('pdf.solicitud_regulatoriaGC_persona', compact('id_evento', 'id_atencion', 'datos', 'clausulas', 'tipo_soli'))->render();
+
+        $cliente = DB::connection('facturacion')->table("FE_SUMINISTROS")
+        ->join('FE_CLIENTE', 'FE_CLIENTE.CODIGO_CLIENTE','=','FE_SUMINISTROS.CODIGO_CLIENTE')
+        ->select("FE_SUMINISTROS.CODIGO_CLIENTE","FE_CLIENTE.tipo_persona")->where('FE_SUMINISTROS.num_suministro', $request['nis'])->first();
+
+
+        $cod_cliente = $cliente->CODIGO_CLIENTE;
+
+        $t_persona = $cliente->tipo_persona;
+
+        $view ='';
+        if($t_persona == 'N'){
+            $view =  \View::make('pdf.solicitud_regulatoriaGC_persona', compact('id_evento', 'id_atencion', 'datos', 'clausulas', 'tipo_soli'))->render();
+        }else{
+            $datos_repre = DB::connection('facturacion')->select("
+            select CONCAT(fc.NOMBRES,' ', fc.apellidos)  as cliente, fc.tipo_persona,
+            fs.num_suministro as nis, CONCAT(fc.NOMBRES,' ', fc.APELLIDOS) as cliente, fc.direccion, fc.DUI as dui,
+            case when
+            fc.nit_dui is null
+            then fc.NIT 
+            else fc.nit_dui 
+            end as nit, fa.numero_medidor as num_medidor,
+            case when fc.repre_legal_1 is null
+            then  fc.repre_legal_2 
+            else fc.repre_legal_1 
+            end as representante,
+
+            case when fc.domicilio_1 is null 
+            then
+            fc.domicilio_2 
+            else 
+            fc.domicilio_1 
+            end as domicilio,
+
+            case when fc.departamento_1 is null
+            then
+            (select fd.NOMBRE_DEPARTAMENTO from FE_DEPARTAMENTOS fd where fd.CODIGO_DEPARTAMENTO = fc.departamento_2)
+            else
+            (select fd.NOMBRE_DEPARTAMENTO from FE_DEPARTAMENTOS fd where fd.CODIGO_DEPARTAMENTO = fc.departamento_1)
+            END AS departamento,
+
+            case when fc.dui_1 is null 
+            then fc.dui_2
+            ELSE  fc.dui_1 end as dui,
+
+            case when fc.nit_1 is null 
+            THEN fc.nit_2
+            else fc.nit_1 end as nit,
+
+            case when fc.cargo_1 is NULL 
+            then fc.cargo_2
+            else fc.cargo_1 end as cargo
+
+            from FE_CLIENTE fc 
+            inner join FACTURACION.dbo.FE_SUMINISTROS fs on fs.CODIGO_CLIENTE = fc.CODIGO_CLIENTE 
+            inner join FACTURACION.dbo.FE_APARATOS fa on fa.num_suministro = fs.num_suministro 
+            where fc.CODIGO_CLIENTE = ".$cod_cliente." and fa.bandera_activo = 1 and fs.num_suministro = ".$request['nis']."
+            ");   
+            $view =  \View::make('pdf.solicitud_regulatoriaGC_juridico', compact('id_evento', 'id_atencion', 'datos', 'clausulas', 'tipo_soli','datos_repre'))->render();
+        }
+
 
         $pdf = \App::make('dompdf.wrapper');
 

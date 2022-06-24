@@ -540,7 +540,64 @@ class AtencionesController extends Controller
 
             return response()->json($datos);
         }
-}
+
+
+
+        public function getDatosApoderado(Request $request){
+
+         $cliente = $request["cliente"];
+
+            $clausula = json_encode(
+                DB::connection('facturacion')->select("SELECT 
+                case when fc.repre_legal_1 is null
+                then  fc.repre_legal_2 
+                else fc.repre_legal_1 
+                end as representante,
+                
+                case when fc.domicilio_1 is null 
+                then
+                fc.domicilio_2 
+                else 
+                fc.domicilio_1 
+                end as domicilio,
+                
+                case when fc.departamento_1 is null
+                then
+                (select fd.NOMBRE_DEPARTAMENTO from FE_DEPARTAMENTOS fd where fd.CODIGO_DEPARTAMENTO = fc.departamento_2)
+                else
+                (select fd.NOMBRE_DEPARTAMENTO from FE_DEPARTAMENTOS fd where fd.CODIGO_DEPARTAMENTO = fc.departamento_1)
+                END AS departamento,
+                
+                case when fc.dui_1 is null 
+                then fc.dui_2
+                ELSE  fc.dui_1 end as dui,
+                
+                case when fc.nit_1 is null 
+                THEN fc.nit_2
+                else fc.nit_1 end as nit,
+                
+                case when fc.cargo_1 is NULL 
+                then fc.cargo_2
+                else fc.cargo_1 end as cargo,
+                
+                case when fc.profesion_1 is NULL 
+                then fc.profesion_2
+                else fc.profesion_1 end as profesion
+                
+                from FE_CLIENTE fc 
+                inner join FACTURACION.dbo.FE_SUMINISTROS fs on fs.CODIGO_CLIENTE = fc.CODIGO_CLIENTE
+                where fs.num_suministro = ".$cliente." "));
+    
+            $arrayJson = [];
+            foreach (json_decode($clausula, true) as $value){
+                $arrayJson = $value;
+            }
+    
+            return  $arrayJson;
+    
+        }
+    }
+
 
 
 

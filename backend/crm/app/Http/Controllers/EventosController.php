@@ -172,6 +172,7 @@ class EventosController extends Controller
                            'estado' => 1,
                            'atencion_id' => $request['atencion_id'],
                            'eventoTitulo' => $request["titulo_evt"],
+                           
                          ]);
 
         return response()->json($insertar);
@@ -212,7 +213,7 @@ class EventosController extends Controller
     public function guardarEventoGC(Request $request){
 
         $atencion_id = $request["atencion_id"];
-
+        $codigo_sucursal = $request["codigo_sucursal"];
 
         $titulo_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.titulo_atn')->where('CRM_atenciones.id',$atencion_id)->first();
         $descripcion_atn = DB::connection('comanda')->table('CRM_atenciones')->select('CRM_atenciones.descripcion')->where('CRM_atenciones.id',$atencion_id)->first();
@@ -234,6 +235,13 @@ class EventosController extends Controller
                            'estado' => 3,
                            'atencion_id' =>     $atencion_id,
                            'eventoTitulo' => $titulo_atn->titulo_atn,
+                           'ap_nombre' => $request["ap_nombre"],
+                           'ap_profesion' => $request["ap_profesion"],
+                           'ap_dui' => $request["ap_dui"],
+                           'ap_nit' => $request["ap_nit"],
+                           'ap_domicilio' => $request["ap_domicilio"],
+                           'ap_actua' => $request["ap_actua"],
+                           'ap_departamento' => $request["ap_departamento"],
                          ]);
 
         return response()->json($atencion_id);

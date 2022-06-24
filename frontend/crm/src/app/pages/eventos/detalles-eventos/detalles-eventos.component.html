@@ -72,6 +72,53 @@
             <input readonly matInput type="text" formControlName="resolucion" [(ngModel)]="eventos_obj.resolucion">
           </mat-form-field>
 
+
+                 <!--Datos de apoderado-->
+    <div *ngIf="tipo_persona_validar">
+      <mat-divider></mat-divider>
+      <h3 style="margin-top:25px !important;">Datos de apoderado</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Nombre de apoderado</mat-label>
+        <input  matInput type="text" formControlName="ap_nombre" placeholder="Nombre de apoderado" autocomplete="off" [(ngModel)]="eventos_obj.ap_nombre">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Profesión</mat-label>
+        <input  matInput type="text" formControlName="ap_profesion" readonly="true" placeholder="Profesión" autocomplete="off" [(ngModel)]="eventos_obj.ap_profesion">
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>N° DUI</mat-label>
+        <input  matInput type="text" formControlName="ap_dui" readonly="true" placeholder="N° DUI" autocomplete="off" [(ngModel)]="eventos_obj.ap_dui">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>N° de NIT</mat-label>
+        <input  matInput type="text" formControlName="ap_nit" readonly="true" placeholder="N° de NIT" autocomplete="off" [(ngModel)]="eventos_obj.ap_nit">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Domicilio</mat-label>
+        <input  matInput type="text" formControlName="ap_domicilio" readonly="true" placeholder="Domicilio" autocomplete="off" [(ngModel)]="eventos_obj.ap_domicilio">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Departamento</mat-label>
+        <input  matInput type="text" formControlName="ap_departamento" readonly="true" placeholder="Departamento" autocomplete="off" [(ngModel)]="eventos_obj.ap_departamento">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Actúa como:</mat-label>
+        <input  matInput type="text" formControlName="ap_actua" readonly="true" placeholder="Actúa como" autocomplete="off" [(ngModel)]="eventos_obj.ap_actua">
+      </mat-form-field>
+    </div>
+
       </form>
     </mat-tab>
 

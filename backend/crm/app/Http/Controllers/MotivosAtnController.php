@@ -95,7 +95,7 @@ class MotivosAtnController extends Controller
 
         
         $clausula = json_encode(
-            DB::connection('comanda')->select("SELECT top 1 gc.id, parrafo as parrafo, cma.nombre as titulo from GC_clausulas gc 
+            DB::connection('comanda')->select("SELECT top 1 gc.id, parrafo as parrafo, cma.nombre as titulo, cma.tipo_persona as tipo_persona from GC_clausulas gc 
             inner join  CRM_motivo_atenciones cma ON cma.id = gc.id_tipo_solicitud 
             where gc.id_tipo_solicitud = ".$request["id"]." and gc.tipo = 'Aclaratoria' and gc.estado = 1
             order by 1 asc"));

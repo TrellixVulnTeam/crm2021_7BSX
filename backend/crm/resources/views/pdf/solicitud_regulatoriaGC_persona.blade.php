@@ -111,8 +111,8 @@
     </div>
 
     @foreach ($datos as $dc)
-        <div style="margin-top: 15px;font-size: 12px;">
-            <p>Yo: <b>{{$dc->cliente}}</b> con DUI: <b>{{$dc->dui}}</b> y NIT: <b>{{$dc->nit}}</b>; actual usuario de EDESAL con Suministro NIS:
+        <div style="margin-top: 15px;font-size: 12px;line-height: 20pt;">
+            <p align="justify">Yo: <b>{{$dc->cliente}}</b> con DUI: <b>{{$dc->dui}}</b> y NIT: <b>{{$dc->nit}}</b>; actual usuario de EDESAL con Suministro NIS:
                 <b>{{$dc->nis}}</b>  ubicado en la dirección: <b>{{$dc->direccion}}</b>.</p>
         </div>
 

@@ -40,6 +40,9 @@ export class ModalAtencionComponent implements OnInit {
   titulo_atn: any;
   atencion_id_evt : any;
   validarArchivos = false;
+  tipo_persona : any;
+  tipo_persona_validar!: boolean;
+  datos_repre : Atenciones = new Atenciones();
 
   constructor(public atencionService: AtencionesService,
     public modal_atencion: MatDialogRef<ModalAtencionComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -59,6 +62,13 @@ export class ModalAtencionComponent implements OnInit {
       'fax' : new FormControl(''),
       'whatsapp' : new FormControl(''),
       'usuario_crm' : new FormControl(''),
+      'ap_nombre' : new FormControl(''),
+      'ap_profesion' : new FormControl(''),
+      'ap_dui' : new FormControl(''),
+      'ap_nit' : new FormControl(''),
+      'ap_domicilio' : new FormControl(''),
+      'ap_actua' : new FormControl(''),
+      'ap_departamento' : new FormControl(''),
     });
 
 
@@ -66,7 +76,7 @@ export class ModalAtencionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.tipo_persona_validar = false;
 
     if(localStorage.getItem('usuario_crm') !== null){
 
@@ -167,6 +177,14 @@ export class ModalAtencionComponent implements OnInit {
         }else{
           let datos_evt : Atenciones = new Atenciones();
           datos_evt.atencion_id = this.atencion_id;
+          datos_evt.codigo_sucursal = this.user.codigo_sucursal;
+          datos_evt.ap_nombre = this.form_atencion.controls["ap_nombre"].value;
+          datos_evt.ap_profesion = this.form_atencion.controls["ap_profesion"].value;
+          datos_evt.ap_dui= this.form_atencion.controls["ap_dui"].value;
+          datos_evt.ap_nit= this.form_atencion.controls["ap_nit"].value;
+          datos_evt.ap_domicilio= this.form_atencion.controls["ap_domicilio"].value;
+          datos_evt.ap_departamento= this.form_atencion.controls["ap_departamento"].value;
+          datos_evt.ap_actua= this.form_atencion.controls["ap_actua"].value;
 
           this.eventosService.guardarEventoGC(datos_evt).subscribe(
             response => {
@@ -195,8 +213,21 @@ export class ModalAtencionComponent implements OnInit {
 
 
   getMotivoAtn(ob: any){
+
+    this.form_atencion.controls["ap_nombre"].setValue('');
+    this.form_atencion.controls["ap_profesion"].setValue('');
+    this.form_atencion.controls["ap_dui"].setValue('');
+    this.form_atencion.controls["ap_nit"].setValue('');
+    this.form_atencion.controls["ap_domicilio"].setValue('');
+    this.form_atencion.controls["ap_departamento"].setValue('');
+    this.form_atencion.controls["ap_actua"].setValue('');
+
     let datos : MotivoAtenciones = new MotivoAtenciones();
     datos.id = ob;
+
+
+    let datos_nis : Atenciones = new Atenciones();
+    datos_nis.cliente = this.form_atencion.controls["suministro"].value;
 
     this.motivoatn_service.getSistemaMotivoAtn(datos).subscribe(
       response => {
@@ -213,13 +244,40 @@ export class ModalAtencionComponent implements OnInit {
       response => {
         this.clausula_atn = response.parrafo;
         this.titulo_atn = response.titulo;
+        this.tipo_persona = response.tipo_persona;
+        console.log(response.tipo_persona);
+
+
       },
       err=>{},
       ()=>{
+        if(this.tipo_persona == 'Natural'){
+          this.tipo_persona_validar = false;
+         }
+         else if(this.tipo_persona == 'Jurídica'){
+          this.tipo_persona_validar = true;
+
+
+          this.atencionService.getDatosApoderado(datos_nis).subscribe(
+            data=>{
+              this.datos_repre = data;
+            },
+            err=>{},
+            ()=>{}
+          );
+
+         }else{
+          this.tipo_persona_validar = false;
+         }
+
         this.form_atencion.controls["titulo_atn"].setValue(this.titulo_atn);
         this.form_atencion.controls["descripcion_atencion"].setValue(this.clausula_atn);
       }
     );
+
+
+
+
 
   }
 

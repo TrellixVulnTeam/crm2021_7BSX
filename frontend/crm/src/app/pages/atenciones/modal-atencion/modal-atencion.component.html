@@ -87,6 +87,52 @@
         <mat-label>Descripción de atención</mat-label>
         <textarea matInput placeholder="Descripción de atención" formControlName="descripcion_atencion" autocomplete="off"></textarea>
       </mat-form-field>
+
+      <!--Datos de apoderado-->
+    <div *ngIf="tipo_persona_validar">
+      <mat-divider></mat-divider>
+      <h3 style="margin-top:25px !important;">Datos de apoderado</h3>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Nombre de apoderado</mat-label>
+        <input  matInput type="text" formControlName="ap_nombre" readonly="true" placeholder="Nombre de apoderado" autocomplete="off" [(ngModel)]="datos_repre.representante">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Profesión</mat-label>
+        <input  matInput type="text" formControlName="ap_profesion" readonly="true"  placeholder="Profesión" autocomplete="off" [(ngModel)]="datos_repre.profesion">
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>N° DUI</mat-label>
+        <input  matInput type="text" formControlName="ap_dui" readonly="true" placeholder="N° DUI" autocomplete="off" [(ngModel)]="datos_repre.dui">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>N° de NIT</mat-label>
+        <input  matInput type="text" formControlName="ap_nit" readonly="true" placeholder="N° de NIT" autocomplete="off" [(ngModel)]="datos_repre.nit">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Domicilio</mat-label>
+        <input  matInput type="text" formControlName="ap_domicilio" readonly="true" placeholder="Domicilio" autocomplete="off" [(ngModel)]="datos_repre.domicilio">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Departamento</mat-label>
+        <input  matInput type="text" formControlName="ap_departamento" readonly="true" placeholder="Departamento" autocomplete="off" [(ngModel)]="datos_repre.departamento">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="input3">
+        <mat-label>Actúa como:</mat-label>
+        <input  matInput type="text" formControlName="ap_actua" readonly="true" placeholder="Actúa como" autocomplete="off" [(ngModel)]="datos_repre.cargo">
+      </mat-form-field>
+    </div>
   </form>
 
     <button mat-raised-button color="primary" class="lg_btn" (click)="guardarAtencion()"

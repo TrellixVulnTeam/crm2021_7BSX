@@ -4,5 +4,5 @@ export class MttoCartas {
     public parrafo!: string;
     public titulo!: string;
     public tipo!: string;
-
+    public tipo_persona!: string;
 }

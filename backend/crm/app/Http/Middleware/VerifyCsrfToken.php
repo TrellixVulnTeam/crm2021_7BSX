@@ -98,6 +98,7 @@ class VerifyCsrfToken extends BaseVerifier
         'getAllEventosGC',
         'imprimir_carta',
         'guardarResolucion_gc',
-        'getOrdenesTrabajo'
+        'getOrdenesTrabajo',
+        'getDatosApoderado'
     ];
 }

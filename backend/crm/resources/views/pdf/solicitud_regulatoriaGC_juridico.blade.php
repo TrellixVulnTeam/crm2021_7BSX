@@ -110,20 +110,23 @@
        <p><b>N° de Gestión Macrotarea  : </b>{{$id_evento}}</p> 
     </div>
 
-    @foreach ($datos as $dc)
-        <div style="margin-top: 15px;font-size: 12px;">
-            <p>Yo: <b>{{$dc->cliente}}</b> con DUI: <b>{{$dc->dui}}</b> y NIT: <b>{{$dc->nit}}</b>; actual usuario de EDESAL con Suministro NIS:
-                <b>{{$dc->nis}}</b>  ubicado en la dirección: <b>{{$dc->direccion}}</b>.</p>
-        </div>
-
-        <div style="margin-top: 10px;font-size: 12px;">
-            <p>N° de Medidor: <b>{{$dc->num_medidor}}</b>.</p>
+    @foreach ($datos_repre as $dc)
+        <div style="margin-top: 15px;font-size: 12px; line-height: 18pt;">
+            <p align="justify">Yo: <b>{{$dc->representante}}</b>, mayor de edad, EMPLEADO, del domicilio de {{$dc->domicilio}}, del departamento de 
+                {{$dc->departamento}} con Documento único de identidad: <b>{{$dc->dui}}</b> y Número de identificación tributaria: <b>{{$dc->nit}}</b>,
+                actuando como <b>{{$dc->cargo}}</b> de <b>{{$dc->cliente}}</b> , con  número de Identificación Tributaria : <b>{{$dc->nit}}</b>; 
+                actual usuario (a) de EDESAL con N° de suministro: <b>{{$dc->nis}}</b>; ubicado en la dirección: <b>{{$dc->direccion}}</b>.
+                <br><br>
+                No de Medidor: <b>{{$dc->num_medidor}}</b>.</p>
         </div>
     @endforeach
 
     @foreach ($tipo_soli as $t)
     <div style="margin-top: 15px;font-size: 12px;">
-        <p>Tipo de solicitud: <b>{{$t->tipo_soli}}</b>.</p>
+        <p>
+            Solicito de manera personal y voluntaria a EDESAL:
+            <br><br>
+            Tipo de solicitud: <b>{{$t->tipo_soli}}</b>.</p>
     </div>
     @endforeach
 
@@ -144,17 +147,17 @@
     @endforeach
 
 
-    <div style="margin-top: 25px;font-size: 12px; ">
+    <div style="margin-top: 20px;font-size: 12px; ">
         <p>  Del mismo modo exonero a EDESAL de toda responsabilidad no contenida en la normativa anterior. </p>
         <p> Esperando de su pronta respuesta quedo de ustedes muy agradecido </p>
         <p> Atentamente</p>
     </div>
 
 
-    @foreach ($datos as $dc)
-        <div style="margin-top: 110px;font-size: 12px;">
+    @foreach ($datos_repre as $dc)
+        <div style="margin-top: 80px;font-size: 12px;">
             ________________________________
-            <p><b>{{$dc->cliente}}</b></p>
+            <p><b>{{$dc->representante}}</b></p>
             <p>DUI: <b>{{$dc->dui}}.</b></p>
         </div>
     @endforeach

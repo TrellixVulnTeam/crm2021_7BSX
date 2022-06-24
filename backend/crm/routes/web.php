@@ -121,6 +121,7 @@ Route::post('guardarResolucion_gc', 'EventosController@guardarResolucion_gc');
 Route::post('getAllEventosGC', 'EventosController@getAllEventosGC');
 Route::post('getAllAtencionesGC', 'AtencionesController@getAllAtencionesGC');
 Route::get('getOrdenesTrabajo', 'AtencionesController@getOrdenesTrabajo');
+Route::post('getDatosApoderado', 'AtencionesController@getDatosApoderado');
 
 //cartas
 Route::post('getDatosbyCarta', 'ClausulasController@getDatosbyCarta');

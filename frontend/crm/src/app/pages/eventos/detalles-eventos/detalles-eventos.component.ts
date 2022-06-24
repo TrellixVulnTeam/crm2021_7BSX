@@ -23,6 +23,9 @@ export class DetallesEventosComponent implements OnInit {
   user: Usuario = new Usuario();
   eventos_obj: Eventos = new Eventos();
   rutaFile!: string;
+  tipo_persona_validar!: boolean;
+  datos_repre : Eventos = new Eventos();
+
 
   constructor( public modal_evento: MatDialogRef<DetallesEventosComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   private router: Router, private _snackBar: MatSnackBar,private url: GlobalService, public dialog: MatDialog,private ticketService: TicketsService) {
@@ -40,6 +43,14 @@ export class DetallesEventosComponent implements OnInit {
       'hora_resolucion' : new FormControl(''),
       'descripcion_evt' : new FormControl(''),
       'resolucion': new FormControl(''),
+      'ap_nombre' : new FormControl(''),
+      'ap_profesion' : new FormControl(''),
+      'ap_dui' : new FormControl(''),
+      'ap_nit' : new FormControl(''),
+      'ap_domicilio' : new FormControl(''),
+      'ap_actua' : new FormControl(''),
+      'ap_departamento' : new FormControl(''),
+
     });
    }
 
@@ -55,6 +66,17 @@ export class DetallesEventosComponent implements OnInit {
       }else{
         this.router.navigate(['login']);
       }
+
+
+
+    if(this.eventos_obj.ap_nombre === null){
+
+      this.tipo_persona_validar = false;
+    }else{
+
+      this.tipo_persona_validar = true;
+    }
+
   }
 
 

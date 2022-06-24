@@ -7,6 +7,7 @@ import {BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
 import { Eventos } from '../models/eventos';
+import { Clientes } from '../models/clientes';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -126,6 +127,15 @@ export class AtencionesService {
   public getEventosPendientes(atn: Atenciones): Observable<Eventos[]> {
     return this.http.post<Eventos>(this.globalservice.getUrlBackEnd() + 'getEventosPendientes', atn, httpOptions)
     .pipe(map(data => data as unknown as Eventos[] ));
+  }
+
+
+
+
+
+  public getDatosApoderado(data: Atenciones): Observable<Atenciones> {
+    return this.http.post<Atenciones>(this.globalservice.getUrlBackEnd() + 'getDatosApoderado', data, httpOptions)
+    .pipe(map(data => data as unknown as Atenciones ));
   }
 
 

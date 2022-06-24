@@ -9,4 +9,5 @@ export class Usuario {
   public rol!: string;
   public correo!: string;
   public nombre_apellido !: string;
+  public codigo_sucursal !: string;
 }

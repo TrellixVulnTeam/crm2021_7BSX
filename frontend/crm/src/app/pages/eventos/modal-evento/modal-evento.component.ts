@@ -22,6 +22,8 @@ export class ModalEventoComponent implements OnInit {
   evento_id : Eventos = new Eventos();
   tipo="evento";
   validarArchivosEv = false;
+  datos_repre : Eventos = new Eventos();
+  tipo_persona_validar!: boolean;
 
   constructor( public modal_evento: MatDialogRef<ModalEventoComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   private router: Router, private eventosService: EventosService, private _snackBar: MatSnackBar,
@@ -37,6 +39,7 @@ export class ModalEventoComponent implements OnInit {
       'fecha_compromiso': new FormControl('',[Validators.required]),
       'fecha_resolucion' : new FormControl('',[Validators.required]),
       'descripcion_evt' : new FormControl(''),
+
     });
   }
 
@@ -47,9 +50,13 @@ export class ModalEventoComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
       this.datos_atencion = this.data.datos_atencion;
 
+
+
+
     }else{
       this.router.navigate(['login']);
     }
+
 
 
   }
