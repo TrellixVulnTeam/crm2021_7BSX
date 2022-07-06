@@ -99,6 +99,10 @@ class VerifyCsrfToken extends BaseVerifier
         'imprimir_carta',
         'guardarResolucion_gc',
         'getOrdenesTrabajo',
-        'getDatosApoderado'
+        'getDatosApoderado',
+        'getInfoNisComerciales',
+        'getMotivosAtencionesGC',
+        'getContactosCliente',
+        'getTiposAtencionesGC'
     ];
 }

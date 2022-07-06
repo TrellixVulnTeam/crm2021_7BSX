@@ -1,7 +1,7 @@
 
 <mat-tab-group>
   <mat-tab label="CRM">
-  <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;">
+  <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;" (selectedTabChange)="getAllEventos()">
       <mat-tab label="Macrotareas abiertas" class="tabs">
         <br>
         <h3 class="title">Macrotareas abiertas</h3>
@@ -348,7 +348,7 @@
   </mat-tab>
 
   <mat-tab label="GESTIONES COMERCIALES">
-    <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;">
+    <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;" (selectedTabChange)="getAllEventosgc()">
 
 
       <mat-tab label="Macrotareas en proceso de resolución" class="tabs">

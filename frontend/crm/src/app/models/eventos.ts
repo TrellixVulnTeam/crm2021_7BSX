@@ -30,6 +30,8 @@ public file!: string;
 public fecha_cierre!: string;
 public user_id_save!: number;
 
+public user_alias!: string;
+public user_sucursal!: string;
 
 public ap_nombre!: string;
 public ap_profesion!: string;

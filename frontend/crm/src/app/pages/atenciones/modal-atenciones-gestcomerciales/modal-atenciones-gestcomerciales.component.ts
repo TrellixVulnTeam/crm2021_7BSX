@@ -9,45 +9,47 @@ import { Clientes } from 'src/app/models/clientes';
 import { Eventos } from 'src/app/models/eventos';
 import { MotivoAtenciones } from 'src/app/models/motivo-atenciones';
 import { MttoCartas } from 'src/app/models/mtto-cartas';
+import { Suministros } from 'src/app/models/suministros';
 import { Usuario } from 'src/app/models/usuario';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { EventosService } from 'src/app/services/eventos.service';
 import { MotivoAtencionesService } from 'src/app/services/motivo-atenciones.service';
 import { MttoCartasService } from 'src/app/services/mtto-cartas.service';
+import { SuministrosService } from 'src/app/services/suministros.service';
 import { GenerarEventoComponent } from '../generar-evento/generar-evento.component';
 
-@Component({
-  selector: 'app-modal-atencion',
-  templateUrl: './modal-atencion.component.html',
-  styleUrls: ['./modal-atencion.component.css']
-})
-export class ModalAtencionComponent implements OnInit {
-  datos_contacto : Clientes[] = [];
-  datos_suministro : Clientes[] = [];
-  list_motivo_atenciones : Atenciones[] = [];
-  list_tipo_atenciones : Atenciones[] = [];
-  form_atencion : FormGroup;
 
-  datos_cliente : Clientes = new Clientes();
-  tipo_atencion = '';
-  user: Usuario = new Usuario();
-  arreglo_atenciones: Atenciones = new Atenciones();
-  atencion_id : any;
-  tipo = 'atencion';
+@Component({
+  selector: 'app-modal-atenciones-gestcomerciales',
+  templateUrl: './modal-atenciones-gestcomerciales.component.html',
+  styleUrls: ['./modal-atenciones-gestcomerciales.component.css']
+})
+export class ModalAtencionesGestcomercialesComponent implements OnInit {
+  form_atencion: FormGroup;
   sistema_motivoatn: any;
   clausula_atn: any;
   titulo_atn: any;
-  atencion_id_evt : any;
-  validarArchivos = false;
   tipo_persona : any;
   tipo_persona_validar!: boolean;
+  list_motivo_atenciones : Atenciones[] = [];
+  list_tipo_atenciones : Atenciones[] = [];
+  datos_contacto : Clientes[] = [];
+  datos_suministro : Clientes[] = [];
   datos_repre : Atenciones = new Atenciones();
+  datos_cliente : Clientes = new Clientes();
+  user: Usuario = new Usuario();
+  tipo_atencion = '';
+  arreglo_atenciones: Atenciones = new Atenciones();
+  atencion_id_evt : any;
+  atencion_id : any;
+  datos_contacto_input : Suministros = new Suministros();
 
   constructor(public atencionService: AtencionesService,
-    public modal_atencion: MatDialogRef<ModalAtencionComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+    public modal_atencion: MatDialogRef<ModalAtencionesGestcomercialesComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router, private _snackBar: MatSnackBar, private clienteService : ClientesService,public dialog: MatDialog,
-    private motivoatn_service: MotivoAtencionesService, private eventosService: EventosService, private mttocartas_service: MttoCartasService) {
+    private motivoatn_service: MotivoAtencionesService, private eventosService: EventosService, private mttocartas_service: MttoCartasService,
+    private suministro_service: SuministrosService) {
     this.form_atencion = new FormGroup({
       'codigo': new FormControl(''),
       'suministro': new FormControl(''),
@@ -70,12 +72,10 @@ export class ModalAtencionComponent implements OnInit {
       'ap_actua' : new FormControl(''),
       'ap_departamento' : new FormControl(''),
     });
-
-
-
   }
 
   ngOnInit(): void {
+
     this.tipo_persona_validar = false;
 
     if(localStorage.getItem('usuario_crm') !== null){
@@ -85,21 +85,27 @@ export class ModalAtencionComponent implements OnInit {
       }else{
         this.router.navigate(['login']);
       }
+      this.datos_cliente = this.data.datos_cliente;
+      this.datos_suministro = this.data.datos_suministro;
 
+      this.suministro_service.getContactosCliente(this.datos_cliente).subscribe(
+        data=>{
+          this.datos_contacto_input = data;
+        }
+      );
 
-    this.atencionService.getMotivosAtenciones().subscribe(
+    this.atencionService.getMotivosAtencionesGC().subscribe(
       data => {
         this.list_motivo_atenciones = data;
       });
 
 
-      this.atencionService.getTiposAtenciones().subscribe(
+      this.atencionService.getTiposAtencionesGC().subscribe(
         data => {
           this.list_tipo_atenciones = data;
         });
 
-        this.datos_cliente = this.data.datos_cliente;
-        this.datos_suministro = this.data.datos_suministro;
+
 
         var cliente = this.data.cliente;
 
@@ -115,14 +121,77 @@ export class ModalAtencionComponent implements OnInit {
         }
 
 
+  }
+
+
+  getMotivoAtn(ob: any){
+
+    this.form_atencion.controls["ap_nombre"].setValue('');
+    this.form_atencion.controls["ap_profesion"].setValue('');
+    this.form_atencion.controls["ap_dui"].setValue('');
+    this.form_atencion.controls["ap_nit"].setValue('');
+    this.form_atencion.controls["ap_domicilio"].setValue('');
+    this.form_atencion.controls["ap_departamento"].setValue('');
+    this.form_atencion.controls["ap_actua"].setValue('');
+
+    let datos : MotivoAtenciones = new MotivoAtenciones();
+    datos.id = ob;
+
+
+    let datos_nis : Atenciones = new Atenciones();
+    datos_nis.cliente = this.form_atencion.controls["suministro"].value;
+
+    this.motivoatn_service.getSistemaMotivoAtn(datos).subscribe(
+      response => {
+        this.sistema_motivoatn = response.sistema;
+      },
+      err=>{},
+      ()=>{}
+    );
+
+    let datos_carta : MttoCartas = new MttoCartas();
+    datos_carta.id = ob;
+
+    this.mttocartas_service.getClausulaAclaratoria(datos_carta).subscribe(
+      response => {
+        this.clausula_atn = response.parrafo;
+        this.titulo_atn = response.titulo;
+        this.tipo_persona = response.tipo_persona;
+        console.log(response.tipo_persona);
+
+
+      },
+      err=>{},
+      ()=>{
+        if(this.tipo_persona == 'Natural'){
+          this.tipo_persona_validar = false;
+         }
+         else if(this.tipo_persona == 'Jurídica'){
+          this.tipo_persona_validar = true;
+
+
+          this.atencionService.getDatosApoderado(datos_nis).subscribe(
+            data=>{
+              this.datos_repre = data;
+            },
+            err=>{},
+            ()=>{}
+          );
+
+         }else{
+          this.tipo_persona_validar = false;
+         }
+
+        this.form_atencion.controls["titulo_atn"].setValue(this.titulo_atn);
+        this.form_atencion.controls["descripcion_atencion"].setValue(this.clausula_atn);
+      }
+    );
+
+
 
 
 
   }
-
-
-
-
 
 
   mostrarDatos(){
@@ -145,6 +214,8 @@ export class ModalAtencionComponent implements OnInit {
       this.tipo_atencion = '';
     }
   }
+
+
   cerrarModalAtn(){
     this.modal_atencion.close();
   }
@@ -157,24 +228,12 @@ export class ModalAtencionComponent implements OnInit {
 
     this.arreglo_atenciones = datos;
 
-
     this.atencionService.guardarAtencion(this.arreglo_atenciones).subscribe(
       response => {
         this.atencion_id = response;
         this.atencion_id_evt = response;
 
-        if(this.sistema_motivoatn === 'CRM'){
 
-          this.dialog.open(GenerarEventoComponent,{
-            data:{
-              atencion_id: this.atencion_id, accion: 'Adjuntar archivos'
-            }
-          }
-           );
-
-           this.validarArchivos = true;
-
-        }else{
           let datos_evt : Atenciones = new Atenciones();
           datos_evt.atencion_id = this.atencion_id;
           datos_evt.codigo_sucursal = this.user.codigo_sucursal;
@@ -199,23 +258,14 @@ export class ModalAtencionComponent implements OnInit {
                 verticalPosition: 'top'
               });
 
+              this.dialog.closeAll();
+
             });
-        }
+
 
       },
       err => {},
       () => {});
-
-
-
-
   }
-
-
-  getMotivoAtn(ob: any){}
-
-
-
-
 
 }

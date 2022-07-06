@@ -14,21 +14,22 @@ class AtencionesController extends Controller
        public function getTiposAtenciones()
        {
            //conexion con COMANDA
-           $atenciones  = DB::connection('comanda')->table('CRM_tipo_atenciones')->orderBy('nombre','ASC')->get();
+           $atenciones  = DB::connection('comanda')->table('CRM_tipo_atenciones')
+           ->where('sistema','CRM')->orderBy('nombre','ASC')->get();
    
            return response()->json($atenciones);
        }
-   
-   
-       //obtener todos los motivos de atenciones
-       public function getMotivosAtenciones()
-       {
-           //conexion con COMANDA
-           $motivos = DB::connection('comanda')->table('CRM_motivo_atenciones')
-           ->where('sistema','CRM')->orWhere('sistema','GEST. COMERCIAL')->orderBy('nombre','ASC')->get();
-   
-           return response()->json($motivos);
-       }
+
+
+        //obtener todos los tipos de atenciones gestiones
+        public function getTiposAtencionesGC()
+        {
+            //conexion con COMANDA
+            $atenciones  = DB::connection('comanda')->table('CRM_tipo_atenciones')
+            ->where('sistema','GEST. COMERCIALES')->orderBy('nombre','ASC')->get();
+    
+            return response()->json($atenciones);
+        }
 
 
        public function mover_archivo(Request $request){

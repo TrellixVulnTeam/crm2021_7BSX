@@ -12,6 +12,7 @@ import { DetallesComponent } from './detalles/detalles.component';
 import { VerArchivosComponent } from './ver-archivos/ver-archivos.component';
 import { CerrarAtencionComponent } from './cerrar-atencion/cerrar-atencion.component';
 import { GenerarEventoComponent } from './generar-evento/generar-evento.component';
+import { ModalAtencionesGestcomercialesComponent } from './modal-atenciones-gestcomerciales/modal-atenciones-gestcomerciales.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { GenerarEventoComponent } from './generar-evento/generar-evento.componen
     DetallesComponent,
     VerArchivosComponent,
     CerrarAtencionComponent,
-    GenerarEventoComponent
+    GenerarEventoComponent,
+    ModalAtencionesGestcomercialesComponent
   ],
   imports: [
     CommonModule,

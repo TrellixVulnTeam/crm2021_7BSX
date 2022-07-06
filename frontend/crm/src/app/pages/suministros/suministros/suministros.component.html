@@ -62,59 +62,54 @@
   </mat-tab>
 
   <mat-tab label="Clientes de cartera comercial" class="tabs">
+    <br><br>
+    <form  [formGroup]="form_nis">
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>Buscar N° Suministro: </mat-label>
+        <input matInput type="text" placeholder="Digite el N° de suministro a buscar" formControlName="suministro" autocomplete="off">
+      </mat-form-field>&nbsp;&nbsp;&nbsp;
 
-    <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 20, 100]"
-    showFirstLastButtons
-    aria-label="Cantidad de registros a mostrar">
-    </mat-paginator>
-
-    <mat-form-field appearance="legacy" class="input_search">
-      <mat-label>Buscar en tabla: </mat-label>
-      <input  matInput type="text" [(ngModel)]="texto"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_suministros1($event)">
-    </mat-form-field>
-
-    <table mat-table [dataSource]="dataSource_suministros1"  >
-
-    <ng-container matColumnDef="num_suministro" >
-      <th mat-header-cell *matHeaderCellDef> N° Suministro </th>
-      <td mat-cell *matCellDef="let row1"> {{row1.num_suministro}} </td>
-    </ng-container>
-    <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef> Estado </th>
-      <td mat-cell *matCellDef="let row1">{{row1.estado}}</td>
-    </ng-container>
+      <button mat-raised-button color="accent" (click)="buscarNisComercial()" [disabled]="form_nis.invalid"><mat-icon>search</mat-icon> Buscar</button>
+    </form>
 
 
-    <ng-container matColumnDef="nombrecliente">
-      <th mat-header-cell *matHeaderCellDef> Nombre de Cliente </th>
-      <td mat-cell *matCellDef="let row1">{{row1.nombrecliente}} {{row1.apellidocliente}}</td>
-    </ng-container>
+    <br>
 
-    <ng-container matColumnDef="anexo_direccion">
-      <th mat-header-cell *matHeaderCellDef> Dirección </th>
-      <td mat-cell *matCellDef="let row1"> {{row1.anexo_direccion}}</td>
-    </ng-container>
+    <form  [formGroup]="form_info_nis" *ngFor="let ob of info_cliente"
+    style="margin: auto !important; align-items: center !important; text-align: center !important;">
+      <br>
+      <mat-divider> </mat-divider>
+      <h2 style=" margin-left: 2% !important;margin-top: 10px !important;">Datos encontrados</h2 >
+      <mat-divider> </mat-divider>
+      <br><br>
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>Nombre de cliente: </mat-label>
+        <input readonly matInput type="text" formControlName="cliente" [(ngModel)]="ob.cliente" autocomplete="off">
+      </mat-form-field>
 
 
+      <mat-form-field appearance="legacy" class="input2">
+        <mat-label>Dirección: </mat-label>
+        <input readonly matInput type="text" formControlName="anexo_direccion" [(ngModel)]="ob.anexo_direccion"  autocomplete="off">
+      </mat-form-field>
 
-    <ng-container matColumnDef="Acciones">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let row1" class="acciones">
-        <button mat-mini-fab color="accent" matTooltip="Nueva atención" matTooltipPosition="left"
-        (click)="open_modal_atenciones(row1)"><mat-icon>notifications</mat-icon></button> &nbsp;&nbsp;
-        <button  mat-mini-fab color="primary" matTooltip="Detalles del suministro" matTooltipPosition="above" (click)="verDetallesSuministro(row1)">
-          <mat-icon>list</mat-icon>
+      <br><br><br>
+      <div style="margin: auto !important; align-items: center !important; text-align: center !important;">
+        <button mat-raised-button color="primary"  (click)="open_modal_atenciones_gc(ob)">
+          <mat-icon>notifications</mat-icon> Nueva atención
+        </button> &nbsp;&nbsp;
+
+        <button  mat-raised-button color="primary" (click)="verDetallesSuministro(ob)">
+          <mat-icon>list</mat-icon> Detalles del suministro
         </button>
         &nbsp;&nbsp;
-        <button  mat-mini-fab color="warn" matTooltip="Historial del suministro" matTooltipPosition="above" (click)="getHistorialCliente(row1)">
-          <mat-icon>history</mat-icon>
+        <button  mat-raised-button color="primary" (click)="getHistorialCliente(ob)">
+          <mat-icon>history </mat-icon> Historial del suministro
         </button>
-      </td>
-    </ng-container>
+      </div>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-    <tr mat-row *matRowDef="let row1; columns: displayedColumns1;"></tr>
-    </table>
+
+    </form>
 
   </mat-tab>
 

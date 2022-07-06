@@ -37,7 +37,7 @@
     <mat-icon>people alt</mat-icon>
     <span class="span-menu">Prospectos y Stakeholders</span>
   </button>
-  <br><br>
+  <br>
   <mat-divider></mat-divider>
 
   <button mat-menu-item routerLink="suministros">
@@ -73,12 +73,6 @@
     <span class="span-menu">Órdenes técnicas</span>
   </button>
 
-  <mat-divider></mat-divider>
-
-  <button  mat-menu-item routerLink="mttocartas" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
-    <mat-icon>description</mat-icon>
-    <span class="span-menu">Mtto. Cartas Auxiliares</span>
-  </button>
 
   <mat-divider></mat-divider>
 
@@ -87,12 +81,6 @@
     <span class="span-menu">Motivos de atención</span>
   </button>
 
-
-  <button  mat-menu-item routerLink="motivoatn" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
-    <mat-icon>notifications</mat-icon>
-    <span class="span-menu">Tipo de Solicitud</span>
-  </button>
-  <mat-divider></mat-divider>
 
   <button  mat-menu-item routerLink="reportes" *ngIf="
   (user.alias =='fsolano' ||
@@ -104,6 +92,22 @@
   user.alias =='mvanegas' )">
     <mat-icon>print</mat-icon>
     <span class="span-menu">Reportes</span>
+  </button><br>
+
+
+  <h2 class="cl-title" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">Gest. Comerciales</h2>
+  <mat-divider></mat-divider>
+  <button  mat-menu-item routerLink="motivoatn" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
+    <mat-icon>notifications</mat-icon>
+    <span class="span-menu">Tipo de Solicitud</span>
+  </button>
+
+
+  <mat-divider *ngIf="user.alias =='aortiz' || user.alias =='abolaños' "></mat-divider>
+
+  <button  mat-menu-item routerLink="mttocartas" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
+    <mat-icon>calendar_view_day</mat-icon>
+    <span class="span-menu">Mtto. Cartas Auxiliares</span>
   </button>
 
 </mat-menu>

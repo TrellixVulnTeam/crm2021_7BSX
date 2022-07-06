@@ -1,7 +1,7 @@
 <mat-tab-group>
   <mat-tab label="CRM">
-    <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;">
-      <mat-tab label="Abiertas" class="tabs">
+    <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;" (selectedTabChange)="getAllAtenciones()">
+      <mat-tab label="Abiertas" class="tabs" >
         <br>
         <h3 class="title">Atenciones Abiertas</h3>
         <mat-divider></mat-divider>
@@ -80,7 +80,7 @@
 
       </mat-tab>
 
-      <mat-tab label="Cerradas" class="tabs">
+      <mat-tab label="Cerradas" class="tabs" >
         <br>
         <h3 class="title">Atenciones Cerradas</h3>
         <mat-divider></mat-divider>
@@ -238,7 +238,7 @@
   </mat-tab>
 
   <mat-tab label="GESTIONES COMERCIALES">
-    <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;">
+    <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;" (selectedTabChange)="getAllAtencionesgc()">
       <mat-tab label="Abiertas" class="tabs1">
         <br>
         <h3 class="title">Atenciones Abiertas</h3>

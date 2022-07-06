@@ -108,6 +108,8 @@ Route::post('getAtencionesBySuministro', 'SuministrosController@getAtencionesByS
 
 //rutas para gestiones comerciales
 Route::get('getMotivosAtenciones', 'MotivosAtnController@getMotivosAtenciones');
+Route::get('getMotivosAtencionesGC', 'MotivosAtnController@getMotivosAtencionesGC');
+
 Route::post('save_motivoatn', 'MotivosAtnController@save');
 Route::post('delete_motivoatn', 'MotivosAtnController@delete');
 Route::post('edit_motivoatn', 'MotivosAtnController@edit');
@@ -122,6 +124,11 @@ Route::post('getAllEventosGC', 'EventosController@getAllEventosGC');
 Route::post('getAllAtencionesGC', 'AtencionesController@getAllAtencionesGC');
 Route::get('getOrdenesTrabajo', 'AtencionesController@getOrdenesTrabajo');
 Route::post('getDatosApoderado', 'AtencionesController@getDatosApoderado');
+Route::post('getInfoNisComerciales', 'SuministrosController@getInfoNisComerciales');
+Route::post('getContactosCliente', 'SuministrosController@getContactosCliente');
+
+Route::get('getTiposAtencionesGC', 'AtencionesController@getTiposAtencionesGC');
+
 
 //cartas
 Route::post('getDatosbyCarta', 'ClausulasController@getDatosbyCarta');
@@ -129,3 +136,4 @@ Route::post('save_parrafo', 'ClausulasController@save_parrafo');
 Route::post('edit_parrafo', 'ClausulasController@edit_parrafo');
 Route::post('delete_parrafo', 'ClausulasController@delete_parrafo');
 Route::any('imprimir_carta', 'ClausulasController@imprimir_carta');
+Route::any('imprimir_comprobante', 'ClausulasController@imprimir_comprobante');

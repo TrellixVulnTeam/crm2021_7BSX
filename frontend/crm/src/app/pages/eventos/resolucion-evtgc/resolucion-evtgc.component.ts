@@ -76,6 +76,9 @@ export class ResolucionEvtgcComponent implements OnInit {
     datos.file =     this.obj_archivos.file;
     datos.user_id_save = this.user.id;
     datos.atencion_id = this.detalle_evento.atencion_id;
+    datos.user_alias = this.user.alias;
+    datos.user_sucursal = this.user.codigo_sucursal;
+    datos.num_suministro = this.detalle_evento.num_suministro;
 
     this.eventosService.guardarResolucion_gc(datos).subscribe(
       data =>{
@@ -149,6 +152,20 @@ export class ResolucionEvtgcComponent implements OnInit {
 
   }
 
+
+  generarComprobante(){
+    let datos: Eventos = new Eventos();
+    datos.evento_id = this.detalle_evento.evento_id;
+    datos.fecha_cierre = this.form_cerrar_evt.controls["fecha"].value;
+    datos.num_suministro = this.detalle_evento.num_suministro;
+
+    const ur =  this.urlBackEnd.getUrlBackEnd() + 'imprimir_comprobante?id_evento=' + this.detalle_evento.evento_id
+    +'&fecha_cierre='+ this.form_cerrar_evt.controls["fecha"].value+'&nis='+this.detalle_evento.num_suministro+
+    '&id_atencion='+this.detalle_evento.atencion_id;
+
+    window.open(ur, '_blank');
+
+  }
 
 
 

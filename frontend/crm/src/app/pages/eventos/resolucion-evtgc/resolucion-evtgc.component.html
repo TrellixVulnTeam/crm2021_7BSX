@@ -16,6 +16,9 @@
 
 <div mat-dialog-actions>
 
-  <button mat-raised-button color="primary" (click)="save()" [disabled]="form_cerrar_evt.invalid">Cerrar macrotarea</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="form_cerrar_evt.invalid">Generar Orden</button>
+
+  <button mat-raised-button color="accent" (click)="generarComprobante()">Imprimir comprobante al UF</button>
+
   <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
 </div>

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
+import { Clientes } from '../models/clientes';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -53,6 +54,20 @@ export class SuministrosService {
     return this.http.post<Suministros>(this.globalservice.getUrlBackEnd() + 'getAtencionesBySuministro', nis, httpOptions)
     .pipe(map(data => data as unknown as Suministros[] ));
   }
+
+  public getInfoNisComerciales(nis: Suministros): Observable<Suministros[]> {
+    return this.http.post<Suministros>(this.globalservice.getUrlBackEnd() + 'getInfoNisComerciales', nis, httpOptions)
+    .pipe(map(data => data as unknown as Suministros[] ));
+  }
+
+
+  public getContactosCliente(nis: Clientes): Observable<Suministros> {
+    return this.http.post<Suministros>(this.globalservice.getUrlBackEnd() + 'getContactosCliente', nis, httpOptions)
+    .pipe(map(data => data as unknown as Suministros));
+  }
+
+
+
 
 
 }

@@ -85,6 +85,20 @@ export class AtencionesService {
     return this.http.get(this.globalservice.getUrlBackEnd() + 'getMotivosAtenciones').pipe(map(data => data as Atenciones[]));
   }
 
+  public getMotivosAtencionesGC(): Observable<Atenciones[]> {
+    return this.http.get(this.globalservice.getUrlBackEnd() + 'getMotivosAtencionesGC').pipe(map(data => data as Atenciones[]));
+  }
+
+
+
+  //metodo para obtener objeto de tipos de atenciones para select
+  public getTiposAtencionesGC(): Observable<Atenciones[]> {
+    return this.http.get(this.globalservice.getUrlBackEnd() + 'getTiposAtencionesGC').pipe(map(data => data as Atenciones[]));
+  }
+
+
+
+
 
   //metodo para obtener objeto de tipos de atenciones para select
   public getTiposAtenciones(): Observable<Atenciones[]> {

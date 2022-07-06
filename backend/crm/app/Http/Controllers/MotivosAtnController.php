@@ -15,7 +15,17 @@ class MotivosAtnController extends Controller
        {
            //conexion con COMANDA
            $motivos = DB::connection('comanda')->table('CRM_motivo_atenciones')->where('estado','1')
-           ->whereIn('sistema',['CRM', 'GEST. COMERCIAL'])->orderBy('nombre','ASC')->get();
+           ->whereIn('sistema',['CRM'])->orderBy('nombre','ASC')->get();
+   
+           return response()->json($motivos);
+       }
+
+
+       public function getMotivosAtencionesGC()
+       {
+           //conexion con COMANDA
+           $motivos = DB::connection('comanda')->table('CRM_motivo_atenciones')->where('estado','1')
+           ->whereIn('sistema',['GEST. COMERCIAL'])->orderBy('nombre','ASC')->get();
    
            return response()->json($motivos);
        }
@@ -96,7 +106,7 @@ class MotivosAtnController extends Controller
         
         $clausula = json_encode(
             DB::connection('comanda')->select("SELECT top 1 gc.id, parrafo as parrafo, cma.nombre as titulo, cma.tipo_persona as tipo_persona from GC_clausulas gc 
-            inner join  CRM_motivo_atenciones cma ON cma.id = gc.id_tipo_solicitud 
+            left join  CRM_motivo_atenciones cma ON cma.id = gc.id_tipo_solicitud 
             where gc.id_tipo_solicitud = ".$request["id"]." and gc.tipo = 'Aclaratoria' and gc.estado = 1
             order by 1 asc"));
 

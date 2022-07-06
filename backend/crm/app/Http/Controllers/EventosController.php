@@ -457,6 +457,8 @@ class EventosController extends Controller
 
         $fechaResConFormato = date_format($fechaResSinFormato,'Ymd');
 
+      
+
         $editar =  DB::connection('comanda')->table('CRM_eventos')
                     ->where('id', $request['evento_id'])
                          ->update([
@@ -477,15 +479,28 @@ class EventosController extends Controller
         ]);
 
 
-        
-        $editar_atn =  DB::connection('comanda')->table('CRM_atenciones')
-        ->where('id', $request['atencion_id'])
-             ->update([
-                'atencion_cerrada' => 'S',
-                ]);
+        $getOrden = DB::connection('comanda')->table("CRM_motivo_atenciones")
+        ->join('CRM_atenciones', 'CRM_atenciones.id_motivo_atencion','=','CRM_motivo_atenciones.id')
+        ->select("CRM_motivo_atenciones.orden_trabajo as orden")->where('CRM_atenciones.id', $request['atencion_id'])->first();
 
 
-        return response()->json($editar_atn);
+        $orden = $getOrden->orden;
+        $codigo_sucursal = $request["user_sucursal"];
+        $user = $request["user_alias"];
+        $nis = $request["num_suministro"];
+        $id_evento = $request["evento_id"];
+        $id_atencion = $request["atencion_id"];
+
+
+        //$execProcedure =  DB::connection('calidad')->statement("EXEC [dbo].[sp_create_calidad_order_crm] 
+        //'".$orden."','".$user."',".$nis.", '".$codigo_sucursal."', ".$id_evento.", ".$id_atencion." ");
+
+
+
+
+
+
+        return response()->json($execProcedure);
     }
 
 }

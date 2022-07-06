@@ -86,4 +86,7 @@ export class Suministros {
   public fecha_reclamoD!: string;
   public fecha_cierreD!: string;
   public cliente!: string;
+
+  public nombre!: string;
+  public contacto!: string;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,6 +13,7 @@ import { ReportesService } from 'src/app/services/reportes.service';
 import { SuministrosService } from 'src/app/services/suministros.service';
 import { ModalAtencionSuministroComponent } from '../../atenciones/modal-atencion-suministro/modal-atencion-suministro.component';
 import { ModalAtencionComponent } from '../../atenciones/modal-atencion/modal-atencion.component';
+import { ModalAtencionesGestcomercialesComponent } from '../../atenciones/modal-atenciones-gestcomerciales/modal-atenciones-gestcomerciales.component';
 import { HistorialClienteComponent } from '../../reportes/historial-cliente/historial-cliente.component';
 import { DetallesSuministroComponent } from '../detalles-suministro/detalles-suministro.component';
 
@@ -34,11 +36,26 @@ export class SuministrosComponent implements OnInit {
   dataSource_suministros1:any = new MatTableDataSource<any>([]);
 
 
+  form_nis: FormGroup;
+  form_info_nis: FormGroup;
+  info_cliente : Suministros[] | undefined;
+
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
   @ViewChild('paginator2') paginator2: MatPaginator | undefined;
 
   constructor(private global: GlobalService, private router: Router, private suministrosService: SuministrosService, private clienteService : ClientesService,
-    public dialog: MatDialog, private rpt_service: ReportesService) { }
+    public dialog: MatDialog, private rpt_service: ReportesService) {
+      this.form_nis = new FormGroup({
+        'suministro': new FormControl('', [Validators.required]),
+      });
+
+
+      this.form_info_nis = new FormGroup({
+        'cliente': new FormControl(''),
+        'anexo_direccion': new FormControl(''),
+       // 'fecha_alta': new FormControl(''),
+      });
+     }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -84,10 +101,10 @@ export class SuministrosComponent implements OnInit {
     this.dataSource_suministros.paginator = this.paginator1;
     this.dataSource_suministros1.paginator = this.paginator2;
     this.getAllSuministrosCorporativa();
-    this.getAllSuministrosComercial();
+   // this.getAllSuministrosComercial();
   }
 
-  getAllSuministrosComercial(){
+  /*getAllSuministrosComercial(){
     this.suministrosService.getAllSuministrosComercial().subscribe(
       data => {
 
@@ -101,7 +118,7 @@ export class SuministrosComponent implements OnInit {
       this.suministrosService._datos_Suministros1.subscribe(response => {
         this.dataSource_suministros1.data = response;
       });
-  }
+  }*/
 
 
 
@@ -139,7 +156,7 @@ verDetallesSuministro(row: Suministros){
 }
 
 
-getHistorialCliente(data: Clientes){
+getHistorialCliente(data: any){
 
   let datos : Clientes = new Clientes();
   datos = data;
@@ -152,6 +169,33 @@ getHistorialCliente(data: Clientes){
       });
     }
   );
+
+}
+
+
+buscarNisComercial(){
+  let datos: Suministros = new Suministros();
+  datos = this.form_nis.value;
+
+  this.suministrosService.getInfoNisComerciales(datos).subscribe(
+    data => {
+      this.info_cliente = data;
+    },
+    err=>{},
+    ()=>{
+
+    });
+}
+
+
+open_modal_atenciones_gc(cliente: Suministros) {
+
+
+  this.dialog.open(ModalAtencionesGestcomercialesComponent,{
+    data: {datos_cliente: cliente, datos_contacto_cli: this.datos_contacto_cli, datos_suministro: '',  cliente: 'edesal',
+            tipo: 'Atencion'},
+    width: '80%',
+  });
 
 }
 

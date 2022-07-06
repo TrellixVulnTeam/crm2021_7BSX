@@ -55,7 +55,7 @@ export class Clientes {
   public fecha_visita!: string;
   public compromisos!: string;
   public categoria!: string;
-
+  public cliente!: string;
 
   public cargo!: string;
   public correo!: string;
