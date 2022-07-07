@@ -26,6 +26,7 @@ export class ResolucionEvtgcComponent implements OnInit {
   dataSource_evtAbiertosgc:any = new MatTableDataSource<any>([]);
   dataSource_evtProResoluciongc:any = new MatTableDataSource<any>([]);
   dataSource_evtCerradosgc:any = new MatTableDataSource<any>([]);
+  btncomprobar: boolean | undefined;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private urlBackEnd: GlobalService,
   private http: HttpClient, private eventosService: EventosService, private _snackBar: MatSnackBar) {
@@ -36,6 +37,7 @@ export class ResolucionEvtgcComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.btncomprobar = false;
     this.detalle_evento = this.data.detalle_evento;
     this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
   }
@@ -88,12 +90,14 @@ export class ResolucionEvtgcComponent implements OnInit {
 
       },
       () => {
+        this.btncomprobar = true;
         this._snackBar.open('¡¡ Resolución Guardada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top'
         });
-        this.dialog.closeAll();
+        this.btncomprobar = true;
+        //this.dialog.closeAll();
         this.getAllEventosgc();
       });
   }
@@ -158,11 +162,12 @@ export class ResolucionEvtgcComponent implements OnInit {
     datos.evento_id = this.detalle_evento.evento_id;
     datos.fecha_cierre = this.form_cerrar_evt.controls["fecha"].value;
     datos.num_suministro = this.detalle_evento.num_suministro;
+    datos.user_impresion = this.user.nombre_usuario;
 
     const ur =  this.urlBackEnd.getUrlBackEnd() + 'imprimir_comprobante?id_evento=' + this.detalle_evento.evento_id
     +'&fecha_cierre='+ this.form_cerrar_evt.controls["fecha"].value+'&nis='+this.detalle_evento.num_suministro+
-    '&id_atencion='+this.detalle_evento.atencion_id;
-
+    '&id_atencion='+this.detalle_evento.atencion_id+'&user='+this.user.nombre_usuario;
+    this.dialog.closeAll();
     window.open(ur, '_blank');
 
   }

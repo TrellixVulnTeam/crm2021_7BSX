@@ -27,7 +27,7 @@ export class MotivoAtencionesComponent implements OnInit {
   //gestiones comerciales
   data_motivosatn_gc:any = new MatTableDataSource<any>([]);
   displayedColumns_gc: string[] = ['id',  'nombre', 'sistema'];
-  @ViewChild('paginator') paginator_1: MatPaginator | undefined;
+  @ViewChild('paginator_1') paginator_1: MatPaginator | undefined;
   texto1:any;
 
   constructor(private motivoatn_service: MotivoAtencionesService, private global: GlobalService, private router: Router,
@@ -50,7 +50,7 @@ export class MotivoAtencionesComponent implements OnInit {
     }
 
 
-    this.getMotivosAtn();
+    //this.getMotivosAtn();
   }
 
 

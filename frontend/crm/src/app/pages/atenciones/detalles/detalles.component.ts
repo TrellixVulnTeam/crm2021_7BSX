@@ -71,13 +71,13 @@ export class DetallesComponent implements OnInit {
       }
 
 
-    this.atencionService.getMotivosAtenciones().subscribe(
+    this.atencionService.getMotivosAtencionesAll().subscribe(
       data => {
         this.list_motivo_atenciones = data;
       });
 
 
-      this.atencionService.getTiposAtenciones().subscribe(
+      this.atencionService.getTiposAtencionesAll().subscribe(
         data => {
           this.list_tipo_atenciones = data;
         });

@@ -7,62 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title></title>
-    <style>
 
-        body{
-            margin-bottom: 0;
-            margin-top: 0;
-        }
-
-
-
-        table.minimalistBlack {
-            border: 1px solid #000000;
-            width: 100%;
-            text-align: left;
-            border-collapse: collapse;
-        }
-        table.minimalistBlack td, table.minimalistBlack th {
-            border: 1px solid #000000;
-            padding: 5px 4px;
-        }
-        table.minimalistBlack tbody td {
-            font-size: 10px;
-        }
-        table.minimalistBlack thead {
-            background: #CFCFCF;
-            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            border-bottom: 1px solid #000000;
-        }
-        table.minimalistBlack thead th {
-            font-size: 12px;
-            font-weight: bold;
-            color: #000000;
-            text-align: left;
-        }
-        .total{
-            background: #CFCFCF;
-            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            border-bottom: 1px solid #000000;
-        }
-        table.minimalistBlack tfoot {
-            font-size: 12px;
-            font-weight: bold;
-            color: #000000;
-            border-top: 1px solid #000000;
-        }
-        table.minimalistBlack tfoot td {
-            font-size: 12px;
-        }
-        #container div {  }
-
-        #div3 { width:200px; float:right }
-        #div1, #div2,#div4 { width:500px;  }
-    </style>
 </head>
 <body>
 
@@ -71,7 +16,6 @@
         <img style="" src="C:\xampp\htdocs\crm\backend\crm\public\img\edesal1.png" alt="">
         <!--<img style="" src="C:\xampp\htdocs\crm_backend\public\img\edesal1.png" alt="">-->
     </div>
-
     <div style="margin-top: 14px; ">
         <b style="margin-left: 170px;font-size: 15px;">EMPRESA DISTRIBUIDORA ELECTRICA SALVADOREÑA</b>
     </div>
@@ -116,13 +60,13 @@
                 {{$dc->departamento}} con Documento único de identidad: <b>{{$dc->dui}}</b> y Número de identificación tributaria: <b>{{$dc->nit}}</b>,
                 actuando como <b>{{$dc->cargo}}</b> de <b>{{$dc->cliente}}</b> , con  número de Identificación Tributaria : <b>{{$dc->nit}}</b>; 
                 actual usuario (a) de EDESAL con N° de suministro: <b>{{$dc->nis}}</b>; ubicado en la dirección: <b>{{$dc->direccion}}</b>.
-                <br><br>
+                <br>
                 No de Medidor: <b>{{$dc->num_medidor}}</b>.</p>
         </div>
     @endforeach
 
     @foreach ($tipo_soli as $t)
-    <div style="margin-top: 15px;font-size: 12px;">
+    <div style="margin-top: 10px;font-size: 12px;">
         <p>
             Solicito de manera personal y voluntaria a EDESAL:
             <br><br>
@@ -135,13 +79,13 @@
     @foreach($clausulas as $c)
         @if($c->tipo == 'Aclaratoria')
         <div style="margin-top: 10px;font-size: 12px;">
-            <p>{{$c->parrafo}}</p>
+            <p align="justify">{{$c->parrafo}}</p>
         </div>
         @endif
 
         @if($c->tipo == 'Fija')
         <div style="margin-top: 10px;font-size: 12px;">
-            <p>{{$c->parrafo}}</p>
+            <p align="justify">{{$c->parrafo}}</p>
         </div>
         @endif
     @endforeach
@@ -155,7 +99,7 @@
 
 
     @foreach ($datos_repre as $dc)
-        <div style="margin-top: 80px;font-size: 12px;">
+        <div style="margin-top: 60px;font-size: 12px;">
             ________________________________
             <p><b>{{$dc->representante}}</b></p>
             <p>DUI: <b>{{$dc->dui}}.</b></p>

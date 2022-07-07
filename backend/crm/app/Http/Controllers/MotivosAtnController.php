@@ -30,6 +30,18 @@ class MotivosAtnController extends Controller
            return response()->json($motivos);
        }
 
+       public function getMotivosAtencionesAll()
+       {
+           //conexion con COMANDA
+           $motivos = DB::connection('comanda')->table('CRM_motivo_atenciones')->where('estado','1')
+           ->whereIn('sistema',['GEST. COMERCIAL', 'CRM'])->orderBy('sistema','ASC')->get();
+   
+           return response()->json($motivos);
+       }
+
+
+       
+
 
     public function save(Request $request){
 

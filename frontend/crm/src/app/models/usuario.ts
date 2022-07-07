@@ -10,4 +10,5 @@ export class Usuario {
   public correo!: string;
   public nombre_apellido !: string;
   public codigo_sucursal !: string;
+  public nombre_usuario!: string;
 }

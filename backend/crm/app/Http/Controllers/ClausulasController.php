@@ -167,6 +167,45 @@ class ClausulasController extends Controller
     }
 
 
+    public function imprimir_comprobante(Request $request)
+    {
+        $id_evento = $request['id_evento'];
+        $id_atencion = $request['id_atencion'];
+        $fecha = $request['fecha_cierre'];
+        $nis = $request['nis'];
+        $user = $request['user'];
+
+
+        $datos =  DB::connection('comanda')->select("SELECT 
+        CONCAT(fc.NOMBRES,' ', fc.APELLIDOS) as nombre_cliente,
+        fs.anexo_direccion as direccion,
+        fs.num_suministro as nis,
+        case when fc.TELEFONO_UNO is null then fc.TELEFONO_DOS else fc.TELEFONO_UNO end as telefono,
+        fa.numero_medidor as num_medidor,
+        case when fs.codigo_tipo_servicio = 'R' then 'RURAL' else 'URBANO' end as tipo_servicio,
+        fcag.descripcion_area_geografica  as densidad,
+        (select ca.titulo_atn  from comanda_db.dbo.CRM_atenciones ca where ca.id = ".$id_atencion.") as titulo_atn,
+        (select fcro.numero_orden  from EDESAL_CALIDAD.dbo.fe_calidad_reclamos_ordenes fcro where fcro.id_atencion_crm = ".$id_atencion.") as numero_orden
+        from FACTURACION.dbo.FE_SUMINISTROS fs
+        inner join FACTURACION.dbo.FE_CLIENTE fc on fc.CODIGO_CLIENTE = fs.CODIGO_CLIENTE 
+        inner join FACTURACION.dbo.FE_APARATOS fa on fa.num_suministro = fs.num_suministro 
+        inner join EDESAL_CALIDAD.dbo.fe_calidad_area_geografica fcag on fcag.codigo_area_geografica  = fs.codigo_area_geografica 
+        where fs.num_suministro = ".$nis." ");
+
+
+      
+        $view =  \View::make('pdf.comprobante_uf', compact('id_evento', 'user', 'id_atencion', 'fecha', 'nis','datos'))->render();
+        
+
+
+        $pdf = \App::make('dompdf.wrapper');
+
+        $pdf->loadHTML($view);
+
+        //return response()->json($iva);
+
+        return $pdf->stream('carta_GC.pdf');
+    }
 
 
 }

@@ -463,7 +463,6 @@ class EventosController extends Controller
                     ->where('id', $request['evento_id'])
                          ->update([
                             'resolucion' => "El cliente firmó el archivo",
-                            'estado' => 2,
                             'fecha_resolucion' => $fechaResConFormato,
                             ]);
         
@@ -500,7 +499,7 @@ class EventosController extends Controller
 
 
 
-        return response()->json($execProcedure);
+        return response()->json($insertar);
     }
 
 }

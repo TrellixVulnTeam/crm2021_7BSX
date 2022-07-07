@@ -103,6 +103,9 @@ class VerifyCsrfToken extends BaseVerifier
         'getInfoNisComerciales',
         'getMotivosAtencionesGC',
         'getContactosCliente',
-        'getTiposAtencionesGC'
+        'getTiposAtencionesGC',
+        'imprimir_comprobante',
+        'getMotivosAtencionesAll',
+        'getTiposAtencionesAll'
     ];
 }

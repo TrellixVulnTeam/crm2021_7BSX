@@ -6,63 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title></title>
-    <style>
 
-        body{
-            margin-bottom: 0;
-            margin-top: 0;
-        }
-
-
-
-        table.minimalistBlack {
-            border: 1px solid #000000;
-            width: 100%;
-            text-align: left;
-            border-collapse: collapse;
-        }
-        table.minimalistBlack td, table.minimalistBlack th {
-            border: 1px solid #000000;
-            padding: 5px 4px;
-        }
-        table.minimalistBlack tbody td {
-            font-size: 10px;
-        }
-        table.minimalistBlack thead {
-            background: #CFCFCF;
-            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            border-bottom: 1px solid #000000;
-        }
-        table.minimalistBlack thead th {
-            font-size: 12px;
-            font-weight: bold;
-            color: #000000;
-            text-align: left;
-        }
-        .total{
-            background: #CFCFCF;
-            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            border-bottom: 1px solid #000000;
-        }
-        table.minimalistBlack tfoot {
-            font-size: 12px;
-            font-weight: bold;
-            color: #000000;
-            border-top: 1px solid #000000;
-        }
-        table.minimalistBlack tfoot td {
-            font-size: 12px;
-        }
-        #container div {  }
-
-        #div3 { width:200px; float:right }
-        #div1, #div2,#div4 { width:500px;  }
-    </style>
 </head>
 <body>
 
@@ -132,7 +76,7 @@
     @foreach($clausulas as $c)
         @if($c->tipo == 'Aclaratoria')
         <div style="margin-top: 10px;font-size: 12px;">
-            <p>{{$c->parrafo}}</p>
+            <p align="justify">{{$c->parrafo}}</p>
         </div>
         @endif
     @endforeach
@@ -141,13 +85,13 @@
     @foreach($clausulas as $c)
         @if($c->tipo == 'Fija')
         <div style="margin-top: 10px;font-size: 12px;">
-            <p>{{$c->parrafo}}</p>
+            <p align="justify">{{$c->parrafo}}</p>
         </div>
         @endif
     @endforeach
 
 
-    <div style="margin-top: 25px;font-size: 12px; ">
+    <div style="margin-top: 20px;font-size: 12px; ">
         <p>  Del mismo modo exonero a EDESAL de toda responsabilidad no contenida en la normativa anterior. </p>
         <p> Esperando de su pronta respuesta quedo de ustedes muy agradecido </p>
         <p> Atentamente</p>
@@ -155,7 +99,7 @@
 
 
     @foreach ($datos as $dc)
-        <div style="margin-top: 110px;font-size: 12px;">
+        <div style="margin-top: 90px;font-size: 12px;">
             ________________________________
             <p><b>{{$dc->cliente}}</b></p>
             <p>DUI: <b>{{$dc->dui}}.</b></p>

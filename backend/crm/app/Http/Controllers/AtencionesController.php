@@ -32,6 +32,16 @@ class AtencionesController extends Controller
         }
 
 
+        public function getTiposAtencionesAll()
+        {
+            //conexion con COMANDA
+            $atenciones  = DB::connection('comanda')->table('CRM_tipo_atenciones')
+            ->whereIn('sistema',['GEST. COMERCIALES', 'CRM'])->orderBy('sistema','ASC')->get();
+    
+            return response()->json($atenciones);
+        }
+
+
        public function mover_archivo(Request $request){
             $file = $request->file('file');
             $nombreoriginal = strtolower($file->getClientOriginalName());
