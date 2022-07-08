@@ -40,6 +40,9 @@ export class ResolucionEvtgcComponent implements OnInit {
     this.btncomprobar = false;
     this.detalle_evento = this.data.detalle_evento;
     this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
+
+
+
   }
 
   subir_archivo(fileInput: any) {
@@ -91,12 +94,11 @@ export class ResolucionEvtgcComponent implements OnInit {
       },
       () => {
         this.btncomprobar = true;
-        this._snackBar.open('¡¡ Resolución Guardada !!', 'Ok', {
-          duration: 3000,
+        this._snackBar.open('¡¡ La orden: '+ this.detalle_evento.descripcion_orden +'  ha sido generada con éxito !!', 'Ok', {
+          duration: 6000,
           horizontalPosition: 'center',
           verticalPosition: 'top'
         });
-        this.btncomprobar = true;
         //this.dialog.closeAll();
         this.getAllEventosgc();
       });

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
+import { Roles } from 'src/app/models/roles';
 import { Usuario } from 'src/app/models/usuario';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
@@ -54,6 +55,10 @@ export class AtencionesComponent implements OnInit {
   texto1gc: any;
   texto2gc:any;
 
+  roles!: Roles[];
+
+  rol_caja_cliente: boolean | undefined;
+
   constructor(public atencionService: AtencionesService, private router: Router, private global: GlobalService,
     public dialog: MatDialog, private adjuntoService: ArchivosService) { }
 
@@ -61,9 +66,22 @@ export class AtencionesComponent implements OnInit {
     if(localStorage.getItem('usuario_crm') !== null){
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
+
+      this.roles = JSON.parse(localStorage.getItem("roles_crm") || '{}');
+
+      this.roles.forEach((element: any) => {
+        if(element["rol"]==='Caja de clientes'){
+          this.rol_caja_cliente = true;
+        }else{
+          this.rol_caja_cliente = false;
+        }
+      });
+
       setTimeout(() => {
         this.global.fillOpcionMenu('Atenciones');
       });
+
+
 
     }else{
       this.router.navigate(['login']);

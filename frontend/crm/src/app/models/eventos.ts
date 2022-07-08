@@ -41,4 +41,5 @@ public ap_domicilio!: string;
 public ap_departamento!: string;
 public ap_actua!: string;
 public user_impresion!: string;
+public descripcion_orden!: string;
 }

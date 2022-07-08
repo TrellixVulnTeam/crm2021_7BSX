@@ -15,27 +15,46 @@ import { ManualMdComponent } from './manual-md/manual-md.component';
 export class DashboardComponent implements OnInit {
   user: Usuario = new Usuario();
   dashboard = 'Inicio';
-  roles: Roles = new Roles();
+  roles!: Roles[];
+
+  rol_caja_cliente: boolean | undefined;
 
   constructor(private router: Router, private usuarioservice : UsuarioService, private global: GlobalService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.rol_caja_cliente = false;
     if(localStorage.getItem('usuario_crm') !== null){
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
 
       this.roles = JSON.parse(localStorage.getItem("roles_crm") || '{}');
 
-      console.log(this.roles);
+
 
       this.global._opcionMenu.subscribe(response=>{
         this.dashboard = response;
       });
 
+
+      this.roles.forEach((element: any) => {
+        if(element["rol"]==='Caja de clientes'){
+          this.rol_caja_cliente = true;
+        }else{
+          this.rol_caja_cliente = false;
+        }
+      });
+
   }else{
     this.router.navigate(['login']);
   }
+
+
+
+
+  //console.log(this.rol_caja_cliente);
+
+
   }
 
   public cerrarSesion() {

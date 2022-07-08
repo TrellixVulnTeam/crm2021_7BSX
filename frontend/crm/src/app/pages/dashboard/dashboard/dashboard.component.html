@@ -27,13 +27,11 @@
 
 
 <mat-menu #menu="matMenu">
-  <h2 class="cl-title">Clientes</h2>
- <!-- <button  mat-menu-item routerLink="clientes">
-    <mat-icon>people alt</mat-icon>
-    <span class="span-menu">EDESAL y conectados < 120 días</span>
-  </button>-->
+  <h2 class="cl-title" *ngIf="rol_caja_cliente === false">Clientes</h2>
 
-  <button  mat-menu-item routerLink="cli-prospectos">
+  <h2 class="cl-title1" *ngIf="rol_caja_cliente === true">Gest. comerciales</h2>
+
+  <button  mat-menu-item routerLink="cli-prospectos" *ngIf="rol_caja_cliente === false">
     <mat-icon>people alt</mat-icon>
     <span class="span-menu">Prospectos y Stakeholders</span>
   </button>
@@ -68,7 +66,7 @@
 
   <mat-divider></mat-divider>
 
-<button  mat-menu-item routerLink="otecnicas">
+<button  mat-menu-item routerLink="otecnicas" *ngIf="rol_caja_cliente === false">
     <mat-icon>description</mat-icon>
     <span class="span-menu">Órdenes técnicas</span>
   </button>

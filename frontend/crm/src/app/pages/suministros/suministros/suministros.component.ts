@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Clientes } from 'src/app/models/clientes';
+import { Roles } from 'src/app/models/roles';
 import { Suministros } from 'src/app/models/suministros';
 import { Usuario } from 'src/app/models/usuario';
 import { ClientesService } from 'src/app/services/clientes.service';
@@ -43,6 +44,10 @@ export class SuministrosComponent implements OnInit {
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
   @ViewChild('paginator2') paginator2: MatPaginator | undefined;
 
+  roles!: Roles[];
+
+  rol_caja_cliente: boolean | undefined;
+
   constructor(private global: GlobalService, private router: Router, private suministrosService: SuministrosService, private clienteService : ClientesService,
     public dialog: MatDialog, private rpt_service: ReportesService) {
       this.form_nis = new FormGroup({
@@ -65,6 +70,19 @@ export class SuministrosComponent implements OnInit {
     if(localStorage.getItem('usuario_crm') !== null){
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
+
+
+      this.roles = JSON.parse(localStorage.getItem("roles_crm") || '{}');
+
+      this.roles.forEach((element: any) => {
+        if(element["rol"]==='Caja de clientes'){
+          this.rol_caja_cliente = true;
+        }else{
+          this.rol_caja_cliente = false;
+        }
+      });
+
+
       setTimeout(() => {
         this.global.fillOpcionMenu('Suministros');
       });

@@ -89,46 +89,15 @@ class EventosController extends Controller
          convert(varchar(10),e.fecha_compromiso,103) as fecha_compromisoF,
          convert(varchar(10),e.fecha_resolucion,103) as fecha_resolucionF,
          (select alias from comanda_db.dbo.users where id = e.usuario_crm )
-          as usuario_creacion from crm_eventos e
+          as usuario_creacion,
+         (select fcto.descripcion_tipo_ordentrabajo  from EDESAL_CALIDAD.dbo.fe_calidad_tipo_ordentrabajo fcto where fcto.codigo_tipo_ordentrabajo = cma.orden_trabajo  ) 
+         as descripcion_orden
+          from crm_eventos e
          inner join crm_estados_eventos as estado on estado.id = e.estado
          inner join comanda_db.dbo.users u on u.id = e.usuario_crm
          inner join comanda_db.dbo.CRM_atenciones ca on ca.id = e.atencion_id 
          inner join comanda_db.dbo.CRM_motivo_atenciones cma on cma.id = ca.id_motivo_atencion 
-         where e.usuario_crm = ".$id." and cma.sistema = 'GEST. COMERCIAL'
-         union
-         SELECT e.*,ee.nombre as estado,e.eventoTitulo as evTitulo,
-         e.id as evento_id,
-         convert(varchar(10),e.fecha_creacion, 103) as fecha_creacionD,
-         (select count(id) from tickets where evento_id = e.id and estado_id != 9)  as conteoTickets,
-         convert(varchar(10),e.fecha_compromiso,103) as fecha_compromisoF,
-         convert(varchar(10),e.fecha_resolucion,103) as fecha_resolucionF,
-           (select alias from comanda_db.dbo.users where id = e.usuario_crm ) as usuario_creacion from 
-           comanda_db.dbo.crm_eventos e
-           inner join comanda_db.dbo.crm_clientes c on c.empresa = e.cliente
-           inner join comanda_db.dbo.users u on u.id = c.usuario_crm
-           inner join comanda_db.dbo.CRM_estados_eventos as ee on ee.id = e.estado
-           inner join comanda_db.dbo.CRM_atenciones ca on ca.id = e.atencion_id 
-           inner join comanda_db.dbo.CRM_motivo_atenciones cma on cma.id = ca.id_motivo_atencion 
-           where u.alias = '".$user."' and cma.sistema = 'GEST. COMERCIAL' and e.usuario_crm != 
-           (select id from comanda_db.dbo.users where estado = 1 and alias = '".$user."')
-          
-         union 
-         SELECT e.*,ee.nombre as estado,e.eventoTitulo as evTitulo,
-         e.id as evento_id,
-         convert(varchar(10),e.fecha_creacion, 103) as fecha_creacionD,
-         (select count(id) from tickets where evento_id = e.id) as conteoTickets,
-         convert(varchar(10),e.fecha_compromiso,103) as fecha_compromisoF,
-         convert(varchar(10),e.fecha_resolucion,103) as fecha_resolucionF,
-         (select alias from comanda_db.dbo.users where id = e.usuario_crm ) as usuario_creacion from 
-         comanda_db.dbo.crm_eventos e
-         inner join comanda_db.dbo.crm_clientes c on c.empresa = e.cliente
-         inner join crm_cliente_usuario ccu on ccu.cliente = c.id
-         inner join comanda_db.dbo.users u on u.id = c.usuario_crm
-         inner join comanda_db.dbo.CRM_estados_eventos as ee on ee.id = e.estado
-         inner join comanda_db.dbo.CRM_atenciones ca on ca.id = e.atencion_id 
-         inner join comanda_db.dbo.CRM_motivo_atenciones cma on cma.id = ca.id_motivo_atencion 
-         WHERE ccu.usuario =".$id."  and cma.sistema = 'GEST. COMERCIAL'
-         order by e.id desc
+         where cma.sistema = 'GEST. COMERCIAL'
              ");
  
  

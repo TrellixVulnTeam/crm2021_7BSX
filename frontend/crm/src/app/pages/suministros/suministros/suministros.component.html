@@ -1,7 +1,7 @@
 <mat-tab-group>
 
 
-  <mat-tab label="Clientes de cartera corporativa" class="tabs">
+  <mat-tab label="Clientes de cartera corporativa" class="tabs" *ngIf="rol_caja_cliente === false">
     <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 20, 100]"
     showFirstLastButtons
     aria-label="Cantidad de registros a mostrar">

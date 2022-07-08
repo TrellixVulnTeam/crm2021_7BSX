@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Archivos } from 'src/app/models/archivos';
 import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
+import { Roles } from 'src/app/models/roles';
 import { Tickets } from 'src/app/models/tickets';
 import { Usuario } from 'src/app/models/usuario';
 import { ArchivosService } from 'src/app/services/archivos.service';
@@ -60,6 +61,10 @@ export class EventosComponent implements OnInit {
   texto2gc:any;
   texto3gc:any;
 
+  roles!: Roles[];
+
+  rol_caja_cliente: boolean | undefined;
+
   constructor( private global: GlobalService, private router: Router, private eventosService: EventosService,
     public dialog: MatDialog, private atencionService: AtencionesService, private adjuntoService: ArchivosService,) { }
 
@@ -74,6 +79,16 @@ export class EventosComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
       setTimeout(() => {
         this.global.fillOpcionMenu('Macrotarea');
+      });
+
+      this.roles = JSON.parse(localStorage.getItem("roles_crm") || '{}');
+
+      this.roles.forEach((element: any) => {
+        if(element["rol"]==='Caja de clientes'){
+          this.rol_caja_cliente = true;
+        }else{
+          this.rol_caja_cliente = false;
+        }
       });
 
     }else{

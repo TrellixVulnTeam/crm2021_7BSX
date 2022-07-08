@@ -54,6 +54,16 @@ mat-menu{
   font-weight: bold !important;
 }
 
+.cl-title1{
+  font-family: 'Montserrat', sans-serif !important;
+  color: #011624 !important;
+  text-align: center !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+}
+
 .span-menu{
   font-size: 12px !important;
 }

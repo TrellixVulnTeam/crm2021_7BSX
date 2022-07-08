@@ -1,5 +1,5 @@
 <mat-tab-group>
-  <mat-tab label="CRM">
+  <mat-tab label="CRM" *ngIf="rol_caja_cliente === false">
     <mat-tab-group style="margin-left: 3% !important;margin-right: 3% !important;" (selectedTabChange)="getAllAtenciones()">
       <mat-tab label="Abiertas" class="tabs" >
         <br>
