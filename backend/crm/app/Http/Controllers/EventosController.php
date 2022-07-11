@@ -435,16 +435,16 @@ class EventosController extends Controller
                             'fecha_resolucion' => $fechaResConFormato,
                             ]);
         
-        $insertar =  DB::connection('comanda')->table('CRM_adjuntos')
-        ->insert([
-          'atencion_id' => $request['atencion_id'],
-          'evento_id' => $request['evento_id'],
-          'fecha_creacion' => $fechaResConFormato,
-          'usuario_id' => $request['user_id_save'],
-          'adjunto' =>  date('Ymd').' '.strtolower(substr($request['file'],12)),
-          'descripcion' => "Carta firmada por cliente para gestiones comerciales",
-          'tipoarchivo' => 30,
-        ]);
+       $insertar =  DB::connection('comanda')->table('CRM_adjuntos')
+       ->insert([
+         'atencion_id' => $request['atencion_id'],
+         'evento_id' => $request['evento_id'],
+         'fecha_creacion' => $fechaResConFormato,
+         'usuario_id' => $request['user_id_save'],
+         'adjunto' =>  date('Ymd').' '.strtolower(substr($request['file'],12)),
+         'descripcion' => "Carta firmada por cliente para gestiones comerciales",
+         'tipoarchivo' => 30,
+       ]);
 
 
         $getOrden = DB::connection('comanda')->table("CRM_motivo_atenciones")
@@ -460,15 +460,15 @@ class EventosController extends Controller
         $id_atencion = $request["atencion_id"];
 
 
-        //$execProcedure =  DB::connection('calidad')->statement("EXEC [dbo].[sp_create_calidad_order_crm] 
-        //'".$orden."','".$user."',".$nis.", '".$codigo_sucursal."', ".$id_evento.", ".$id_atencion." ");
+        $execProcedure =  DB::connection('calidad')->statement("EXEC [dbo].[sp_create_calidad_order_crm] 
+        '".$orden."','".$user."',".$nis.", '".$codigo_sucursal."', ".$id_evento.", ".$id_atencion." ");
 
 
 
 
 
 
-        return response()->json($insertar);
+        return response()->json($execProcedure);
     }
 
 }

@@ -22,7 +22,7 @@
 
         <mat-form-field appearance="legacy" class="input" *ngIf="validar">
           <mat-label>Orden de trabajo asociada: </mat-label>
-          <mat-select formControlName="orden_trabajo">
+          <mat-select formControlName="orden_trabajo" [(ngModel)]="datos.orden_trabajo">
             <mat-option  value="N/D">Selecciona</mat-option>
             <mat-option  *ngFor="let data of data_orden" [value]="data.codigo_tipo_ordentrabajo">{{data.codigo_tipo_ordentrabajo}} -- {{data.descripcion_tipo_ordentrabajo}}</mat-option>
           </mat-select>
@@ -30,7 +30,7 @@
 
         <mat-form-field appearance="legacy" class="input" *ngIf="validar">
           <mat-label>Persona: </mat-label>
-          <mat-select formControlName="tipo_persona">
+          <mat-select formControlName="tipo_persona" [(ngModel)]="datos.tipo_persona">
             <mat-option  value="N/D">Selecciona</mat-option>
             <mat-option  value="Jurídica">Jurídica</mat-option>
             <mat-option  value="Natural">Natural</mat-option>

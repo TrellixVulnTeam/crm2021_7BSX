@@ -117,9 +117,20 @@ export class EventosComponent implements OnInit {
     this.getAllEventosgc();
   }
 
+  clear_data(){
+    this.dataSource_evtTodos.data = [];
+    this.dataSource_evtAbiertos.data = [];
+    this.dataSource_evtProResolucion.data = [];
+    this.dataSource_evtCerrados.data = [];
+    this.dataSource_evtTodosgc.data = [];
+    this.dataSource_evtAbiertosgc.data = [];
+    this.dataSource_evtProResoluciongc.data = [];
+    this.dataSource_evtCerradosgc.data = [];
+  }
+
 
   getAllEventos(){
-
+    this.clear_data();
     this.eventosService.getAllEventos(this.user).subscribe(
       data => {
 
@@ -172,7 +183,7 @@ export class EventosComponent implements OnInit {
 
 
   getAllEventosgc(){
-
+    this.clear_data();
     this.eventosService.getAllEventosGC(this.user).subscribe(
       data => {
 

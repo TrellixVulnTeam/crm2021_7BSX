@@ -77,7 +77,17 @@ export class TicketsComponent implements OnInit {
     this.getAllTickets();
   }
 
+  clear_data(){
+    this.dataSource_tckTodos.data = [];
+  this.dataSource_tckGenerados.data = [];
+  this.dataSource_tckProResolucion.data = [];
+
+  this.dataSource_tckSolucionados.data = [];
+  this.dataSource_tckRechazados.data = [];
+  this.dataSource_tckCerrados.data = [];;
+  }
   getAllTickets(){
+    this.clear_data();
     this.ticketService.getAllTickets(this.user).subscribe(
       data => {
 

@@ -30,15 +30,18 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.datos = this.data.data;
+
     this.getordenestrabajo();
+    this.datos = this.data.data;
+
+    console.log(this.datos);
   }
 
   getordenestrabajo(){
     this.motivoatn_service.getOrdenesTrabajo().subscribe(
       data => {
         this.data_orden = data;
-        console.log(this.data_orden);
+
       });
 
   }
@@ -96,8 +99,8 @@ export class EditComponent implements OnInit {
     this.motivoatn_service.getMotivosAtenciones().subscribe(
       data => {
         this.data_motivosatn = data;
-        this.motivoatn_service.fill_motivoatn(data);
-        this.motivoatn_service._datos_motivoatn.subscribe(response => {});
+        //this.motivoatn_service.fill_motivoatn(data);
+        //  this.motivoatn_service._datos_motivoatn.subscribe(response => {});
       });
 
 

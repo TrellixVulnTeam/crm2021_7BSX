@@ -140,9 +140,18 @@ this.dataSource_atnCerradasgc.filter = filterValue.trim().toLowerCase();
 
 
 }
+clear_data(){
+  this.dataSource_atnTodas.data = [];
+  this.dataSource_atnCerradas.data = [];
+  this.dataSource_atnAbiertas.data = [];
 
+  this.dataSource_atnAbiertasgc.data = [];
+  this.dataSource_atnCerradasgc.data = [];
+  this.dataSource_atnTodasgc.data = [];;
+}
 
   getAllAtenciones(){
+    this.clear_data();
     this.atencionService.getAllAtenciones(this.user).subscribe(
       data => {
 
@@ -198,6 +207,7 @@ this.dataSource_atnCerradasgc.filter = filterValue.trim().toLowerCase();
 
 
   getAllAtencionesgc(){
+    this.clear_data();
     this.atencionService.getAllAtencionesGC(this.user).subscribe(
       data => {
 
