@@ -396,6 +396,84 @@
       </mat-tab>
 
 
+
+      <mat-tab label="Anuladas" class="tabs1">
+        <br>
+        <h3 class="title">Atenciones Anuladas</h3>
+        <mat-divider></mat-divider>
+
+        <mat-paginator #paginator4gc [pageSizeOptions]="[5, 10, 20, 100]"
+        showFirstLastButtons
+        aria-label="Cantidad de registros a mostrar">
+        </mat-paginator>
+
+        <mat-form-field appearance="legacy" class="input_search">
+          <mat-label>Buscar en tabla: </mat-label>
+          <input  matInput type="text" [(ngModel)]="texto3gc"  placeholder="Buscar" autocomplete="off" (ngModelChange)="filterTable_atnAnuladasgc($event)">
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource_atnAnuladasgc"  >
+
+        <ng-container matColumnDef="id" >
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let row2"> {{row2.id}}
+            <button mat-mini-fab color="primary" matTooltip="Detalles de la atención" matTooltipPosition="right"
+             (click)="verDetalleAtencion(row2)"><mat-icon>remove_red_eye</mat-icon></button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <td mat-cell *matCellDef="let row2" class="cli"> {{row2.cliente }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="usuarioCreacion">
+          <th mat-header-cell *matHeaderCellDef> Usuario </th>
+          <td mat-cell *matCellDef="let row2"> {{row2.usuarioCreacion}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="titulo_atn">
+          <th mat-header-cell *matHeaderCellDef> Título </th>
+          <td mat-cell *matCellDef="let row2">
+              {{row2.titulo_atn}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let row2"  class="desc">
+            <div class="desc_div">
+              {{row2.descripcion}}
+            </div> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaC">
+          <th mat-header-cell *matHeaderCellDef> Fecha Creación </th>
+          <td mat-cell *matCellDef="let row2"> {{row2.fechaC}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let row2"> {{row2.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row2">
+
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row2; columns: displayedColumns;"></tr>
+        </table>
+
+
+
+      </mat-tab>
+
       <mat-tab label="Todas las atenciones" class="tabs1">
         <br>
         <h3 class="title">Todas las atenciones</h3>
