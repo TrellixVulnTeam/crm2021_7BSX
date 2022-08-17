@@ -73,7 +73,7 @@ export class ModalEventoComponent implements OnInit {
       response => {
         this.evento_id = response;
 
-        this._snackBar.open('¡¡ Evento Guardado !!', 'Ok', {
+        this._snackBar.open('¡¡ Macrotarea guardada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top'

@@ -3,10 +3,21 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Archivos } from 'src/app/models/archivos';
+import { Atenciones } from 'src/app/models/atenciones';
+import { Eventos } from 'src/app/models/eventos';
 import { Otecnicas } from 'src/app/models/otecnicas';
+import { Tickets } from 'src/app/models/tickets';
 import { Usuario } from 'src/app/models/usuario';
+import { ArchivosService } from 'src/app/services/archivos.service';
+import { AtencionesService } from 'src/app/services/atenciones.service';
+import { EventosService } from 'src/app/services/eventos.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { OtecnicasService } from 'src/app/services/otecnicas.service';
+import { TicketsService } from 'src/app/services/tickets.service';
+import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
+import { DetallesEventosComponent } from '../../eventos/detalles-eventos/detalles-eventos.component';
+import { DetallesTicketsComponent } from '../../tickets/detalles-tickets/detalles-tickets.component';
 import { DetallesOtecnicasComponent } from '../detalles-otecnicas/detalles-otecnicas.component';
 
 @Component({
@@ -17,14 +28,15 @@ import { DetallesOtecnicasComponent } from '../detalles-otecnicas/detalles-otecn
 export class OtecnicasComponent implements OnInit {
   user: Usuario = new Usuario();
   texto:any;
-
-  displayedColumns: string[] = ['id',  'solicitud', 'fecha_creacionD' , 'cliente', 'fecha_resolucionD', 'nombresolicitante',  'aprobTecnica', 'aprobVentas', 'aprobGg'];
+  adjuntos: Archivos[] = [];
+  displayedColumns: string[] = ['atencion_id', 'evento_id', 'ticket_id', 'id',  'solicitud', 'fecha_creacionD' , 'cliente', 'fecha_resolucionD', 'nombresolicitante',  'aprobTecnica', 'aprobVentas', 'aprobGg'];
   dataSource_ordenesTodas:any = new MatTableDataSource<any>([]);
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
 
   constructor( private global: GlobalService, private router: Router, private ordenesService: OtecnicasService,
-    public dialog: MatDialog,) { }
+    public dialog: MatDialog, private adjuntoService: ArchivosService, private atencionService: AtencionesService,
+    private eventoService: EventosService, private ticketService: TicketsService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -79,4 +91,62 @@ export class OtecnicasComponent implements OnInit {
     width: '80%',
   });
  }
+
+
+ verDetalleEvento(evento: Eventos){
+  let datos: any;
+  datos = evento;
+
+  this.adjuntoService.getAdjuntosEventos(datos).subscribe(
+    data=>{
+      this.adjuntos = data;
+
+      this.eventoService.getDetalleEvento(datos).subscribe(
+        data=>{
+          this.dialog.open(DetallesEventosComponent,{
+            data: {datos_evento: data, datos_adjuntos: this.adjuntos},
+            width: '80%',
+          });
+        });
+
+    });
+
+}
+
+
+
+verDetalleAtencion(atencion: Atenciones){
+
+
+  let datos: any;
+  datos = atencion;
+
+  this.adjuntoService.getAdjuntosAtencion(datos).subscribe(
+    data=>{
+      this.adjuntos = data;
+      this.atencionService.getDetalleAtencion(atencion).subscribe(
+        data=>{
+          this.dialog.open(DetallesComponent,{
+            data: {datos_atencion: data, datos_adjuntos: this.adjuntos},
+            width: '80%',
+          });
+        }
+      );
+    });
+}
+
+verDetalleTicket(ticket: Tickets){
+
+  this.ticketService.getDetalleTicketOT(ticket).subscribe(
+    data=>{
+
+      this.dialog.open(DetallesTicketsComponent,{
+        data: {detalles_ticket: data},
+        width: '80%',
+      });
+    });
+
+
+}
+
 }

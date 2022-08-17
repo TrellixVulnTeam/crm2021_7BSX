@@ -88,6 +88,12 @@ export class TicketsService {
     return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'getDetalleTicket', ticket, httpOptions)
     .pipe(map(data => data as unknown as Tickets[] ));
   }
+  public getDetalleTicketOT(ticket: Tickets): Observable<Tickets[]> {
+    return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'getDetalleTicketOT', ticket, httpOptions)
+    .pipe(map(data => data as unknown as Tickets[] ));
+  }
+
+
 
 
   public getTicketsAsociados(ticket: Tickets): Observable<Tickets[]> {
@@ -107,5 +113,12 @@ export class TicketsService {
     return this.http.post<Usuario[]>(this.globalservice.getUrlBackEnd() + 'notificarUsuarios', users, httpOptions)
     .pipe(map(data => data as Usuario[] ));
   }
+
+
+  public getNotificados(ticket: Tickets): Observable<Usuario[]> {
+    return this.http.post<Tickets>(this.globalservice.getUrlBackEnd() + 'getNotificados', ticket, httpOptions)
+    .pipe(map(data => data as unknown as Usuario[] ));
+  }
+
 
 }

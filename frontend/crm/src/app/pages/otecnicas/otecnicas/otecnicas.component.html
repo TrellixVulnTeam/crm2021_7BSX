@@ -10,9 +10,39 @@
 
     <table mat-table [dataSource]="dataSource_ordenesTodas"  >
 
+      <ng-container matColumnDef="atencion_id" >
+        <th mat-header-cell *matHeaderCellDef> ID Atención </th>
+        <td mat-cell *matCellDef="let row"> {{row.atencion_id}}&nbsp;&nbsp;
+          <button mat-mini-fab color="primary" matTooltip="Detalles de la atención"
+          matTooltipPosition="right" (click)="verDetalleAtencion(row)"><mat-icon>remove_red_eye</mat-icon></button>
+        </td>
+      </ng-container>
+
+
+
+    <ng-container matColumnDef="evento_id" >
+      <th mat-header-cell *matHeaderCellDef> ID Macrotarea </th>
+      <td mat-cell *matCellDef="let row"> {{row.evento_id}}&nbsp;&nbsp;
+        <button  mat-mini-fab color="accent" matTooltip="Detalles de Macrotarea" matTooltipPosition="above"
+            (click)="verDetalleEvento(row)">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ticket_id" >
+      <th mat-header-cell *matHeaderCellDef> ID Ticket </th>
+      <td mat-cell *matCellDef="let row"> {{row.ticket_id}} &nbsp;&nbsp;
+        <button mat-mini-fab color="basic" class="success" matTooltip="Detalles del ticket"
+        matTooltipPosition="right" (click)="verDetalleTicket(row)"><mat-icon>remove_red_eye</mat-icon></button>
+
+      </td>
+    </ng-container>
+
+
     <ng-container matColumnDef="id" >
       <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let row"> {{row.id}}
+      <td mat-cell *matCellDef="let row"> {{row.id}}&nbsp;&nbsp;
         <button  mat-mini-fab color="accent" matTooltip="Detalles de la Orden" matTooltipPosition="above" (click)="verDetalleOrden(row)">
           <mat-icon>list</mat-icon>
         </button>

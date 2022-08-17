@@ -4,12 +4,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Archivos } from 'src/app/models/archivos';
-import { Eventos } from 'src/app/models/eventos';
 import { Tickets } from 'src/app/models/tickets';
 import { Usuario } from 'src/app/models/usuario';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AtencionesService } from 'src/app/services/atenciones.service';
 import { EventosService } from 'src/app/services/eventos.service';
+import { TicketsService } from 'src/app/services/tickets.service';
 import { DetallesComponent } from '../../atenciones/detalles/detalles.component';
 import { DetallesEventosComponent } from '../../eventos/detalles-eventos/detalles-eventos.component';
 
@@ -24,9 +24,12 @@ export class DetallesTicketsComponent implements OnInit {
   user: Usuario = new Usuario();
   adjuntos: Archivos[] = [];
 
+  usuarios: Usuario[] = [];
+
+
   constructor( public modal_detalles: MatDialogRef<DetallesTicketsComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
   private router: Router, private _snackBar: MatSnackBar,private atencionService: AtencionesService, private eventosService: EventosService,
-  public dialog: MatDialog, private adjuntoService: ArchivosService ) {
+  public dialog: MatDialog, private adjuntoService: ArchivosService, public ticketService: TicketsService ) {
     this.form_ticket = new FormGroup({
       //'codigo': new FormControl(''),
       'id_evento': new FormControl(''),
@@ -37,7 +40,9 @@ export class DetallesTicketsComponent implements OnInit {
       'horaAproxD': new FormControl(''),
       'descripcion_tck': new FormControl(''),
       'asignado': new FormControl(''),
-      'solicitante': new FormControl('')
+      'solicitante': new FormControl(''),
+      'fechasolicitud': new FormControl(''),
+      'estado': new FormControl(''),
     });
   }
 
@@ -50,7 +55,7 @@ export class DetallesTicketsComponent implements OnInit {
 
       this.detalles_ticket = this.data.detalles_ticket;
 
-
+      this.getNotificados();
       }else{
         this.router.navigate(['login']);
       }
@@ -102,6 +107,17 @@ export class DetallesTicketsComponent implements OnInit {
 
   }
 
+
+  getNotificados(){
+
+    this.ticketService.getNotificados(this.detalles_ticket).subscribe(
+      data =>{
+        this.usuarios = data;
+      },
+      err=>{},
+      ()=>{}
+    );
+  }
 
   cerrar(){
     this.modal_detalles.close()

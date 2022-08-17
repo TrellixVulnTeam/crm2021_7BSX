@@ -18,6 +18,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const matmodules = [
   MatSliderModule,
@@ -37,7 +38,8 @@ const matmodules = [
   MatTooltipModule,
   MatProgressBarModule,
   MatDialogModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatCheckboxModule
 ]
 @NgModule({
   declarations: [],

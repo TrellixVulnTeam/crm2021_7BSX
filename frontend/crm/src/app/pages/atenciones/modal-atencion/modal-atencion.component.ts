@@ -163,7 +163,7 @@ export class ModalAtencionComponent implements OnInit {
         this.atencion_id = response;
         this.atencion_id_evt = response;
 
-        if(this.sistema_motivoatn === 'CRM'){
+
 
           this.dialog.open(GenerarEventoComponent,{
             data:{
@@ -174,33 +174,9 @@ export class ModalAtencionComponent implements OnInit {
 
            this.validarArchivos = true;
 
-        }else{
-          let datos_evt : Atenciones = new Atenciones();
-          datos_evt.atencion_id = this.atencion_id;
-          datos_evt.codigo_sucursal = this.user.codigo_sucursal;
-          datos_evt.ap_nombre = this.form_atencion.controls["ap_nombre"].value;
-          datos_evt.ap_profesion = this.form_atencion.controls["ap_profesion"].value;
-          datos_evt.ap_dui= this.form_atencion.controls["ap_dui"].value;
-          datos_evt.ap_nit= this.form_atencion.controls["ap_nit"].value;
-          datos_evt.ap_domicilio= this.form_atencion.controls["ap_domicilio"].value;
-          datos_evt.ap_departamento= this.form_atencion.controls["ap_departamento"].value;
-          datos_evt.ap_actua= this.form_atencion.controls["ap_actua"].value;
 
-          this.eventosService.guardarEventoGC(datos_evt).subscribe(
-            response => {
-            },
-            err => {
 
-            },
-            () => {
-              this._snackBar.open('¡¡ Atención y Macrotarea creados !!', 'Ok', {
-                duration: 4000,
-                horizontalPosition: 'center',
-                verticalPosition: 'top'
-              });
 
-            });
-        }
 
       },
       err => {},

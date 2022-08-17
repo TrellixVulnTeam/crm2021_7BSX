@@ -63,19 +63,22 @@ export class DetallesEventosComponent implements OnInit {
       this.eventos_obj = this.data.datos_evento;
       this.datos_adjuntos = this.data.datos_adjuntos;
       this.rutaFile = this.url.getUrlBackEnd()+'descargarArchivo?ruta=';
+
+      if(this.eventos_obj.ap_nombre === undefined || this.eventos_obj.ap_nombre === null ){
+
+        this.tipo_persona_validar = false;
+      }else{
+
+        this.tipo_persona_validar = true;
+      }
+
       }else{
         this.router.navigate(['login']);
       }
 
 
 
-    if(this.eventos_obj.ap_nombre === null){
 
-      this.tipo_persona_validar = false;
-    }else{
-
-      this.tipo_persona_validar = true;
-    }
 
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -42,11 +43,15 @@ export class CliProspectosComponent implements OnInit {
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
   @ViewChild('paginator2') paginator2: MatPaginator | undefined;
 
+  checked!: boolean;
 
   constructor(private router: Router, private clienteService : ClientesService,
     public dialog: MatDialog, public global: GlobalService, private rpt_service: ReportesService) { }
 
   ngOnInit(): void {
+
+    this.checked === false;
+
     if(localStorage.getItem('usuario_crm') !== null){
 
       this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
@@ -76,9 +81,6 @@ export class CliProspectosComponent implements OnInit {
   filterTable_compartidos (filterValue :string) {
     this.dataSource1.filter = filterValue.trim().toLowerCase();
  }
-
-
-
 
   getProspectos(){
     this.clienteService.getProspectosStakeholders(this.user).subscribe(
