@@ -51,15 +51,18 @@ export class EventosComponent implements OnInit {
   dataSource_evtAbiertosgc:any = new MatTableDataSource<any>([]);
   dataSource_evtProResoluciongc:any = new MatTableDataSource<any>([]);
   dataSource_evtCerradosgc:any = new MatTableDataSource<any>([]);
+  dataSource_evtAnuladosgc:any = new MatTableDataSource<any>([]);
 
   @ViewChild('paginator1gc') paginator1gc: MatPaginator | undefined;
   @ViewChild('paginator2gc') paginator2gc: MatPaginator | undefined;
   @ViewChild('paginator3gc') paginator3gc: MatPaginator | undefined;
   @ViewChild('paginator4gc') paginator4gc: MatPaginator | undefined;
+  @ViewChild('paginator5gc') paginator5gc: MatPaginator | undefined;
   textogc:any;
   texto1gc:any;
   texto2gc:any;
   texto3gc:any;
+  texto4gc:any;
 
   roles!: Roles[];
 
@@ -112,7 +115,7 @@ export class EventosComponent implements OnInit {
     this.dataSource_evtAbiertosgc.paginator= this.paginator2gc;
     this.dataSource_evtProResoluciongc.paginator = this.paginator3gc;
     this.dataSource_evtCerradosgc.paginator = this.paginator4gc;
-
+    this.dataSource_evtAnuladosgc.paginator = this.paginator5gc;
     this.getAllEventos();
     this.getAllEventosgc();
   }
@@ -126,6 +129,7 @@ export class EventosComponent implements OnInit {
     this.dataSource_evtAbiertosgc.data = [];
     this.dataSource_evtProResoluciongc.data = [];
     this.dataSource_evtCerradosgc.data = [];
+    this.dataSource_evtAnuladosgc.data = [];
   }
 
 
@@ -208,13 +212,25 @@ export class EventosComponent implements OnInit {
           }
         });
 
+
+        data.forEach((element: any) => {
+          if(element["estado"]==='Anulado'){
+            this.dataSource_evtAnuladosgc.data.push(element);
+          }
+        });
+
         //llenando behaviour subject
         this.eventosService.fillevtTodos_listgc(this.dataSource_evtTodosgc.data);
         this.eventosService.fillevtAbiertos_listgc(this.dataSource_evtAbiertosgc.data);
         this.eventosService.fillevtProResolucion_listgc(this.dataSource_evtProResoluciongc.data);
         this.eventosService.fillevtCerrados_listgc(this.dataSource_evtCerradosgc.data);
+        this.eventosService.fillevtAnulados_listgc(this.dataSource_evtAnuladosgc.data);
 
         //suscribiendose a arreglo para llenar tabla
+        this.eventosService._datos_evtAnuladosgc.subscribe(response => {
+          this.dataSource_evtAnuladosgc.data = response;
+        });
+
         this.eventosService._datos_evtTodosgc.subscribe(response => {
           this.dataSource_evtTodosgc.data = response;
         });
@@ -271,6 +287,10 @@ filterTable_evtCerradosgc(filterValue :string) {
   this.dataSource_evtCerradosgc.filter = filterValue.trim().toLowerCase();
 }
 
+
+filterTable_evtAnuladosgc(filterValue :string) {
+  this.dataSource_evtAnuladosgc.filter = filterValue.trim().toLowerCase();
+}
 
 
 generarTicket(eve: Eventos){

@@ -93,9 +93,9 @@
   </button><br>
 
 
-  <h2 class="cl-title" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">Gest. Comerciales</h2>
+  <h2 class="cl-title" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' || user.alias == 'hmurgas' ">Gest. Comerciales</h2>
   <mat-divider></mat-divider>
-  <button  mat-menu-item routerLink="motivoatn" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
+  <button  mat-menu-item routerLink="motivoatn" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' || user.alias == 'hmurgas' ">
     <mat-icon>notifications</mat-icon>
     <span class="span-menu">Tipo de Solicitud</span>
   </button>
@@ -103,7 +103,7 @@
 
   <mat-divider *ngIf="user.alias =='aortiz' || user.alias =='abolaños' "></mat-divider>
 
-  <button  mat-menu-item routerLink="mttocartas" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' ">
+  <button  mat-menu-item routerLink="mttocartas" *ngIf="user.alias =='aortiz' || user.alias =='abolaños' || user.alias == 'hmurgas' ">
     <mat-icon>calendar_view_day</mat-icon>
     <span class="span-menu">Mtto. Cartas Auxiliares</span>
   </button>

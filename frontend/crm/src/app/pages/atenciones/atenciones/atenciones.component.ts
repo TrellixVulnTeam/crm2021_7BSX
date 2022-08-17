@@ -46,14 +46,18 @@ export class AtencionesComponent implements OnInit {
   dataSource_atnAbiertasgc:any = new MatTableDataSource<any>([]);
   dataSource_atnCerradasgc:any = new MatTableDataSource<any>([]);
 
+  dataSource_atnAnuladasgc:any = new MatTableDataSource<any>([]);
+
 
   @ViewChild('paginator1gc') paginator1gc: MatPaginator | undefined;
   @ViewChild('paginator2gc') paginator2gc: MatPaginator | undefined;
   @ViewChild('paginator3gc') paginator3gc: MatPaginator | undefined;
+  @ViewChild('paginator4gc') paginator4gc: MatPaginator | undefined;
 
   textogc: any;
   texto1gc: any;
   texto2gc:any;
+  texto3gc:any;
 
   roles!: Roles[];
 
@@ -100,6 +104,7 @@ export class AtencionesComponent implements OnInit {
     this.dataSource_atnTodasgc.paginator = this.paginator1gc;
     this.dataSource_atnAbiertasgc.paginator = this.paginator2gc;
     this.dataSource_atnCerradasgc.paginator = this.paginator3gc;
+    this.dataSource_atnAnuladasgc.paginator = this.paginator4gc;
 
     this.getAllAtenciones();
     this.getAllAtencionesgc();
@@ -140,6 +145,15 @@ this.dataSource_atnCerradasgc.filter = filterValue.trim().toLowerCase();
 
 
 }
+
+
+filterTable_atnAnuladasgc(filterValue :string) {
+
+  this.dataSource_atnAnuladasgc.filter = filterValue.trim().toLowerCase();
+
+
+  }
+
 clear_data(){
   this.dataSource_atnTodas.data = [];
   this.dataSource_atnCerradas.data = [];
@@ -148,6 +162,7 @@ clear_data(){
   this.dataSource_atnAbiertasgc.data = [];
   this.dataSource_atnCerradasgc.data = [];
   this.dataSource_atnTodasgc.data = [];;
+  this.dataSource_atnAnuladasgc.data = [];;
 }
 
   getAllAtenciones(){
@@ -229,6 +244,16 @@ clear_data(){
           }
         });
 
+
+        data.forEach((element: any) => {
+          if(element["estado"]==='Anulada'){
+            this.dataSource_atnAnuladasgc.data.push(element);
+
+          }
+        });
+
+        console.log(this.dataSource_atnAnuladasgc.data);
+
         //llenanado arreglo del service
         this.atencionService.fillatnCerradas_listgc(this.dataSource_atnCerradasgc.data);
 
@@ -236,8 +261,15 @@ clear_data(){
 
         this.atencionService.fillatnTodas_listgc(this.dataSource_atnTodasgc.data);
 
+        this.atencionService.fillatnAnuladas_listgc(this.dataSource_atnAnuladasgc.data);
+
 
         //suscribiendose al arreglo para obtener data
+
+        this.atencionService._datos_atnAnuladasgc.subscribe(response => {
+          this.dataSource_atnAnuladasgc.data = response;
+        });
+
         this.atencionService._datos_atnTodasgc.subscribe(response => {
           this.dataSource_atnTodasgc.data = response;
         });

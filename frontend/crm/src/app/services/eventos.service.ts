@@ -58,12 +58,19 @@ export class EventosService {
 
   //gestiones comerciales
 
-
   datos_evtTodosgc = new BehaviorSubject<Eventos[]>([]);
   _datos_evtTodosgc = this.datos_evtTodosgc.asObservable();
 
   fillevtTodos_listgc(d: Eventos[]){
     this.datos_evtTodosgc.next(d);
+  }
+
+
+  datos_evtAnuladosgc = new BehaviorSubject<Eventos[]>([]);
+  _datos_evtAnuladosgc = this.datos_evtAnuladosgc.asObservable();
+
+  fillevtAnulados_listgc(d: Eventos[]){
+    this.datos_evtAnuladosgc.next(d);
   }
 
 

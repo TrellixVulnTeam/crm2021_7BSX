@@ -259,6 +259,7 @@ class AtencionesController extends Controller
             try{
                 $atenciones = DB::connection('calidad')->select("
                      SELECT case when c.atencion_cerrada = 'S' then 'Cerrada'
+                     when c.atencion_cerrada = 'A' then 'Anulada'
                      else
                      'Abierta'
                      end as estado,
@@ -296,8 +297,8 @@ class AtencionesController extends Controller
             $id = $request["atencion_id"];
 
             $atenciones  = json_encode(DB::connection('comanda')->select("
-            SELECT c.*,case when c.atencion_cerrada = 'S'
-            then 'Cerrada'
+            SELECT c.*,case when c.atencion_cerrada = 'S' then 'Cerrada'
+            when c.atencion_cerrada = 'A' then 'Anulada'
             else
             'Abierta'
             end as estado,

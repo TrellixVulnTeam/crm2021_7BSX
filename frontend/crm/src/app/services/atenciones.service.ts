@@ -22,6 +22,16 @@ const httpOptions = {
 })
 export class AtencionesService {
 
+
+  datos_atnAnuladasgc = new BehaviorSubject<Atenciones[]>([]);
+  _datos_atnAnuladasgc = this.datos_atnAnuladasgc.asObservable();
+
+  fillatnAnuladas_listgc(d: Atenciones[]){
+    this.datos_atnAnuladasgc.next(d);
+  }
+
+
+
   datos_atnTodasgc = new BehaviorSubject<Atenciones[]>([]);
   _datos_atnTodasgc = this.datos_atnTodasgc.asObservable();
 
