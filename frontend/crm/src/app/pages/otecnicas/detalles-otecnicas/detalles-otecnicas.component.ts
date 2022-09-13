@@ -39,6 +39,7 @@ export class DetallesOtecnicasComponent implements OnInit {
       'comentario_apAd': new FormControl(''),
       'comentario_deV': new FormControl(''),
       'comentario_deAd': new FormControl(''),
+      'comentarioff': new FormControl(''),
       'user': new FormControl(''),
       'fecha_tecnica_aprob': new FormControl(''),
       'fecha_comercial_aprob': new FormControl(''),
@@ -60,6 +61,17 @@ export class DetallesOtecnicasComponent implements OnInit {
       'ingr_mensuales': new FormControl(''),
       'ingr_anuales': new FormControl(''),
       'anios_est': new FormControl(''),
+
+
+      'comentarioaprob_finanzas': new FormControl(''),
+      'fecha_ff_aprob': new FormControl(''),
+      'usuario_ff': new FormControl(''),
+
+
+      'comentario_legal': new FormControl(''),
+      'fecha_legal': new FormControl(''),
+      'comentario_apLegal': new FormControl(''),
+
     });
   }
 
@@ -254,6 +266,88 @@ export class DetallesOtecnicasComponent implements OnInit {
     console.log(this.detalles_orden);
     const ur =  this.urlBackEnd.getUrlBackEnd() + 'imprimirorden?id=' + this.detalles_orden.id;
     window.open(ur, '_blank');
+  }
+
+
+
+
+  aprobarOrdenFinanzas(){
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.aprobarOrdenFinanzas(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.getAllOrdenes();
+        this._snackBar.open('¡¡ Orden aprobada !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+
+
+  }
+
+
+
+  denegarOrdenFinanzas(){
+
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.denegarOrdenFinanzas(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.getAllOrdenes();
+        this._snackBar.open('¡¡ Orden denegada !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+  }
+
+
+  comentariolegal(){
+
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.comentariolegal(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.getAllOrdenes();
+        this._snackBar.open('¡¡ Comentario guardado !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
   }
 
 }

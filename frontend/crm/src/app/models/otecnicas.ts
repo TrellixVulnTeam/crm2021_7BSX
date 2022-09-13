@@ -48,4 +48,17 @@ export class Otecnicas {
   public ingr_mensuales!: string;
   public ingr_anuales!: string;
   public anios_est!: string;
+
+
+  public aprobFf!:string;
+  public comentarioaprob_finanzas!:string;
+  public fecha_ff_aprob!:string;
+  public usuario_ff!:string;
+  public comentariodenegacion_finanzas!:string;
+
+  public aprobLegal!:string;
+  public comentario_legal!:string;
+  public fecha_legal!:string;
+
+
 }

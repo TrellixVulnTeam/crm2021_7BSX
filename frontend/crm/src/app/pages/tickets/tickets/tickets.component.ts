@@ -208,6 +208,9 @@ verDetalleAtencion(atencion: Atenciones){
 
 
 
+
+
+
 verDetalleEvento(evento: Eventos){
   let datos: any;
   datos = evento;
@@ -215,10 +218,15 @@ verDetalleEvento(evento: Eventos){
   this.adjuntoService.getAdjuntosEventos(datos).subscribe(
     data=>{
       this.adjuntos = data;
-      this.dialog.open(DetallesEventosComponent,{
-        data: {datos_evento: evento, datos_adjuntos: this.adjuntos},
-        width: '80%',
-      });
+
+      this.eventosService.getDetalleEvento(datos).subscribe(
+        data=>{
+          this.dialog.open(DetallesEventosComponent,{
+            data: {datos_evento: data, datos_adjuntos: this.adjuntos},
+            width: '80%',
+          });
+        });
+
     });
 
 }

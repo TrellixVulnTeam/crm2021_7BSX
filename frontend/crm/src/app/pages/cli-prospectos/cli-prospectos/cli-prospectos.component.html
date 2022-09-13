@@ -44,8 +44,9 @@
             (click)="open_modal_atenciones(row)"><mat-icon>notifications</mat-icon></button>
             <button (click)="getClienteByName(row)" mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
             <button (click)="open_modal_contacto(row)" mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
-            <button  mat-mini-fab color="warn" matTooltip="Historial del suministro" matTooltipPosition="above" (click)="getHistorialCliente(row)">
-              <mat-icon>history</mat-icon>
+            <button  mat-mini-fab color="warn" matTooltip="Historial del suministro" matTooltipPosition="above" (click)="getHistorialCliente(row)"
+            style="background-color: black !important;">
+              <mat-icon>remove_red_eye</mat-icon>
             </button>
           </td>
         </ng-container>
@@ -104,8 +105,9 @@
             (click)="open_modal_atenciones(row1)"><mat-icon>notifications</mat-icon></button>
             <button (click)="getClienteByName(row1)" mat-mini-fab color="accent" matTooltip="Detalles del cliente" matTooltipPosition="above"><mat-icon>list</mat-icon></button>
             <button (click)="open_modal_contacto(row1)" mat-mini-fab color="primary" matTooltip="Nuevo contacto" matTooltipPosition="right"><mat-icon>people</mat-icon></button>
-            <button  mat-mini-fab color="warn" matTooltip="Historial del suministro" matTooltipPosition="above" (click)="getHistorialCliente(row1)">
-              <mat-icon>history</mat-icon>
+            <button  mat-mini-fab color="warn" matTooltip="Historial del suministro" matTooltipPosition="above" (click)="getHistorialCliente(row1)"
+            style="background-color: black !important;">
+              <mat-icon>remove_red_eye</mat-icon>
             </button>
           </td>
         </ng-container>

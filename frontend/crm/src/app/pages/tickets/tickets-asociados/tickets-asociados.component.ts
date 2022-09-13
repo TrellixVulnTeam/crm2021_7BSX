@@ -4,6 +4,7 @@ import { Atenciones } from 'src/app/models/atenciones';
 import { Eventos } from 'src/app/models/eventos';
 import { Tickets } from 'src/app/models/tickets';
 import { EventosService } from 'src/app/services/eventos.service';
+import { TicketsService } from 'src/app/services/tickets.service';
 import { DetallesEventosComponent } from '../../eventos/detalles-eventos/detalles-eventos.component';
 import { EventosAsociadosComponent } from '../../eventos/eventos-asociados/eventos-asociados.component';
 import { DetallesTicketsComponent } from '../detalles-tickets/detalles-tickets.component';
@@ -21,7 +22,7 @@ export class TicketsAsociadosComponent implements OnInit {
   validar_btn: any;
 
   constructor( public modal_ticket: MatDialogRef<TicketsAsociadosComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-  public dialog: MatDialog, private eventosService: EventosService) { }
+  public dialog: MatDialog, private eventosService: EventosService, private ticketService: TicketsService) { }
 
   ngOnInit(): void {
     this.datos_evento = this.data.datos_evento;
@@ -56,10 +57,25 @@ export class TicketsAsociadosComponent implements OnInit {
   }
 
 
+
+
+
   verDetalleTicket(ticket: Tickets){
-    this.dialog.open(DetallesTicketsComponent,{
-      data: {detalles_ticket: ticket},
-      width: '80%',
-    });
+
+    let datos : Tickets = new Tickets();
+    datos.id = ticket.id;
+
+    this.ticketService.getDetalleTicketEvt(ticket).subscribe(
+      data=>{
+
+        this.dialog.open(DetallesTicketsComponent,{
+          data: {detalles_ticket: data},
+          width: '80%',
+        });
+      });
+
+
   }
+
+
 }
