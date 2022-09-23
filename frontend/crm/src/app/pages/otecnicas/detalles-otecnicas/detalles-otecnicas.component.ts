@@ -510,6 +510,10 @@ export class DetallesOtecnicasComponent implements OnInit {
               horizontalPosition: 'center',
               verticalPosition: 'top'
             });
+
+            this.form_seguimiento.controls["presupuesto"].setValue('');
+            this.form_seguimiento.controls["venta_real"].setValue('');
+            this.form_seguimiento.controls["comentario_detalle"].setValue('');
           }
           );
 
