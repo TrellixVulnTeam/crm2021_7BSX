@@ -48,3 +48,18 @@ button{
   width: 32% !important;
 }
 
+.desc_div{
+  width: 100% !important;
+  max-height:100px;
+  overflow-y:auto !important;
+}
+
+
+.desc{
+  width: 25% !important;
+}
+
+td{
+  color: black !important;
+
+}

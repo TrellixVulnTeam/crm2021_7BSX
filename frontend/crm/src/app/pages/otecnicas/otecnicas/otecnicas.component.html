@@ -68,10 +68,6 @@
       <td mat-cell *matCellDef="let row">{{row.cliente}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="fecha_resolucionD">
-      <th mat-header-cell *matHeaderCellDef> Fecha de resolución </th>
-      <td mat-cell *matCellDef="let row">{{row.fecha_resolucionD}} </td>
-    </ng-container>
 
     <ng-container matColumnDef="nombresolicitante">
       <th mat-header-cell *matHeaderCellDef> Solicitante </th>
@@ -82,7 +78,7 @@
 
 
     <ng-container matColumnDef="aprobTecnica">
-      <th mat-header-cell *matHeaderCellDef> Aprob. G. Técnica </th>
+      <th mat-header-cell *matHeaderCellDef style="border-right: 1px  solid white;">G. Técnica </th>
       <td mat-cell *matCellDef="let row">
         <div class="pendiente" *ngIf="row.aprobTecnica == 'Pendiente'">Pendiente</div>
         <div class="aprobada" *ngIf="row.aprobTecnica == 'Aprobada'">Aprobada</div>
@@ -92,7 +88,7 @@
     </ng-container>
 
     <ng-container matColumnDef="aprobVentas">
-      <th mat-header-cell *matHeaderCellDef> Aprob. Secundaria </th>
+      <th mat-header-cell *matHeaderCellDef style="border-right: 1px  solid white;">G. Comercial </th>
       <td mat-cell *matCellDef="let row">
         <div class="pendiente" *ngIf="row.aprobVentas == 'Pendiente'">Pendiente</div>
         <div class="aprobada"  *ngIf="row.aprobVentas == 'Aprobada'">Aprobada</div>
@@ -102,11 +98,31 @@
 
 
     <ng-container matColumnDef="aprobGg">
-      <th mat-header-cell *matHeaderCellDef> Aprob. G. General </th>
+      <th mat-header-cell *matHeaderCellDef style="border-right: 1px  solid white;"> G. General </th>
       <td mat-cell *matCellDef="let row">
         <div class="pendiente" *ngIf="row.aprobGg == 'Pendiente'">Pendiente</div>
         <div class="aprobada"  *ngIf="row.aprobGg == 'Aprobada'">Aprobada</div>
         <div class="denegada"  *ngIf="row.aprobGg == 'Denegada'">Denegada</div>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="aprobFf">
+      <th mat-header-cell *matHeaderCellDef style="border-right: 1px  solid white;"> G. Finanzas </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="pendiente" *ngIf="row.aprobFf == 'Pendiente'">Pendiente</div>
+        <div class="aprobada"  *ngIf="row.aprobFf == 'Aprobada'">Aprobada</div>
+        <div class="denegada"  *ngIf="row.aprobFf == 'Denegada'">Denegada</div>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="aprobOc">
+      <th mat-header-cell *matHeaderCellDef style="border-right: 1px  solid white;"> G. Op. Comerciales </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="pendiente" *ngIf="row.aprobOc == 'Pendiente'">Pendiente</div>
+        <div class="aprobada"  *ngIf="row.aprobOc == 'Aprobada'">Aprobada</div>
+        <div class="denegada"  *ngIf="row.aprobOc == 'Denegada'">Denegada</div>
       </td>
     </ng-container>
 

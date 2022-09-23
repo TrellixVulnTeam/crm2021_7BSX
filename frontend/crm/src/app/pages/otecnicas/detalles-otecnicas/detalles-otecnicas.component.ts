@@ -15,13 +15,24 @@ import { OtecnicasService } from 'src/app/services/otecnicas.service';
 })
 export class DetallesOtecnicasComponent implements OnInit {
   FormOrden: FormGroup;
+  form_seguimiento: FormGroup;
   detalles_orden: Otecnicas = new Otecnicas();
+
+  datos_anuales: Otecnicas[] = [];
   user: Usuario = new Usuario();
 
   dataSource_ordenesTodas:any = new MatTableDataSource<any>([]);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ot_service: OtecnicasService,public modal: MatDialogRef<DetallesOtecnicasComponent>,
   private _snackBar: MatSnackBar, public urlBackEnd: GlobalService) {
+
+    this.form_seguimiento = new FormGroup({
+      'id_ot': new FormControl('',),
+      'presupuesto': new FormControl('',),
+      'venta_real': new FormControl('',),
+      'comentario_detalle': new FormControl('',),
+      'user_id': new FormControl('',),
+    });
     this.FormOrden = new FormGroup({
       'id': new FormControl('',),
       'trabajo': new FormControl('',),
@@ -72,12 +83,24 @@ export class DetallesOtecnicasComponent implements OnInit {
       'fecha_legal': new FormControl(''),
       'comentario_apLegal': new FormControl(''),
 
+
+      'comentario_oc': new FormControl(''),
+      'comentarioaprob_oc': new FormControl(''),
+      'fecha_oc': new FormControl(''),
+      'usuario_oc': new FormControl(''),
+
+      'monto_real': new FormControl(''),
+      'n_obra': new FormControl(''),
+      'fecha_inicio_ejecucion': new FormControl(''),
+      'fecha_fin_ejecucion': new FormControl(''),
     });
   }
 
   ngOnInit(): void {
     this.detalles_orden = this.data.detalles_orden;
+    this.datos_anuales = this.data.datos_anuales;
     this.user = JSON.parse(localStorage.getItem("usuario_crm") || '{}');
+    console.log(this.datos_anuales);
   }
 
 
@@ -94,7 +117,7 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
+        this.close();
         this._snackBar.open('¡¡ Orden aprobada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -121,7 +144,7 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
+        this.close();
         this._snackBar.open('¡¡ Orden aprobada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -150,7 +173,7 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
+        this.close();
         this._snackBar.open('¡¡ Orden denegada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -177,7 +200,7 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
+        this.close();
         this._snackBar.open('¡¡ Orden aprobada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -203,7 +226,7 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
+        this.close();
         this._snackBar.open('¡¡ Orden denegada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -230,7 +253,7 @@ export class DetallesOtecnicasComponent implements OnInit {
       },
       ()=>{
 
-        this.getAllOrdenes();
+        this.close();
         this._snackBar.open('¡¡ Orden denegada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -243,7 +266,7 @@ export class DetallesOtecnicasComponent implements OnInit {
 
 
   getAllOrdenes(){
-    this.modal.close();
+
     this.ot_service.getAllOrdenes().subscribe(
       data => {
 
@@ -284,7 +307,7 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
+        this.close();
         this._snackBar.open('¡¡ Orden aprobada !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -313,8 +336,8 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
-        this._snackBar.open('¡¡ Orden denegada !!', 'Ok', {
+        this.close();
+        this._snackBar.open('¡¡ Datos guardados !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top'
@@ -339,12 +362,156 @@ export class DetallesOtecnicasComponent implements OnInit {
 
       },
       ()=>{
-        this.getAllOrdenes();
+
         this._snackBar.open('¡¡ Comentario guardado !!', 'Ok', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top'
         });
+
+      }
+    );
+  }
+
+
+
+  aprobarOrdenOc(){
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.aprobarOrdenOc(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.close();
+        this._snackBar.open('¡¡ Datos guardados !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+
+
+  }
+
+
+
+  denegarOrdenOc(){
+
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.denegarOrdenOc(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.close();
+        this._snackBar.open('¡¡ Datos guardados !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+  }
+
+
+
+  save_info_real(){
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.save_info_real(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+
+        this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+  }
+
+
+  save_info_monto_real(){
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.FormOrden.value;
+
+    this.ot_service.save_info_monto_real(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+
+        this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+
+      }
+    );
+  }
+
+
+  close(){
+    this.modal.close();
+    this.getAllOrdenes();
+  }
+
+
+  guardar_detalle_anual(){
+    let datos : Otecnicas = new Otecnicas();
+
+    datos = this.form_seguimiento.value;
+
+    this.ot_service.guardar_detalle_anual(datos).subscribe(
+      data =>{
+
+      },
+      err =>{
+
+      },
+      ()=>{
+        this.ot_service.getDatosAnualesOrden(this.detalles_orden).subscribe(
+          data => {
+            this.datos_anuales = data;
+          },
+          err=>{},
+          ()=>{
+            this._snackBar.open('¡¡ Datos Guardados !!', 'Ok', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            });
+          }
+          );
 
       }
     );

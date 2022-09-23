@@ -5,12 +5,12 @@
 }
 
 input{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   font-size: 18px !important;
 }
 
 ::placeholder {
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   font-size: 18px !important;
 }
 
@@ -44,7 +44,7 @@ width: 100% !important;
 .btnLogin{
   width: 100% !important;
   color: white !important;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   font-size: 20px !important;
   background-color: black;
 }

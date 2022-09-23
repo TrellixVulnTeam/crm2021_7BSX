@@ -87,5 +87,40 @@ export class OtecnicasService {
   }
 
 
+  public aprobarOrdenOc(ot: Otecnicas): Observable<Otecnicas> {
+    return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'aprobarOrdenOc', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas ));
+  }
+
+
+  public denegarOrdenOc(ot: Otecnicas): Observable<Otecnicas> {
+    return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'denegarOrdenOc', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas ));
+  }
+
+
+  public save_info_real(ot: Otecnicas): Observable<Otecnicas> {
+    return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'save_info_real', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas ));
+  }
+
+
+  public save_info_monto_real(ot: Otecnicas): Observable<Otecnicas> {
+    return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'save_info_monto_real', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas ));
+  }
+
+
+  public getDatosAnualesOrden(ot: Otecnicas): Observable<Otecnicas[]> {
+    return this.http.post<Otecnicas[]>(this.globalservice.getUrlBackEnd() + 'getDatosAnualesOrden', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas[] ));
+  }
+
+  public guardar_detalle_anual(ot: Otecnicas): Observable<Otecnicas> {
+    return this.http.post<Otecnicas>(this.globalservice.getUrlBackEnd() + 'guardar_detalle_anual', ot, httpOptions)
+    .pipe(map(data => data as Otecnicas ));
+  }
+
+
 
 }

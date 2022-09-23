@@ -29,7 +29,9 @@ export class OtecnicasComponent implements OnInit {
   user: Usuario = new Usuario();
   texto:any;
   adjuntos: Archivos[] = [];
-  displayedColumns: string[] = ['atencion_id', 'evento_id', 'ticket_id', 'id',  'solicitud', 'fecha_creacionD' , 'cliente', 'fecha_resolucionD', 'nombresolicitante',  'aprobTecnica', 'aprobVentas', 'aprobGg'];
+
+  datosAnuales: Otecnicas[] = [];
+  displayedColumns: string[] = ['atencion_id', 'evento_id', 'ticket_id', 'id',  'solicitud', 'fecha_creacionD' , 'cliente', 'nombresolicitante',  'aprobTecnica', 'aprobVentas', 'aprobGg', 'aprobFf', 'aprobOc'];
   dataSource_ordenesTodas:any = new MatTableDataSource<any>([]);
 
   @ViewChild('paginator1') paginator1: MatPaginator | undefined;
@@ -86,10 +88,22 @@ export class OtecnicasComponent implements OnInit {
 
 
  verDetalleOrden(datos: Otecnicas){
-  this.dialog.open(DetallesOtecnicasComponent,{
-    data: {detalles_orden: datos},
-    width: '80%',
-  });
+
+  this.ordenesService.getDatosAnualesOrden(datos).subscribe(
+    data => {
+      this.datosAnuales = data;
+    },
+    err=>{},
+    ()=>{
+      this.dialog.open(DetallesOtecnicasComponent,{
+        disableClose: true ,
+        data: {detalles_orden: datos, datos_anuales: this.datosAnuales},
+        width: '80%',
+      });
+    }
+    );
+
+
  }
 
 
@@ -104,6 +118,7 @@ export class OtecnicasComponent implements OnInit {
       this.eventoService.getDetalleEvento(datos).subscribe(
         data=>{
           this.dialog.open(DetallesEventosComponent,{
+
             data: {datos_evento: data, datos_adjuntos: this.adjuntos},
             width: '80%',
           });

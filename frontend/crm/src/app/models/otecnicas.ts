@@ -61,4 +61,27 @@ export class Otecnicas {
   public fecha_legal!:string;
 
 
+
+  public aprobOc!:string;
+  public comentarioaprob_oc!:string;
+  public fecha_oc!:string;
+  public usuario_oc!:string;
+  public comentariodenegacion_oc!:string;
+
+  public monto_real!:string;
+  public n_obra!:string;
+  public fecha_inicio!:string;
+  public fecha_fin!:string;
+  public modified_conta!:string;
+  public modified_tec!:string;
+
+
+  public anio!:string;
+  public venta_real!:number;
+  public presupuesto_dt!:number;
+  public fecha_actual!:string;
+  public comentario!:string;
+  public user_name!:string;
+  public user_lastname!:string;
+
 }

@@ -1,55 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;  font-family: 'Open Sans', sans-serif !important; }
 
 a{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 button{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 span{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 input{
-  font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
-}
-
-mat-option{
-  font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
-  font-size: 12px !important;
-}
-mat-card-title{
-  font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
-}
-
-.mat-tab-label{
-  font-family: 'Montserrat', sans-serif !important;
-}
-
-h2{
-  font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
-}
-
-h1{
-  font-family: 'Montserrat', sans-serif !important;
-  color: #003F63 !important;
-}
-
-h3{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   color: #003F63 !important;
 }
 
 textarea{
-    font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
+  color: #003F63 !important;
+}
+
+mat-option{
+  font-family: 'Open Sans', sans-serif !important;
+  color: #003F63 !important;
+  font-size: 12px !important;
+}
+mat-card-title{
+  font-family: 'Open Sans', sans-serif !important;
+  color: #003F63 !important;
+}
+
+.mat-tab-label{
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+h2{
+  font-family: 'Open Sans', sans-serif !important;
+  color: #003F63 !important;
+}
+
+h1{
+  font-family: 'Open Sans', sans-serif !important;
+  color: #003F63 !important;
+}
+
+h3{
+  font-family: 'Open Sans', sans-serif !important;
+  color: #003F63 !important;
+}
+
+textarea{
+    font-family: 'Open Sans', sans-serif !important;
 }
 mat-icon{
   color: #003F63 !important;
@@ -69,19 +74,20 @@ mat-paginator{
   width: 40% !important;
 }
 th{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   color: #003F63 !important;
   font-size: 12px !important;
   font-weight: bold !important;
 }
 
 td{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   font-size: 12px !important;
+  color: black !important;
 }
 
 mat-tab > label{
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 
